@@ -100,6 +100,49 @@
   .tip{background:#eef4f1; border:1px solid #d8e6df; color:#2f5249;}
   .tip .spark{width:16px;height:16px;fill:var(--kin);stroke:none;margin-top:1px;flex:0 0 auto;}
 
+  /* Day-picker rail */
+  .dayrail{display:flex; gap:15px; overflow-x:auto; padding:14px 14px 12px; position:sticky; top:46px; z-index:40; background:var(--paper); border-bottom:1px solid var(--line2); -webkit-overflow-scrolling:touch;}
+  .dayrail::-webkit-scrollbar{display:none;}
+  .drm{flex:0 0 auto; background:none; border:none; cursor:pointer; font-family:inherit; display:flex; flex-direction:column; align-items:center; gap:6px; padding:0;}
+  .drm-seal{width:52px; height:52px; border-radius:50%; border:1.5px solid var(--c); background:#fff; display:grid; place-items:center; position:relative; transition:transform .2s;}
+  .drm-seal .kj{font-family:var(--serif); font-size:22px; color:var(--c); line-height:1;}
+  .drm-seal .no{position:absolute; bottom:-3px; left:-3px; width:19px; height:19px; border-radius:50%; background:var(--c); color:#fff; font-family:var(--serif); font-size:10px; display:grid; place-items:center; border:2px solid var(--paper);}
+  .drm-date{font-size:11px; color:var(--muted); font-weight:600;}
+  .drm.on .drm-seal{background:var(--c); transform:scale(1.05);}
+  .drm.on .drm-seal .kj{color:#fff;}
+  .drm.on .drm-date{color:var(--ink); font-weight:800;}
+
+  /* Focused day + timeline */
+  .dayfocus-wrap{padding:20px 4px 0;}
+  .df-head{display:flex; align-items:center; gap:14px; justify-content:flex-end; margin-bottom:20px;}
+  .df-seal{flex:0 0 auto; width:64px; height:64px; border-radius:50%; background:var(--c); display:grid; place-items:center; position:relative; box-shadow:0 5px 14px rgba(0,0,0,.14);}
+  .df-seal .kj{font-family:var(--serif); font-size:30px; color:#fff;}
+  .df-seal .no{position:absolute; bottom:-4px; left:-4px; width:24px; height:24px; border-radius:50%; background:#fff; color:var(--c); font-family:var(--serif); font-size:12px; font-weight:700; display:grid; place-items:center; border:2px solid var(--paper);}
+  .df-titles{text-align:right;}
+  .df-date{font-size:12px; color:var(--muted); font-weight:600;}
+  .df-title{font-size:21px; font-weight:800; color:var(--ink); margin-top:3px;}
+  .df-city{font-family:var(--serif); font-size:12px; color:var(--c); letter-spacing:2px; margin-top:4px;}
+  .timeline{position:relative;}
+  .tl-row{display:flex; align-items:flex-start;}
+  .tl-when{flex:0 0 84px; font-size:12px; font-weight:700; color:var(--c); padding-top:7px; display:flex; align-items:center; gap:5px;}
+  .tl-when .ic{width:13px;height:13px; color:var(--c);}
+  .tl-when.eatw{color:#a8402a;} .tl-when.eatw .ic{color:#a8402a;}
+  .tl-rail{flex:0 0 30px; align-self:stretch; position:relative;}
+  .tl-rail::before{content:""; position:absolute; top:0; bottom:0; right:14px; width:2px; background:var(--line);}
+  .tl-row:first-child .tl-rail::before{top:9px;}
+  .tl-row:last-child .tl-rail::before{bottom:auto; height:9px;}
+  .tl-dot{position:absolute; top:7px; right:8px; width:14px; height:14px; border-radius:50%; background:var(--c,#21405e); border:3px solid var(--paper); box-shadow:0 0 0 1px var(--line);}
+  .tl-what{flex:1; font-size:14px; color:var(--ink2); padding:5px 0 16px; line-height:1.65;}
+  .df-tip{display:flex; gap:10px; align-items:flex-start; background:#eef4f1; border:1px solid #d8e6df; border-radius:10px; padding:12px 14px; margin-top:6px; font-size:13.5px; color:#2f5249;}
+  .df-tip .spark{width:16px;height:16px;fill:var(--kin);stroke:none;flex:0 0 auto;margin-top:1px;}
+
+  /* Glossary */
+  .gl{background:none; border:none; padding:0; font:inherit; color:var(--ai); cursor:pointer; border-bottom:1.5px dotted var(--kin); font-weight:600;}
+  .gloss-card{padding:24px 20px 26px; text-align:right;}
+  .gloss-term{font-family:var(--serif); font-size:21px; font-weight:800; color:var(--ai); margin-bottom:10px;}
+  .gloss-card p{font-size:14px; color:var(--ink2); line-height:1.75; margin:0 0 18px;}
+  .gloss-close{background:var(--ai); color:#fff; border:none; font-family:inherit; font-weight:700; padding:11px 22px; border-radius:8px; font-size:13.5px; cursor:pointer;}
+
   /* Stays */
   .stay-note{font-size:13px;color:var(--muted);margin:-6px 2px 16px;}
   .hotel{ background:var(--card); border:1px solid var(--line); border-radius:8px; overflow:hidden; margin-bottom:16px; box-shadow:0 4px 16px rgba(35,31,25,.05);}
@@ -578,25 +621,65 @@ function placeLinks(arr){
   }).join('')+'</div>';
 }
 
+const CITYN={tokyo:'טוקיו',hakone:'הקונה',kyoto:'קיוטו',osaka:'אוסקה',end:'יציאה'};
+const GLOSS={
+ "מונורייל":"הרכבת האוטומטית מהאנדה למרכז טוקיו — מהירה ונוחה.",
+ "eSIM":"סים דיגיטלי שמתקינים בלי כרטיס פיזי — אינטרנט מרגע הנחיתה.",
+ "Suica":"כרטיס תשלום נטען (בנגיעה) לרכבות, אוטובוסים וחנויות נוחות.",
+ "ג'ט לג":"עייפות מהפרשי שעות. יפן מקדימה את ישראל ב-6 שעות בקיץ.",
+ "ראמן":"מרק אטריות יפני עשיר — אחת ממנות הדגל של יפן.",
+ "שינקנסן":"רכבת הקליע המהירה של יפן (עד ~320 קמ\"ש).",
+ "אונסן":"מעיין חם גופרי למרחצאות — מתקלחים לפני הכניסה, ללא בגד ים.",
+ "קאיסקי":"ארוחת שף מסורתית רב-מנתית, עונתית ומוקפדת.",
+ "אומקסה":"תפריט שהשף בוחר — פירוש המילה: 'אני סומך עליך'.",
+ "ריוקאן":"פונדק יפני מסורתי עם פוטון, מחצלות טאטאמי ולרוב אונסן.",
+ "מאצ'ה":"תה ירוק טחון, מריר-מתוק — סמל קולינרי של קיוטו.",
+ "איזקאיה":"פאב-מסעדה יפני קטן וביתי, לאוכל ושתייה.",
+ "קושיקאטסו":"שיפודים מטוגנים — מאכל הרחוב של אוסקה. לא טובלים פעמיים ברוטב!",
+};
+const GKEYS=Object.keys(GLOSS).sort((a,b)=>b.length-a.length);
+function glossWrap(t){GKEYS.forEach(k=>{if(t.indexOf(k)>-1) t=t.replace(k,`<button class="gl" data-g="${k}">${k}</button>`);});return t;}
+function dpick(date){const p=date.split('·');return p[1]?p[1].trim():'';}
+
 const vd=document.getElementById('view-days');
-days.forEach(d=>{
-  const c=C[d.city];
-  const el=document.createElement('div'); el.className='day';
-  el.innerHTML=`
-   <div class="day-head">
-     <div class="d-seal" style="--c:${c}"><span class="kj">${KJ[d.city]}</span><span class="no">${d.num}</span></div>
-     <div class="day-meta"><div class="d-date">${d.date}</div><div class="d-title">${d.title}</div></div>
-     ${I.chev}
-   </div>
-   <div class="day-body"><div class="day-body-inner">
-     ${d.blocks.map(b=>`<div class="block"><div class="when">${waterLabel(b[0])?I.wave:''}${b[0]}</div><div class="what">${b[1]}${placeLinks(b[2])}</div></div>`).join('')}
-     <div class="note eat">${I.food}<div><b>לאכול · </b>${d.eat}</div></div>
-     <div class="note tip">${I.spark}<div>${d.tip}</div></div>
-   </div></div>`;
-  const head=el.querySelector('.day-head'), body=el.querySelector('.day-body');
-  head.addEventListener('click',()=>{const open=el.classList.toggle('open'); body.style.maxHeight=open?body.scrollHeight+80+'px':'0';});
-  vd.appendChild(el);
-});
+let curDay=0;
+function renderRail(){
+  return '<div class="dayrail">'+days.map((d,i)=>`<button class="drm${i===curDay?' on':''}" style="--c:${C[d.city]}" data-day="${i}">
+     <span class="drm-seal"><span class="kj">${KJ[d.city]}</span><span class="no">${d.num}</span></span>
+     <span class="drm-date">${dpick(d.date)}</span></button>`).join('')+'</div>';
+}
+function renderFocus(){
+  const d=days[curDay], c=C[d.city];
+  let rows=d.blocks.map(b=>`<div class="tl-row">
+     <div class="tl-when">${waterLabel(b[0])?I.wave:''}${b[0]}</div>
+     <div class="tl-rail"><span class="tl-dot" style="--c:${c}"></span></div>
+     <div class="tl-what">${glossWrap(b[1])}${placeLinks(b[2])}</div></div>`).join('');
+  rows+=`<div class="tl-row">
+     <div class="tl-when eatw">${I.food}לאכול</div>
+     <div class="tl-rail"><span class="tl-dot" style="--c:#a8402a"></span></div>
+     <div class="tl-what"><b>המלצת השף · </b>${glossWrap(d.eat)}</div></div>`;
+  return `<div class="day-focus" style="--c:${c}">
+     <div class="df-head">
+       <div class="df-seal"><span class="kj">${KJ[d.city]}</span><span class="no">${d.num}</span></div>
+       <div class="df-titles"><div class="df-date">${d.date}</div><div class="df-title">${d.title}</div><div class="df-city">${CITYN[d.city]}</div></div>
+     </div>
+     <div class="timeline">${rows}</div>
+     <div class="df-tip">${I.spark}<div>${glossWrap(d.tip)}</div></div>
+   </div>`;
+}
+function paintDays(){
+  vd.innerHTML=renderRail()+'<div class="dayfocus-wrap">'+renderFocus()+'</div>';
+  vd.querySelectorAll('.drm').forEach(b=>b.addEventListener('click',()=>{curDay=+b.dataset.day; paintDays();}));
+}
+paintDays();
+function openGloss(k){
+  const def=GLOSS[k]; if(!def) return;
+  document.getElementById('sheet-content').innerHTML=`<div class="gloss-card"><div class="gloss-term">${k}</div><p>${def}</p><button class="gloss-close" onclick="closeDetail()">הבנתי</button></div>`;
+  document.getElementById('sheet').classList.add('show');
+  document.getElementById('sheet-ov').classList.add('show');
+  document.body.classList.add('noscroll');
+}
+document.addEventListener('click',e=>{const g=e.target.closest('.gl'); if(g){e.preventDefault(); openGloss(g.dataset.g);}});
 
 const hl=document.getElementById('hotellist');
 hotels.forEach(h=>{
@@ -696,7 +779,6 @@ tabDefs.forEach(([k,label,ro])=>{
   b.innerHTML=`${label}<span class="ro">${ro}</span>`; b.addEventListener('click',()=>show(k)); tabsEl.appendChild(b);
 });
 show('days');
-setTimeout(()=>{const f=document.querySelector('.day'); if(f) f.querySelector('.day-head').click();},160);
 if(window.navigator.standalone){document.getElementById('a2hs').style.display='none';}
 </script>
 </body>
