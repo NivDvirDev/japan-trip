@@ -28,7 +28,7 @@
   .hero{ position:relative; overflow:hidden; color:#f4eddb; text-align:center;
     padding:calc(env(safe-area-inset-top) + 40px) 22px 38px;
     background:linear-gradient(168deg,#19314a 0%, #21405e 55%, #1c4a4a 125%);}
-  .hero-wave{position:absolute; inset:0; width:100%; height:100%; opacity:.45;}
+  .hero-wave{position:absolute; inset:0; width:100%; height:100%; opacity:.22;}
   .hero > *{position:relative; z-index:1;}
   .hero .kicker{ font-family:var(--serif); font-size:13px; letter-spacing:6px; color:var(--kin-l); margin-bottom:14px;}
   .hero h1{ margin:0; font-size:28px; font-weight:800; line-height:1.3; letter-spacing:.5px;}
@@ -380,7 +380,7 @@ const info=[
 function mapsLink(q){return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q+' Japan');}
 function taLink(q){return 'https://www.tripadvisor.com/Search?q='+encodeURIComponent(q);}
 function bubbles(r){let h='';for(let i=1;i<=5;i++){h+= r>=i?'<i></i>':(r>=i-0.5?'<i class="h"></i>':'<i class="o"></i>');}return '<span class="bub">'+h+'</span>';}
-function waterLabel(t){return /ים|נהר|תעלה|מפרץ|אגם/.test(t);}
+function waterLabel(t){return /·\s*(ים|נהר|תעלה|מפרץ|אגם)/.test(t);}
 
 const vd=document.getElementById('view-days');
 days.forEach(d=>{
