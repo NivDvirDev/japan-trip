@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="ליהי & ליאור · יפן">
 <meta name="theme-color" content="#15233E">
-<title>ליהי & ליאור — יפן 2026 💕</title>
+<title>ליהי & ליאור — יפן 2026 · リヒ & リオル</title>
 <style>
   :root{
     --indigo:#15233E; --indigo2:#27406b; --gold:#C8A24B; --gold-dk:#a8842f;
@@ -37,7 +37,10 @@
   .hero .kicker{ position:relative; z-index:1; font-size:11px; letter-spacing:3px; text-transform:uppercase;
     color:var(--gold); font-weight:700; margin-bottom:8px; }
   .hero h1{ position:relative; z-index:1; margin:0; font-size:27px; font-weight:800; line-height:1.25;}
-  .hero .sub{ position:relative; z-index:1; opacity:.9; font-size:13.5px; margin-top:8px;}
+  .hero .jp{ position:relative; z-index:1; margin-top:7px; font-size:15px; font-weight:500; letter-spacing:2px;
+    color:rgba(255,255,255,.82);}
+  .hero .jp::before,.hero .jp::after{content:""; display:inline-block; width:18px; height:1px; background:var(--gold); vertical-align:middle; margin:0 10px;}
+  .hero .sub{ position:relative; z-index:1; opacity:.9; font-size:13.5px; margin-top:10px;}
   .hero .rule{ position:relative; z-index:1; width:54px; height:3px; border-radius:3px; background:var(--gold); margin:14px auto 0;}
   .hero .route{ position:relative; z-index:1; margin-top:14px; font-size:12.5px; font-weight:600;
     background:rgba(255,255,255,.12); display:inline-block; padding:7px 15px; border-radius:30px; border:1px solid rgba(255,255,255,.18);}
@@ -143,18 +146,19 @@
 
 <div class="hero">
   <div class="kicker">Japan · 2026</div>
-  <h1>ליהי &amp; ליאור ביפן 💕</h1>
+  <h1>ליהי &amp; ליאור ביפן</h1>
+  <div class="jp">リヒ &amp; リオル&nbsp;&nbsp;·&nbsp;&nbsp;日本</div>
   <div class="sub">22 ביוני – 3 ביולי 2026 · טיול החלומות שלכם</div>
   <div class="rule"></div>
   <div class="route">טוקיו ← הקונה ← קיוטו ← אוסקה</div>
-  <div class="count"><span>11 לילות</span><span>4 ערים</span><span>עונת ההורטנזיות 💙</span></div>
+  <div class="count"><span>11 לילות</span><span>4 ערים</span><span>עונת ההורטנזיות</span></div>
 </div>
 
 <div class="tabs" id="tabs"></div>
 
 <div class="wrap">
   <div id="view-intro" style="display:none">
-    <div class="callout intro-hero">ליהי וליאור — בנינו לכם מסלול שלוקח אתכם דרך הצדדים הכי שווים של יפן: אוכל, טבע, אורות ניאון ורגעים שקטים רק לשניכם. כל אטרקציה עם כפתור מפה וכפתור TripAdvisor, ויש המלצות לינה אמיתיות בלשונית <b>לינה</b>. עכשיו רק תיהנו. 🥢💕</div>
+    <div class="callout intro-hero">ליהי וליאור — בנינו לכם מסלול שלוקח אתכם דרך הצדדים הכי שווים של יפן: אוכל, טבע, אורות ניאון ורגעים שקטים רק לשניכם. ומכיוון שליהי אוהבת ים ושקיעות — שילבנו פנימה אִי, חופים ושיט בנהר ובמפרץ. 🌊 כל אטרקציה עם כפתור מפה וכפתור TripAdvisor, ויש המלצות לינה אמיתיות בלשונית <b>לינה</b>. עכשיו רק תיהנו.</div>
     <div class="eyebrow">לפני שמתחילים</div>
     <div class="section-title">3 דברים שכדאי לדעת</div>
     <div class="callout"><b>עונת הגשמים (tsuyu):</b> הגשם בא בהתפרצויות קצרות, לא יום שלם. מטריה מתקפלת + נעליים עמידות במים = מנצחים. בונוס: ההורטנזיות פורחות בכל מקום.</div>
@@ -213,23 +217,23 @@ const days=[
  {num:3,city:'tokyo',date:"ד' · 24.6 · מסורת + פופ-קלצ'ר",title:"מקדשים עתיקים ואנימה",
   blocks:[["בוקר","אסקוסה — מקדש סנסו-ג'י ורחוב נאקאמיסה. שיט קצר על נהר סומידה."],
    ["צהריים","אקיהברה — אנימה, גיימינג, אלקטרוניקה, gachapon. גן עדן לפופ-קלצ'ר."],
-   ["ערב","גינזה לשופינג יוקרה ואומקסה סושי לפינוק."]],
+   ["ערב","גינזה לשופינג ואומקסה — או שיט שקיעה במפרץ טוקיו: גשר הקשת ואופק הניאון מהמים. 🌊"]],
   eat:"אומקסה סושי בגינזה (הזמינו!).",
   tip:"רוצים עוד אמנות? teamLab Borderless באזאבודאי הילס.",
-  spots:["Senso-ji Temple","Akihabara Electric Town","Ginza Tokyo"]},
- {num:4,city:'tokyo',date:"ה' · 25.6 · מפלט לקמקורה",title:"טבע, ים, בודהה ענק",
-  blocks:[["כל היום","קמקורה (~1 שעה) — הבודהה הגדול, מקדשים, וטרק קל. ביוני מקדש Meigetsu-in מתפוצץ בהורטנזיות."],
-   ["גיבוי לגשם","יום שופינג ב-Shimokitazawa — וינטג', קפה, היפ (מקורה)."],
-   ["ערב","חזרה לטוקיו. בר גג או בר וויסקי שקט."]],
-  eat:"שירסו-דון ליד הים בקמקורה.",
-  tip:"ההורטנזיות הן הסיבה שאנשים אוהבים יוני ביפן.",
-  spots:["Kotoku-in Great Buddha Kamakura","Meigetsu-in Temple","Shimokitazawa Tokyo"]},
+  spots:["Senso-ji Temple","Akihabara Electric Town","Tokyo Bay Sunset Cruise","Ginza Tokyo"]},
+ {num:4,city:'tokyo',date:"ה' · 25.6 · קמקורה ואי אנושימה",title:"ים, אי, בודהה ענק 🌊",
+  blocks:[["בוקר","קמקורה (~1 שעה) — הבודהה הגדול (Daibutsu) ומקדשים. ביוני Meigetsu-in מתפוצץ בהורטנזיות."],
+   ["צהריים — ים 🌊","חוף יואיגהמה ואי אנושימה — חוף ים, מגדלור, מערות ים, וטיילת לאורך החוף. בול בשבילך, ליהי."],
+   ["ערב","שקיעה מעל האוקיינוס מאנושימה, ואז חזרה לטוקיו."]],
+  eat:"שירסו-דון (דג כסוף טרי) ליד הים.",
+  tip:"אנושימה הוא אי קטן עם נוף ים פתוח ושקיעה מהממת — גן עדן לאוהבי ים.",
+  spots:["Enoshima Island","Yuigahama Beach Kamakura","Kotoku-in Great Buddha Kamakura","Meigetsu-in Temple"]},
  {num:5,city:'hakone',date:"ו' · 26.6 · טוקיו ← הקונה",title:"אונסן, אגם, פסגת הפינוק",
   blocks:[["בוקר","נסיעה להקונה (~1.5 ש'). Hakone Free Pass. רכבל מעל עמק Owakudani הגעשי."],
    ["צהריים","ספינת שודדים על אגם אשי, ושער הטורי של מקדש הקונה שעומד במים."],
    ["ערב","ריוקאן עם אונסן פרטי + ארוחת קאיסקי. הלילה שתזכרו."]],
   eat:"קאיסקי בריוקאן (כלול בלינה בד\"כ).",
-  tip:"הלילה הכי רומנטי בטיול — אונסן פרטי וארוחת שף, רק שניכם. פוג'י אולי יסתתר בעננים, אבל הערב הזה שווה את הכל. ❤️",
+  tip:"הלילה הכי רומנטי בטיול — אונסן פרטי וארוחת שף, רק שניכם. פוג'י אולי יסתתר בעננים, אבל הערב הזה שווה את הכל.",
   spots:["Owakudani","Lake Ashi Hakone","Hakone Shrine Torii Gate","Hakone Open Air Museum"]},
  {num:6,city:'kyoto',date:"ש' · 27.6 · הקונה ← קיוטו",title:"מבירת המקדשים מתחילים",
   blocks:[["בוקר","אונסן רגוע. שינקנסן אודוארה ← קיוטו (~2:20). הניחו תיקים."],
@@ -238,13 +242,14 @@ const days=[
   eat:"מטבח קיוטו עדין או יאקיטורי בפונטוצ'ו.",
   tip:"קיוטו = ההפך מטוקיו: לאט, עדין, מסורתי.",
   spots:["Gion Kyoto","Kiyomizu-dera","Pontocho Alley"]},
- {num:7,city:'kyoto',date:"א' · 28.6 · ערב-מערב",title:"חורש הבמבוק והזהב",
-  blocks:[["בוקר מוקדם","אראשיאמה — חורש הבמבוק (לכו ב-8:00!), טנריו-ג'י, גשר טוגטסוקיו, פארק הקופים."],
-   ["צהריים","קינקאקו-ג'י — ביתן הזהב המשתקף באגם."],
+ {num:7,city:'kyoto',date:"א' · 28.6 · ערב-מערב",title:"במבוק, נהר וזהב 🚣",
+  blocks:[["בוקר מוקדם","אראשיאמה — חורש הבמבוק (לכו ב-8:00!), טנריו-ג'י וגשר טוגטסוקיו."],
+   ["צהריים — נהר 🚣","שיט נהר הוזוגאוה (Hozugawa) — סירה מסורתית ~2 שעות דרך קניון ירוק ומים זורמים. נוף עוצר נשימה."],
+   ["אחה\"צ","קינקאקו-ג'י — ביתן הזהב המשתקף באגם."],
    ["ערב","שוק נישיקי לטעימות, ואז קוואראמאצ'י לחיי לילה."]],
   eat:"סיבוב טעימות בשוק נישיקי; קינוח מאצ'ה.",
-  tip:"הבמבוק מתמלא עד 9:00. ב-8:00 הוא כמעט שלכם.",
-  spots:["Arashiyama Bamboo Grove","Kinkaku-ji","Nishiki Market Kyoto"]},
+  tip:"שיט ההוזוגאוה מתחיל בקאמיאומה ונוחת באראשיאמה — שילוב מושלם של מים, טבע ושקט.",
+  spots:["Arashiyama Bamboo Grove","Hozugawa River Boat Ride","Kinkaku-ji","Nishiki Market Kyoto"]},
  {num:8,city:'kyoto',date:"ב' · 29.6 · שערים אדומים",title:"10,000 שערים, צבאים, מאצ'ה",
   blocks:[["בוקר מוקדם","פושימי-אינארי — אלפי שערי טורי אדומים. לכו לפני 8:00."],
    ["אופציה א'","אוג'י — בירת המאצ'ה, ומקדש Mimuroto-ji עם 10,000 שיחי הורטנזיה (שיא ביוני!)."],
@@ -255,10 +260,10 @@ const days=[
  {num:9,city:'osaka',date:"ג' · 30.6 · קיוטו ← אוסקה",title:"אל בירת האוכל",
   blocks:[["בוקר","נסיעה קצרה לאוסקה (~15 דק' שינקנסן). הניחו תיקים."],
    ["אחה\"צ","טירת אוסקה וגנים, שופינג בשינסאיבאשי-סוג'י (מקורה)."],
-   ["ערב","דוטונבורי! ניאון, שלט Glico, שיט על התעלה, ואוכל רחוב."]],
+   ["ערב — תעלה 🌊","דוטונבורי! שיט בתעלת טומבורי המוארת מתחת לשלט ה-Glico, ניאון ואוכל רחוב."]],
   eat:"טאקויאקי + אוקונומיאקי בדוטונבורי.",
   tip:"הסיסמה המקומית: kuidaore — 'לאכול עד שתתמוטטו'.",
-  spots:["Osaka Castle","Shinsaibashi-suji","Dotonbori"]},
+  spots:["Osaka Castle","Tombori River Cruise Osaka","Shinsaibashi-suji","Dotonbori"]},
  {num:10,city:'osaka',date:"ד' · 1.7 · יום הפופ-קלצ'ר",title:"סופר נינטנדו וורלד",
   blocks:[["מומלץ לכם","Universal Studios Japan — סופר נינטנדו וורלד, הארי פוטר. קנו Express Pass!"],
    ["אופציה ב'","טירת הימג'י (~1 ש') + קובה לבקר קובה אגדי."],
