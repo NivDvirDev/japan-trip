@@ -5,141 +5,157 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="ליהי & ליאור · יפן">
-<meta name="theme-color" content="#15233E">
+<meta name="apple-mobile-web-app-title" content="ליהי & ליאור · 日本">
+<meta name="theme-color" content="#16304a">
 <title>ליהי & ליאור — יפן 2026 · リヒ & リオル</title>
 <style>
   :root{
-    --indigo:#15233E; --indigo2:#27406b; --gold:#C8A24B; --gold-dk:#a8842f;
-    --teal:#0E7C7B; --crimson:#B23A48; --plum:#6D4C7D;
-    --ink:#1f2430; --muted:#6b7280; --bg:#f4f1ea; --card:#ffffff;
-    --line:#e7ded0; --soft:#f0ece2; --rose:#fff2f5;
+    --ink:#231f19; --ink2:#4a4338; --paper:#efe8d8; --paper2:#f6f1e6; --card:#fffdf6;
+    --ai:#21405e; --ai-d:#172f49; --shu:#a8402a; --shu-soft:#bb5237;
+    --kin:#a98a4e; --kin-l:#c4a76c; --line:#e4d9c1; --line2:#efe7d5; --muted:#857a67;
+    --tokyo:#21405e; --hakone:#2f6a5f; --kyoto:#a8402a; --osaka:#6a4a6b; --end:#6b6253;
+    --serif:"Hiragino Mincho ProN","Yu Mincho","YuMincho",Georgia,"Times New Roman",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;
   }
   *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
   html,body{margin:0;padding:0;}
-  body{
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;
-    background:var(--bg); color:var(--ink); line-height:1.65;
-    padding-bottom:92px; -webkit-text-size-adjust:100%; letter-spacing:.1px;
-  }
+  body{ font-family:var(--sans); background:var(--paper); color:var(--ink);
+    line-height:1.7; padding-bottom:96px; -webkit-text-size-adjust:100%;}
   a{color:inherit; text-decoration:none;}
-  .em{font-variant-emoji:emoji;}
+  .ic{width:18px;height:18px;flex:0 0 auto;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
 
   /* ===== Hero ===== */
-  .hero{ position:relative; overflow:hidden; color:#fff;
-    padding:calc(env(safe-area-inset-top) + 34px) 22px 30px; text-align:center;
-    background:linear-gradient(150deg,#11203b 0%, #1d3358 48%, #0E7C7B 130%);
-  }
-  .hero::after{ content:""; position:absolute; inset:0; opacity:.10; pointer-events:none;
-    background-image:radial-gradient(circle at 20% 18%, #fff 0 1.4px, transparent 1.6px),
-                     radial-gradient(circle at 70% 60%, #fff 0 1.4px, transparent 1.6px);
-    background-size:26px 26px, 34px 34px; }
-  .hero .kicker{ position:relative; z-index:1; font-size:11px; letter-spacing:3px; text-transform:uppercase;
-    color:var(--gold); font-weight:700; margin-bottom:8px; }
-  .hero h1{ position:relative; z-index:1; margin:0; font-size:27px; font-weight:800; line-height:1.25;}
-  .hero .jp{ position:relative; z-index:1; margin-top:7px; font-size:15px; font-weight:500; letter-spacing:2px;
-    color:rgba(255,255,255,.82);}
-  .hero .jp::before,.hero .jp::after{content:""; display:inline-block; width:18px; height:1px; background:var(--gold); vertical-align:middle; margin:0 10px;}
-  .hero .sub{ position:relative; z-index:1; opacity:.9; font-size:13.5px; margin-top:10px;}
-  .hero .rule{ position:relative; z-index:1; width:54px; height:3px; border-radius:3px; background:var(--gold); margin:14px auto 0;}
-  .hero .route{ position:relative; z-index:1; margin-top:14px; font-size:12.5px; font-weight:600;
-    background:rgba(255,255,255,.12); display:inline-block; padding:7px 15px; border-radius:30px; border:1px solid rgba(255,255,255,.18);}
-  .hero .count{ position:relative; z-index:1; margin-top:13px; display:flex; justify-content:center; gap:8px; font-size:11.5px; flex-wrap:wrap;}
-  .hero .count span{ background:rgba(255,255,255,.10); padding:5px 11px; border-radius:14px; border:1px solid rgba(255,255,255,.12);}
+  .hero{ position:relative; overflow:hidden; color:#f4eddb; text-align:center;
+    padding:calc(env(safe-area-inset-top) + 40px) 22px 38px;
+    background:linear-gradient(168deg,#19314a 0%, #21405e 55%, #1c4a4a 125%);}
+  .hero-wave{position:absolute; inset:0; width:100%; height:100%; opacity:.45;}
+  .hero > *{position:relative; z-index:1;}
+  .hero .kicker{ font-family:var(--serif); font-size:13px; letter-spacing:6px; color:var(--kin-l); margin-bottom:14px;}
+  .hero h1{ margin:0; font-size:28px; font-weight:800; line-height:1.3; letter-spacing:.5px;}
+  .hero .jp{ font-family:var(--serif); font-size:17px; letter-spacing:5px; color:#e7dcc2; margin-top:12px; display:flex; align-items:center; justify-content:center; gap:14px;}
+  .hero .jp::before,.hero .jp::after{content:""; width:26px; height:1px; background:linear-gradient(90deg,transparent,var(--kin-l));}
+  .hero .jp::after{background:linear-gradient(90deg,var(--kin-l),transparent);}
+  .hero .sub{ font-size:13px; color:#cdbf9f; margin-top:16px; letter-spacing:.5px;}
+  .hero .route{ margin-top:18px; font-size:12.5px; letter-spacing:1px; display:inline-block; padding:9px 18px;
+    border:1px solid rgba(196,167,108,.4); border-radius:2px; color:#e7dcc2;}
+  .hero .count{ margin-top:15px; display:flex; justify-content:center; gap:9px; font-size:11px; flex-wrap:wrap; letter-spacing:.5px; color:#cdbf9f;}
+  .hero .count span{ position:relative; padding:0 11px;}
+  .hero .count span+span::before{content:""; position:absolute; right:-1px; top:3px; bottom:3px; width:1px; background:rgba(196,167,108,.4);}
 
   /* ===== Tabs ===== */
-  .tabs{ position:sticky; top:0; z-index:50; display:flex; gap:7px; overflow-x:auto;
-    padding:11px 13px; background:rgba(244,241,234,.93); backdrop-filter:saturate(180%) blur(12px);
-    border-bottom:1px solid var(--line); -webkit-overflow-scrolling:touch;}
+  .tabs{ position:sticky; top:0; z-index:50; display:flex; gap:0; overflow-x:auto;
+    background:rgba(239,232,216,.94); backdrop-filter:saturate(160%) blur(12px);
+    border-bottom:1px solid var(--line); -webkit-overflow-scrolling:touch; padding:0 8px;}
   .tabs::-webkit-scrollbar{display:none;}
-  .tab{ flex:0 0 auto; border:1px solid var(--line); background:#fff; color:var(--indigo); font-weight:700;
-    font-size:13px; padding:9px 16px; border-radius:30px; box-shadow:0 1px 3px rgba(0,0,0,.05); font-family:inherit; cursor:pointer; transition:.15s;}
-  .tab.active{ background:var(--indigo); color:#fff; border-color:var(--indigo);}
+  .tab{ flex:0 0 auto; border:none; background:none; color:var(--muted); font-weight:600;
+    font-size:13.5px; padding:14px 16px 12px; font-family:inherit; cursor:pointer; position:relative; letter-spacing:.3px; transition:color .2s;}
+  .tab .ro{display:block; font-family:var(--serif); font-size:9px; letter-spacing:2px; opacity:.6; margin-top:2px;}
+  .tab.active{color:var(--ai);}
+  .tab.active::after{content:""; position:absolute; right:16px; left:16px; bottom:0; height:2px; background:var(--shu);}
 
-  .wrap{padding:16px 14px 0;}
-  .eyebrow{ font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--gold-dk); font-weight:800;}
-  .section-title{ font-size:18px; font-weight:800; color:var(--indigo); margin:6px 2px 14px; display:flex; align-items:center; gap:9px;}
+  .wrap{padding:22px 16px 0;}
 
-  .callout{ background:#fff; border:1px solid var(--line); border-right:4px solid var(--gold); border-radius:14px; padding:14px 16px; margin:0 0 12px; font-size:14px; box-shadow:0 1px 4px rgba(0,0,0,.04);}
-  .callout b{color:var(--crimson);}
-  .intro-hero{ background:linear-gradient(135deg,#fff5f7,#fdeef0); border:1px solid #f3d4da; border-right:4px solid var(--crimson);}
+  /* ===== Section head (seal) ===== */
+  .shead{display:flex; align-items:center; gap:13px; margin:8px 2px 18px;}
+  .seal{ flex:0 0 auto; width:42px; height:42px; display:grid; place-items:center; font-family:var(--serif);
+    font-size:21px; color:var(--shu); border:1.5px solid var(--shu); border-radius:5px; background:rgba(168,64,42,.04);}
+  .shead .sh-he{font-size:19px; font-weight:800; color:var(--ink); letter-spacing:.3px;}
+  .shead .sh-ro{font-family:var(--serif); font-size:10px; letter-spacing:3px; color:var(--kin); text-transform:uppercase; margin-top:1px;}
+
+  .lead{ background:var(--card); border:1px solid var(--line); border-radius:6px; padding:16px 18px; margin:0 0 14px;
+    font-size:14px; color:var(--ink2); position:relative;}
+  .lead::before{content:""; position:absolute; top:0; bottom:0; right:0; width:3px; background:var(--shu); border-radius:3px 0 0 3px;}
+  .lead b{color:var(--shu); font-weight:700;}
 
   /* ===== Day cards ===== */
-  .day{ background:var(--card); border-radius:18px; margin-bottom:13px; box-shadow:0 3px 14px rgba(20,30,50,.06); overflow:hidden; border:1px solid var(--line);}
-  .day-head{ display:flex; align-items:center; gap:13px; padding:15px 16px; cursor:pointer;}
-  .day-num{ flex:0 0 auto; width:46px; height:46px; border-radius:13px; color:#fff; font-weight:800;
-    display:flex; align-items:center; justify-content:center; font-size:18px; box-shadow:0 3px 8px rgba(0,0,0,.15);}
+  .day{ background:var(--card); border:1px solid var(--line); border-radius:8px; margin-bottom:14px; overflow:hidden;
+    box-shadow:0 4px 16px rgba(35,31,25,.05);}
+  .day-head{ display:flex; align-items:center; gap:14px; padding:16px 17px; cursor:pointer;}
+  .d-seal{ flex:0 0 auto; width:48px; height:48px; border-radius:50%; border:1.5px solid var(--c,#21405e);
+    display:grid; place-items:center; background:#fff; position:relative;}
+  .d-seal .kj{font-family:var(--serif); font-size:21px; color:var(--c,#21405e); line-height:1;}
+  .d-seal .no{ position:absolute; bottom:-5px; left:-5px; width:21px; height:21px; border-radius:50%;
+    background:var(--c,#21405e); color:#fff; font-family:var(--serif); font-size:11px; display:grid; place-items:center; border:2px solid var(--card);}
   .day-meta{flex:1 1 auto; min-width:0;}
-  .day-meta .d-date{ font-size:11.5px; color:var(--muted); font-weight:700; letter-spacing:.3px;}
-  .day-meta .d-title{ font-size:15.5px; font-weight:800; color:var(--ink); margin-top:2px;}
-  .chev{ flex:0 0 auto; color:var(--muted); transition:transform .25s; font-size:13px;}
-  .day.open .chev{transform:rotate(-180deg);}
-  .day-body{max-height:0; overflow:hidden; transition:max-height .38s ease;}
-  .day-body-inner{padding:0 16px 16px;}
-  .block{display:flex; gap:11px; padding:10px 0; border-top:1px solid #f1ece2;}
-  .block .when{ flex:0 0 96px; font-size:12px; font-weight:800; color:var(--indigo2);}
-  .block .what{flex:1; font-size:14px;}
-  .eat{ background:linear-gradient(135deg,#fff7ef,#fdf0e3); border:1px solid #f0dcc3; border-radius:11px; padding:10px 13px; font-size:13.5px; margin-top:11px;}
-  .eat b{color:var(--crimson);}
-  .tip{ background:#eef8f6; border-right:3px solid var(--teal); border-radius:9px; padding:10px 13px; font-size:13px; margin-top:9px; color:#0b5b5a;}
+  .day-meta .d-date{ font-size:11.5px; color:var(--muted); font-weight:600; letter-spacing:.4px;}
+  .day-meta .d-title{ font-size:16px; font-weight:800; color:var(--ink); margin-top:3px;}
+  .chev{flex:0 0 auto; color:var(--kin); transition:transform .3s;}
+  .day.open .chev{transform:rotate(180deg);}
+  .day-body{max-height:0; overflow:hidden; transition:max-height .4s ease;}
+  .day-body-inner{padding:0 17px 17px;}
+  .block{display:flex; gap:12px; padding:11px 0; border-top:1px solid var(--line);}
+  .block .when{ flex:0 0 104px; font-size:12px; font-weight:700; color:var(--ai); display:flex; align-items:center; gap:6px; letter-spacing:.2px;}
+  .block .when .ic{width:14px;height:14px;color:var(--hakone);}
+  .block .what{flex:1; font-size:14px; color:var(--ink2);}
+  .note{ display:flex; gap:10px; align-items:flex-start; border-radius:6px; padding:11px 13px; margin-top:12px; font-size:13.5px;}
+  .note .ic{width:17px;height:17px;margin-top:1px;}
+  .eat{background:linear-gradient(180deg,#fbf5e9,#f8efdf); border:1px solid var(--line); color:var(--ink2);}
+  .eat .ic{color:var(--shu);} .eat b{color:var(--shu);}
+  .tip{background:#eef4f1; border:1px solid #d8e6df; color:#2f5249;}
+  .tip .spark{width:16px;height:16px;fill:var(--kin);stroke:none;margin-top:1px;flex:0 0 auto;}
 
-  /* ===== Spots (Map + TripAdvisor) ===== */
-  .spots{margin-top:13px;}
-  .spots-label{font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); font-weight:800; margin-bottom:7px;}
-  .spot{ display:flex; align-items:center; gap:8px; padding:8px 0; border-top:1px dashed #ece4d6;}
+  /* ===== Spots ===== */
+  .spots{margin-top:15px; border-top:1px solid var(--line); padding-top:13px;}
+  .spots-label{font-family:var(--serif); font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:var(--kin); margin-bottom:9px;}
+  .spot{ display:flex; align-items:center; gap:9px; padding:9px 0; border-top:1px solid var(--line2);}
   .spot:first-of-type{border-top:none;}
-  .spot .nm{flex:1; font-size:13.5px; font-weight:600;}
-  .btn{ flex:0 0 auto; display:inline-flex; align-items:center; gap:5px; font-size:11.5px; font-weight:700;
-    padding:7px 11px; border-radius:20px; border:1px solid var(--line); background:#fff; cursor:pointer;}
-  .btn.map{ color:#1a73e8; border-color:#d3e3fd; background:#f5f9ff;}
-  .btn.ta{ color:#0a6b52; border-color:#bfe6d4; background:#effaf4;}
-  .btn:active{opacity:.65;}
-  .ta-dot{width:13px;height:13px;border-radius:50%;background:#34e0a1;display:inline-block;position:relative;}
-  .ta-dot::before,.ta-dot::after{content:"";position:absolute;top:50%;width:5px;height:5px;background:#000;border-radius:50%;transform:translateY(-50%);}
-  .ta-dot::before{left:1.5px;} .ta-dot::after{right:1.5px;}
+  .spot .nm{flex:1; font-size:13.5px; font-weight:600; color:var(--ink);}
+  .btn{ flex:0 0 auto; display:inline-flex; align-items:center; gap:6px; font-size:11.5px; font-weight:600;
+    padding:7px 12px; border-radius:3px; border:1px solid var(--line); background:#fff; cursor:pointer; color:var(--ink2); letter-spacing:.2px;}
+  .btn:active{opacity:.6;}
+  .btn.map{border-color:#dbe5f3;}
+  .btn.ta{border-color:#cfe8da;}
+  .gmi,.tai{flex:0 0 auto;}
 
   /* ===== Stays ===== */
-  .hotel{ background:#fff; border:1px solid var(--line); border-radius:18px; overflow:hidden; margin-bottom:15px; box-shadow:0 3px 14px rgba(20,30,50,.06);}
-  .hotel .ph{ width:100%; height:172px; object-fit:cover; display:block; background:var(--soft);}
-  .hotel .body{padding:14px 16px 16px;}
-  .hotel .city-tag{ font-size:11px; font-weight:800; letter-spacing:1px; text-transform:uppercase; padding:3px 10px; border-radius:20px; color:#fff; display:inline-block; margin-bottom:8px;}
-  .hotel h3{margin:0 0 6px; font-size:16.5px; font-weight:800; color:var(--indigo);}
-  .rate{ display:inline-flex; align-items:center; gap:7px; font-size:13px; font-weight:700; color:#0a6b52; background:#effaf4; border:1px solid #bfe6d4; padding:4px 10px; border-radius:20px;}
-  .bub{display:inline-flex; gap:2px;}
-  .bub i{width:11px;height:11px;border-radius:50%;background:#34e0a1;display:inline-block;}
-  .bub i.h{background:linear-gradient(90deg,#34e0a1 50%,#d6f5e8 50%);}
-  .bub i.o{background:#d6f5e8;}
-  .meta-row{display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-top:10px; font-size:12.5px; color:var(--muted);}
-  .pill{background:var(--soft); border:1px solid var(--line); border-radius:14px; padding:3px 10px; font-weight:600; color:var(--ink);}
-  .hotel .cta{ display:flex; align-items:center; justify-content:center; gap:7px; margin-top:13px; width:100%;
-    background:#000; color:#fff; font-weight:800; font-size:13.5px; padding:12px; border-radius:12px;}
-  .hotel .cta .ta-dot{transform:scale(1.1);}
-  .stay-note{font-size:12.5px;color:var(--muted);margin:-4px 2px 14px;}
+  .stay-note{font-size:13px;color:var(--muted);margin:-6px 2px 16px;}
+  .hotel{ background:var(--card); border:1px solid var(--line); border-radius:8px; overflow:hidden; margin-bottom:16px; box-shadow:0 4px 16px rgba(35,31,25,.05);}
+  .hotel .ph{ width:100%; height:184px; object-fit:cover; display:block; background:var(--paper);}
+  .hotel .body{padding:15px 17px 17px;}
+  .hotel .city-tag{ font-family:var(--serif); font-size:11px; letter-spacing:2px; padding:4px 11px; border-radius:2px; color:#fff; display:inline-flex; align-items:center; gap:6px; margin-bottom:10px;}
+  .hotel .city-tag .kj{font-size:13px;}
+  .hotel h3{margin:0 0 8px; font-size:17px; font-weight:800; color:var(--ink); letter-spacing:.2px;}
+  .rate{ display:inline-flex; align-items:center; gap:8px; font-size:13px; font-weight:700; color:var(--ink2);}
+  .bub{display:inline-flex; gap:2.5px;}
+  .bub i{width:11px;height:11px;border-radius:50%;background:#2e8b6f;display:inline-block;}
+  .bub i.h{background:linear-gradient(90deg,#2e8b6f 50%,#cfe0d8 50%);}
+  .bub i.o{background:#cfe0d8;}
+  .meta-row{display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-top:12px; font-size:12.5px;}
+  .pill{ font-family:var(--serif); background:var(--paper2); border:1px solid var(--line); border-radius:2px; padding:4px 11px; color:var(--ink2); letter-spacing:.3px;}
+  .hotel .cta{ display:flex; align-items:center; justify-content:center; gap:9px; margin-top:15px; width:100%;
+    background:var(--ai); color:#fff; font-weight:600; font-size:13.5px; padding:13px; border-radius:4px; letter-spacing:.3px;}
 
   /* ===== Checklist ===== */
-  .check{ background:#fff; border:1px solid var(--line); border-radius:14px; margin-bottom:9px; padding:13px 15px; display:flex; align-items:flex-start; gap:12px; cursor:pointer;}
-  .check .box{ flex:0 0 auto; width:24px; height:24px; border-radius:7px; border:2px solid var(--indigo); display:flex; align-items:center; justify-content:center; font-size:15px; color:#fff; transition:.15s;}
-  .check.done .box{background:var(--teal); border-color:var(--teal);}
+  .check{ background:var(--card); border:1px solid var(--line); border-radius:6px; margin-bottom:10px; padding:14px 16px; display:flex; align-items:flex-start; gap:13px; cursor:pointer;}
+  .check .box{ flex:0 0 auto; width:24px; height:24px; border-radius:4px; border:1.5px solid var(--ai); display:grid; place-items:center; color:#fff; transition:.15s;}
+  .check .box .ic{width:15px;height:15px;stroke:#fff;opacity:0;}
+  .check.done .box{background:var(--hakone); border-color:var(--hakone);}
+  .check.done .box .ic{opacity:1;}
   .check .ctext{flex:1; font-size:14px;}
-  .check .ctext .ct-t{font-weight:800; color:var(--indigo);}
+  .check .ctext .ct-t{font-weight:700; color:var(--ink);}
   .check.done .ctext{opacity:.5; text-decoration:line-through;}
   .check .ctext .ct-d{font-size:12.5px; color:var(--muted); display:block; margin-top:2px;}
 
   /* ===== Info ===== */
-  .info{background:#fff; border:1px solid var(--line); border-radius:14px; margin-bottom:10px; overflow:hidden;}
-  .info-head{padding:14px 16px; font-weight:800; color:var(--indigo); font-size:14.5px; display:flex; justify-content:space-between; align-items:center; cursor:pointer;}
+  .info{background:var(--card); border:1px solid var(--line); border-radius:6px; margin-bottom:11px; overflow:hidden;}
+  .info-head{padding:15px 16px; font-weight:700; color:var(--ink); font-size:14.5px; display:flex; align-items:center; gap:12px; cursor:pointer;}
+  .info-head .ic{color:var(--ai);}
+  .info-head .chev{margin-inline-start:auto;color:var(--kin);}
   .info-body{max-height:0; overflow:hidden; transition:max-height .35s ease;}
-  .info-body-inner{padding:0 16px 14px; font-size:13.5px;}
-  .info-body-inner ul{margin:0; padding-inline-start:18px;}
-  .info-body-inner li{margin:7px 0;}
+  .info-body-inner{padding:0 16px 15px 52px; font-size:13.5px; color:var(--ink2);}
+  .info-body-inner ul{margin:0; padding:0; list-style:none;}
+  .info-body-inner li{margin:9px 0; padding-inline-start:14px; position:relative;}
+  .info-body-inner li::before{content:""; position:absolute; right:0; top:9px; width:5px; height:5px; background:var(--kin); border-radius:50%;}
+  .info-body-inner b{color:var(--ink);}
 
-  .foot{text-align:center; font-size:12px; color:var(--muted); padding:22px 16px 8px; line-height:1.7;}
-  .foot .gold{color:var(--gold-dk); font-weight:700;}
+  .foot{text-align:center; font-size:11.5px; color:var(--muted); padding:26px 18px 10px; line-height:1.9; letter-spacing:.3px;}
+  .foot .kj{font-family:var(--serif); color:var(--kin); font-size:15px; display:block; margin-bottom:6px; letter-spacing:4px;}
 
-  .a2hs{ position:fixed; bottom:0; right:0; left:0; z-index:60; background:var(--indigo); color:#fff;
-    padding:12px 16px calc(12px + env(safe-area-inset-bottom)); font-size:13px; display:flex; align-items:center; gap:10px; box-shadow:0 -3px 14px rgba(0,0,0,.2);}
-  .a2hs .x{margin-inline-start:auto; background:rgba(255,255,255,.2); border:none; color:#fff; width:26px; height:26px; border-radius:50%; font-size:15px; font-family:inherit;}
-  .a2hs b{color:var(--gold);}
+  .a2hs{ position:fixed; bottom:0; right:0; left:0; z-index:60; background:var(--ink); color:#f4eddb;
+    padding:13px 16px calc(13px + env(safe-area-inset-bottom)); font-size:12.5px; display:flex; align-items:center; gap:11px; letter-spacing:.2px;}
+  .a2hs .ic{color:var(--kin-l);}
+  .a2hs b{color:var(--kin-l); font-weight:600;}
+  .a2hs .x{margin-inline-start:auto; background:rgba(244,237,219,.16); border:none; color:#f4eddb; width:26px; height:26px; border-radius:50%; font-size:15px; font-family:inherit;}
 </style>
 </head>
 <body>
@@ -147,11 +163,20 @@
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><clipPath id="gmpin"><path d="M12 2C7.58 2 4 5.58 4 10c0 5.25 8 12 8 12s8-6.75 8-12c0-4.42-3.58-8-8-8z"/></clipPath></defs></svg>
 
 <div class="hero">
-  <div class="kicker">Japan · 2026</div>
+  <svg class="hero-wave" viewBox="0 0 96 48" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <defs><pattern id="seig" width="16" height="8" patternUnits="userSpaceOnUse">
+      <g fill="none" stroke="#c4a76c" stroke-width="0.5">
+        <circle cx="8" cy="8" r="7.5"/><circle cx="8" cy="8" r="5"/><circle cx="8" cy="8" r="2.5"/>
+        <circle cx="0" cy="8" r="7.5"/><circle cx="16" cy="8" r="7.5"/>
+        <circle cx="8" cy="0" r="7.5"/><circle cx="8" cy="0" r="5"/><circle cx="8" cy="0" r="2.5"/>
+        <circle cx="0" cy="0" r="7.5"/><circle cx="16" cy="0" r="7.5"/>
+      </g></pattern></defs>
+    <rect width="96" height="48" fill="url(#seig)"/>
+  </svg>
+  <div class="kicker">日本 · 2026</div>
   <h1>ליהי &amp; ליאור ביפן</h1>
-  <div class="jp">リヒ &amp; リオル&nbsp;&nbsp;·&nbsp;&nbsp;日本</div>
+  <div class="jp">リヒ &amp; リオル</div>
   <div class="sub">22 ביוני – 3 ביולי 2026 · טיול החלומות שלכם</div>
-  <div class="rule"></div>
   <div class="route">טוקיו ← הקונה ← קיוטו ← אוסקה</div>
   <div class="count"><span>11 לילות</span><span>4 ערים</span><span>עונת ההורטנזיות</span></div>
 </div>
@@ -160,46 +185,59 @@
 
 <div class="wrap">
   <div id="view-intro" style="display:none">
-    <div class="callout intro-hero">ליהי וליאור — בנינו לכם מסלול שלוקח אתכם דרך הצדדים הכי שווים של יפן: אוכל, טבע, אורות ניאון ורגעים שקטים רק לשניכם. ומכיוון שליהי אוהבת ים ושקיעות — שילבנו פנימה אִי, חופים ושיט בנהר ובמפרץ. 🌊 כל אטרקציה עם כפתור מפה וכפתור TripAdvisor, ויש המלצות לינה אמיתיות בלשונית <b>לינה</b>. עכשיו רק תיהנו.</div>
-    <div class="eyebrow">לפני שמתחילים</div>
-    <div class="section-title">3 דברים שכדאי לדעת</div>
-    <div class="callout"><b>עונת הגשמים (tsuyu):</b> הגשם בא בהתפרצויות קצרות, לא יום שלם. מטריה מתקפלת + נעליים עמידות במים = מנצחים. בונוס: ההורטנזיות פורחות בכל מקום.</div>
-    <div class="callout"><b>בלי JR Pass:</b> למסלול הזה הוא כבר לא משתלם ב-2026. קנו כרטיסי שינקנסן בודדים (אפליקציית smartEX) + כרטיס Suica נטען.</div>
-    <div class="callout"><b>מזומן:</b> יפן עדיין אוהבת מזומן. משכו ין מכספומט ב-7-Eleven, החזיקו תמיד ¥10,000–20,000.</div>
+    <div class="lead">ליהי וליאור — בנינו לכם מסלול שלוקח אתכם דרך הצדדים הכי שווים של יפן: אוכל, טבע, אורות ניאון ורגעים שקטים רק לשניכם. ומכיוון שליהי אוהבת ים ושקיעות — שילבנו פנימה אִי, חופים ושיט בנהר ובמפרץ. כל אטרקציה עם קישור למפה ול-Tripadvisor, ויש המלצות לינה אמיתיות בלשונית <b>לינה</b>.</div>
+    <div class="shead"><span class="seal">心</span><div><div class="sh-he">לפני שמתחילים</div><div class="sh-ro">Before you go</div></div></div>
+    <div class="lead"><b>עונת הגשמים (tsuyu):</b> הגשם בא בהתפרצויות קצרות, לא יום שלם. מטריה מתקפלת ונעליים עמידות במים — ואתם מנצחים. בונוס: ההורטנזיות פורחות בכל מקום.</div>
+    <div class="lead"><b>בלי JR Pass:</b> למסלול הזה הוא כבר לא משתלם ב-2026. קנו כרטיסי שינקנסן בודדים (אפליקציית smartEX) וכרטיס Suica נטען.</div>
+    <div class="lead"><b>מזומן:</b> יפן עדיין אוהבת מזומן. משכו ין מכספומט ב-7-Eleven, החזיקו תמיד ¥10,000–20,000.</div>
   </div>
 
   <div id="view-days"></div>
 
   <div id="view-stay" style="display:none">
-    <div class="eyebrow">מובחר ב-TripAdvisor</div>
-    <div class="section-title">איפה לישון 🛏️</div>
-    <div class="stay-note">המלצות מדורגות גבוה ב-TripAdvisor לתאריכים שלכם. לחיצה על הכפתור פותחת את המלון באפליקציה.</div>
+    <div class="shead"><span class="seal">宿</span><div><div class="sh-he">איפה לישון</div><div class="sh-ro">Stays</div></div></div>
+    <div class="stay-note">המלצות מדורגות גבוה ב-Tripadvisor לתאריכים שלכם. הכפתור פותח את המלון באפליקציה.</div>
     <div id="hotellist"></div>
   </div>
 
   <div id="view-book" style="display:none">
-    <div class="eyebrow">דחוף</div>
-    <div class="section-title">🔴 להזמין עכשיו</div>
+    <div class="shead"><span class="seal">要</span><div><div class="sh-he">להזמין עכשיו</div><div class="sh-ro">Book now</div></div></div>
     <div id="checklist"></div>
     <div class="foot">הסימונים נשמרים במכשיר שלכם אוטומטית.</div>
   </div>
 
   <div id="view-info" style="display:none">
-    <div class="eyebrow">טוב לדעת</div>
-    <div class="section-title">🧭 המדריך המעשי</div>
+    <div class="shead"><span class="seal">案</span><div><div class="sh-he">המדריך המעשי</div><div class="sh-ro">Good to know</div></div></div>
     <div id="infolist"></div>
   </div>
 </div>
 
-<div class="foot">נבנה <span class="gold">באהבה</span> לליהי וליאור · עובד גם בלי אינטרנט · 楽しんで, תיהנו! 🎌</div>
+<div class="foot"><span class="kj">良い旅を</span>נבנה באהבה לליהי וליאור · עובד גם בלי אינטרנט</div>
 
 <div class="a2hs" id="a2hs">
-  <span>📲 הוסיפו למסך הבית: <b>שיתוף</b> ← <b>הוסף למסך הבית</b></span>
+  <svg class="ic" viewBox="0 0 24 24"><path d="M12 15V4M8.5 7.5 12 4l3.5 3.5"/><path d="M6 11v8a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-8"/></svg>
+  <span>הוסיפו למסך הבית: <b>שיתוף</b> ← <b>הוסף למסך הבית</b></span>
   <button class="x" onclick="document.getElementById('a2hs').style.display='none'">×</button>
 </div>
 
 <script>
-const cityColors={tokyo:'#27406b',hakone:'#0E7C7B',kyoto:'#B23A48',osaka:'#6D4C7D',end:'#6b7280'};
+const C={tokyo:'#21405e',hakone:'#2f6a5f',kyoto:'#a8402a',osaka:'#6a4a6b',end:'#6b6253'};
+const KJ={tokyo:'東',hakone:'箱',kyoto:'京',osaka:'阪',end:'空'};
+
+const I={
+ ta:'<svg class="tai" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#2e8b6f"/><circle cx="8.4" cy="12" r="3.5" fill="#fff"/><circle cx="15.6" cy="12" r="3.5" fill="#fff"/><circle cx="8.4" cy="12" r="1.5" fill="#0b0b0b"/><circle cx="15.6" cy="12" r="1.5" fill="#0b0b0b"/><path d="M12 8.4c.9-1 2.2-1.6 3.6-1.6M12 8.4c-.9-1-2.2-1.6-3.6-1.6" stroke="#fff" stroke-width="1.1" fill="none" stroke-linecap="round"/></svg>',
+ spark:'<svg class="spark" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l1.8 7.2L21 11l-7.2 1.8L12 20l-1.8-7.2L3 11l7.2-1.8z"/></svg>',
+ food:'<svg class="ic" viewBox="0 0 24 24"><path d="M4 11h16a8 8 0 0 1-16 0z"/><path d="M6 11c0-2.5 1.8-4.5 4-4.5"/><path d="M16 4l-3.5 5"/></svg>',
+ train:'<svg class="ic" viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="14" rx="3"/><path d="M6 11h12"/><circle cx="9.2" cy="14" r=".8"/><circle cx="14.8" cy="14" r=".8"/><path d="M8 21l2-3M16 21l-2-3"/></svg>',
+ wifi:'<svg class="ic" viewBox="0 0 24 24"><path d="M2.5 9a15 15 0 0 1 19 0"/><path d="M5.5 12.5a10 10 0 0 1 13 0"/><path d="M8.5 16a5 5 0 0 1 7 0"/><circle cx="12" cy="19.2" r=".9"/></svg>',
+ etiquette:'<svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="6" r="2.6"/><path d="M5 19c1.8-4.5 5-6.5 7-6.5s5.2 2 7 6.5"/></svg>',
+ bag:'<svg class="ic" viewBox="0 0 24 24"><rect x="5.5" y="7.5" width="13" height="12.5" rx="2"/><path d="M9 7.5V5.5a3 3 0 0 1 6 0v2"/><path d="M10 11v5M14 11v5"/></svg>',
+ wave:'<svg class="ic" viewBox="0 0 24 24"><path d="M2 9c1.6 0 1.6 1.6 3.2 1.6S6.8 9 8.4 9 10 10.6 11.6 10.6 13.2 9 14.8 9s1.6 1.6 3.2 1.6S19.6 9 21.2 9"/><path d="M2 15c1.6 0 1.6 1.6 3.2 1.6S6.8 15 8.4 15 10 16.6 11.6 16.6 13.2 15 14.8 15s1.6 1.6 3.2 1.6S19.6 15 21.2 15"/></svg>',
+ check:'<svg class="ic" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg>',
+ chev:'<svg class="ic chev" viewBox="0 0 24 24" width="16" height="16"><path d="M6 9l6 6 6-6"/></svg>',
+ gm:'<svg class="gmi" viewBox="0 0 24 24" width="15" height="17" aria-hidden="true"><g clip-path="url(#gmpin)"><rect x="0" y="0" width="12" height="11" fill="#4285F4"/><rect x="12" y="0" width="12" height="11" fill="#EA4335"/><rect x="0" y="11" width="12" height="13" fill="#FBBC04"/><rect x="12" y="11" width="12" height="13" fill="#34A853"/></g><circle cx="12" cy="9.3" r="2.9" fill="#fff"/></svg>'
+};
+const infoIcon={transport:I.train,connect:I.wifi,food:I.food,etiquette:I.etiquette,pack:I.bag};
 
 const days=[
  {num:1,city:'tokyo',date:"ב' · 22.6 · נחיתה בטוקיו",title:"נחיתה והתמקמות",
@@ -210,30 +248,30 @@ const days=[
   tip:"שנת לילה טובה ביום הראשון = טיול מנצח.",
   spots:["Shibuya Scramble Crossing","Hachiko Statue Shibuya"]},
  {num:2,city:'tokyo',date:"ג' · 23.6 · טוקיו הצעיר",title:"אמנות דיגיטלית, אופנה, לילה",
-  blocks:[["בוקר","teamLab Planets בטויוסו — צועדים יחפים במים ובאור. מושלם ליום גשום (הזמינו מראש!)."],
+  blocks:[["בוקר","teamLab Planets בטויוסו — צועדים יחפים במים ובאור. מושלם ליום גשום (הזמינו מראש)."],
    ["צהריים","הרג'וקו (רחוב טאקשיטה), אומוטסאנדו, ומקדש מייג'י ביער."],
    ["ערב","שינג'וקו — איזקאיות ב-Omoide Yokocho, ברים זעירים ב-Golden Gai, ניאון בקבוקיצ'ו."]],
   eat:"יאקיטורי ב-Omoide Yokocho; קרפ בהרג'וקו.",
-  tip:"Golden Gai = 200+ ברים זעירים. חפשו 'no cover charge'.",
+  tip:"Golden Gai = 200+ ברים זעירים. חפשו ברים בלי דמי כניסה.",
   spots:["teamLab Planets TOKYO","Takeshita Street Harajuku","Omoide Yokocho","Golden Gai Tokyo"]},
- {num:3,city:'tokyo',date:"ד' · 24.6 · מסורת + פופ-קלצ'ר",title:"מקדשים עתיקים ואנימה",
+ {num:3,city:'tokyo',date:"ד' · 24.6 · מסורת ופופ-קלצ'ר",title:"מקדשים עתיקים ואנימה",
   blocks:[["בוקר","אסקוסה — מקדש סנסו-ג'י ורחוב נאקאמיסה. שיט קצר על נהר סומידה."],
-   ["צהריים","אקיהברה — אנימה, גיימינג, אלקטרוניקה, gachapon. גן עדן לפופ-קלצ'ר."],
-   ["ערב","גינזה לשופינג ואומקסה — או שיט שקיעה במפרץ טוקיו: גשר הקשת ואופק הניאון מהמים. 🌊"]],
-  eat:"אומקסה סושי בגינזה (הזמינו!).",
+   ["צהריים","אקיהברה — אנימה, גיימינג, אלקטרוניקה. גן עדן לפופ-קלצ'ר."],
+   ["ערב","גינזה לשופינג ואומקסה — או שיט שקיעה במפרץ טוקיו: גשר הקשת ואופק הניאון מהמים."]],
+  eat:"אומקסה סושי בגינזה (הזמינו מראש).",
   tip:"רוצים עוד אמנות? teamLab Borderless באזאבודאי הילס.",
   spots:["Senso-ji Temple","Akihabara Electric Town","Tokyo Bay Sunset Cruise","Ginza Tokyo"]},
- {num:4,city:'tokyo',date:"ה' · 25.6 · קמקורה ואי אנושימה",title:"ים, אי, בודהה ענק 🌊",
-  blocks:[["בוקר","קמקורה (~1 שעה) — הבודהה הגדול (Daibutsu) ומקדשים. ביוני Meigetsu-in מתפוצץ בהורטנזיות."],
-   ["צהריים — ים 🌊","חוף יואיגהמה ואי אנושימה — חוף ים, מגדלור, מערות ים, וטיילת לאורך החוף. בול בשבילך, ליהי."],
+ {num:4,city:'tokyo',date:"ה' · 25.6 · קמקורה ואי אנושימה",title:"ים, אי, בודהה ענק",
+  blocks:[["בוקר","קמקורה (~1 שעה) — הבודהה הגדול ומקדשים. ביוני Meigetsu-in מתפוצץ בהורטנזיות."],
+   ["צהריים · ים","חוף יואיגהמה ואי אנושימה — חוף ים, מגדלור, מערות ים וטיילת חוף. בול בשבילך, ליהי."],
    ["ערב","שקיעה מעל האוקיינוס מאנושימה, ואז חזרה לטוקיו."]],
   eat:"שירסו-דון (דג כסוף טרי) ליד הים.",
   tip:"אנושימה הוא אי קטן עם נוף ים פתוח ושקיעה מהממת — גן עדן לאוהבי ים.",
   spots:["Enoshima Island","Yuigahama Beach Kamakura","Kotoku-in Great Buddha Kamakura","Meigetsu-in Temple"]},
  {num:5,city:'hakone',date:"ו' · 26.6 · טוקיו ← הקונה",title:"אונסן, אגם, פסגת הפינוק",
   blocks:[["בוקר","נסיעה להקונה (~1.5 ש'). Hakone Free Pass. רכבל מעל עמק Owakudani הגעשי."],
-   ["צהריים","ספינת שודדים על אגם אשי, ושער הטורי של מקדש הקונה שעומד במים."],
-   ["ערב","ריוקאן עם אונסן פרטי + ארוחת קאיסקי. הלילה שתזכרו."]],
+   ["צהריים · אגם","ספינה על אגם אשי, ושער הטורי של מקדש הקונה שעומד במים."],
+   ["ערב","ריוקאן עם אונסן פרטי וארוחת קאיסקי. הלילה שתזכרו."]],
   eat:"קאיסקי בריוקאן (כלול בלינה בד\"כ).",
   tip:"הלילה הכי רומנטי בטיול — אונסן פרטי וארוחת שף, רק שניכם. פוג'י אולי יסתתר בעננים, אבל הערב הזה שווה את הכל.",
   spots:["Owakudani","Lake Ashi Hakone","Hakone Shrine Torii Gate","Hakone Open Air Museum"]},
@@ -244,17 +282,17 @@ const days=[
   eat:"מטבח קיוטו עדין או יאקיטורי בפונטוצ'ו.",
   tip:"קיוטו = ההפך מטוקיו: לאט, עדין, מסורתי.",
   spots:["Gion Kyoto","Kiyomizu-dera","Pontocho Alley"]},
- {num:7,city:'kyoto',date:"א' · 28.6 · ערב-מערב",title:"במבוק, נהר וזהב 🚣",
-  blocks:[["בוקר מוקדם","אראשיאמה — חורש הבמבוק (לכו ב-8:00!), טנריו-ג'י וגשר טוגטסוקיו."],
-   ["צהריים — נהר 🚣","שיט נהר הוזוגאוה (Hozugawa) — סירה מסורתית ~2 שעות דרך קניון ירוק ומים זורמים. נוף עוצר נשימה."],
+ {num:7,city:'kyoto',date:"א' · 28.6 · ערב-מערב",title:"במבוק, נהר וזהב",
+  blocks:[["בוקר מוקדם","חורש הבמבוק (לכו ב-8:00), טנריו-ג'י וגשר טוגטסוקיו."],
+   ["צהריים · נהר","שיט נהר הוזוגאוה — סירה מסורתית ~2 שעות דרך קניון ירוק ומים זורמים. נוף עוצר נשימה."],
    ["אחה\"צ","קינקאקו-ג'י — ביתן הזהב המשתקף באגם."],
-   ["ערב","שוק נישיקי לטעימות, ואז קוואראמאצ'י לחיי לילה."]],
+   ["ערב","שוק נישיקי לטעימות, ואז קוואראמאצ'י."]],
   eat:"סיבוב טעימות בשוק נישיקי; קינוח מאצ'ה.",
-  tip:"שיט ההוזוגאוה מתחיל בקאמיאומה ונוחת באראשיאמה — שילוב מושלם של מים, טבע ושקט.",
+  tip:"שיט ההוזוגאוה מתחיל בקאמיאומה ונוחת באראשיאמה — מים, טבע ושקט.",
   spots:["Arashiyama Bamboo Grove","Hozugawa River Boat Ride","Kinkaku-ji","Nishiki Market Kyoto"]},
- {num:8,city:'kyoto',date:"ב' · 29.6 · שערים אדומים",title:"10,000 שערים, צבאים, מאצ'ה",
+ {num:8,city:'kyoto',date:"ב' · 29.6 · שערים אדומים",title:"שערי טורי, צבאים ומאצ'ה",
   blocks:[["בוקר מוקדם","פושימי-אינארי — אלפי שערי טורי אדומים. לכו לפני 8:00."],
-   ["אופציה א'","אוג'י — בירת המאצ'ה, ומקדש Mimuroto-ji עם 10,000 שיחי הורטנזיה (שיא ביוני!)."],
+   ["אופציה א'","אוג'י — בירת המאצ'ה, ומקדש Mimuroto-ji עם 10,000 שיחי הורטנזיה (שיא ביוני)."],
    ["אופציה ב'","נארה (45 דק') — פארק הצבאים החופשיים וטודאי-ג'י."]],
   eat:"קינוחי מאצ'ה באוג'י, או מוצ'י בנארה.",
   tip:"גשם? אוג'י (מקורה חלקית). בהיר? נארה (חוץ פתוח).",
@@ -262,20 +300,20 @@ const days=[
  {num:9,city:'osaka',date:"ג' · 30.6 · קיוטו ← אוסקה",title:"אל בירת האוכל",
   blocks:[["בוקר","נסיעה קצרה לאוסקה (~15 דק' שינקנסן). הניחו תיקים."],
    ["אחה\"צ","טירת אוסקה וגנים, שופינג בשינסאיבאשי-סוג'י (מקורה)."],
-   ["ערב — תעלה 🌊","דוטונבורי! שיט בתעלת טומבורי המוארת מתחת לשלט ה-Glico, ניאון ואוכל רחוב."]],
-  eat:"טאקויאקי + אוקונומיאקי בדוטונבורי.",
+   ["ערב · תעלה","דוטונבורי — שיט בתעלת טומבורי המוארת מתחת לשלט ה-Glico, ניאון ואוכל רחוב."]],
+  eat:"טאקויאקי ואוקונומיאקי בדוטונבורי.",
   tip:"הסיסמה המקומית: kuidaore — 'לאכול עד שתתמוטטו'.",
   spots:["Osaka Castle","Tombori River Cruise Osaka","Shinsaibashi-suji","Dotonbori"]},
  {num:10,city:'osaka',date:"ד' · 1.7 · יום הפופ-קלצ'ר",title:"סופר נינטנדו וורלד",
-  blocks:[["מומלץ לכם","Universal Studios Japan — סופר נינטנדו וורלד, הארי פוטר. קנו Express Pass!"],
-   ["אופציה ב'","טירת הימג'י (~1 ש') + קובה לבקר קובה אגדי."],
+  blocks:[["מומלץ לכם","Universal Studios Japan — סופר נינטנדו וורלד, הארי פוטר. קנו Express Pass."],
+   ["אופציה ב'","טירת הימג'י (~1 ש') וקובה לבקר קובה אגדי."],
    ["ערב","חיי לילה באמריקה-מורה וברים בנמבה."]],
   eat:"סטייק קובה, או טפניאקי/סושי באוסקה.",
   tip:"פופ-קלצ'ר? יוניברסל. היסטוריה? הימג'י. אי אפשר לטעות.",
   spots:["Universal Studios Japan","Himeji Castle","Amerikamura Osaka"]},
  {num:11,city:'osaka',date:"ה' · 2.7 · יום אחרון מלא",title:"שווקים, גאדג'טים, פרידה",
   blocks:[["בוקר","שוק קורומון איצ'יבה — סושי טרי, פירות יקרים. ארוחת בוקר של אלופים."],
-   ["צהריים","Den Den Town (האקיהברה של אוסקה), שינסקאי + טסוטנקאקו לקושיקאטסו."],
+   ["צהריים","Den Den Town (האקיהברה של אוסקה), שינסקאי וטסוטנקאקו לקושיקאטסו."],
    ["ערב","ארוחת פרידה מפנקת — סושי/טפניאקי/וגיו. לילה אחרון בנמבה."]],
   eat:"ארוחת השיא של הטיול — הזמינו מראש.",
   tip:"מתנות אחרונות בשינסאיבאשי או בשדה (KIX).",
@@ -284,7 +322,7 @@ const days=[
   blocks:[["בוקר","רכבת Haruka/Nankai לשדה קנסאי (KIX, ~50 דק' מנמבה)."],
    ["טיפ","הגיעו לשדה ~3 שעות לפני טיסה בינלאומית. שופינג אחרון בטרמינל."]],
   eat:"בנטו אחרון לדרך מחנות בתחנה.",
-  tip:"זהו, ליהי וליאור — חזרתם עם זיכרונות לכל החיים. סיינרה, יפן! 🌸",
+  tip:"זהו, ליהי וליאור — חזרתם עם זיכרונות לכל החיים. סיינרה, יפן.",
   spots:["Kansai International Airport"]},
 ];
 
@@ -308,61 +346,60 @@ const hotels=[
 ];
 
 const bookings=[
- ["מלונות ל-11 הלילות","טוקיו 4 · הקונה 1 · קיוטו 3 · אוסקה 3 — ראו המלצות בלשונית 'לינה'"],
+ ["מלונות ל-11 הלילות","טוקיו 4 · הקונה 1 · קיוטו 3 · אוסקה 3 — ראו המלצות בלשונית לינה"],
  ["ריוקאן בהקונה","הטובים עם אונסן פרטי נגמרים מהר — זו פסגת הפינוק"],
  ["teamLab Planets","כרטיסים לפי שעה ונגמרים — הזמינו אונליין מראש"],
  ["Shibuya Sky (שקיעה)","סלוטי השקיעה הכי מבוקשים"],
  ["אומקסה סושי (1–2)","דרך הקונסיירז' של המלון או אפליקציה"],
  ["USJ Express Pass","אם בוחרים יום ביוניברסל — חוסך תורים"],
- ["eSIM / פוקט-וויי-פיי","Airalo / Ubigi — 5 דקות הגדרה"],
+ ["eSIM","Airalo / Ubigi — 5 דקות הגדרה"],
  ["כרטיסי שינקנסן (smartEX)","טוקיו←קיוטו, קיוטו←אוסקה. בלי JR Pass"],
 ];
 
 const info=[
- ["🚄 תחבורה",["<b>Suica/ICOCA:</b> כרטיס נטען לכל רכבת/אוטובוס/חנות נוחות. טענו ~¥3,000.",
+ ["תחבורה","transport",["<b>Suica/ICOCA:</b> כרטיס נטען לכל רכבת/אוטובוס/חנות נוחות. טענו ~¥3,000.",
   "<b>שינקנסן:</b> כרטיסים בודדים דרך אפליקציית smartEX. טוקיו←קיוטו ~₪500 לאדם.",
   "<b>בלי JR Pass:</b> כבר לא משתלם למסלול הזה.",
   "<b>הקונה:</b> Hakone Free Pass מכסה רכבלים, ספינה ואוטובוסים."]],
- ["📱 חיבור וכסף",["<b>אינטרנט:</b> eSIM (Airalo/Ubigi). לזוג — שתי חבילות נפרדות.",
+ ["חיבור וכסף","connect",["<b>אינטרנט:</b> eSIM (Airalo/Ubigi). לזוג — שתי חבילות נפרדות.",
   "<b>מזומן:</b> כספומט ב-7-Eleven מקבל כרטיסים זרים. החזיקו ¥10–20K.",
-  "<b>אפליקציות:</b> Google Maps, Google Translate (מצלמה לתפריטים!), Navitime, TripAdvisor."]],
- ["🍜 אוכל",["<b>הזמנות:</b> אומקסה/קובה — דרך הקונסיירז'. הרבה מקומות 'תור בלבד'.",
+  "<b>אפליקציות:</b> Google Maps, Google Translate (מצלמה לתפריטים), Navitime, Tripadvisor."]],
+ ["אוכל","food",["<b>הזמנות:</b> אומקסה/קובה — דרך הקונסיירז'. הרבה מקומות 'תור בלבד'.",
   "<b>טיפים:</b> אין טיפים ביפן! זה אפילו נחשב מוזר.",
-  "<b>קונביני:</b> 7-Eleven, Lawson, FamilyMart — אוכל מעולה וזול. סנדוויץ' הביצה אגדי."]],
- ["🙇 נימוסים",["לא אוכלים תוך כדי הליכה (חוץ מאזורי אוכל רחוב).",
+  "<b>קונביני:</b> 7-Eleven, Lawson, FamilyMart — אוכל מעולה וזול."]],
+ ["נימוסים","etiquette",["לא אוכלים תוך כדי הליכה (חוץ מאזורי אוכל רחוב).",
   "שקט ברכבות — בלי שיחות טלפון.",
-  "באונסן: מתקלחים לפני, נכנסים עירומים. קעקועים — בדקו מראש.",
+  "באונסן: מתקלחים לפני, נכנסים ללא בגד ים. קעקועים — בדקו מראש.",
   "מסירים נעליים על טאטאמי. עומדים בצד באסקלטור."]],
- ["🎒 לארוז (עונת גשמים)",["מטריה מתקפלת (או שקופה ב-konbini ב-¥500) + מעיל גשם דק.",
+ ["לארוז","pack",["מטריה מתקפלת (או שקופה ב-konbini ב-¥500) ומעיל גשם דק.",
   "נעליים נוחות ועמידות במים — 15,000+ צעדים ביום.",
   "בדים מתייבשים-מהר ושכבות קלות (לח וחם).",
   "סוללת גיבוי — הניווט מרוקן את הטלפון."]],
 ];
 
-const gmIcon='<svg class="gmi" viewBox="0 0 24 24" width="14" height="16" aria-hidden="true"><g clip-path="url(#gmpin)"><rect x="0" y="0" width="12" height="11" fill="#4285F4"/><rect x="12" y="0" width="12" height="11" fill="#EA4335"/><rect x="0" y="11" width="12" height="13" fill="#FBBC04"/><rect x="12" y="11" width="12" height="13" fill="#34A853"/></g><circle cx="12" cy="9.3" r="2.9" fill="#fff"/></svg>';
 function mapsLink(q){return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q+' Japan');}
 function taLink(q){return 'https://www.tripadvisor.com/Search?q='+encodeURIComponent(q);}
 function bubbles(r){let h='';for(let i=1;i<=5;i++){h+= r>=i?'<i></i>':(r>=i-0.5?'<i class="h"></i>':'<i class="o"></i>');}return '<span class="bub">'+h+'</span>';}
+function waterLabel(t){return /ים|נהר|תעלה|מפרץ|אגם/.test(t);}
 
-// days
 const vd=document.getElementById('view-days');
 days.forEach(d=>{
-  const c=cityColors[d.city];
+  const c=C[d.city];
   const el=document.createElement('div'); el.className='day';
   el.innerHTML=`
    <div class="day-head">
-     <div class="day-num" style="background:${c}">${d.num}</div>
+     <div class="d-seal" style="--c:${c}"><span class="kj">${KJ[d.city]}</span><span class="no">${d.num}</span></div>
      <div class="day-meta"><div class="d-date">${d.date}</div><div class="d-title">${d.title}</div></div>
-     <div class="chev">▼</div>
+     ${I.chev}
    </div>
    <div class="day-body"><div class="day-body-inner">
-     ${d.blocks.map(b=>`<div class="block"><div class="when">${b[0]}</div><div class="what">${b[1]}</div></div>`).join('')}
-     <div class="eat"><b>🍜 לאכול:</b> ${d.eat}</div>
-     <div class="tip">💡 ${d.tip}</div>
-     <div class="spots"><div class="spots-label">מקומות · מפה + TripAdvisor</div>
+     ${d.blocks.map(b=>`<div class="block"><div class="when">${waterLabel(b[0])?I.wave:''}${b[0]}</div><div class="what">${b[1]}</div></div>`).join('')}
+     <div class="note eat">${I.food}<div><b>לאכול · </b>${d.eat}</div></div>
+     <div class="note tip">${I.spark}<div>${d.tip}</div></div>
+     <div class="spots"><div class="spots-label">מקומות · מפה ו-Tripadvisor</div>
        ${d.spots.map(s=>`<div class="spot"><span class="nm">${s.replace(/ (Japan|Tokyo|Kyoto|Osaka)$/,'')}</span>
-         <a class="btn map" href="${mapsLink(s)}" target="_blank" rel="noopener">${gmIcon} מפה</a>
-         <a class="btn ta" href="${taLink(s)}" target="_blank" rel="noopener"><span class="ta-dot"></span> TripAdvisor</a></div>`).join('')}
+         <a class="btn map" href="${mapsLink(s)}" target="_blank" rel="noopener">${I.gm} מפה</a>
+         <a class="btn ta" href="${taLink(s)}" target="_blank" rel="noopener">${I.ta} Tripadvisor</a></div>`).join('')}
      </div>
    </div></div>`;
   const head=el.querySelector('.day-head'), body=el.querySelector('.day-body');
@@ -370,58 +407,53 @@ days.forEach(d=>{
   vd.appendChild(el);
 });
 
-// hotels
 const hl=document.getElementById('hotellist');
 hotels.forEach(h=>{
-  const c=cityColors[h.city];
+  const c=C[h.city];
   const el=document.createElement('div'); el.className='hotel';
   el.innerHTML=`
-   <img class="ph" src="${h.img}" alt="${h.name}" loading="lazy"
-        onerror="this.style.display='none'">
+   <img class="ph" src="${h.img}" alt="${h.name}" loading="lazy" onerror="this.style.display='none'">
    <div class="body">
-     <span class="city-tag" style="background:${c}">${h.cityName}</span>
+     <span class="city-tag" style="background:${c}"><span class="kj">${KJ[h.city]}</span> ${h.cityName}</span>
      <h3>${h.name}</h3>
      <span class="rate">${bubbles(h.rating)} ${h.rating.toFixed(1)} · ${h.reviews.toLocaleString()} ביקורות</span>
      <div class="meta-row">${h.tags.map(t=>`<span class="pill">${t}</span>`).join('')}<span class="pill">${h.price}</span></div>
-     <a class="cta" href="${h.url}" target="_blank" rel="noopener"><span class="ta-dot"></span> צפו ב-TripAdvisor</a>
+     <a class="cta" href="${h.url}" target="_blank" rel="noopener">${I.ta} צפו ב-Tripadvisor</a>
    </div>`;
   hl.appendChild(el);
 });
 
-// checklist
 const cl=document.getElementById('checklist');
 bookings.forEach((b,i)=>{
   const key='jp_book_'+i, done=localStorage.getItem(key)==='1';
   const el=document.createElement('div'); el.className='check'+(done?' done':'');
-  el.innerHTML=`<div class="box">✓</div><div class="ctext"><span class="ct-t">${b[0]}</span><span class="ct-d">${b[1]}</span></div>`;
+  el.innerHTML=`<div class="box">${I.check}</div><div class="ctext"><span class="ct-t">${b[0]}</span><span class="ct-d">${b[1]}</span></div>`;
   el.addEventListener('click',()=>{const now=el.classList.toggle('done'); localStorage.setItem(key,now?'1':'0');});
   cl.appendChild(el);
 });
 
-// info
 const il=document.getElementById('infolist');
 info.forEach(s=>{
   const el=document.createElement('div'); el.className='info';
-  el.innerHTML=`<div class="info-head">${s[0]}<span class="chev">▼</span></div>
-   <div class="info-body"><div class="info-body-inner"><ul>${s[1].map(x=>`<li>${x}</li>`).join('')}</ul></div></div>`;
-  const head=el.querySelector('.info-head'), body=el.querySelector('.info-body');
+  el.innerHTML=`<div class="info-head">${infoIcon[s[1]]}<span>${s[0]}</span>${I.chev}</div>
+   <div class="info-body"><div class="info-body-inner"><ul>${s[2].map(x=>`<li>${x}</li>`).join('')}</ul></div></div>`;
+  const head=el.querySelector('.info-head'), body=el.querySelector('.info-body'), chev=head.querySelector('.chev');
   head.addEventListener('click',()=>{const open=body.style.maxHeight&&body.style.maxHeight!=='0px';
-    body.style.maxHeight=open?'0':body.scrollHeight+30+'px'; head.querySelector('.chev').style.transform=open?'rotate(0)':'rotate(-180deg)';});
+    body.style.maxHeight=open?'0':body.scrollHeight+30+'px'; chev.style.transform=open?'rotate(0)':'rotate(180deg)';});
   il.appendChild(el);
 });
 
-// tabs
-const tabDefs=[['intro','מבוא'],['days','המסלול'],['stay','לינה'],['book','להזמין'],['info','מידע']];
+const tabDefs=[['intro','מבוא','Welcome'],['days','המסלול','Itinerary'],['stay','לינה','Stays'],['book','להזמין','Book'],['info','מידע','Info']];
 const views=['intro','days','stay','book','info'];
-const tabsEl=document.getElementById('tabs');
 function show(k){
   views.forEach(v=>document.getElementById('view-'+v).style.display=(v===k)?'block':'none');
   document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.k===k));
   window.scrollTo({top:0,behavior:'smooth'});
 }
-tabDefs.forEach(([k,label])=>{
-  const b=document.createElement('button'); b.className='tab'; b.textContent=label; b.dataset.k=k;
-  b.addEventListener('click',()=>show(k)); tabsEl.appendChild(b);
+const tabsEl=document.getElementById('tabs');
+tabDefs.forEach(([k,label,ro])=>{
+  const b=document.createElement('button'); b.className='tab'; b.dataset.k=k;
+  b.innerHTML=`${label}<span class="ro">${ro}</span>`; b.addEventListener('click',()=>show(k)); tabsEl.appendChild(b);
 });
 show('days');
 setTimeout(()=>{const f=document.querySelector('.day'); if(f) f.querySelector('.day-head').click();},160);
