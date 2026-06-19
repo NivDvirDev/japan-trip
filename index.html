@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="יפן 2026">
+<meta name="theme-color" content="#1F3A5F">
+<title>יפן 2026 — המסלול הזוגי</title>
+<style>
+  :root{
+    --navy:#1F3A5F; --red:#C0392B; --teal:#0E7C7B; --purple:#8E44AD;
+    --ink:#222; --grey:#6b7280; --bg:#f5f1ea; --card:#ffffff; --line:#e6ddd0;
+    --sand:#f7ecdd;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.6;
+    padding-bottom:90px;
+    -webkit-text-size-adjust:100%;
+  }
+  a{color:inherit;}
+  /* Hero */
+  .hero{
+    background:linear-gradient(135deg,#1F3A5F 0%, #2c5277 55%, #0E7C7B 100%);
+    color:#fff; padding:calc(env(safe-area-inset-top) + 28px) 20px 26px;
+    text-align:center; border-radius:0 0 26px 26px; box-shadow:0 6px 18px rgba(31,58,95,.25);
+  }
+  .hero h1{margin:0; font-size:26px; font-weight:800; letter-spacing:.3px;}
+  .hero .sub{opacity:.92; font-size:14px; margin-top:6px;}
+  .hero .route{margin-top:12px; font-size:13px; background:rgba(255,255,255,.15); display:inline-block; padding:6px 14px; border-radius:20px; font-weight:600;}
+  .hero .count{margin-top:14px; display:flex; justify-content:center; gap:10px; font-size:12px;}
+  .hero .count span{background:rgba(255,255,255,.13); padding:5px 11px; border-radius:14px;}
+  /* Tabs */
+  .tabs{position:sticky; top:0; z-index:50; display:flex; gap:6px; overflow-x:auto;
+    padding:10px 12px; background:rgba(245,241,234,.92); backdrop-filter:saturate(180%) blur(10px);
+    border-bottom:1px solid var(--line); -webkit-overflow-scrolling:touch;}
+  .tabs::-webkit-scrollbar{display:none;}
+  .tab{flex:0 0 auto; border:none; background:#fff; color:var(--navy); font-weight:700;
+    font-size:13px; padding:9px 15px; border-radius:20px; box-shadow:0 1px 4px rgba(0,0,0,.06);
+    font-family:inherit;}
+  .tab.active{background:var(--navy); color:#fff;}
+  .wrap{padding:14px 14px 0;}
+  .section-title{font-size:15px; font-weight:800; color:var(--navy); margin:22px 4px 10px;
+    display:flex; align-items:center; gap:8px;}
+  /* Intro callouts */
+  .callout{background:var(--sand); border:1px solid var(--line); border-radius:14px; padding:13px 15px; margin:0 0 12px; font-size:14px;}
+  .callout b{color:var(--red);}
+  /* Day card */
+  .day{background:var(--card); border-radius:16px; margin-bottom:12px; box-shadow:0 2px 10px rgba(0,0,0,.05); overflow:hidden; border:1px solid var(--line);}
+  .day-head{display:flex; align-items:center; gap:12px; padding:14px 15px; cursor:pointer; position:relative;}
+  .day-num{flex:0 0 auto; width:42px; height:42px; border-radius:12px; color:#fff; font-weight:800;
+    display:flex; align-items:center; justify-content:center; font-size:17px;}
+  .day-meta{flex:1 1 auto; min-width:0;}
+  .day-meta .d-date{font-size:12px; color:var(--grey); font-weight:600;}
+  .day-meta .d-title{font-size:15px; font-weight:800; color:var(--ink); margin-top:1px;}
+  .chev{flex:0 0 auto; color:var(--grey); transition:transform .25s; font-size:14px;}
+  .day.open .chev{transform:rotate(-180deg);}
+  .day-body{max-height:0; overflow:hidden; transition:max-height .35s ease;}
+  .day-body-inner{padding:2px 15px 15px;}
+  .block{display:flex; gap:10px; padding:9px 0; border-top:1px dashed var(--line);}
+  .block:first-child{border-top:none;}
+  .block .when{flex:0 0 92px; font-size:12px; font-weight:800; color:var(--navy);}
+  .block .what{flex:1; font-size:14px;}
+  .eat{background:#fef4ef; border-radius:10px; padding:9px 12px; font-size:13.5px; margin-top:10px;}
+  .eat b{color:var(--red);}
+  .tip{background:#eefaf7; border-right:3px solid var(--teal); border-radius:8px; padding:9px 12px; font-size:13px; margin-top:8px; color:#0c5e5d;}
+  .maps{display:flex; flex-wrap:wrap; gap:7px; margin-top:11px;}
+  .maps a{font-size:12px; font-weight:700; text-decoration:none; background:var(--navy); color:#fff;
+    padding:7px 11px; border-radius:16px; display:inline-flex; align-items:center; gap:5px;}
+  .maps a:active{opacity:.7;}
+  /* Checklist */
+  .check{background:#fff; border:1px solid var(--line); border-radius:14px; margin-bottom:9px;
+    padding:13px 14px; display:flex; align-items:flex-start; gap:11px; cursor:pointer;}
+  .check .box{flex:0 0 auto; width:24px; height:24px; border-radius:7px; border:2px solid var(--navy);
+    display:flex; align-items:center; justify-content:center; font-size:15px; color:#fff; transition:.15s;}
+  .check.done .box{background:var(--teal); border-color:var(--teal);}
+  .check .ctext{flex:1; font-size:14px;}
+  .check .ctext .ct-t{font-weight:800; color:var(--navy);}
+  .check.done .ctext{opacity:.5; text-decoration:line-through;}
+  .check .ctext .ct-d{font-size:12.5px; color:var(--grey); display:block; margin-top:2px;}
+  /* Info accordion */
+  .info{background:#fff; border:1px solid var(--line); border-radius:14px; margin-bottom:10px; overflow:hidden;}
+  .info-head{padding:13px 15px; font-weight:800; color:var(--navy); font-size:14.5px; display:flex; justify-content:space-between; align-items:center; cursor:pointer;}
+  .info-body{max-height:0; overflow:hidden; transition:max-height .35s ease;}
+  .info-body-inner{padding:0 15px 14px; font-size:13.5px;}
+  .info-body-inner ul{margin:0; padding-inline-start:18px;}
+  .info-body-inner li{margin:7px 0;}
+  .info-body-inner b{color:var(--ink);}
+  /* footer note */
+  .foot{text-align:center; font-size:12px; color:var(--grey); padding:20px 16px 8px;}
+  /* A2HS banner */
+  .a2hs{position:fixed; bottom:0; right:0; left:0; z-index:60; background:var(--navy); color:#fff;
+    padding:11px 16px calc(11px + env(safe-area-inset-bottom)); font-size:13px; display:flex; align-items:center; gap:10px;
+    box-shadow:0 -3px 14px rgba(0,0,0,.2);}
+  .a2hs .x{margin-inline-start:auto; background:rgba(255,255,255,.2); border:none; color:#fff; width:26px; height:26px; border-radius:50%; font-size:15px; font-family:inherit;}
+  .a2hs b{color:#ffd9a8;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>יפן — הטיול הזוגי 🇯🇵</h1>
+  <div class="sub">22 ביוני – 3 ביולי 2026</div>
+  <div class="route">טוקיו ← הקונה ← קיוטו ← אוסקה</div>
+  <div class="count"><span>11 לילות</span><span>4 ערים</span><span>עונת ההורטנזיות 💙</span></div>
+</div>
+
+<div class="tabs" id="tabs"></div>
+
+<div class="wrap">
+  <!-- INTRO -->
+  <div id="view-intro">
+    <div class="section-title">⚡ 3 דברים לפני שמתחילים</div>
+    <div class="callout"><b>עונת הגשמים (tsuyu):</b> הגשם בא בהתפרצויות קצרות, לא יום שלם. מטריה מתקפלת + נעליים עמידות במים = מנצחים. בונוס: ההורטנזיות פורחות בכל מקום.</div>
+    <div class="callout"><b>בלי JR Pass:</b> למסלול הזה הוא כבר לא משתלם ב-2026. קנו כרטיסי שינקנסן בודדים (אפליקציית smartEX) + כרטיס Suica נטען. תחסכו מאות שקלים.</div>
+    <div class="callout"><b>מזומן:</b> יפן עדיין אוהבת מזומן. משכו ין מכספומט ב-7-Eleven, החזיקו תמיד ¥10,000–20,000.</div>
+    <div class="section-title">📍 איפה לישון</div>
+    <div class="callout">טוקיו — שיבויה/שינג'וקו · הקונה — ריוקאן עם אונסן פרטי · קיוטו — גיון/קוואראמאצ'י · אוסקה — נמבה/שינסאיבאשי</div>
+  </div>
+
+  <!-- DAYS -->
+  <div id="view-days"></div>
+
+  <!-- CHECKLIST -->
+  <div id="view-book" style="display:none">
+    <div class="section-title">🔴 להזמין עכשיו (פחות משבוע!)</div>
+    <div id="checklist"></div>
+    <div class="foot">הסימונים נשמרים במכשיר שלכם אוטומטית.</div>
+  </div>
+
+  <!-- INFO -->
+  <div id="view-info" style="display:none">
+    <div class="section-title">🧭 המדריך המעשי</div>
+    <div id="infolist"></div>
+  </div>
+</div>
+
+<div class="foot">בנוי לזרום גם בלי אינטרנט · תהנו! 楽しんで 🎌</div>
+
+<div class="a2hs" id="a2hs">
+  <span>📲 הוסיפו למסך הבית: <b>שיתוף</b> ← <b>הוסף למסך הבית</b></span>
+  <button class="x" onclick="document.getElementById('a2hs').style.display='none'">×</button>
+</div>
+
+<script>
+const cityColors={tokyo:'#1F3A5F',hakone:'#0E7C7B',kyoto:'#C0392B',osaka:'#8E44AD',end:'#6b7280'};
+
+const days=[
+ {num:1,city:'tokyo',date:"ב' · 22.6 · נחיתה בטוקיו",title:"נחיתה והתמקמות",
+  blocks:[["בוקר/צהריים","נחיתה. רכבת לעיר (Narita Express ~60 דק' / מונורייל מהאנדה ~30 דק'). הניחו תיקים."],
+   ["בדרך","קנו Suica/Welcome Suica, הפעילו eSIM."],
+   ["ערב","צומת שיבויה בלילה, הכלב האצ'יקו, וראמן ראשון. אל תעמיסו — ג'ט לג."]],
+  eat:"ראמן ב-Ichiran או איזקאיה ברחוב צדדי.",
+  tip:"שנת לילה טובה ביום הראשון = טיול מנצח.",
+  maps:["Shibuya Scramble Crossing","Hachiko Statue Shibuya"]},
+ {num:2,city:'tokyo',date:"ג' · 23.6 · טוקיו הצעיר",title:"אמנות דיגיטלית, אופנה, לילה",
+  blocks:[["בוקר","teamLab Planets בטויוסו — צועדים יחפים במים ובאור. מושלם ליום גשום (הזמינו מראש!)."],
+   ["צהריים","הרג'וקו (רחוב טאקשיטה), אומוטסאנדו, ומקדש מייג'י ביער."],
+   ["ערב","שינג'וקו — איזקאיות ב-Omoide Yokocho, ברים זעירים ב-Golden Gai, ניאון בקבוקיצ'ו."]],
+  eat:"יאקיטורי ב-Omoide Yokocho; קרפ בהרג'וקו.",
+  tip:"Golden Gai = 200+ ברים זעירים. חפשו 'no cover charge'.",
+  maps:["teamLab Planets TOKYO","Takeshita Street Harajuku","Omoide Yokocho","Golden Gai"]},
+ {num:3,city:'tokyo',date:"ד' · 24.6 · מסורת + פופ-קלצ'ר",title:"מקדשים עתיקים ואנימה",
+  blocks:[["בוקר","אסקוסה — מקדש סנסו-ג'י ורחוב נאקאמיסה. שיט קצר על נהר סומידה."],
+   ["צהריים","אקיהברה — אנימה, גיימינג, אלקטרוניקה, gachapon. גן עדן לפופ-קלצ'ר."],
+   ["ערב","גינזה לשופינג יוקרה ואומקסה סושי לפינוק."]],
+  eat:"אומקסה סושי בגינזה (הזמינו!).",
+  tip:"רוצים עוד אמנות? teamLab Borderless באזאבודאי הילס.",
+  maps:["Senso-ji Temple","Akihabara Electric Town","Ginza Tokyo"]},
+ {num:4,city:'tokyo',date:"ה' · 25.6 · מפלט לקמקורה",title:"טבע, ים, בודהה ענק",
+  blocks:[["כל היום","קמקורה (~1 שעה) — הבודהה הגדול, מקדשים, וטרק קל. ביוני מקדש Meigetsu-in מתפוצץ בהורטנזיות."],
+   ["גיבוי לגשם","יום שופינג ב-Shimokitazawa — וינטג', קפה, היפ (מקורה)."],
+   ["ערב","חזרה לטוקיו. בר גג או בר וויסקי שקט."]],
+  eat:"שירסו-דון ליד הים בקמקורה.",
+  tip:"ההורטנזיות הן הסיבה שאנשים אוהבים יוני ביפן.",
+  maps:["Kotoku-in Great Buddha Kamakura","Meigetsu-in Temple","Shimokitazawa"]},
+ {num:5,city:'hakone',date:"ו' · 26.6 · טוקיו ← הקונה",title:"אונסן, אגם, פסגת הפינוק",
+  blocks:[["בוקר","נסיעה להקונה (~1.5 ש'). Hakone Free Pass. רכבל מעל עמק Owakudani הגעשי."],
+   ["צהריים","ספינת שודדים על אגם אשי, ושער הטורי של מקדש הקונה שעומד במים."],
+   ["ערב","ריוקאן יוקרתי עם אונסן פרטי + ארוחת קאיסקי. הלילה שתזכרו."]],
+  eat:"קאיסקי בריוקאן (כלול בלינה בד\"כ).",
+  tip:"פוג'י עשוי להסתתר בעננים בעונה — האונסן והקאיסקי שווים בפני עצמם.",
+  maps:["Owakudani","Lake Ashi Hakone","Hakone Shrine Torii Gate","Hakone Open Air Museum"]},
+ {num:6,city:'kyoto',date:"ש' · 27.6 · הקונה ← קיוטו",title:"מבירת המקדשים מתחילים",
+  blocks:[["בוקר","אונסן רגוע. שינקנסן אודוארה ← קיוטו (~2:20). הניחו תיקים."],
+   ["אחה\"צ","גיון והיגאשיאמה — סמטאות מרוצפות, בתי תה. עליה לקיומיזו-דרה לשקיעה."],
+   ["ערב","סמטת פונטוצ'ו לאורך הנהר לארוחת ערב."]],
+  eat:"מטבח קיוטו עדין או יאקיטורי בפונטוצ'ו.",
+  tip:"קיוטו = ההפך מטוקיו: לאט, עדין, מסורתי.",
+  maps:["Gion Kyoto","Kiyomizu-dera","Pontocho Alley"]},
+ {num:7,city:'kyoto',date:"א' · 28.6 · ערב-מערב",title:"חורש הבמבוק והזהב",
+  blocks:[["בוקר מוקדם","אראשיאמה — חורש הבמבוק (לכו ב-8:00!), טנריו-ג'י, גשר טוגטסוקיו, פארק הקופים."],
+   ["צהריים","קינקאקו-ג'י — ביתן הזהב המשתקף באגם."],
+   ["ערב","שוק נישיקי לטעימות, ואז קוואראמאצ'י לחיי לילה."]],
+  eat:"סיבוב טעימות בשוק נישיקי; קינוח מאצ'ה.",
+  tip:"הבמבוק מתמלא עד 9:00. ב-8:00 הוא כמעט שלכם.",
+  maps:["Arashiyama Bamboo Grove","Kinkaku-ji","Nishiki Market"]},
+ {num:8,city:'kyoto',date:"ב' · 29.6 · שערים אדומים",title:"10,000 שערים, צבאים, מאצ'ה",
+  blocks:[["בוקר מוקדם","פושימי-אינארי — אלפי שערי טורי אדומים. לכו לפני 8:00."],
+   ["אופציה א'","אוג'י — בירת המאצ'ה, ומקדש Mimuroto-ji עם 10,000 שיחי הורטנזיה (שיא ביוני!)."],
+   ["אופציה ב'","נארה (45 דק') — פארק הצבאים החופשיים וטודאי-ג'י."]],
+  eat:"קינוחי מאצ'ה באוג'י, או מוצ'י בנארה.",
+  tip:"גשם? אוג'י (מקורה חלקית). בהיר? נארה (חוץ פתוח).",
+  maps:["Fushimi Inari Taisha","Mimuroto-ji Uji","Nara Park"]},
+ {num:9,city:'osaka',date:"ג' · 30.6 · קיוטו ← אוסקה",title:"אל בירת האוכל",
+  blocks:[["בוקר","נסיעה קצרה לאוסקה (~15 דק' שינקנסן). הניחו תיקים."],
+   ["אחה\"צ","טירת אוסקה וגנים, שופינג בשינסאיבאשי-סוג'י (מקורה)."],
+   ["ערב","דוטונבורי! ניאון, שלט Glico, שיט על התעלה, ואוכל רחוב."]],
+  eat:"טאקויאקי + אוקונומיאקי בדוטונבורי.",
+  tip:"הסיסמה המקומית: kuidaore — 'לאכול עד שתתמוטטו'.",
+  maps:["Osaka Castle","Shinsaibashi-suji","Dotonbori"]},
+ {num:10,city:'osaka',date:"ד' · 1.7 · יום הפופ-קלצ'ר",title:"סופר נינטנדו וורלד",
+  blocks:[["מומלץ לכם","Universal Studios Japan — סופר נינטנדו וורלד, הארי פוטר. קנו Express Pass!"],
+   ["אופציה ב'","טירת הימג'י (~1 ש') + קובה לבקר קובה אגדי."],
+   ["ערב","חיי לילה באמריקה-מורה וברים בנמבה."]],
+  eat:"סטייק קובה, או טפניאקי/סושי באוסקה.",
+  tip:"פופ-קלצ'ר? יוניברסל. היסטוריה? הימג'י. אי אפשר לטעות.",
+  maps:["Universal Studios Japan","Himeji Castle","Amerikamura Osaka"]},
+ {num:11,city:'osaka',date:"ה' · 2.7 · יום אחרון מלא",title:"שווקים, גאדג'טים, פרידה",
+  blocks:[["בוקר","שוק קורומון איצ'יבה — סושי טרי, פירות יקרים. ארוחת בוקר של אלופים."],
+   ["צהריים","Den Den Town (האקיהברה של אוסקה), שינסקאי + טסוטנקאקו לקושיקאטסו."],
+   ["ערב","ארוחת פרידה מפנקת — סושי/טפניאקי/וגיו. לילה אחרון בנמבה."]],
+  eat:"ארוחת השיא של הטיול — הזמינו מראש.",
+  tip:"מתנות אחרונות בשינסאיבאשי או בשדה (KIX).",
+  maps:["Kuromon Ichiba Market","Den Den Town Osaka","Shinsekai Osaka"]},
+ {num:12,city:'end',date:"ו' · 3.7 · טיסה הביתה",title:"להתראות, יפן",
+  blocks:[["בוקר","רכבת Haruka/Nankai לשדה קנסאי (KIX, ~50 דק' מנמבה)."],
+   ["טיפ","הגיעו לשדה ~3 שעות לפני טיסה בינלאומית. שופינג אחרון בטרמינל."]],
+  eat:"בנטו אחרון לדרך מחנות בתחנה.",
+  tip:"טסים דווקא מטוקיו? תגידו לי ואהפוך את הסדר.",
+  maps:["Kansai International Airport"]},
+];
+
+const bookings=[
+ ["מלונות ל-11 הלילות","טוקיו 4 · הקונה 1 · קיוטו 3 · אוסקה 3 — מחירים עולים, החדרים הטובים נתפסים"],
+ ["ריוקאן בהקונה","הטובים עם אונסן פרטי נגמרים מהר — זו פסגת הפינוק"],
+ ["teamLab Planets","כרטיסים לפי שעה ונגמרים — הזמינו אונליין מראש"],
+ ["Shibuya Sky (שקיעה)","סלוטי השקיעה הכי מבוקשים"],
+ ["אומקסה סושי (1–2)","דרך הקונסיירז' של המלון או אפליקציה"],
+ ["USJ Express Pass","אם בוחרים יום ביוניברסל — חוסך תורים"],
+ ["eSIM / פוקט-וויי-פיי","Airalo / Ubigi — 5 דקות הגדרה"],
+ ["כרטיסי שינקנסן (smartEX)","טוקיו←קיוטו, קיוטו←אוסקה. בלי JR Pass"],
+];
+
+const info=[
+ ["🚄 תחבורה",["<b>Suica/ICOCA:</b> כרטיס נטען לכל רכבת/אוטובוס/חנות נוחות. טענו ~¥3,000.",
+  "<b>שינקנסן:</b> כרטיסים בודדים דרך אפליקציית smartEX. טוקיו←קיוטו ~₪500 לאדם.",
+  "<b>בלי JR Pass:</b> כבר לא משתלם למסלול הזה.",
+  "<b>הקונה:</b> Hakone Free Pass מכסה רכבלים, ספינה ואוטובוסים."]],
+ ["📱 חיבור וכסף",["<b>אינטרנט:</b> eSIM (Airalo/Ubigi). לזוג — שתי חבילות נפרדות.",
+  "<b>מזומן:</b> כספומט ב-7-Eleven מקבל כרטיסים זרים. החזיקו ¥10–20K.",
+  "<b>אפליקציות:</b> Google Maps, Google Translate (מצלמה לתפריטים!), Navitime, Tabelog."]],
+ ["🍜 אוכל",["<b>הזמנות:</b> אומקסה/קובה — דרך הקונסיירז'. הרבה מקומות 'תור בלבד'.",
+  "<b>טיפים:</b> אין טיפים ביפן! זה אפילו נחשב מוזר.",
+  "<b>קונביני:</b> 7-Eleven, Lawson, FamilyMart — אוכל מעולה וזול. סנדוויץ' הביצה אגדי."]],
+ ["🙇 נימוסים",["לא אוכלים תוך כדי הליכה (חוץ מאזורי אוכל רחוב).",
+  "שקט ברכבות — בלי שיחות טלפון.",
+  "באונסן: מתקלחים לפני, נכנסים עירומים. קעקועים — בדקו מראש.",
+  "מסירים נעליים על טאטאמי. עומדים בצד באסקלטור."]],
+ ["🎒 לארוז (עונת גשמים)",["מטריה מתקפלת (או שקופה ב-konbini ב-¥500) + מעיל גשם דק.",
+  "נעליים נוחות ועמידות במים — 15,000+ צעדים ביום.",
+  "בדים מתייבשים-מהר ושכבות קלות (לח וחם).",
+  "סוללת גיבוי — הניווט מרוקן את הטלפון."]],
+];
+
+// ---- render days ----
+function mapsLink(q){return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q);}
+const vd=document.getElementById('view-days');
+days.forEach(d=>{
+  const c=cityColors[d.city];
+  const el=document.createElement('div'); el.className='day';
+  el.innerHTML=`
+   <div class="day-head">
+     <div class="day-num" style="background:${c}">${d.num}</div>
+     <div class="day-meta"><div class="d-date">${d.date}</div><div class="d-title">${d.title}</div></div>
+     <div class="chev">▼</div>
+   </div>
+   <div class="day-body"><div class="day-body-inner">
+     ${d.blocks.map(b=>`<div class="block"><div class="when">${b[0]}</div><div class="what">${b[1]}</div></div>`).join('')}
+     <div class="eat"><b>🍜 לאכול:</b> ${d.eat}</div>
+     <div class="tip">💡 ${d.tip}</div>
+     <div class="maps">${d.maps.map(m=>`<a href="${mapsLink(m)}" target="_blank" rel="noopener">📍 ${m.split(' ').slice(0,2).join(' ')}</a>`).join('')}</div>
+   </div></div>`;
+  const head=el.querySelector('.day-head');
+  const body=el.querySelector('.day-body');
+  head.addEventListener('click',()=>{
+    const open=el.classList.toggle('open');
+    body.style.maxHeight= open ? body.scrollHeight+40+'px' : '0';
+  });
+  vd.appendChild(el);
+});
+
+// ---- render checklist ----
+const cl=document.getElementById('checklist');
+bookings.forEach((b,i)=>{
+  const key='jp_book_'+i;
+  const done=localStorage.getItem(key)==='1';
+  const el=document.createElement('div'); el.className='check'+(done?' done':'');
+  el.innerHTML=`<div class="box">✓</div><div class="ctext"><span class="ct-t">${b[0]}</span><span class="ct-d">${b[1]}</span></div>`;
+  el.addEventListener('click',()=>{
+    const now=el.classList.toggle('done');
+    localStorage.setItem(key, now?'1':'0');
+  });
+  cl.appendChild(el);
+});
+
+// ---- render info ----
+const il=document.getElementById('infolist');
+info.forEach(s=>{
+  const el=document.createElement('div'); el.className='info';
+  el.innerHTML=`<div class="info-head">${s[0]}<span class="chev">▼</span></div>
+   <div class="info-body"><div class="info-body-inner"><ul>${s[1].map(x=>`<li>${x}</li>`).join('')}</ul></div></div>`;
+  const head=el.querySelector('.info-head'); const body=el.querySelector('.info-body');
+  head.addEventListener('click',()=>{
+    const open=body.style.maxHeight && body.style.maxHeight!=='0px';
+    body.style.maxHeight= open?'0':body.scrollHeight+30+'px';
+    head.querySelector('.chev').style.transform= open?'rotate(0)':'rotate(-180deg)';
+  });
+  il.appendChild(el);
+});
+
+// ---- tabs ----
+const views={intro:'view-intro',days:'view-days',book:'view-book',info:'view-info'};
+const tabDefs=[['intro','מבוא'],['days','המסלול'],['book','להזמין'],['info','מידע']];
+const tabsEl=document.getElementById('tabs');
+tabDefs.forEach(([k,label],idx)=>{
+  const b=document.createElement('button'); b.className='tab'+(idx<=1?'':''); b.textContent=label; b.dataset.k=k;
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    b.classList.add('active');
+    // intro+days share top scroll; show/hide
+    document.getElementById('view-intro').style.display=(k==='intro')?'block':'none';
+    document.getElementById('view-days').style.display=(k==='days')?'block':'none';
+    document.getElementById('view-book').style.display=(k==='book')?'block':'none';
+    document.getElementById('view-info').style.display=(k==='info')?'block':'none';
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+  tabsEl.appendChild(b);
+});
+// default: show intro + days together
+document.querySelectorAll('.tab')[1].classList.add('active');
+document.getElementById('view-intro').style.display='none';
+document.getElementById('view-days').style.display='block';
+document.getElementById('view-book').style.display='none';
+document.getElementById('view-info').style.display='none';
+// open day 1 by default
+setTimeout(()=>{const f=document.querySelector('.day'); if(f){f.querySelector('.day-head').click();}},150);
+
+// hide A2HS if already standalone
+if(window.navigator.standalone){document.getElementById('a2hs').style.display='none';}
+</script>
+</body>
+</html>
