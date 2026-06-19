@@ -118,17 +118,32 @@
   .hotel .cta{ display:flex; align-items:center; justify-content:center; gap:9px; margin-top:15px; width:100%; background:var(--ai); color:#fff; font-weight:600; font-size:13.5px; padding:13px; border-radius:4px; letter-spacing:.3px; transition:transform .12s;}
   .hotel .cta:active{transform:scale(.98);}
 
-  /* Checklist */
-  .check{ background:var(--card); border:1px solid var(--line); border-radius:6px; margin-bottom:10px; padding:14px 16px; display:flex; align-items:flex-start; gap:13px; cursor:pointer; transition:background .15s;}
-  .check:active{background:#faf5e9;}
-  .check .box{ flex:0 0 auto; width:24px; height:24px; border-radius:4px; border:1.5px solid var(--ai); display:grid; place-items:center; color:#fff; transition:.15s;}
+  /* Checklist (expandable) */
+  .check{ background:var(--card); border:1px solid var(--line); border-radius:6px; margin-bottom:10px; overflow:hidden; transition:box-shadow .2s;}
+  .check-head{display:flex; align-items:flex-start; gap:13px; padding:14px 16px; cursor:pointer; transition:background .15s;}
+  .check-head:active{background:#faf5e9;}
+  .check .box{ flex:0 0 auto; width:24px; height:24px; border-radius:4px; border:1.5px solid var(--ai); background:#fff; display:grid; place-items:center; color:#fff; transition:.15s; cursor:pointer; padding:0;}
   .check .box .ic{width:15px;height:15px;stroke:#fff;opacity:0;}
   .check.done .box{background:var(--hakone,#2f6a5f); border-color:#2f6a5f;}
   .check.done .box .ic{opacity:1;}
   .check .ctext{flex:1; font-size:14px;}
   .check .ctext .ct-t{font-weight:700; color:var(--ink);}
-  .check.done .ctext{opacity:.5; text-decoration:line-through;}
+  .check.done .ctext .ct-t{opacity:.5; text-decoration:line-through;}
   .check .ctext .ct-d{font-size:12.5px; color:var(--muted); display:block; margin-top:2px;}
+  .check-head .chev{flex:0 0 auto; color:var(--kin); transition:transform .3s; margin-top:2px;}
+  .check-detail{max-height:0; overflow:hidden; transition:max-height .38s ease; background:#fdfaf2; border-top:1px solid var(--line2);}
+  .cd-inner{padding:14px 16px 16px 52px;}
+  .cd-sec{margin-bottom:13px;}
+  .cd-h{font-size:11px; font-weight:800; letter-spacing:1px; color:var(--kin); text-transform:uppercase; margin-bottom:6px;}
+  .cd-box{font-size:13.5px; color:var(--ink2); background:#fff; border:1px solid var(--line); border-radius:8px; padding:10px 12px; line-height:1.65;}
+  .cd-box.soft{background:#f1f6f3; border-color:#dce8e2; color:#33564c;}
+  .cd-sec ul{margin:0; padding:0; list-style:none;}
+  .cd-sec li{font-size:13.5px; color:var(--ink2); margin:7px 0; padding-inline-start:14px; position:relative; line-height:1.55;}
+  .cd-sec li::before{content:""; position:absolute; right:0; top:8px; width:5px; height:5px; border-radius:50%; background:var(--kin);}
+  .cd-links{display:flex; flex-wrap:wrap; gap:8px; margin-top:4px;}
+  .cd-link{display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:700; padding:9px 15px; border-radius:6px; background:var(--ai); color:#fff;}
+  .cd-link.alt{background:#fff; color:var(--ai); border:1px solid #dbe5f3; cursor:pointer; font-family:inherit;}
+  .cd-link:active{opacity:.7;}
 
   /* Info */
   .info{background:var(--card); border:1px solid var(--line); border-radius:6px; margin-bottom:11px; overflow:hidden;}
@@ -495,14 +510,46 @@ const hotels=[
 ];
 
 const bookings=[
- ["מלונות ל-11 הלילות","טוקיו 4 · הקונה 1 · קיוטו 3 · אוסקה 3 — ראו המלצות בלשונית לינה"],
- ["ריוקאן בהקונה","הטובים עם אונסן פרטי נגמרים מהר — זו פסגת הפינוק"],
- ["teamLab Planets","כרטיסים לפי שעה ונגמרים — הזמינו אונליין מראש"],
- ["Shibuya Sky (שקיעה)","סלוטי השקיעה הכי מבוקשים"],
- ["אומקסה סושי (1–2)","דרך הקונסיירז' של המלון או אפליקציה"],
- ["USJ Express Pass","אם בוחרים יום ביוניברסל — חוסך תורים"],
- ["eSIM","Airalo / Ubigi — 5 דקות הגדרה"],
- ["כרטיסי שינקנסן (smartEX)","טוקיו←קיוטו, קיוטו←אוסקה. בלי JR Pass"],
+ {t:"מלונות ל-11 הלילות",s:"טוקיו 4 · הקונה 1 · קיוטו 3 · אוסקה 3",
+  how:"הזמינו דרך Booking.com / Agoda / אתר המלון. בלשונית 'לינה' יש המלצות אמיתיות מ-Tripadvisor עם קישורים ישירים.",
+  customs:"צ'ק-אין בד\"כ מ-15:00, צ'ק-אאוט עד 10:00–11:00. הרבה מלונות גובים תשלום מראש.",
+  tips:["בקשו חדר לא-מעשן (חלק עדיין עם חדרי עישון).","שמרו את כתובת המלון ביפנית בטלפון להראות לנהג מונית."],
+  action:"stay",actLabel:"להמלצות לינה"},
+ {t:"ריוקאן בהקונה",s:"הטובים עם אונסן פרטי נגמרים מהר — פסגת הפינוק",
+  how:"הזמינו מוקדם דרך Japanese Guest Houses / Booking / אתר הריוקאן.",
+  customs:"ארוחת ערב קאיסקי וארוחת בוקר בד\"כ כלולות ('1 night 2 meals'). מגיעים עד 17:00–18:00 לארוחה. באונסן: מתקלחים לפני, נכנסים ללא בגד ים.",
+  tips:["בקשו חדר עם אמבט/אונסן פרטי (rotenburo) — שווה את התוספת.","קעקועים? בדקו מדיניות מראש."],
+  link:["חיפוש ריוקאן בהקונה","https://www.japaneseguesthouses.com/"]},
+ {t:"teamLab Planets",s:"כרטיסים לפי שעה — נגמרים",
+  how:"כרטיסים רק מראש ולפי שעה, באתר הרשמי.",
+  customs:"נכנסים יחפים; חלק מהמסלול במים עד הברך — לבשו מכנס שמתגלגל.",
+  tips:["בחרו סלוט בוקר מוקדם — פחות עומס.","הצמידו לערב באזור שינג'וקו/אודאיבה."],
+  link:["אתר הכרטיסים","https://www.teamlab.art/e/planets/"]},
+ {t:"Shibuya Sky (שקיעה)",s:"סלוטי השקיעה הכי מבוקשים",
+  how:"כרטיסים מראש באתר Shibuya Sky; בחרו סלוט שקיעה.",
+  customs:"הגיעו ~30 דק' לפני השקיעה כדי לתפוס מקום בגג הפתוח.",
+  tips:["בגשם/רוח חזקה הגג הפתוח עלול להיסגר — בדקו תחזית.","צלמו את הצומת מלמעלה."],
+  link:["אתר Shibuya Sky","https://www.shibuya-scramble-square.com/sky/"]},
+ {t:"אומקסה סושי (1–2)",s:"מקומות טובים דורשים הזמנה מראש",
+  how:"דרך הקונסיירז' של המלון, או אפליקציות OMAKASE / Pocket Concierge / Tableall.",
+  customs:"אומקסה = השף בוחר. אוכלים כל חתיכה מיד כשמוגשת (ביד זה לגיטימי), טובלים מעט בסויה מצד הדג. אין טיפים ביפן.",
+  tips:["הגיעו בזמן — איחור פוגע בכל רצף ההגשה.","ציינו אלרגיות מראש."],
+  link:["OMAKASE — הזמנות","https://omakase.in/en"]},
+ {t:"USJ Express Pass",s:"אם בוחרים יום ביוניברסל — חוסך תורים",
+  how:"כרטיס כניסה + Express Pass באתר USJ או דרך Klook.",
+  customs:"סופר נינטנדו וורלד עשוי לדרוש 'Area Timed Entry' — כלול בחלק מחבילות ה-Express, או דרך האפליקציה ביום עצמו.",
+  tips:["קחו Express Pass שכולל את Mario Kart ו-Donkey Kong.","הגיעו עם הפתיחה."],
+  link:["אתר USJ","https://www.usj.co.jp/web/en/us"]},
+ {t:"eSIM",s:"Airalo / Ubigi — 5 דקות הגדרה",
+  how:"קונים אונליין, מקבלים QR, מתקינים תוך דקות. מפעילים עם הנחיתה.",
+  customs:"אין צורך בסים פיזי; המספר הישראלי נשאר לקבלת SMS אם רומינג-נתונים כבוי.",
+  tips:["לזוג — שתי חבילות נפרדות, לא לחלוק נקודה אחת.","10–20GB ל-11 יום מספיק בד\"כ."],
+  link:["Airalo · יפן","https://www.airalo.com/japan-esim"]},
+ {t:"כרטיסי שינקנסן (smartEX)",s:"טוקיו←קיוטו, קיוטו←אוסקה. בלי JR Pass",
+  how:"אפליקציית smartEX להזמנת מושבים מראש. אפשר גם לקנות בתחנה.",
+  customs:"בוחרים מושב; מזוודה גדולה מצריכה מושב עם מקום מאחור (להזמין מראש, ללא תוספת).",
+  tips:["מושב בצד D/E (ימין בנסיעה מטוקיו) — נוף לפוג'י בימים בהירים.","קנו 'אקיבן' (בנטו תחנה) לפני העלייה."],
+  link:["smartEX","https://smart-ex.jp/en/"]},
 ];
 
 const info=[
@@ -571,10 +618,26 @@ const cl=document.getElementById('checklist');
 bookings.forEach((b,i)=>{
   const key='jp_book_'+i, done=localStorage.getItem(key)==='1';
   const el=document.createElement('div'); el.className='check'+(done?' done':'');
-  el.innerHTML=`<div class="box">${I.check}</div><div class="ctext"><span class="ct-t">${b[0]}</span><span class="ct-d">${b[1]}</span></div>`;
-  el.addEventListener('click',()=>{const now=el.classList.toggle('done'); localStorage.setItem(key,now?'1':'0');});
+  const linkBtn=b.link?`<a class="cd-link" href="${b.link[1]}" target="_blank" rel="noopener">${b.link[0]}</a>`:'';
+  const actBtn=b.action?`<button class="cd-link alt" data-act="${b.action}">${b.actLabel||'פתח'}</button>`:'';
+  el.innerHTML=`
+   <div class="check-head">
+     <button class="box" aria-label="סמן כבוצע">${I.check}</button>
+     <div class="ctext"><span class="ct-t">${b.t}</span><span class="ct-d">${b.s}</span></div>
+     ${I.chev}
+   </div>
+   <div class="check-detail"><div class="cd-inner">
+     ${b.how?`<div class="cd-sec"><div class="cd-h">איך מזמינים</div><div class="cd-box">${b.how}</div></div>`:''}
+     ${b.customs?`<div class="cd-sec"><div class="cd-h">מה נהוג</div><div class="cd-box soft">${b.customs}</div></div>`:''}
+     ${b.tips&&b.tips.length?`<div class="cd-sec"><div class="cd-h">טיפים</div><ul>${b.tips.map(x=>`<li>${x}</li>`).join('')}</ul></div>`:''}
+     ${(linkBtn||actBtn)?`<div class="cd-links">${linkBtn}${actBtn}</div>`:''}
+   </div></div>`;
+  const head=el.querySelector('.check-head'), box=el.querySelector('.box'), det=el.querySelector('.check-detail'), chev=head.querySelector('.chev');
+  box.addEventListener('click',e=>{e.stopPropagation(); const now=el.classList.toggle('done'); localStorage.setItem(key,now?'1':'0');});
+  head.addEventListener('click',()=>{const open=det.style.maxHeight&&det.style.maxHeight!=='0px'; det.style.maxHeight=open?'0':det.scrollHeight+30+'px'; chev.style.transform=open?'rotate(0)':'rotate(180deg)';});
   cl.appendChild(el);
 });
+document.addEventListener('click',e=>{const a=e.target.closest('.cd-link[data-act]'); if(a){e.preventDefault(); show(a.dataset.act);}});
 
 const il=document.getElementById('infolist');
 info.forEach(s=>{
