@@ -6,105 +6,146 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="ליהי & ליאור · יפן">
-<meta name="theme-color" content="#1F3A5F">
+<meta name="theme-color" content="#15233E">
 <title>ליהי & ליאור — יפן 2026 💕</title>
 <style>
   :root{
-    --navy:#1F3A5F; --red:#C0392B; --teal:#0E7C7B; --purple:#8E44AD;
-    --ink:#222; --grey:#6b7280; --bg:#f5f1ea; --card:#ffffff; --line:#e6ddd0;
-    --sand:#f7ecdd;
+    --indigo:#15233E; --indigo2:#27406b; --gold:#C8A24B; --gold-dk:#a8842f;
+    --teal:#0E7C7B; --crimson:#B23A48; --plum:#6D4C7D;
+    --ink:#1f2430; --muted:#6b7280; --bg:#f4f1ea; --card:#ffffff;
+    --line:#e7ded0; --soft:#f0ece2; --rose:#fff2f5;
   }
   *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
   html,body{margin:0;padding:0;}
   body{
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;
-    background:var(--bg); color:var(--ink); line-height:1.6;
-    padding-bottom:90px;
-    -webkit-text-size-adjust:100%;
+    background:var(--bg); color:var(--ink); line-height:1.65;
+    padding-bottom:92px; -webkit-text-size-adjust:100%; letter-spacing:.1px;
   }
-  a{color:inherit;}
-  /* Hero */
-  .hero{
-    background:linear-gradient(135deg,#1F3A5F 0%, #2c5277 55%, #0E7C7B 100%);
-    color:#fff; padding:calc(env(safe-area-inset-top) + 28px) 20px 26px;
-    text-align:center; border-radius:0 0 26px 26px; box-shadow:0 6px 18px rgba(31,58,95,.25);
+  a{color:inherit; text-decoration:none;}
+  .em{font-variant-emoji:emoji;}
+
+  /* ===== Hero ===== */
+  .hero{ position:relative; overflow:hidden; color:#fff;
+    padding:calc(env(safe-area-inset-top) + 34px) 22px 30px; text-align:center;
+    background:linear-gradient(150deg,#11203b 0%, #1d3358 48%, #0E7C7B 130%);
   }
-  .hero h1{margin:0; font-size:26px; font-weight:800; letter-spacing:.3px;}
-  .hero .sub{opacity:.92; font-size:14px; margin-top:6px;}
-  .hero .route{margin-top:12px; font-size:13px; background:rgba(255,255,255,.15); display:inline-block; padding:6px 14px; border-radius:20px; font-weight:600;}
-  .hero .count{margin-top:14px; display:flex; justify-content:center; gap:10px; font-size:12px;}
-  .hero .count span{background:rgba(255,255,255,.13); padding:5px 11px; border-radius:14px;}
-  /* Tabs */
-  .tabs{position:sticky; top:0; z-index:50; display:flex; gap:6px; overflow-x:auto;
-    padding:10px 12px; background:rgba(245,241,234,.92); backdrop-filter:saturate(180%) blur(10px);
+  .hero::after{ content:""; position:absolute; inset:0; opacity:.10; pointer-events:none;
+    background-image:radial-gradient(circle at 20% 18%, #fff 0 1.4px, transparent 1.6px),
+                     radial-gradient(circle at 70% 60%, #fff 0 1.4px, transparent 1.6px);
+    background-size:26px 26px, 34px 34px; }
+  .hero .kicker{ position:relative; z-index:1; font-size:11px; letter-spacing:3px; text-transform:uppercase;
+    color:var(--gold); font-weight:700; margin-bottom:8px; }
+  .hero h1{ position:relative; z-index:1; margin:0; font-size:27px; font-weight:800; line-height:1.25;}
+  .hero .sub{ position:relative; z-index:1; opacity:.9; font-size:13.5px; margin-top:8px;}
+  .hero .rule{ position:relative; z-index:1; width:54px; height:3px; border-radius:3px; background:var(--gold); margin:14px auto 0;}
+  .hero .route{ position:relative; z-index:1; margin-top:14px; font-size:12.5px; font-weight:600;
+    background:rgba(255,255,255,.12); display:inline-block; padding:7px 15px; border-radius:30px; border:1px solid rgba(255,255,255,.18);}
+  .hero .count{ position:relative; z-index:1; margin-top:13px; display:flex; justify-content:center; gap:8px; font-size:11.5px; flex-wrap:wrap;}
+  .hero .count span{ background:rgba(255,255,255,.10); padding:5px 11px; border-radius:14px; border:1px solid rgba(255,255,255,.12);}
+
+  /* ===== Tabs ===== */
+  .tabs{ position:sticky; top:0; z-index:50; display:flex; gap:7px; overflow-x:auto;
+    padding:11px 13px; background:rgba(244,241,234,.93); backdrop-filter:saturate(180%) blur(12px);
     border-bottom:1px solid var(--line); -webkit-overflow-scrolling:touch;}
   .tabs::-webkit-scrollbar{display:none;}
-  .tab{flex:0 0 auto; border:none; background:#fff; color:var(--navy); font-weight:700;
-    font-size:13px; padding:9px 15px; border-radius:20px; box-shadow:0 1px 4px rgba(0,0,0,.06);
-    font-family:inherit;}
-  .tab.active{background:var(--navy); color:#fff;}
-  .wrap{padding:14px 14px 0;}
-  .section-title{font-size:15px; font-weight:800; color:var(--navy); margin:22px 4px 10px;
-    display:flex; align-items:center; gap:8px;}
-  /* Intro callouts */
-  .callout{background:var(--sand); border:1px solid var(--line); border-radius:14px; padding:13px 15px; margin:0 0 12px; font-size:14px;}
-  .callout b{color:var(--red);}
-  /* Day card */
-  .day{background:var(--card); border-radius:16px; margin-bottom:12px; box-shadow:0 2px 10px rgba(0,0,0,.05); overflow:hidden; border:1px solid var(--line);}
-  .day-head{display:flex; align-items:center; gap:12px; padding:14px 15px; cursor:pointer; position:relative;}
-  .day-num{flex:0 0 auto; width:42px; height:42px; border-radius:12px; color:#fff; font-weight:800;
-    display:flex; align-items:center; justify-content:center; font-size:17px;}
+  .tab{ flex:0 0 auto; border:1px solid var(--line); background:#fff; color:var(--indigo); font-weight:700;
+    font-size:13px; padding:9px 16px; border-radius:30px; box-shadow:0 1px 3px rgba(0,0,0,.05); font-family:inherit; cursor:pointer; transition:.15s;}
+  .tab.active{ background:var(--indigo); color:#fff; border-color:var(--indigo);}
+
+  .wrap{padding:16px 14px 0;}
+  .eyebrow{ font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--gold-dk); font-weight:800;}
+  .section-title{ font-size:18px; font-weight:800; color:var(--indigo); margin:6px 2px 14px; display:flex; align-items:center; gap:9px;}
+
+  .callout{ background:#fff; border:1px solid var(--line); border-right:4px solid var(--gold); border-radius:14px; padding:14px 16px; margin:0 0 12px; font-size:14px; box-shadow:0 1px 4px rgba(0,0,0,.04);}
+  .callout b{color:var(--crimson);}
+  .intro-hero{ background:linear-gradient(135deg,#fff5f7,#fdeef0); border:1px solid #f3d4da; border-right:4px solid var(--crimson);}
+
+  /* ===== Day cards ===== */
+  .day{ background:var(--card); border-radius:18px; margin-bottom:13px; box-shadow:0 3px 14px rgba(20,30,50,.06); overflow:hidden; border:1px solid var(--line);}
+  .day-head{ display:flex; align-items:center; gap:13px; padding:15px 16px; cursor:pointer;}
+  .day-num{ flex:0 0 auto; width:46px; height:46px; border-radius:13px; color:#fff; font-weight:800;
+    display:flex; align-items:center; justify-content:center; font-size:18px; box-shadow:0 3px 8px rgba(0,0,0,.15);}
   .day-meta{flex:1 1 auto; min-width:0;}
-  .day-meta .d-date{font-size:12px; color:var(--grey); font-weight:600;}
-  .day-meta .d-title{font-size:15px; font-weight:800; color:var(--ink); margin-top:1px;}
-  .chev{flex:0 0 auto; color:var(--grey); transition:transform .25s; font-size:14px;}
+  .day-meta .d-date{ font-size:11.5px; color:var(--muted); font-weight:700; letter-spacing:.3px;}
+  .day-meta .d-title{ font-size:15.5px; font-weight:800; color:var(--ink); margin-top:2px;}
+  .chev{ flex:0 0 auto; color:var(--muted); transition:transform .25s; font-size:13px;}
   .day.open .chev{transform:rotate(-180deg);}
-  .day-body{max-height:0; overflow:hidden; transition:max-height .35s ease;}
-  .day-body-inner{padding:2px 15px 15px;}
-  .block{display:flex; gap:10px; padding:9px 0; border-top:1px dashed var(--line);}
-  .block:first-child{border-top:none;}
-  .block .when{flex:0 0 92px; font-size:12px; font-weight:800; color:var(--navy);}
+  .day-body{max-height:0; overflow:hidden; transition:max-height .38s ease;}
+  .day-body-inner{padding:0 16px 16px;}
+  .block{display:flex; gap:11px; padding:10px 0; border-top:1px solid #f1ece2;}
+  .block .when{ flex:0 0 96px; font-size:12px; font-weight:800; color:var(--indigo2);}
   .block .what{flex:1; font-size:14px;}
-  .eat{background:#fef4ef; border-radius:10px; padding:9px 12px; font-size:13.5px; margin-top:10px;}
-  .eat b{color:var(--red);}
-  .tip{background:#eefaf7; border-right:3px solid var(--teal); border-radius:8px; padding:9px 12px; font-size:13px; margin-top:8px; color:#0c5e5d;}
-  .maps{display:flex; flex-wrap:wrap; gap:7px; margin-top:11px;}
-  .maps a{font-size:12px; font-weight:700; text-decoration:none; background:var(--navy); color:#fff;
-    padding:7px 11px; border-radius:16px; display:inline-flex; align-items:center; gap:5px;}
-  .maps a:active{opacity:.7;}
-  /* Checklist */
-  .check{background:#fff; border:1px solid var(--line); border-radius:14px; margin-bottom:9px;
-    padding:13px 14px; display:flex; align-items:flex-start; gap:11px; cursor:pointer;}
-  .check .box{flex:0 0 auto; width:24px; height:24px; border-radius:7px; border:2px solid var(--navy);
-    display:flex; align-items:center; justify-content:center; font-size:15px; color:#fff; transition:.15s;}
+  .eat{ background:linear-gradient(135deg,#fff7ef,#fdf0e3); border:1px solid #f0dcc3; border-radius:11px; padding:10px 13px; font-size:13.5px; margin-top:11px;}
+  .eat b{color:var(--crimson);}
+  .tip{ background:#eef8f6; border-right:3px solid var(--teal); border-radius:9px; padding:10px 13px; font-size:13px; margin-top:9px; color:#0b5b5a;}
+
+  /* ===== Spots (Map + TripAdvisor) ===== */
+  .spots{margin-top:13px;}
+  .spots-label{font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); font-weight:800; margin-bottom:7px;}
+  .spot{ display:flex; align-items:center; gap:8px; padding:8px 0; border-top:1px dashed #ece4d6;}
+  .spot:first-of-type{border-top:none;}
+  .spot .nm{flex:1; font-size:13.5px; font-weight:600;}
+  .btn{ flex:0 0 auto; display:inline-flex; align-items:center; gap:5px; font-size:11.5px; font-weight:700;
+    padding:7px 11px; border-radius:20px; border:1px solid var(--line); background:#fff; cursor:pointer;}
+  .btn.map{ color:#1a73e8; border-color:#d3e3fd; background:#f5f9ff;}
+  .btn.ta{ color:#0a6b52; border-color:#bfe6d4; background:#effaf4;}
+  .btn:active{opacity:.65;}
+  .ta-dot{width:13px;height:13px;border-radius:50%;background:#34e0a1;display:inline-block;position:relative;}
+  .ta-dot::before,.ta-dot::after{content:"";position:absolute;top:50%;width:5px;height:5px;background:#000;border-radius:50%;transform:translateY(-50%);}
+  .ta-dot::before{left:1.5px;} .ta-dot::after{right:1.5px;}
+
+  /* ===== Stays ===== */
+  .hotel{ background:#fff; border:1px solid var(--line); border-radius:18px; overflow:hidden; margin-bottom:15px; box-shadow:0 3px 14px rgba(20,30,50,.06);}
+  .hotel .ph{ width:100%; height:172px; object-fit:cover; display:block; background:var(--soft);}
+  .hotel .body{padding:14px 16px 16px;}
+  .hotel .city-tag{ font-size:11px; font-weight:800; letter-spacing:1px; text-transform:uppercase; padding:3px 10px; border-radius:20px; color:#fff; display:inline-block; margin-bottom:8px;}
+  .hotel h3{margin:0 0 6px; font-size:16.5px; font-weight:800; color:var(--indigo);}
+  .rate{ display:inline-flex; align-items:center; gap:7px; font-size:13px; font-weight:700; color:#0a6b52; background:#effaf4; border:1px solid #bfe6d4; padding:4px 10px; border-radius:20px;}
+  .bub{display:inline-flex; gap:2px;}
+  .bub i{width:11px;height:11px;border-radius:50%;background:#34e0a1;display:inline-block;}
+  .bub i.h{background:linear-gradient(90deg,#34e0a1 50%,#d6f5e8 50%);}
+  .bub i.o{background:#d6f5e8;}
+  .meta-row{display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-top:10px; font-size:12.5px; color:var(--muted);}
+  .pill{background:var(--soft); border:1px solid var(--line); border-radius:14px; padding:3px 10px; font-weight:600; color:var(--ink);}
+  .hotel .cta{ display:flex; align-items:center; justify-content:center; gap:7px; margin-top:13px; width:100%;
+    background:#000; color:#fff; font-weight:800; font-size:13.5px; padding:12px; border-radius:12px;}
+  .hotel .cta .ta-dot{transform:scale(1.1);}
+  .stay-note{font-size:12.5px;color:var(--muted);margin:-4px 2px 14px;}
+
+  /* ===== Checklist ===== */
+  .check{ background:#fff; border:1px solid var(--line); border-radius:14px; margin-bottom:9px; padding:13px 15px; display:flex; align-items:flex-start; gap:12px; cursor:pointer;}
+  .check .box{ flex:0 0 auto; width:24px; height:24px; border-radius:7px; border:2px solid var(--indigo); display:flex; align-items:center; justify-content:center; font-size:15px; color:#fff; transition:.15s;}
   .check.done .box{background:var(--teal); border-color:var(--teal);}
   .check .ctext{flex:1; font-size:14px;}
-  .check .ctext .ct-t{font-weight:800; color:var(--navy);}
+  .check .ctext .ct-t{font-weight:800; color:var(--indigo);}
   .check.done .ctext{opacity:.5; text-decoration:line-through;}
-  .check .ctext .ct-d{font-size:12.5px; color:var(--grey); display:block; margin-top:2px;}
-  /* Info accordion */
+  .check .ctext .ct-d{font-size:12.5px; color:var(--muted); display:block; margin-top:2px;}
+
+  /* ===== Info ===== */
   .info{background:#fff; border:1px solid var(--line); border-radius:14px; margin-bottom:10px; overflow:hidden;}
-  .info-head{padding:13px 15px; font-weight:800; color:var(--navy); font-size:14.5px; display:flex; justify-content:space-between; align-items:center; cursor:pointer;}
+  .info-head{padding:14px 16px; font-weight:800; color:var(--indigo); font-size:14.5px; display:flex; justify-content:space-between; align-items:center; cursor:pointer;}
   .info-body{max-height:0; overflow:hidden; transition:max-height .35s ease;}
-  .info-body-inner{padding:0 15px 14px; font-size:13.5px;}
+  .info-body-inner{padding:0 16px 14px; font-size:13.5px;}
   .info-body-inner ul{margin:0; padding-inline-start:18px;}
   .info-body-inner li{margin:7px 0;}
-  .info-body-inner b{color:var(--ink);}
-  /* footer note */
-  .foot{text-align:center; font-size:12px; color:var(--grey); padding:20px 16px 8px;}
-  /* A2HS banner */
-  .a2hs{position:fixed; bottom:0; right:0; left:0; z-index:60; background:var(--navy); color:#fff;
-    padding:11px 16px calc(11px + env(safe-area-inset-bottom)); font-size:13px; display:flex; align-items:center; gap:10px;
-    box-shadow:0 -3px 14px rgba(0,0,0,.2);}
+
+  .foot{text-align:center; font-size:12px; color:var(--muted); padding:22px 16px 8px; line-height:1.7;}
+  .foot .gold{color:var(--gold-dk); font-weight:700;}
+
+  .a2hs{ position:fixed; bottom:0; right:0; left:0; z-index:60; background:var(--indigo); color:#fff;
+    padding:12px 16px calc(12px + env(safe-area-inset-bottom)); font-size:13px; display:flex; align-items:center; gap:10px; box-shadow:0 -3px 14px rgba(0,0,0,.2);}
   .a2hs .x{margin-inline-start:auto; background:rgba(255,255,255,.2); border:none; color:#fff; width:26px; height:26px; border-radius:50%; font-size:15px; font-family:inherit;}
-  .a2hs b{color:#ffd9a8;}
+  .a2hs b{color:var(--gold);}
 </style>
 </head>
 <body>
 
 <div class="hero">
-  <h1>ליהי & ליאור ביפן 💕🇯🇵</h1>
+  <div class="kicker">Japan · 2026</div>
+  <h1>ליהי &amp; ליאור ביפן 💕</h1>
   <div class="sub">22 ביוני – 3 ביולי 2026 · טיול החלומות שלכם</div>
+  <div class="rule"></div>
   <div class="route">טוקיו ← הקונה ← קיוטו ← אוסקה</div>
   <div class="count"><span>11 לילות</span><span>4 ערים</span><span>עונת ההורטנזיות 💙</span></div>
 </div>
@@ -112,35 +153,39 @@
 <div class="tabs" id="tabs"></div>
 
 <div class="wrap">
-  <!-- INTRO -->
-  <div id="view-intro">
-    <div class="callout" style="background:#fff0f3;border-color:#f3c6d0">ליהי וליאור — הכנו לכם מסלול שלוקח אתכם דרך הצדדים הכי שווים של יפן: אוכל, טבע, אורות ניאון ורגעים שקטים רק לשניכם. שתפים את הכרטיסים, פותחים מפה בלחיצה, ומסמנים מה כבר הזמנתם. עכשיו רק תיהנו. 🥢💕</div>
-    <div class="section-title">⚡ 3 דברים לפני שמתחילים</div>
+  <div id="view-intro" style="display:none">
+    <div class="callout intro-hero">ליהי וליאור — בנינו לכם מסלול שלוקח אתכם דרך הצדדים הכי שווים של יפן: אוכל, טבע, אורות ניאון ורגעים שקטים רק לשניכם. כל אטרקציה עם כפתור מפה וכפתור TripAdvisor, ויש המלצות לינה אמיתיות בלשונית <b>לינה</b>. עכשיו רק תיהנו. 🥢💕</div>
+    <div class="eyebrow">לפני שמתחילים</div>
+    <div class="section-title">3 דברים שכדאי לדעת</div>
     <div class="callout"><b>עונת הגשמים (tsuyu):</b> הגשם בא בהתפרצויות קצרות, לא יום שלם. מטריה מתקפלת + נעליים עמידות במים = מנצחים. בונוס: ההורטנזיות פורחות בכל מקום.</div>
-    <div class="callout"><b>בלי JR Pass:</b> למסלול הזה הוא כבר לא משתלם ב-2026. קנו כרטיסי שינקנסן בודדים (אפליקציית smartEX) + כרטיס Suica נטען. תחסכו מאות שקלים.</div>
+    <div class="callout"><b>בלי JR Pass:</b> למסלול הזה הוא כבר לא משתלם ב-2026. קנו כרטיסי שינקנסן בודדים (אפליקציית smartEX) + כרטיס Suica נטען.</div>
     <div class="callout"><b>מזומן:</b> יפן עדיין אוהבת מזומן. משכו ין מכספומט ב-7-Eleven, החזיקו תמיד ¥10,000–20,000.</div>
-    <div class="section-title">📍 איפה לישון</div>
-    <div class="callout">טוקיו — שיבויה/שינג'וקו · הקונה — ריוקאן עם אונסן פרטי · קיוטו — גיון/קוואראמאצ'י · אוסקה — נמבה/שינסאיבאשי</div>
   </div>
 
-  <!-- DAYS -->
   <div id="view-days"></div>
 
-  <!-- CHECKLIST -->
+  <div id="view-stay" style="display:none">
+    <div class="eyebrow">מובחר ב-TripAdvisor</div>
+    <div class="section-title">איפה לישון 🛏️</div>
+    <div class="stay-note">המלצות מדורגות גבוה ב-TripAdvisor לתאריכים שלכם. לחיצה על הכפתור פותחת את המלון באפליקציה.</div>
+    <div id="hotellist"></div>
+  </div>
+
   <div id="view-book" style="display:none">
-    <div class="section-title">🔴 להזמין עכשיו (פחות משבוע!)</div>
+    <div class="eyebrow">דחוף</div>
+    <div class="section-title">🔴 להזמין עכשיו</div>
     <div id="checklist"></div>
     <div class="foot">הסימונים נשמרים במכשיר שלכם אוטומטית.</div>
   </div>
 
-  <!-- INFO -->
   <div id="view-info" style="display:none">
+    <div class="eyebrow">טוב לדעת</div>
     <div class="section-title">🧭 המדריך המעשי</div>
     <div id="infolist"></div>
   </div>
 </div>
 
-<div class="foot">נבנה באהבה לליהי וליאור · בנוי לזרום גם בלי אינטרנט · 楽しんで, תיהנו! 🎌</div>
+<div class="foot">נבנה <span class="gold">באהבה</span> לליהי וליאור · עובד גם בלי אינטרנט · 楽しんで, תיהנו! 🎌</div>
 
 <div class="a2hs" id="a2hs">
   <span>📲 הוסיפו למסך הבית: <b>שיתוף</b> ← <b>הוסף למסך הבית</b></span>
@@ -148,7 +193,7 @@
 </div>
 
 <script>
-const cityColors={tokyo:'#1F3A5F',hakone:'#0E7C7B',kyoto:'#C0392B',osaka:'#8E44AD',end:'#6b7280'};
+const cityColors={tokyo:'#27406b',hakone:'#0E7C7B',kyoto:'#B23A48',osaka:'#6D4C7D',end:'#6b7280'};
 
 const days=[
  {num:1,city:'tokyo',date:"ב' · 22.6 · נחיתה בטוקיו",title:"נחיתה והתמקמות",
@@ -157,87 +202,106 @@ const days=[
    ["ערב","צומת שיבויה בלילה, הכלב האצ'יקו, וראמן ראשון. אל תעמיסו — ג'ט לג."]],
   eat:"ראמן ב-Ichiran או איזקאיה ברחוב צדדי.",
   tip:"שנת לילה טובה ביום הראשון = טיול מנצח.",
-  maps:["Shibuya Scramble Crossing","Hachiko Statue Shibuya"]},
+  spots:["Shibuya Scramble Crossing","Hachiko Statue Shibuya"]},
  {num:2,city:'tokyo',date:"ג' · 23.6 · טוקיו הצעיר",title:"אמנות דיגיטלית, אופנה, לילה",
   blocks:[["בוקר","teamLab Planets בטויוסו — צועדים יחפים במים ובאור. מושלם ליום גשום (הזמינו מראש!)."],
    ["צהריים","הרג'וקו (רחוב טאקשיטה), אומוטסאנדו, ומקדש מייג'י ביער."],
    ["ערב","שינג'וקו — איזקאיות ב-Omoide Yokocho, ברים זעירים ב-Golden Gai, ניאון בקבוקיצ'ו."]],
   eat:"יאקיטורי ב-Omoide Yokocho; קרפ בהרג'וקו.",
   tip:"Golden Gai = 200+ ברים זעירים. חפשו 'no cover charge'.",
-  maps:["teamLab Planets TOKYO","Takeshita Street Harajuku","Omoide Yokocho","Golden Gai"]},
+  spots:["teamLab Planets TOKYO","Takeshita Street Harajuku","Omoide Yokocho","Golden Gai Tokyo"]},
  {num:3,city:'tokyo',date:"ד' · 24.6 · מסורת + פופ-קלצ'ר",title:"מקדשים עתיקים ואנימה",
   blocks:[["בוקר","אסקוסה — מקדש סנסו-ג'י ורחוב נאקאמיסה. שיט קצר על נהר סומידה."],
    ["צהריים","אקיהברה — אנימה, גיימינג, אלקטרוניקה, gachapon. גן עדן לפופ-קלצ'ר."],
    ["ערב","גינזה לשופינג יוקרה ואומקסה סושי לפינוק."]],
   eat:"אומקסה סושי בגינזה (הזמינו!).",
   tip:"רוצים עוד אמנות? teamLab Borderless באזאבודאי הילס.",
-  maps:["Senso-ji Temple","Akihabara Electric Town","Ginza Tokyo"]},
+  spots:["Senso-ji Temple","Akihabara Electric Town","Ginza Tokyo"]},
  {num:4,city:'tokyo',date:"ה' · 25.6 · מפלט לקמקורה",title:"טבע, ים, בודהה ענק",
   blocks:[["כל היום","קמקורה (~1 שעה) — הבודהה הגדול, מקדשים, וטרק קל. ביוני מקדש Meigetsu-in מתפוצץ בהורטנזיות."],
    ["גיבוי לגשם","יום שופינג ב-Shimokitazawa — וינטג', קפה, היפ (מקורה)."],
    ["ערב","חזרה לטוקיו. בר גג או בר וויסקי שקט."]],
   eat:"שירסו-דון ליד הים בקמקורה.",
   tip:"ההורטנזיות הן הסיבה שאנשים אוהבים יוני ביפן.",
-  maps:["Kotoku-in Great Buddha Kamakura","Meigetsu-in Temple","Shimokitazawa"]},
+  spots:["Kotoku-in Great Buddha Kamakura","Meigetsu-in Temple","Shimokitazawa Tokyo"]},
  {num:5,city:'hakone',date:"ו' · 26.6 · טוקיו ← הקונה",title:"אונסן, אגם, פסגת הפינוק",
   blocks:[["בוקר","נסיעה להקונה (~1.5 ש'). Hakone Free Pass. רכבל מעל עמק Owakudani הגעשי."],
    ["צהריים","ספינת שודדים על אגם אשי, ושער הטורי של מקדש הקונה שעומד במים."],
-   ["ערב","ריוקאן יוקרתי עם אונסן פרטי + ארוחת קאיסקי. הלילה שתזכרו."]],
+   ["ערב","ריוקאן עם אונסן פרטי + ארוחת קאיסקי. הלילה שתזכרו."]],
   eat:"קאיסקי בריוקאן (כלול בלינה בד\"כ).",
   tip:"הלילה הכי רומנטי בטיול — אונסן פרטי וארוחת שף, רק שניכם. פוג'י אולי יסתתר בעננים, אבל הערב הזה שווה את הכל. ❤️",
-  maps:["Owakudani","Lake Ashi Hakone","Hakone Shrine Torii Gate","Hakone Open Air Museum"]},
+  spots:["Owakudani","Lake Ashi Hakone","Hakone Shrine Torii Gate","Hakone Open Air Museum"]},
  {num:6,city:'kyoto',date:"ש' · 27.6 · הקונה ← קיוטו",title:"מבירת המקדשים מתחילים",
   blocks:[["בוקר","אונסן רגוע. שינקנסן אודוארה ← קיוטו (~2:20). הניחו תיקים."],
    ["אחה\"צ","גיון והיגאשיאמה — סמטאות מרוצפות, בתי תה. עליה לקיומיזו-דרה לשקיעה."],
    ["ערב","סמטת פונטוצ'ו לאורך הנהר לארוחת ערב."]],
   eat:"מטבח קיוטו עדין או יאקיטורי בפונטוצ'ו.",
   tip:"קיוטו = ההפך מטוקיו: לאט, עדין, מסורתי.",
-  maps:["Gion Kyoto","Kiyomizu-dera","Pontocho Alley"]},
+  spots:["Gion Kyoto","Kiyomizu-dera","Pontocho Alley"]},
  {num:7,city:'kyoto',date:"א' · 28.6 · ערב-מערב",title:"חורש הבמבוק והזהב",
   blocks:[["בוקר מוקדם","אראשיאמה — חורש הבמבוק (לכו ב-8:00!), טנריו-ג'י, גשר טוגטסוקיו, פארק הקופים."],
    ["צהריים","קינקאקו-ג'י — ביתן הזהב המשתקף באגם."],
    ["ערב","שוק נישיקי לטעימות, ואז קוואראמאצ'י לחיי לילה."]],
   eat:"סיבוב טעימות בשוק נישיקי; קינוח מאצ'ה.",
   tip:"הבמבוק מתמלא עד 9:00. ב-8:00 הוא כמעט שלכם.",
-  maps:["Arashiyama Bamboo Grove","Kinkaku-ji","Nishiki Market"]},
+  spots:["Arashiyama Bamboo Grove","Kinkaku-ji","Nishiki Market Kyoto"]},
  {num:8,city:'kyoto',date:"ב' · 29.6 · שערים אדומים",title:"10,000 שערים, צבאים, מאצ'ה",
   blocks:[["בוקר מוקדם","פושימי-אינארי — אלפי שערי טורי אדומים. לכו לפני 8:00."],
    ["אופציה א'","אוג'י — בירת המאצ'ה, ומקדש Mimuroto-ji עם 10,000 שיחי הורטנזיה (שיא ביוני!)."],
    ["אופציה ב'","נארה (45 דק') — פארק הצבאים החופשיים וטודאי-ג'י."]],
   eat:"קינוחי מאצ'ה באוג'י, או מוצ'י בנארה.",
   tip:"גשם? אוג'י (מקורה חלקית). בהיר? נארה (חוץ פתוח).",
-  maps:["Fushimi Inari Taisha","Mimuroto-ji Uji","Nara Park"]},
+  spots:["Fushimi Inari Taisha","Mimuroto-ji Uji","Nara Park"]},
  {num:9,city:'osaka',date:"ג' · 30.6 · קיוטו ← אוסקה",title:"אל בירת האוכל",
   blocks:[["בוקר","נסיעה קצרה לאוסקה (~15 דק' שינקנסן). הניחו תיקים."],
    ["אחה\"צ","טירת אוסקה וגנים, שופינג בשינסאיבאשי-סוג'י (מקורה)."],
    ["ערב","דוטונבורי! ניאון, שלט Glico, שיט על התעלה, ואוכל רחוב."]],
   eat:"טאקויאקי + אוקונומיאקי בדוטונבורי.",
   tip:"הסיסמה המקומית: kuidaore — 'לאכול עד שתתמוטטו'.",
-  maps:["Osaka Castle","Shinsaibashi-suji","Dotonbori"]},
+  spots:["Osaka Castle","Shinsaibashi-suji","Dotonbori"]},
  {num:10,city:'osaka',date:"ד' · 1.7 · יום הפופ-קלצ'ר",title:"סופר נינטנדו וורלד",
   blocks:[["מומלץ לכם","Universal Studios Japan — סופר נינטנדו וורלד, הארי פוטר. קנו Express Pass!"],
    ["אופציה ב'","טירת הימג'י (~1 ש') + קובה לבקר קובה אגדי."],
    ["ערב","חיי לילה באמריקה-מורה וברים בנמבה."]],
   eat:"סטייק קובה, או טפניאקי/סושי באוסקה.",
   tip:"פופ-קלצ'ר? יוניברסל. היסטוריה? הימג'י. אי אפשר לטעות.",
-  maps:["Universal Studios Japan","Himeji Castle","Amerikamura Osaka"]},
+  spots:["Universal Studios Japan","Himeji Castle","Amerikamura Osaka"]},
  {num:11,city:'osaka',date:"ה' · 2.7 · יום אחרון מלא",title:"שווקים, גאדג'טים, פרידה",
   blocks:[["בוקר","שוק קורומון איצ'יבה — סושי טרי, פירות יקרים. ארוחת בוקר של אלופים."],
    ["צהריים","Den Den Town (האקיהברה של אוסקה), שינסקאי + טסוטנקאקו לקושיקאטסו."],
    ["ערב","ארוחת פרידה מפנקת — סושי/טפניאקי/וגיו. לילה אחרון בנמבה."]],
   eat:"ארוחת השיא של הטיול — הזמינו מראש.",
   tip:"מתנות אחרונות בשינסאיבאשי או בשדה (KIX).",
-  maps:["Kuromon Ichiba Market","Den Den Town Osaka","Shinsekai Osaka"]},
+  spots:["Kuromon Ichiba Market","Den Den Town Osaka","Shinsekai Osaka"]},
  {num:12,city:'end',date:"ו' · 3.7 · טיסה הביתה",title:"להתראות, יפן",
   blocks:[["בוקר","רכבת Haruka/Nankai לשדה קנסאי (KIX, ~50 דק' מנמבה)."],
    ["טיפ","הגיעו לשדה ~3 שעות לפני טיסה בינלאומית. שופינג אחרון בטרמינל."]],
   eat:"בנטו אחרון לדרך מחנות בתחנה.",
   tip:"זהו, ליהי וליאור — חזרתם עם זיכרונות לכל החיים. סיינרה, יפן! 🌸",
-  maps:["Kansai International Airport"]},
+  spots:["Kansai International Airport"]},
+];
+
+const hotels=[
+ {city:'tokyo',cityName:'טוקיו',name:'MONday Apart Premium NIHONBASHI',rating:4.9,reviews:886,
+  tags:['נוף עיר','מודרני','מיקום מרכזי'],price:'~$160 / לילה',
+  img:'https://media-cdn.tripadvisor.com/media/photo-w/2b/9a/0a/b7/caption.jpg',
+  url:'https://www.tripadvisor.com/Hotel_Review-g14129589-d20376911-Reviews-MONday_Apart_Premium_NIHONBASHI-Nihonbashi_Chuo_Tokyo_Tokyo_Prefecture_Kanto.html'},
+ {city:'hakone',cityName:'הקונה',name:'Hyatt Regency Hakone Resort and Spa',rating:4.5,reviews:2091,
+  tags:['יוקרה','אונסן','שקט'],price:'~$465 / לילה',
+  img:'https://media-cdn.tripadvisor.com/media/photo-w/05/7e/83/d8/caption.jpg',
+  url:'https://www.tripadvisor.com/Hotel_Review-g298171-d635211-Reviews-Hyatt_Regency_Hakone_Resort_and_Spa-Hakone_machi_Ashigarashimo_gun_Kanagawa_Prefecture.html'},
+ {city:'kyoto',cityName:'קיוטו',name:'Mimaru Suites Kyoto Central',rating:5.0,reviews:409,
+  tags:['מקסים','מרכזי','סוויטות'],price:'~$570 / לילה',
+  img:'https://media-cdn.tripadvisor.com/media/photo-w/30/fd/2c/58/caption.jpg',
+  url:'https://www.tripadvisor.com/Hotel_Review-g298564-d25400658-Reviews-Mimaru_Suites_Kyoto_Central-Kyoto_Kyoto_Prefecture_Kinki.html'},
+ {city:'osaka',cityName:'אוסקה',name:'Hotel Royal Classic Osaka',rating:4.5,reviews:67,
+  tags:['רומנטי','מודרני','נמבה'],price:'~$225 / לילה',
+  img:'https://media-cdn.tripadvisor.com/media/photo-w/1a/77/4f/b1/caption.jpg',
+  url:'https://www.tripadvisor.com/Hotel_Review-g14134988-d19429108-Reviews-Hotel_Royal_Classic_Osaka-Namba_Chuo_Osaka_Osaka_Prefecture_Kinki.html'},
 ];
 
 const bookings=[
- ["מלונות ל-11 הלילות","טוקיו 4 · הקונה 1 · קיוטו 3 · אוסקה 3 — מחירים עולים, החדרים הטובים נתפסים"],
+ ["מלונות ל-11 הלילות","טוקיו 4 · הקונה 1 · קיוטו 3 · אוסקה 3 — ראו המלצות בלשונית 'לינה'"],
  ["ריוקאן בהקונה","הטובים עם אונסן פרטי נגמרים מהר — זו פסגת הפינוק"],
  ["teamLab Planets","כרטיסים לפי שעה ונגמרים — הזמינו אונליין מראש"],
  ["Shibuya Sky (שקיעה)","סלוטי השקיעה הכי מבוקשים"],
@@ -254,7 +318,7 @@ const info=[
   "<b>הקונה:</b> Hakone Free Pass מכסה רכבלים, ספינה ואוטובוסים."]],
  ["📱 חיבור וכסף",["<b>אינטרנט:</b> eSIM (Airalo/Ubigi). לזוג — שתי חבילות נפרדות.",
   "<b>מזומן:</b> כספומט ב-7-Eleven מקבל כרטיסים זרים. החזיקו ¥10–20K.",
-  "<b>אפליקציות:</b> Google Maps, Google Translate (מצלמה לתפריטים!), Navitime, Tabelog."]],
+  "<b>אפליקציות:</b> Google Maps, Google Translate (מצלמה לתפריטים!), Navitime, TripAdvisor."]],
  ["🍜 אוכל",["<b>הזמנות:</b> אומקסה/קובה — דרך הקונסיירז'. הרבה מקומות 'תור בלבד'.",
   "<b>טיפים:</b> אין טיפים ביפן! זה אפילו נחשב מוזר.",
   "<b>קונביני:</b> 7-Eleven, Lawson, FamilyMart — אוכל מעולה וזול. סנדוויץ' הביצה אגדי."]],
@@ -268,8 +332,11 @@ const info=[
   "סוללת גיבוי — הניווט מרוקן את הטלפון."]],
 ];
 
-// ---- render days ----
-function mapsLink(q){return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q);}
+function mapsLink(q){return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q+' Japan');}
+function taLink(q){return 'https://www.tripadvisor.com/Search?q='+encodeURIComponent(q);}
+function bubbles(r){let h='';for(let i=1;i<=5;i++){h+= r>=i?'<i></i>':(r>=i-0.5?'<i class="h"></i>':'<i class="o"></i>');}return '<span class="bub">'+h+'</span>';}
+
+// days
 const vd=document.getElementById('view-days');
 days.forEach(d=>{
   const c=cityColors[d.city];
@@ -284,74 +351,72 @@ days.forEach(d=>{
      ${d.blocks.map(b=>`<div class="block"><div class="when">${b[0]}</div><div class="what">${b[1]}</div></div>`).join('')}
      <div class="eat"><b>🍜 לאכול:</b> ${d.eat}</div>
      <div class="tip">💡 ${d.tip}</div>
-     <div class="maps">${d.maps.map(m=>`<a href="${mapsLink(m)}" target="_blank" rel="noopener">📍 ${m.split(' ').slice(0,2).join(' ')}</a>`).join('')}</div>
+     <div class="spots"><div class="spots-label">מקומות · מפה + TripAdvisor</div>
+       ${d.spots.map(s=>`<div class="spot"><span class="nm">${s.replace(/ (Japan|Tokyo|Kyoto|Osaka)$/,'')}</span>
+         <a class="btn map" href="${mapsLink(s)}" target="_blank" rel="noopener">📍 מפה</a>
+         <a class="btn ta" href="${taLink(s)}" target="_blank" rel="noopener"><span class="ta-dot"></span> TripAdvisor</a></div>`).join('')}
+     </div>
    </div></div>`;
-  const head=el.querySelector('.day-head');
-  const body=el.querySelector('.day-body');
-  head.addEventListener('click',()=>{
-    const open=el.classList.toggle('open');
-    body.style.maxHeight= open ? body.scrollHeight+40+'px' : '0';
-  });
+  const head=el.querySelector('.day-head'), body=el.querySelector('.day-body');
+  head.addEventListener('click',()=>{const open=el.classList.toggle('open'); body.style.maxHeight=open?body.scrollHeight+60+'px':'0';});
   vd.appendChild(el);
 });
 
-// ---- render checklist ----
+// hotels
+const hl=document.getElementById('hotellist');
+hotels.forEach(h=>{
+  const c=cityColors[h.city];
+  const el=document.createElement('div'); el.className='hotel';
+  el.innerHTML=`
+   <img class="ph" src="${h.img}" alt="${h.name}" loading="lazy"
+        onerror="this.style.display='none'">
+   <div class="body">
+     <span class="city-tag" style="background:${c}">${h.cityName}</span>
+     <h3>${h.name}</h3>
+     <span class="rate">${bubbles(h.rating)} ${h.rating.toFixed(1)} · ${h.reviews.toLocaleString()} ביקורות</span>
+     <div class="meta-row">${h.tags.map(t=>`<span class="pill">${t}</span>`).join('')}<span class="pill">${h.price}</span></div>
+     <a class="cta" href="${h.url}" target="_blank" rel="noopener"><span class="ta-dot"></span> צפו ב-TripAdvisor</a>
+   </div>`;
+  hl.appendChild(el);
+});
+
+// checklist
 const cl=document.getElementById('checklist');
 bookings.forEach((b,i)=>{
-  const key='jp_book_'+i;
-  const done=localStorage.getItem(key)==='1';
+  const key='jp_book_'+i, done=localStorage.getItem(key)==='1';
   const el=document.createElement('div'); el.className='check'+(done?' done':'');
   el.innerHTML=`<div class="box">✓</div><div class="ctext"><span class="ct-t">${b[0]}</span><span class="ct-d">${b[1]}</span></div>`;
-  el.addEventListener('click',()=>{
-    const now=el.classList.toggle('done');
-    localStorage.setItem(key, now?'1':'0');
-  });
+  el.addEventListener('click',()=>{const now=el.classList.toggle('done'); localStorage.setItem(key,now?'1':'0');});
   cl.appendChild(el);
 });
 
-// ---- render info ----
+// info
 const il=document.getElementById('infolist');
 info.forEach(s=>{
   const el=document.createElement('div'); el.className='info';
   el.innerHTML=`<div class="info-head">${s[0]}<span class="chev">▼</span></div>
    <div class="info-body"><div class="info-body-inner"><ul>${s[1].map(x=>`<li>${x}</li>`).join('')}</ul></div></div>`;
-  const head=el.querySelector('.info-head'); const body=el.querySelector('.info-body');
-  head.addEventListener('click',()=>{
-    const open=body.style.maxHeight && body.style.maxHeight!=='0px';
-    body.style.maxHeight= open?'0':body.scrollHeight+30+'px';
-    head.querySelector('.chev').style.transform= open?'rotate(0)':'rotate(-180deg)';
-  });
+  const head=el.querySelector('.info-head'), body=el.querySelector('.info-body');
+  head.addEventListener('click',()=>{const open=body.style.maxHeight&&body.style.maxHeight!=='0px';
+    body.style.maxHeight=open?'0':body.scrollHeight+30+'px'; head.querySelector('.chev').style.transform=open?'rotate(0)':'rotate(-180deg)';});
   il.appendChild(el);
 });
 
-// ---- tabs ----
-const views={intro:'view-intro',days:'view-days',book:'view-book',info:'view-info'};
-const tabDefs=[['intro','מבוא'],['days','המסלול'],['book','להזמין'],['info','מידע']];
+// tabs
+const tabDefs=[['intro','מבוא'],['days','המסלול'],['stay','לינה'],['book','להזמין'],['info','מידע']];
+const views=['intro','days','stay','book','info'];
 const tabsEl=document.getElementById('tabs');
-tabDefs.forEach(([k,label],idx)=>{
-  const b=document.createElement('button'); b.className='tab'+(idx<=1?'':''); b.textContent=label; b.dataset.k=k;
-  b.addEventListener('click',()=>{
-    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-    b.classList.add('active');
-    // intro+days share top scroll; show/hide
-    document.getElementById('view-intro').style.display=(k==='intro')?'block':'none';
-    document.getElementById('view-days').style.display=(k==='days')?'block':'none';
-    document.getElementById('view-book').style.display=(k==='book')?'block':'none';
-    document.getElementById('view-info').style.display=(k==='info')?'block':'none';
-    window.scrollTo({top:0,behavior:'smooth'});
-  });
-  tabsEl.appendChild(b);
+function show(k){
+  views.forEach(v=>document.getElementById('view-'+v).style.display=(v===k)?'block':'none');
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.k===k));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+tabDefs.forEach(([k,label])=>{
+  const b=document.createElement('button'); b.className='tab'; b.textContent=label; b.dataset.k=k;
+  b.addEventListener('click',()=>show(k)); tabsEl.appendChild(b);
 });
-// default: show intro + days together
-document.querySelectorAll('.tab')[1].classList.add('active');
-document.getElementById('view-intro').style.display='none';
-document.getElementById('view-days').style.display='block';
-document.getElementById('view-book').style.display='none';
-document.getElementById('view-info').style.display='none';
-// open day 1 by default
-setTimeout(()=>{const f=document.querySelector('.day'); if(f){f.querySelector('.day-head').click();}},150);
-
-// hide A2HS if already standalone
+show('days');
+setTimeout(()=>{const f=document.querySelector('.day'); if(f) f.querySelector('.day-head').click();},160);
 if(window.navigator.standalone){document.getElementById('a2hs').style.display='none';}
 </script>
 </body>
