@@ -69,10 +69,13 @@
 
   /* ===== Day cards ===== */
   .day{ background:var(--card); border:1px solid var(--line); border-radius:8px; margin-bottom:14px; overflow:hidden;
-    box-shadow:0 4px 16px rgba(35,31,25,.05);}
-  .day-head{ display:flex; align-items:center; gap:14px; padding:16px 17px; cursor:pointer;}
+    box-shadow:0 4px 16px rgba(35,31,25,.05); transition:box-shadow .25s, border-color .25s;}
+  .day.open{box-shadow:0 8px 26px rgba(35,31,25,.10); border-color:var(--line2);}
+  .day-head{ display:flex; align-items:center; gap:14px; padding:16px 17px; cursor:pointer; transition:background .2s;}
+  .day-head:active{background:#faf5e9;}
   .d-seal{ flex:0 0 auto; width:48px; height:48px; border-radius:50%; border:1.5px solid var(--c,#21405e);
-    display:grid; place-items:center; background:#fff; position:relative;}
+    display:grid; place-items:center; background:#fff; position:relative; transition:transform .3s;}
+  .day.open .d-seal{transform:scale(1.06);}
   .d-seal .kj{font-family:var(--serif); font-size:21px; color:var(--c,#21405e); line-height:1;}
   .d-seal .no{ position:absolute; bottom:-5px; left:-5px; width:21px; height:21px; border-radius:50%;
     background:var(--c,#21405e); color:#fff; font-family:var(--serif); font-size:11px; display:grid; place-items:center; border:2px solid var(--card);}
@@ -81,31 +84,33 @@
   .day-meta .d-title{ font-size:16px; font-weight:800; color:var(--ink); margin-top:3px;}
   .chev{flex:0 0 auto; color:var(--kin); transition:transform .3s;}
   .day.open .chev{transform:rotate(180deg);}
-  .day-body{max-height:0; overflow:hidden; transition:max-height .4s ease;}
+  .day-body{max-height:0; overflow:hidden; transition:max-height .42s cubic-bezier(.4,0,.2,1);}
   .day-body-inner{padding:0 17px 17px;}
-  .block{display:flex; gap:12px; padding:11px 0; border-top:1px solid var(--line);}
-  .block .when{ flex:0 0 104px; font-size:12px; font-weight:700; color:var(--ai); display:flex; align-items:center; gap:6px; letter-spacing:.2px;}
+  .block{display:flex; gap:12px; padding:12px 0; border-top:1px solid var(--line);}
+  .block .when{ flex:0 0 100px; font-size:12px; font-weight:700; color:var(--ai); display:flex; align-items:center; gap:6px; letter-spacing:.2px; padding-top:1px;}
   .block .when .ic{width:14px;height:14px;color:var(--hakone);}
   .block .what{flex:1; font-size:14px; color:var(--ink2);}
-  .note{ display:flex; gap:10px; align-items:flex-start; border-radius:6px; padding:11px 13px; margin-top:12px; font-size:13.5px;}
+
+  /* ===== Inline place links ===== */
+  .plinks{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px;}
+  .pl{display:inline-flex; align-items:center; gap:4px; background:var(--paper2); border:1px solid var(--line);
+    border-radius:24px; padding:3px 4px 3px 11px; transition:border-color .2s, background .2s;}
+  .pl:active{background:#f0e9d8;}
+  .pl-nm{font-size:11.5px; color:var(--ink2); font-weight:600; letter-spacing:.2px;}
+  .pin{ display:inline-grid; place-items:center; width:29px; height:29px; border-radius:50%; background:#fff;
+    border:1px solid var(--line); transition:transform .12s ease, box-shadow .15s;}
+  .pin:active{transform:scale(.84);}
+  .pin.map{border-color:#dbe5f3;} .pin.map:hover{box-shadow:0 2px 8px rgba(66,133,244,.22);}
+  .pin.ta{border-color:#cfe8da;} .pin.ta:hover{box-shadow:0 2px 8px rgba(46,139,111,.22);}
+  .gmi,.tai{flex:0 0 auto;}
+
+  /* ===== Notes ===== */
+  .note{ display:flex; gap:10px; align-items:flex-start; border-radius:6px; padding:11px 13px; margin-top:13px; font-size:13.5px;}
   .note .ic{width:17px;height:17px;margin-top:1px;}
   .eat{background:linear-gradient(180deg,#fbf5e9,#f8efdf); border:1px solid var(--line); color:var(--ink2);}
   .eat .ic{color:var(--shu);} .eat b{color:var(--shu);}
   .tip{background:#eef4f1; border:1px solid #d8e6df; color:#2f5249;}
   .tip .spark{width:16px;height:16px;fill:var(--kin);stroke:none;margin-top:1px;flex:0 0 auto;}
-
-  /* ===== Spots ===== */
-  .spots{margin-top:15px; border-top:1px solid var(--line); padding-top:13px;}
-  .spots-label{font-family:var(--serif); font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:var(--kin); margin-bottom:9px;}
-  .spot{ display:flex; align-items:center; gap:9px; padding:9px 0; border-top:1px solid var(--line2);}
-  .spot:first-of-type{border-top:none;}
-  .spot .nm{flex:1; font-size:13.5px; font-weight:600; color:var(--ink);}
-  .btn{ flex:0 0 auto; display:inline-flex; align-items:center; gap:6px; font-size:11.5px; font-weight:600;
-    padding:7px 12px; border-radius:3px; border:1px solid var(--line); background:#fff; cursor:pointer; color:var(--ink2); letter-spacing:.2px;}
-  .btn:active{opacity:.6;}
-  .btn.map{border-color:#dbe5f3;}
-  .btn.ta{border-color:#cfe8da;}
-  .gmi,.tai{flex:0 0 auto;}
 
   /* ===== Stays ===== */
   .stay-note{font-size:13px;color:var(--muted);margin:-6px 2px 16px;}
@@ -123,10 +128,12 @@
   .meta-row{display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-top:12px; font-size:12.5px;}
   .pill{ font-family:var(--serif); background:var(--paper2); border:1px solid var(--line); border-radius:2px; padding:4px 11px; color:var(--ink2); letter-spacing:.3px;}
   .hotel .cta{ display:flex; align-items:center; justify-content:center; gap:9px; margin-top:15px; width:100%;
-    background:var(--ai); color:#fff; font-weight:600; font-size:13.5px; padding:13px; border-radius:4px; letter-spacing:.3px;}
+    background:var(--ai); color:#fff; font-weight:600; font-size:13.5px; padding:13px; border-radius:4px; letter-spacing:.3px; transition:transform .12s;}
+  .hotel .cta:active{transform:scale(.98);}
 
   /* ===== Checklist ===== */
-  .check{ background:var(--card); border:1px solid var(--line); border-radius:6px; margin-bottom:10px; padding:14px 16px; display:flex; align-items:flex-start; gap:13px; cursor:pointer;}
+  .check{ background:var(--card); border:1px solid var(--line); border-radius:6px; margin-bottom:10px; padding:14px 16px; display:flex; align-items:flex-start; gap:13px; cursor:pointer; transition:background .15s;}
+  .check:active{background:#faf5e9;}
   .check .box{ flex:0 0 auto; width:24px; height:24px; border-radius:4px; border:1.5px solid var(--ai); display:grid; place-items:center; color:#fff; transition:.15s;}
   .check .box .ic{width:15px;height:15px;stroke:#fff;opacity:0;}
   .check.done .box{background:var(--hakone); border-color:var(--hakone);}
@@ -138,9 +145,10 @@
 
   /* ===== Info ===== */
   .info{background:var(--card); border:1px solid var(--line); border-radius:6px; margin-bottom:11px; overflow:hidden;}
-  .info-head{padding:15px 16px; font-weight:700; color:var(--ink); font-size:14.5px; display:flex; align-items:center; gap:12px; cursor:pointer;}
+  .info-head{padding:15px 16px; font-weight:700; color:var(--ink); font-size:14.5px; display:flex; align-items:center; gap:12px; cursor:pointer; transition:background .15s;}
+  .info-head:active{background:#faf5e9;}
   .info-head .ic{color:var(--ai);}
-  .info-head .chev{margin-inline-start:auto;color:var(--kin);}
+  .info-head .chev{margin-inline-start:auto;color:var(--kin);transition:transform .3s;}
   .info-body{max-height:0; overflow:hidden; transition:max-height .35s ease;}
   .info-body-inner{padding:0 16px 15px 52px; font-size:13.5px; color:var(--ink2);}
   .info-body-inner ul{margin:0; padding:0; list-style:none;}
@@ -185,7 +193,7 @@
 
 <div class="wrap">
   <div id="view-intro" style="display:none">
-    <div class="lead">ליהי וליאור — בנינו לכם מסלול שלוקח אתכם דרך הצדדים הכי שווים של יפן: אוכל, טבע, אורות ניאון ורגעים שקטים רק לשניכם. ומכיוון שליהי אוהבת ים ושקיעות — שילבנו פנימה אִי, חופים ושיט בנהר ובמפרץ. כל אטרקציה עם קישור למפה ול-Tripadvisor, ויש המלצות לינה אמיתיות בלשונית <b>לינה</b>.</div>
+    <div class="lead">ליהי וליאור — בנינו לכם מסלול שלוקח אתכם דרך הצדדים הכי שווים של יפן: אוכל, טבע, אורות ניאון ורגעים שקטים רק לשניכם. ומכיוון שליהי אוהבת ים ושקיעות — שילבנו פנימה אִי, חופים ושיט בנהר ובמפרץ. ליד כל מקום במסלול יש קישור למפה ול-Tripadvisor, ויש המלצות לינה אמיתיות בלשונית <b>לינה</b>.</div>
     <div class="shead"><span class="seal">心</span><div><div class="sh-he">לפני שמתחילים</div><div class="sh-ro">Before you go</div></div></div>
     <div class="lead"><b>עונת הגשמים (tsuyu):</b> הגשם בא בהתפרצויות קצרות, לא יום שלם. מטריה מתקפלת ונעליים עמידות במים — ואתם מנצחים. בונוס: ההורטנזיות פורחות בכל מקום.</div>
     <div class="lead"><b>בלי JR Pass:</b> למסלול הזה הוא כבר לא משתלם ב-2026. קנו כרטיסי שינקנסן בודדים (אפליקציית smartEX) וכרטיס Suica נטען.</div>
@@ -235,7 +243,7 @@ const I={
  wave:'<svg class="ic" viewBox="0 0 24 24"><path d="M2 9c1.6 0 1.6 1.6 3.2 1.6S6.8 9 8.4 9 10 10.6 11.6 10.6 13.2 9 14.8 9s1.6 1.6 3.2 1.6S19.6 9 21.2 9"/><path d="M2 15c1.6 0 1.6 1.6 3.2 1.6S6.8 15 8.4 15 10 16.6 11.6 16.6 13.2 15 14.8 15s1.6 1.6 3.2 1.6S19.6 15 21.2 15"/></svg>',
  check:'<svg class="ic" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg>',
  chev:'<svg class="ic chev" viewBox="0 0 24 24" width="16" height="16"><path d="M6 9l6 6 6-6"/></svg>',
- gm:'<svg class="gmi" viewBox="0 0 24 24" width="15" height="17" aria-hidden="true"><g clip-path="url(#gmpin)"><rect x="0" y="0" width="12" height="11" fill="#4285F4"/><rect x="12" y="0" width="12" height="11" fill="#EA4335"/><rect x="0" y="11" width="12" height="13" fill="#FBBC04"/><rect x="12" y="11" width="12" height="13" fill="#34A853"/></g><circle cx="12" cy="9.3" r="2.9" fill="#fff"/></svg>'
+ gm:'<svg class="gmi" viewBox="0 0 24 24" width="16" height="18" aria-hidden="true"><g clip-path="url(#gmpin)"><rect x="0" y="0" width="12" height="11" fill="#4285F4"/><rect x="12" y="0" width="12" height="11" fill="#EA4335"/><rect x="0" y="11" width="12" height="13" fill="#FBBC04"/><rect x="12" y="11" width="12" height="13" fill="#34A853"/></g><circle cx="12" cy="9.3" r="2.9" fill="#fff"/></svg>'
 };
 const infoIcon={transport:I.train,connect:I.wifi,food:I.food,etiquette:I.etiquette,pack:I.bag};
 
@@ -243,87 +251,75 @@ const days=[
  {num:1,city:'tokyo',date:"ב' · 22.6 · נחיתה בטוקיו",title:"נחיתה והתמקמות",
   blocks:[["בוקר/צהריים","נחיתה. רכבת לעיר (Narita Express ~60 דק' / מונורייל מהאנדה ~30 דק'). הניחו תיקים."],
    ["בדרך","קנו Suica/Welcome Suica, הפעילו eSIM."],
-   ["ערב","צומת שיבויה בלילה, הכלב האצ'יקו, וראמן ראשון. אל תעמיסו — ג'ט לג."]],
+   ["ערב","צומת שיבויה בלילה, הכלב האצ'יקו, וראמן ראשון. אל תעמיסו — ג'ט לג.",["Shibuya Scramble Crossing","Hachiko Statue Shibuya"]]],
   eat:"ראמן ב-Ichiran או איזקאיה ברחוב צדדי.",
-  tip:"שנת לילה טובה ביום הראשון = טיול מנצח.",
-  spots:["Shibuya Scramble Crossing","Hachiko Statue Shibuya"]},
+  tip:"שנת לילה טובה ביום הראשון = טיול מנצח."},
  {num:2,city:'tokyo',date:"ג' · 23.6 · טוקיו הצעיר",title:"אמנות דיגיטלית, אופנה, לילה",
-  blocks:[["בוקר","teamLab Planets בטויוסו — צועדים יחפים במים ובאור. מושלם ליום גשום (הזמינו מראש)."],
-   ["צהריים","הרג'וקו (רחוב טאקשיטה), אומוטסאנדו, ומקדש מייג'י ביער."],
-   ["ערב","שינג'וקו — איזקאיות ב-Omoide Yokocho, ברים זעירים ב-Golden Gai, ניאון בקבוקיצ'ו."]],
+  blocks:[["בוקר","teamLab Planets בטויוסו — צועדים יחפים במים ובאור. מושלם ליום גשום (הזמינו מראש).",["teamLab Planets TOKYO"]],
+   ["צהריים","הרג'וקו (רחוב טאקשיטה), אומוטסאנדו, ומקדש מייג'י ביער.",["Takeshita Street Harajuku","Meiji Shrine Tokyo"]],
+   ["ערב","שינג'וקו — איזקאיות ב-Omoide Yokocho, ברים זעירים ב-Golden Gai, ניאון בקבוקיצ'ו.",["Omoide Yokocho","Golden Gai Tokyo"]]],
   eat:"יאקיטורי ב-Omoide Yokocho; קרפ בהרג'וקו.",
-  tip:"Golden Gai = 200+ ברים זעירים. חפשו ברים בלי דמי כניסה.",
-  spots:["teamLab Planets TOKYO","Takeshita Street Harajuku","Omoide Yokocho","Golden Gai Tokyo"]},
+  tip:"Golden Gai = 200+ ברים זעירים. חפשו ברים בלי דמי כניסה."},
  {num:3,city:'tokyo',date:"ד' · 24.6 · מסורת ופופ-קלצ'ר",title:"מקדשים עתיקים ואנימה",
-  blocks:[["בוקר","אסקוסה — מקדש סנסו-ג'י ורחוב נאקאמיסה. שיט קצר על נהר סומידה."],
-   ["צהריים","אקיהברה — אנימה, גיימינג, אלקטרוניקה. גן עדן לפופ-קלצ'ר."],
-   ["ערב","גינזה לשופינג ואומקסה — או שיט שקיעה במפרץ טוקיו: גשר הקשת ואופק הניאון מהמים."]],
+  blocks:[["בוקר","אסקוסה — מקדש סנסו-ג'י ורחוב נאקאמיסה. שיט קצר על נהר סומידה.",["Senso-ji Temple"]],
+   ["צהריים","אקיהברה — אנימה, גיימינג, אלקטרוניקה. גן עדן לפופ-קלצ'ר.",["Akihabara Electric Town"]],
+   ["ערב","גינזה לשופינג ואומקסה — או שיט שקיעה במפרץ טוקיו: גשר הקשת ואופק הניאון מהמים.",["Tokyo Bay Sunset Cruise","Ginza Tokyo"]]],
   eat:"אומקסה סושי בגינזה (הזמינו מראש).",
-  tip:"רוצים עוד אמנות? teamLab Borderless באזאבודאי הילס.",
-  spots:["Senso-ji Temple","Akihabara Electric Town","Tokyo Bay Sunset Cruise","Ginza Tokyo"]},
+  tip:"רוצים עוד אמנות? teamLab Borderless באזאבודאי הילס."},
  {num:4,city:'tokyo',date:"ה' · 25.6 · קמקורה ואי אנושימה",title:"ים, אי, בודהה ענק",
-  blocks:[["בוקר","קמקורה (~1 שעה) — הבודהה הגדול ומקדשים. ביוני Meigetsu-in מתפוצץ בהורטנזיות."],
-   ["צהריים · ים","חוף יואיגהמה ואי אנושימה — חוף ים, מגדלור, מערות ים וטיילת חוף. בול בשבילך, ליהי."],
+  blocks:[["בוקר","קמקורה (~1 שעה) — הבודהה הגדול ומקדשים. ביוני Meigetsu-in מתפוצץ בהורטנזיות.",["Kotoku-in Great Buddha Kamakura","Meigetsu-in Temple"]],
+   ["צהריים · ים","חוף יואיגהמה ואי אנושימה — חוף ים, מגדלור, מערות ים וטיילת חוף. בול בשבילך, ליהי.",["Enoshima Island","Yuigahama Beach Kamakura"]],
    ["ערב","שקיעה מעל האוקיינוס מאנושימה, ואז חזרה לטוקיו."]],
   eat:"שירסו-דון (דג כסוף טרי) ליד הים.",
-  tip:"אנושימה הוא אי קטן עם נוף ים פתוח ושקיעה מהממת — גן עדן לאוהבי ים.",
-  spots:["Enoshima Island","Yuigahama Beach Kamakura","Kotoku-in Great Buddha Kamakura","Meigetsu-in Temple"]},
+  tip:"אנושימה הוא אי קטן עם נוף ים פתוח ושקיעה מהממת — גן עדן לאוהבי ים."},
  {num:5,city:'hakone',date:"ו' · 26.6 · טוקיו ← הקונה",title:"אונסן, אגם, פסגת הפינוק",
-  blocks:[["בוקר","נסיעה להקונה (~1.5 ש'). Hakone Free Pass. רכבל מעל עמק Owakudani הגעשי."],
-   ["צהריים · אגם","ספינה על אגם אשי, ושער הטורי של מקדש הקונה שעומד במים."],
+  blocks:[["בוקר","נסיעה להקונה (~1.5 ש'). Hakone Free Pass. רכבל מעל עמק Owakudani הגעשי.",["Owakudani"]],
+   ["צהריים · אגם","ספינה על אגם אשי, ושער הטורי של מקדש הקונה שעומד במים.",["Lake Ashi Hakone","Hakone Shrine Torii Gate","Hakone Open Air Museum"]],
    ["ערב","ריוקאן עם אונסן פרטי וארוחת קאיסקי. הלילה שתזכרו."]],
   eat:"קאיסקי בריוקאן (כלול בלינה בד\"כ).",
-  tip:"הלילה הכי רומנטי בטיול — אונסן פרטי וארוחת שף, רק שניכם. פוג'י אולי יסתתר בעננים, אבל הערב הזה שווה את הכל.",
-  spots:["Owakudani","Lake Ashi Hakone","Hakone Shrine Torii Gate","Hakone Open Air Museum"]},
+  tip:"הלילה הכי רומנטי בטיול — אונסן פרטי וארוחת שף, רק שניכם. פוג'י אולי יסתתר בעננים, אבל הערב הזה שווה את הכל."},
  {num:6,city:'kyoto',date:"ש' · 27.6 · הקונה ← קיוטו",title:"מבירת המקדשים מתחילים",
   blocks:[["בוקר","אונסן רגוע. שינקנסן אודוארה ← קיוטו (~2:20). הניחו תיקים."],
-   ["אחה\"צ","גיון והיגאשיאמה — סמטאות מרוצפות, בתי תה. עליה לקיומיזו-דרה לשקיעה."],
-   ["ערב","סמטת פונטוצ'ו לאורך הנהר לארוחת ערב."]],
+   ["אחה\"צ","גיון והיגאשיאמה — סמטאות מרוצפות, בתי תה. עליה לקיומיזו-דרה לשקיעה.",["Gion Kyoto","Kiyomizu-dera"]],
+   ["ערב","סמטת פונטוצ'ו לאורך הנהר לארוחת ערב.",["Pontocho Alley"]]],
   eat:"מטבח קיוטו עדין או יאקיטורי בפונטוצ'ו.",
-  tip:"קיוטו = ההפך מטוקיו: לאט, עדין, מסורתי.",
-  spots:["Gion Kyoto","Kiyomizu-dera","Pontocho Alley"]},
+  tip:"קיוטו = ההפך מטוקיו: לאט, עדין, מסורתי."},
  {num:7,city:'kyoto',date:"א' · 28.6 · ערב-מערב",title:"במבוק, נהר וזהב",
-  blocks:[["בוקר מוקדם","חורש הבמבוק (לכו ב-8:00), טנריו-ג'י וגשר טוגטסוקיו."],
-   ["צהריים · נהר","שיט נהר הוזוגאוה — סירה מסורתית ~2 שעות דרך קניון ירוק ומים זורמים. נוף עוצר נשימה."],
-   ["אחה\"צ","קינקאקו-ג'י — ביתן הזהב המשתקף באגם."],
-   ["ערב","שוק נישיקי לטעימות, ואז קוואראמאצ'י."]],
+  blocks:[["בוקר מוקדם","חורש הבמבוק (לכו ב-8:00), טנריו-ג'י וגשר טוגטסוקיו.",["Arashiyama Bamboo Grove"]],
+   ["צהריים · נהר","שיט נהר הוזוגאוה — סירה מסורתית ~2 שעות דרך קניון ירוק ומים זורמים. נוף עוצר נשימה.",["Hozugawa River Boat Ride"]],
+   ["אחה\"צ","קינקאקו-ג'י — ביתן הזהב המשתקף באגם.",["Kinkaku-ji"]],
+   ["ערב","שוק נישיקי לטעימות, ואז קוואראמאצ'י.",["Nishiki Market Kyoto"]]],
   eat:"סיבוב טעימות בשוק נישיקי; קינוח מאצ'ה.",
-  tip:"שיט ההוזוגאוה מתחיל בקאמיאומה ונוחת באראשיאמה — מים, טבע ושקט.",
-  spots:["Arashiyama Bamboo Grove","Hozugawa River Boat Ride","Kinkaku-ji","Nishiki Market Kyoto"]},
+  tip:"שיט ההוזוגאוה מתחיל בקאמיאומה ונוחת באראשיאמה — מים, טבע ושקט."},
  {num:8,city:'kyoto',date:"ב' · 29.6 · שערים אדומים",title:"שערי טורי, צבאים ומאצ'ה",
-  blocks:[["בוקר מוקדם","פושימי-אינארי — אלפי שערי טורי אדומים. לכו לפני 8:00."],
-   ["אופציה א'","אוג'י — בירת המאצ'ה, ומקדש Mimuroto-ji עם 10,000 שיחי הורטנזיה (שיא ביוני)."],
-   ["אופציה ב'","נארה (45 דק') — פארק הצבאים החופשיים וטודאי-ג'י."]],
+  blocks:[["בוקר מוקדם","פושימי-אינארי — אלפי שערי טורי אדומים. לכו לפני 8:00.",["Fushimi Inari Taisha"]],
+   ["אופציה א'","אוג'י — בירת המאצ'ה, ומקדש Mimuroto-ji עם 10,000 שיחי הורטנזיה (שיא ביוני).",["Mimuroto-ji Uji"]],
+   ["אופציה ב'","נארה (45 דק') — פארק הצבאים החופשיים וטודאי-ג'י.",["Nara Park"]]],
   eat:"קינוחי מאצ'ה באוג'י, או מוצ'י בנארה.",
-  tip:"גשם? אוג'י (מקורה חלקית). בהיר? נארה (חוץ פתוח).",
-  spots:["Fushimi Inari Taisha","Mimuroto-ji Uji","Nara Park"]},
+  tip:"גשם? אוג'י (מקורה חלקית). בהיר? נארה (חוץ פתוח)."},
  {num:9,city:'osaka',date:"ג' · 30.6 · קיוטו ← אוסקה",title:"אל בירת האוכל",
   blocks:[["בוקר","נסיעה קצרה לאוסקה (~15 דק' שינקנסן). הניחו תיקים."],
-   ["אחה\"צ","טירת אוסקה וגנים, שופינג בשינסאיבאשי-סוג'י (מקורה)."],
-   ["ערב · תעלה","דוטונבורי — שיט בתעלת טומבורי המוארת מתחת לשלט ה-Glico, ניאון ואוכל רחוב."]],
+   ["אחה\"צ","טירת אוסקה וגנים, שופינג בשינסאיבאשי-סוג'י (מקורה).",["Osaka Castle","Shinsaibashi-suji"]],
+   ["ערב · תעלה","דוטונבורי — שיט בתעלת טומבורי המוארת מתחת לשלט ה-Glico, ניאון ואוכל רחוב.",["Dotonbori","Tombori River Cruise Osaka"]]],
   eat:"טאקויאקי ואוקונומיאקי בדוטונבורי.",
-  tip:"הסיסמה המקומית: kuidaore — 'לאכול עד שתתמוטטו'.",
-  spots:["Osaka Castle","Tombori River Cruise Osaka","Shinsaibashi-suji","Dotonbori"]},
+  tip:"הסיסמה המקומית: kuidaore — 'לאכול עד שתתמוטטו'."},
  {num:10,city:'osaka',date:"ד' · 1.7 · יום הפופ-קלצ'ר",title:"סופר נינטנדו וורלד",
-  blocks:[["מומלץ לכם","Universal Studios Japan — סופר נינטנדו וורלד, הארי פוטר. קנו Express Pass."],
-   ["אופציה ב'","טירת הימג'י (~1 ש') וקובה לבקר קובה אגדי."],
-   ["ערב","חיי לילה באמריקה-מורה וברים בנמבה."]],
+  blocks:[["מומלץ לכם","Universal Studios Japan — סופר נינטנדו וורלד, הארי פוטר. קנו Express Pass.",["Universal Studios Japan"]],
+   ["אופציה ב'","טירת הימג'י (~1 ש') וקובה לבקר קובה אגדי.",["Himeji Castle"]],
+   ["ערב","חיי לילה באמריקה-מורה וברים בנמבה.",["Amerikamura Osaka"]]],
   eat:"סטייק קובה, או טפניאקי/סושי באוסקה.",
-  tip:"פופ-קלצ'ר? יוניברסל. היסטוריה? הימג'י. אי אפשר לטעות.",
-  spots:["Universal Studios Japan","Himeji Castle","Amerikamura Osaka"]},
+  tip:"פופ-קלצ'ר? יוניברסל. היסטוריה? הימג'י. אי אפשר לטעות."},
  {num:11,city:'osaka',date:"ה' · 2.7 · יום אחרון מלא",title:"שווקים, גאדג'טים, פרידה",
-  blocks:[["בוקר","שוק קורומון איצ'יבה — סושי טרי, פירות יקרים. ארוחת בוקר של אלופים."],
-   ["צהריים","Den Den Town (האקיהברה של אוסקה), שינסקאי וטסוטנקאקו לקושיקאטסו."],
+  blocks:[["בוקר","שוק קורומון איצ'יבה — סושי טרי, פירות יקרים. ארוחת בוקר של אלופים.",["Kuromon Ichiba Market"]],
+   ["צהריים","Den Den Town (האקיהברה של אוסקה), שינסקאי וטסוטנקאקו לקושיקאטסו.",["Den Den Town Osaka","Shinsekai Osaka"]],
    ["ערב","ארוחת פרידה מפנקת — סושי/טפניאקי/וגיו. לילה אחרון בנמבה."]],
   eat:"ארוחת השיא של הטיול — הזמינו מראש.",
-  tip:"מתנות אחרונות בשינסאיבאשי או בשדה (KIX).",
-  spots:["Kuromon Ichiba Market","Den Den Town Osaka","Shinsekai Osaka"]},
+  tip:"מתנות אחרונות בשינסאיבאשי או בשדה (KIX)."},
  {num:12,city:'end',date:"ו' · 3.7 · טיסה הביתה",title:"להתראות, יפן",
-  blocks:[["בוקר","רכבת Haruka/Nankai לשדה קנסאי (KIX, ~50 דק' מנמבה)."],
+  blocks:[["בוקר","רכבת Haruka/Nankai לשדה קנסאי (KIX, ~50 דק' מנמבה).",["Kansai International Airport"]],
    ["טיפ","הגיעו לשדה ~3 שעות לפני טיסה בינלאומית. שופינג אחרון בטרמינל."]],
   eat:"בנטו אחרון לדרך מחנות בתחנה.",
-  tip:"זהו, ליהי וליאור — חזרתם עם זיכרונות לכל החיים. סיינרה, יפן.",
-  spots:["Kansai International Airport"]},
+  tip:"זהו, ליהי וליאור — חזרתם עם זיכרונות לכל החיים. סיינרה, יפן."},
 ];
 
 const hotels=[
@@ -379,8 +375,15 @@ const info=[
 
 function mapsLink(q){return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q+' Japan');}
 function taLink(q){return 'https://www.tripadvisor.com/Search?q='+encodeURIComponent(q);}
+function shortName(s){return s.replace(/ (Japan|TOKYO|Tokyo|Kyoto|Osaka|Kamakura|Uji|Shibuya|Harajuku)$/,'').trim();}
 function bubbles(r){let h='';for(let i=1;i<=5;i++){h+= r>=i?'<i></i>':(r>=i-0.5?'<i class="h"></i>':'<i class="o"></i>');}return '<span class="bub">'+h+'</span>';}
 function waterLabel(t){return /·\s*(ים|נהר|תעלה|מפרץ|אגם)/.test(t);}
+function placeLinks(arr){
+  if(!arr||!arr.length) return '';
+  return '<div class="plinks">'+arr.map(s=>`<span class="pl"><span class="pl-nm">${shortName(s)}</span>`+
+    `<a class="pin map" href="${mapsLink(s)}" target="_blank" rel="noopener" aria-label="פתח במפות גוגל">${I.gm}</a>`+
+    `<a class="pin ta" href="${taLink(s)}" target="_blank" rel="noopener" aria-label="פתח ב-Tripadvisor">${I.ta}</a></span>`).join('')+'</div>';
+}
 
 const vd=document.getElementById('view-days');
 days.forEach(d=>{
@@ -393,14 +396,9 @@ days.forEach(d=>{
      ${I.chev}
    </div>
    <div class="day-body"><div class="day-body-inner">
-     ${d.blocks.map(b=>`<div class="block"><div class="when">${waterLabel(b[0])?I.wave:''}${b[0]}</div><div class="what">${b[1]}</div></div>`).join('')}
+     ${d.blocks.map(b=>`<div class="block"><div class="when">${waterLabel(b[0])?I.wave:''}${b[0]}</div><div class="what">${b[1]}${placeLinks(b[2])}</div></div>`).join('')}
      <div class="note eat">${I.food}<div><b>לאכול · </b>${d.eat}</div></div>
      <div class="note tip">${I.spark}<div>${d.tip}</div></div>
-     <div class="spots"><div class="spots-label">מקומות · מפה ו-Tripadvisor</div>
-       ${d.spots.map(s=>`<div class="spot"><span class="nm">${s.replace(/ (Japan|Tokyo|Kyoto|Osaka)$/,'')}</span>
-         <a class="btn map" href="${mapsLink(s)}" target="_blank" rel="noopener">${I.gm} מפה</a>
-         <a class="btn ta" href="${taLink(s)}" target="_blank" rel="noopener">${I.ta} Tripadvisor</a></div>`).join('')}
-     </div>
    </div></div>`;
   const head=el.querySelector('.day-head'), body=el.querySelector('.day-body');
   head.addEventListener('click',()=>{const open=el.classList.toggle('open'); body.style.maxHeight=open?body.scrollHeight+60+'px':'0';});
