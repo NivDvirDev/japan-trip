@@ -80,16 +80,14 @@
   .block .when .ic{width:14px;height:14px;color:var(--hakone,#2f6a5f);}
   .block .what{flex:1; font-size:14px; color:var(--ink2);}
 
-  /* Inline place links */
-  .plinks{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px;}
-  .pl{display:inline-flex; align-items:center; gap:4px; background:var(--paper2); border:1px solid var(--line); border-radius:24px; padding:3px 4px 3px 11px; transition:background .2s;}
-  .pl:active{background:#f0e9d8;}
-  .pl-nm{font-size:11.5px; color:var(--ink2); font-weight:600; letter-spacing:.2px;}
-  .pin{ display:inline-grid; place-items:center; width:29px; height:29px; border-radius:50%; background:#fff; border:1px solid var(--line); transition:transform .12s ease, box-shadow .15s; cursor:pointer; font-family:inherit; padding:0;}
-  .pin:active{transform:scale(.84);}
-  .pin.map{border-color:#dbe5f3;}
-  .pin.ta{border-color:#cfe8da;}
-  .pin.info{border-color:var(--cc); color:var(--cc); background:color-mix(in srgb, var(--cc) 7%, #fff);}
+  /* Inline place links — rounded-square icon chips */
+  .plinks{display:flex; flex-direction:column; gap:11px; margin-top:13px; align-items:flex-start;}
+  .pl{display:inline-flex; align-items:center; gap:9px;}
+  .pl-nm{font-size:14px; color:var(--ink); font-weight:700; letter-spacing:.2px;}
+  .pin{ display:inline-grid; place-items:center; width:33px; height:33px; border-radius:9px; background:#fff; border:1px solid var(--line); box-shadow:0 1px 3px rgba(35,31,25,.05); transition:transform .12s ease, box-shadow .15s; cursor:pointer; font-family:inherit; padding:0;}
+  .pin:active{transform:scale(.9);}
+  .pin.map,.pin.ta{border-color:#e2d8c4;}
+  .pin.info{border:1.5px solid var(--cc); color:var(--cc); background:#fff;}
   .gmi,.tai{flex:0 0 auto;}
 
   /* Notes */
@@ -138,8 +136,12 @@
 
   /* Glossary */
   .gl{background:none; border:none; padding:0; font:inherit; color:var(--ai); cursor:pointer; border-bottom:1.5px dotted var(--kin); font-weight:600;}
-  .gloss-card{padding:24px 20px 26px; text-align:right;}
-  .gloss-term{font-family:var(--serif); font-size:21px; font-weight:800; color:var(--ai); margin-bottom:10px;}
+  .gloss-card{padding:22px 20px 26px; text-align:right;}
+  .gloss-kicker{font-family:var(--serif); font-size:10px; letter-spacing:3px; color:var(--kin); text-transform:uppercase; margin-bottom:8px;}
+  .gloss-term{font-family:var(--serif); font-size:26px; font-weight:800; color:var(--ai); margin-bottom:4px;}
+  .gloss-sub{font-family:var(--serif); font-size:15px; color:var(--kin); margin-bottom:13px;}
+  .gloss-sub .gl-jp{font-size:19px; color:var(--ink2);}
+  .gloss-sub .gl-mid{margin:0 8px; color:var(--line);}
   .gloss-card p{font-size:14px; color:var(--ink2); line-height:1.75; margin:0 0 18px;}
   .gloss-close{background:var(--ai); color:#fff; border:none; font-family:inherit; font-weight:700; padding:11px 22px; border-radius:8px; font-size:13.5px; cursor:pointer;}
 
@@ -464,6 +466,47 @@ const details={
   guide:"כאן הפופ-קלצ'ר שאתם מכירים פוגש את יפן: סופר נינטנדו וורלד עם מריו אמיתי, הארי פוטר ועוד. קנו Express Pass מראש — הוא יקר, אבל יחסוך לכם שעות בתורים, וזה שווה כל ין.",
   know:["סופר נינטנדו וורלד עשוי לדרוש כרטיס כניסה מתוזמן.","הגיעו עם הפתיחה."],
   getting:"תחנת Universal City (קו JR Yumesaki)."},
+ "Omoide Yokocho":{cat:'food',
+  guide:"'סמטת הזיכרונות' — מבוך זעיר של דוכני יאקיטורי ובארים מאז שנות ה-40, מתחת לפסי הרכבת. צפוף, מעושן ואותנטי. שבו בבר של 6 מקומות והצביעו על מה שנראה טוב.",
+  order:["יאקיטורי","מוֹטסוּ-ניקומי (תבשיל)","בירה קרה"],
+  know:["מזומן בלבד ברוב המקומות.","חלק גובים 'דמי כיסא' קטנים."],
+  getting:"צמוד לתחנת Shinjuku, יציאה מערבית.",
+  nearby:[["Golden Gai","Golden Gai Tokyo"]]},
+ "Golden Gai Tokyo":{cat:'urban',
+  guide:"שישה סמטאות עם 200+ ברים זעירים, כל אחד בעיצוב משלו ולעיתים 5 מקומות בלבד — לב הבוהמה הלילי של טוקיו. אל תתביישו להיכנס; חלק מסבירי-פנים לזרים, אחרים 'לקבועים בלבד'.",
+  know:["חפשו שלט 'tourists welcome' / 'no cover charge'.","פתוח בעיקר אחרי 21:00."],
+  nearby:[["Omoide Yokocho","Omoide Yokocho"]]},
+ "Ginza Tokyo":{cat:'urban',
+  guide:"רובע היוקרה של טוקיו — חנויות דגל, גלריות וסושי משובח. בסופי שבוע אחה\"צ הרחוב הראשי נסגר לרכב והופך למדרחוב.",
+  know:["מגדל Ginza Six — גג תצפית חינמי.","כמה ממסעדות האומקסה הטובות בעולם כאן."],
+  nearby:[["Tsukiji Market","Tsukiji Outer Market"]]},
+ "Pontocho Alley":{cat:'food',
+  guide:"סמטה צרה ומוארת פנסים לאורך נהר קאמו, מלאה מסעדות מסורתיות. בקיץ חלקן פותחות מרפסות עץ מעל הנהר — מהפינות הרומנטיות בקיוטו.",
+  know:["יש יקרות ויש נגישות — בדקו תפריט בכניסה.","ערב = הקסם המלא."],
+  nearby:[["Gion","Gion Kyoto"],["Nishiki Market","Nishiki Market Kyoto"]]},
+ "Meigetsu-in Temple":{cat:'nature',
+  guide:"'מקדש ההורטנזיות' של קמקורה — ביוני אלפי שיחי אג'יסאי כחולים פורחים, ו'חלון הזן' העגול ממסגר גן ירוק כמו תמונה. שיא הפריחה בדיוק בתאריכים שלכם.",
+  when:"יוני — שיא הפריחה. בוקר מוקדם.",
+  getting:"תחנת Kita-Kamakura (קו JR Yokosuka).",
+  nearby:[["Great Buddha","Kotoku-in Great Buddha Kamakura"]]},
+ "Himeji Castle":{cat:'culture',
+  guide:"הטירה היפה והשלמה ביותר ששרדה ביפן (מאה 17), מכונה 'אנפת הלבן' בזכות קירותיה הצחורים. מבוך ההגנה בדרך לצריח מרשים בפני עצמו. אתר מורשת עולמית.",
+  know:["~1 שעה ברכבת מאוסקה.","מדרגות תלולות בתוך הצריח."],
+  getting:"תחנת Himeji, ~15 דק' הליכה.",
+  nearby:[["Koko-en Garden","Kokoen Garden Himeji"]]},
+ "Den Den Town Osaka":{cat:'urban',
+  guide:"ה'אקיהברה של אוסקה' — רחובות של אנימה, מנגה, גיימינג וצעצועי אספנות. רגוע ופחות צפוף מאקיהברה, וכיף לחטט בו.",
+  know:["מכונות gachapon וחנויות יד-שנייה לאספנים.","בשכונת Nipponbashi."],
+  nearby:[["Shinsekai","Shinsekai Osaka"]]},
+ "Shinsekai Osaka":{cat:'urban',
+  guide:"שכונה רטרו ססגונית סביב מגדל Tsutenkaku, נבנתה ב-1912 בהשראת פריז וניו-יורק. בירת הקושיקאטסו, וקיטש יפני במיטבו — מואר ושמח בערב.",
+  order:["קושיקאטסו (שיפודים מטוגנים)","דוֹטֶרָה / סטריט פוד"],
+  know:["זכרו: לא טובלים שיפוד פעמיים ברוטב המשותף!"],
+  nearby:[["Tsutenkaku","Tsutenkaku Tower"]]},
+ "Tombori River Cruise Osaka":{cat:'nature',
+  guide:"שיט ~20 דקות בתעלת דוטונבורי, מתחת לשלטי הניאון הענקיים ושלט ה-Glico. נקודת מבט רגועה ויפה על לב הבילוי של אוסקה.",
+  getting:"מזח Tazaemonbashi, בלב דוטונבורי.",
+  nearby:[["Dotonbori","Dotonbori"]]},
  "Kansai International Airport":{cat:'transit',
   guide:"שדה התעופה בנוי על אי מלאכותי במפרץ אוסקה. מנמבה זה קרוב — אל תתלחצו, אבל אל תזלזלו בזמן.",
   getting:"אקספרס Nankai 'Rapi:t' מנמבה ~38 דק', או JR Haruka מ-Tennoji/Shin-Osaka.",
@@ -623,19 +666,24 @@ function placeLinks(arr){
 
 const CITYN={tokyo:'טוקיו',hakone:'הקונה',kyoto:'קיוטו',osaka:'אוסקה',end:'יציאה'};
 const GLOSS={
- "מונורייל":"הרכבת האוטומטית מהאנדה למרכז טוקיו — מהירה ונוחה.",
- "eSIM":"סים דיגיטלי שמתקינים בלי כרטיס פיזי — אינטרנט מרגע הנחיתה.",
- "Suica":"כרטיס תשלום נטען (בנגיעה) לרכבות, אוטובוסים וחנויות נוחות.",
- "ג'ט לג":"עייפות מהפרשי שעות. יפן מקדימה את ישראל ב-6 שעות בקיץ.",
- "ראמן":"מרק אטריות יפני עשיר — אחת ממנות הדגל של יפן.",
- "שינקנסן":"רכבת הקליע המהירה של יפן (עד ~320 קמ\"ש).",
- "אונסן":"מעיין חם גופרי למרחצאות — מתקלחים לפני הכניסה, ללא בגד ים.",
- "קאיסקי":"ארוחת שף מסורתית רב-מנתית, עונתית ומוקפדת.",
- "אומקסה":"תפריט שהשף בוחר — פירוש המילה: 'אני סומך עליך'.",
- "ריוקאן":"פונדק יפני מסורתי עם פוטון, מחצלות טאטאמי ולרוב אונסן.",
- "מאצ'ה":"תה ירוק טחון, מריר-מתוק — סמל קולינרי של קיוטו.",
- "איזקאיה":"פאב-מסעדה יפני קטן וביתי, לאוכל ושתייה.",
- "קושיקאטסו":"שיפודים מטוגנים — מאכל הרחוב של אוסקה. לא טובלים פעמיים ברוטב!",
+ "מונורייל":{d:"הרכבת האוטומטית מהאנדה למרכז טוקיו — מהירה ונוחה.",p:"מוֹנוֹרֵייל",j:"モノレール",r:"monorēru"},
+ "eSIM":{d:"סים דיגיטלי שמתקינים בלי כרטיס פיזי — אינטרנט מרגע הנחיתה.",p:"אִי־סִים",r:"e-SIM"},
+ "Suica":{d:"כרטיס תשלום נטען (בנגיעה) לרכבות, אוטובוסים וחנויות נוחות.",p:"סוּאִיקָה",j:"スイカ",r:"Suica"},
+ "ג'ט לג":{d:"עייפות מהפרשי שעות. יפן מקדימה את ישראל ב-6 שעות בקיץ.",p:"גֵ'ט לַג",r:"jet lag"},
+ "ראמן":{d:"מרק אטריות יפני עשיר — אחת ממנות הדגל של יפן.",p:"רָאמֶן",j:"ラーメン",r:"rāmen"},
+ "שינקנסן":{d:"רכבת הקליע המהירה של יפן (עד ~320 קמ\"ש).",p:"שִׁינְקַנְסֶן",j:"新幹線",r:"shinkansen"},
+ "אונסן":{d:"מעיין חם גופרי למרחצאות — מתקלחים לפני הכניסה, ללא בגד ים.",p:"אוֹנְסֶן",j:"温泉",r:"onsen"},
+ "קאיסקי":{d:"ארוחת שף מסורתית רב-מנתית, עונתית ומוקפדת.",p:"קַאיְסֵקִי",j:"懐石",r:"kaiseki"},
+ "אומקסה":{d:"תפריט שהשף בוחר — פירוש המילה: 'אני סומך עליך'.",p:"אוֹמָקָסֶה",j:"お任せ",r:"omakase"},
+ "ריוקאן":{d:"פונדק יפני מסורתי עם פוטון, מחצלות טאטאמי ולרוב אונסן.",p:"רְיוֹקָאן",j:"旅館",r:"ryokan"},
+ "מאצ'ה":{d:"תה ירוק טחון, מריר-מתוק — סמל קולינרי של קיוטו.",p:"מַאצָּ'ה",j:"抹茶",r:"matcha"},
+ "איזקאיה":{d:"פאב-מסעדה יפני קטן וביתי, לאוכל ושתייה.",p:"אִיזָקָאיָה",j:"居酒屋",r:"izakaya"},
+ "קושיקאטסו":{d:"שיפודים מטוגנים — מאכל הרחוב של אוסקה. לא טובלים פעמיים ברוטב!",p:"קוּשִׁיקַאטְסוּ",j:"串カツ",r:"kushikatsu"},
+ "טאקויאקי":{d:"כדורי בצק ממולאים בתמנון — האוכל המזוהה ביותר עם אוסקה.",p:"טָאקוֹיָאקִי",j:"たこ焼き",r:"takoyaki"},
+ "אוקונומיאקי":{d:"פנקייק מלוח עם כרוב, בשר או פירות ים ורטבים.",p:"אוֹקוֹנוֹמִייָאקִי",j:"お好み焼き",r:"okonomiyaki"},
+ "יאקיטורי":{d:"שיפודי עוף צלויים על גחלים — קלאסיקה של איזקאיות.",p:"יָאקִיטוֹרִי",j:"焼き鳥",r:"yakitori"},
+ "וגיו":{d:"בקר יפני משויש ועשיר; קובה הוא הזן המפורסם.",p:"וָאגְיוּ",j:"和牛",r:"wagyū"},
+ "טפניאקי":{d:"בישול על משטח ברזל לוהט מול הסועד.",p:"טֶפַּנְיָאקִי",j:"鉄板焼き",r:"teppanyaki"},
 };
 const GKEYS=Object.keys(GLOSS).sort((a,b)=>b.length-a.length);
 function glossWrap(t){GKEYS.forEach(k=>{if(t.indexOf(k)>-1) t=t.replace(k,`<button class="gl" data-g="${k}">${k}</button>`);});return t;}
@@ -673,8 +721,16 @@ function paintDays(){
 }
 paintDays();
 function openGloss(k){
-  const def=GLOSS[k]; if(!def) return;
-  document.getElementById('sheet-content').innerHTML=`<div class="gloss-card"><div class="gloss-term">${k}</div><p>${def}</p><button class="gloss-close" onclick="closeDetail()">הבנתי</button></div>`;
+  const g=GLOSS[k]; if(!g) return;
+  const jp=g.j?`<span class="gl-jp">${g.j}</span>`:'';
+  const rom=g.r?`<span class="gl-rom">${g.r}</span>`:'';
+  const sub=(jp||rom)?`<div class="gloss-sub">${jp}${(jp&&rom)?'<span class="gl-mid">·</span>':''}${rom}</div>`:'';
+  document.getElementById('sheet-content').innerHTML=`<div class="gloss-card">
+    <div class="gloss-kicker">מילון המדריך</div>
+    <div class="gloss-term">${g.p||k}</div>
+    ${sub}
+    <p>${g.d}</p>
+    <button class="gloss-close" onclick="closeDetail()">הבנתי</button></div>`;
   document.getElementById('sheet').classList.add('show');
   document.getElementById('sheet-ov').classList.add('show');
   document.body.classList.add('noscroll');
