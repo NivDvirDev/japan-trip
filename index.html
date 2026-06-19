@@ -713,7 +713,7 @@ let curDay=0;
 // per-page content kanji watermark (faded vertical Mincho, painted as SVG background-image)
 const DAYK=['新宿','渋谷','浅草','祇園','竹林','鳥居','銀座','ジブリ','秋葉原','東京','空港'];
 function wmBg(txt,op){
-  op=op||0.07; const fs=84, gap=100, pad=66, W=190; const chars=[...txt];
+  op=op||0.11; const fs=84, gap=100, pad=66, W=190; const chars=[...txt];
   const h=pad*2+(chars.length-1)*gap;
   const t=chars.map((ch,i)=>`<text x="${W/2}" y="${pad+i*gap}" font-family="Hiragino Mincho ProN, YuMincho, serif" font-size="${fs}" fill="#231f19" fill-opacity="${op}" text-anchor="middle" dominant-baseline="middle">${ch}</text>`).join('');
   const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${h}" viewBox="0 0 ${W} ${h}">${t}</svg>`;
@@ -751,7 +751,7 @@ function paintDays(){
 paintDays();
 // content-keyed kanji watermark on the four static views
 [['view-intro','日本'],['view-stay','宿'],['view-book','予約'],['view-info','案内']].forEach(([id,k])=>{
-  const el=document.getElementById(id); if(el){el.style.cssText+=';'+wmStyle(k,0.06);}
+  const el=document.getElementById(id); if(el){el.style.cssText+=';'+wmStyle(k,0.09);}
 });
 function openGloss(k){
   const g=GLOSS[k]; if(!g) return;
