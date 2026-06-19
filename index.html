@@ -88,7 +88,7 @@
   .pin{ display:inline-grid; place-items:center; width:33px; height:33px; border-radius:9px; background:#fff; border:1px solid var(--line); box-shadow:0 1px 3px rgba(35,31,25,.05); transition:transform .12s ease, box-shadow .15s; cursor:pointer; font-family:inherit; padding:0; margin:0; align-self:center;}
   .pin:active{transform:scale(.9);}
   .pin.map,.pin.ta{border-color:#e2d8c4;}
-  .pin.info{border:1.5px solid var(--cc); color:var(--cc); background:#fff;}
+  .pin.cat{border:1.5px solid var(--cc); color:var(--cc); background:#fff;}
   .gmi,.tai{flex:0 0 auto;}
 
   /* Notes */
@@ -658,7 +658,7 @@ function placeLinks(arr){
   if(!arr||!arr.length) return '';
   return '<div class="plinks">'+arr.map(s=>{
     const d=details[s], m=d?catMeta[d.cat]:null;
-    const info=d?`<button class="pin info" style="--cc:${m.c}" data-place="${attr(s)}" aria-label="מידע מורחב — מיאגי־סנסיי">${m.icon}</button>`:'';
+    const info=d?`<button class="pin cat" style="--cc:${m.c}" data-place="${attr(s)}" aria-label="מידע מורחב — מיאגי־סנסיי">${m.icon}</button>`:'';
     return `<span class="pl"><span class="pl-nm">${shortName(s)}</span><span class="pl-ic">${info}`+
       `<a class="pin map" href="${mapsLink(s)}" target="_blank" rel="noopener" aria-label="פתח במפות גוגל">${I.gm}</a>`+
       `<a class="pin ta" href="${taLink(s)}" target="_blank" rel="noopener" aria-label="פתח ב-Tripadvisor">${I.ta}</a></span></span>`;
@@ -821,7 +821,7 @@ function closeDetail(){
   document.getElementById('sheet-ov').classList.remove('show');
   document.body.classList.remove('noscroll');
 }
-document.addEventListener('click',e=>{const b=e.target.closest('.pin.info'); if(b){e.preventDefault(); openDetail(b.dataset.place);}});
+document.addEventListener('click',e=>{const b=e.target.closest('.pin.cat'); if(b){e.preventDefault(); openDetail(b.dataset.place);}});
 
 const tabDefs=[['intro','מבוא','Welcome'],['days','המסלול','Itinerary'],['stay','לינה','Stays'],['book','להזמין','Book'],['info','מידע','Info']];
 const views=['intro','days','stay','book','info'];
