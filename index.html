@@ -82,8 +82,9 @@
 
   /* Inline place links — rounded-square icon chips */
   .plinks{display:flex; flex-direction:column; gap:11px; margin-top:13px; align-items:flex-start;}
-  .pl{display:inline-flex; align-items:flex-end; gap:9px;}
-  .pl-nm{font-size:14px; color:var(--ink); font-weight:700; letter-spacing:.2px; line-height:1.5;}
+  .pl{display:inline-flex; align-items:center; gap:9px;}
+  .pl-ic{display:inline-flex; align-items:center; gap:9px;}
+  .pl-nm{font-size:14px; color:var(--ink); font-weight:700; letter-spacing:.2px; line-height:1.4;}
   .pin{ display:inline-grid; place-items:center; width:33px; height:33px; border-radius:9px; background:#fff; border:1px solid var(--line); box-shadow:0 1px 3px rgba(35,31,25,.05); transition:transform .12s ease, box-shadow .15s; cursor:pointer; font-family:inherit; padding:0;}
   .pin:active{transform:scale(.9);}
   .pin.map,.pin.ta{border-color:#e2d8c4;}
@@ -658,9 +659,9 @@ function placeLinks(arr){
   return '<div class="plinks">'+arr.map(s=>{
     const d=details[s], m=d?catMeta[d.cat]:null;
     const info=d?`<button class="pin info" style="--cc:${m.c}" data-place="${attr(s)}" aria-label="מידע מורחב — מיאגי־סנסיי">${m.icon}</button>`:'';
-    return `<span class="pl"><span class="pl-nm">${shortName(s)}</span>${info}`+
+    return `<span class="pl"><span class="pl-nm">${shortName(s)}</span><span class="pl-ic">${info}`+
       `<a class="pin map" href="${mapsLink(s)}" target="_blank" rel="noopener" aria-label="פתח במפות גוגל">${I.gm}</a>`+
-      `<a class="pin ta" href="${taLink(s)}" target="_blank" rel="noopener" aria-label="פתח ב-Tripadvisor">${I.ta}</a></span>`;
+      `<a class="pin ta" href="${taLink(s)}" target="_blank" rel="noopener" aria-label="פתח ב-Tripadvisor">${I.ta}</a></span></span>`;
   }).join('')+'</div>';
 }
 
