@@ -144,6 +144,8 @@
 </head>
 <body>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><clipPath id="gmpin"><path d="M12 2C7.58 2 4 5.58 4 10c0 5.25 8 12 8 12s8-6.75 8-12c0-4.42-3.58-8-8-8z"/></clipPath></defs></svg>
+
 <div class="hero">
   <div class="kicker">Japan · 2026</div>
   <h1>ליהי &amp; ליאור ביפן</h1>
@@ -337,6 +339,7 @@ const info=[
   "סוללת גיבוי — הניווט מרוקן את הטלפון."]],
 ];
 
+const gmIcon='<svg class="gmi" viewBox="0 0 24 24" width="14" height="16" aria-hidden="true"><g clip-path="url(#gmpin)"><rect x="0" y="0" width="12" height="11" fill="#4285F4"/><rect x="12" y="0" width="12" height="11" fill="#EA4335"/><rect x="0" y="11" width="12" height="13" fill="#FBBC04"/><rect x="12" y="11" width="12" height="13" fill="#34A853"/></g><circle cx="12" cy="9.3" r="2.9" fill="#fff"/></svg>';
 function mapsLink(q){return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q+' Japan');}
 function taLink(q){return 'https://www.tripadvisor.com/Search?q='+encodeURIComponent(q);}
 function bubbles(r){let h='';for(let i=1;i<=5;i++){h+= r>=i?'<i></i>':(r>=i-0.5?'<i class="h"></i>':'<i class="o"></i>');}return '<span class="bub">'+h+'</span>';}
@@ -358,7 +361,7 @@ days.forEach(d=>{
      <div class="tip">💡 ${d.tip}</div>
      <div class="spots"><div class="spots-label">מקומות · מפה + TripAdvisor</div>
        ${d.spots.map(s=>`<div class="spot"><span class="nm">${s.replace(/ (Japan|Tokyo|Kyoto|Osaka)$/,'')}</span>
-         <a class="btn map" href="${mapsLink(s)}" target="_blank" rel="noopener">📍 מפה</a>
+         <a class="btn map" href="${mapsLink(s)}" target="_blank" rel="noopener">${gmIcon} מפה</a>
          <a class="btn ta" href="${taLink(s)}" target="_blank" rel="noopener"><span class="ta-dot"></span> TripAdvisor</a></div>`).join('')}
      </div>
    </div></div>`;
