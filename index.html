@@ -13,7 +13,6 @@
     --ink:#231f19; --ink2:#4a4338; --paper:#efe8d8; --paper2:#f6f1e6; --card:#fffdf6;
     --ai:#21405e; --ai-d:#172f49; --shu:#a8402a; --shu-soft:#bb5237;
     --kin:#a98a4e; --kin-l:#c4a76c; --line:#e4d9c1; --line2:#efe7d5; --muted:#857a67;
-    --tokyo:#21405e; --hakone:#2f6a5f; --kyoto:#a8402a; --osaka:#6a4a6b; --end:#6b6253;
     --serif:"Hiragino Mincho ProN","Yu Mincho","YuMincho",Georgia,"Times New Roman",serif;
     --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;
   }
@@ -21,10 +20,11 @@
   html,body{margin:0;padding:0;}
   body{ font-family:var(--sans); background:var(--paper); color:var(--ink);
     line-height:1.7; padding-bottom:96px; -webkit-text-size-adjust:100%;}
+  body.noscroll{overflow:hidden;}
   a{color:inherit; text-decoration:none;}
   .ic{width:18px;height:18px;flex:0 0 auto;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
 
-  /* ===== Hero ===== */
+  /* Hero */
   .hero{ position:relative; overflow:hidden; color:#f4eddb; text-align:center;
     padding:calc(env(safe-area-inset-top) + 40px) 22px 38px;
     background:linear-gradient(168deg,#19314a 0%, #21405e 55%, #1c4a4a 125%);}
@@ -36,49 +36,38 @@
   .hero .jp::before,.hero .jp::after{content:""; width:26px; height:1px; background:linear-gradient(90deg,transparent,var(--kin-l));}
   .hero .jp::after{background:linear-gradient(90deg,var(--kin-l),transparent);}
   .hero .sub{ font-size:13px; color:#cdbf9f; margin-top:16px; letter-spacing:.5px;}
-  .hero .route{ margin-top:18px; font-size:12.5px; letter-spacing:1px; display:inline-block; padding:9px 18px;
-    border:1px solid rgba(196,167,108,.4); border-radius:2px; color:#e7dcc2;}
+  .hero .route{ margin-top:18px; font-size:12.5px; letter-spacing:1px; display:inline-block; padding:9px 18px; border:1px solid rgba(196,167,108,.4); border-radius:2px; color:#e7dcc2;}
   .hero .count{ margin-top:15px; display:flex; justify-content:center; gap:9px; font-size:11px; flex-wrap:wrap; letter-spacing:.5px; color:#cdbf9f;}
   .hero .count span{ position:relative; padding:0 11px;}
   .hero .count span+span::before{content:""; position:absolute; right:-1px; top:3px; bottom:3px; width:1px; background:rgba(196,167,108,.4);}
 
-  /* ===== Tabs ===== */
-  .tabs{ position:sticky; top:0; z-index:50; display:flex; gap:0; overflow-x:auto;
-    background:rgba(239,232,216,.94); backdrop-filter:saturate(160%) blur(12px);
-    border-bottom:1px solid var(--line); -webkit-overflow-scrolling:touch; padding:0 8px;}
+  /* Tabs */
+  .tabs{ position:sticky; top:0; z-index:50; display:flex; gap:0; overflow-x:auto; background:rgba(239,232,216,.94); backdrop-filter:saturate(160%) blur(12px); border-bottom:1px solid var(--line); -webkit-overflow-scrolling:touch; padding:0 8px;}
   .tabs::-webkit-scrollbar{display:none;}
-  .tab{ flex:0 0 auto; border:none; background:none; color:var(--muted); font-weight:600;
-    font-size:13.5px; padding:14px 16px 12px; font-family:inherit; cursor:pointer; position:relative; letter-spacing:.3px; transition:color .2s;}
+  .tab{ flex:0 0 auto; border:none; background:none; color:var(--muted); font-weight:600; font-size:13.5px; padding:14px 16px 12px; font-family:inherit; cursor:pointer; position:relative; letter-spacing:.3px; transition:color .2s;}
   .tab .ro{display:block; font-family:var(--serif); font-size:9px; letter-spacing:2px; opacity:.6; margin-top:2px;}
   .tab.active{color:var(--ai);}
   .tab.active::after{content:""; position:absolute; right:16px; left:16px; bottom:0; height:2px; background:var(--shu);}
 
   .wrap{padding:22px 16px 0;}
-
-  /* ===== Section head (seal) ===== */
   .shead{display:flex; align-items:center; gap:13px; margin:8px 2px 18px;}
-  .seal{ flex:0 0 auto; width:42px; height:42px; display:grid; place-items:center; font-family:var(--serif);
-    font-size:21px; color:var(--shu); border:1.5px solid var(--shu); border-radius:5px; background:rgba(168,64,42,.04);}
+  .seal{ flex:0 0 auto; width:42px; height:42px; display:grid; place-items:center; font-family:var(--serif); font-size:21px; color:var(--shu); border:1.5px solid var(--shu); border-radius:5px; background:rgba(168,64,42,.04);}
   .shead .sh-he{font-size:19px; font-weight:800; color:var(--ink); letter-spacing:.3px;}
   .shead .sh-ro{font-family:var(--serif); font-size:10px; letter-spacing:3px; color:var(--kin); text-transform:uppercase; margin-top:1px;}
 
-  .lead{ background:var(--card); border:1px solid var(--line); border-radius:6px; padding:16px 18px; margin:0 0 14px;
-    font-size:14px; color:var(--ink2); position:relative;}
+  .lead{ background:var(--card); border:1px solid var(--line); border-radius:6px; padding:16px 18px; margin:0 0 14px; font-size:14px; color:var(--ink2); position:relative;}
   .lead::before{content:""; position:absolute; top:0; bottom:0; right:0; width:3px; background:var(--shu); border-radius:3px 0 0 3px;}
   .lead b{color:var(--shu); font-weight:700;}
 
-  /* ===== Day cards ===== */
-  .day{ background:var(--card); border:1px solid var(--line); border-radius:8px; margin-bottom:14px; overflow:hidden;
-    box-shadow:0 4px 16px rgba(35,31,25,.05); transition:box-shadow .25s, border-color .25s;}
+  /* Day cards */
+  .day{ background:var(--card); border:1px solid var(--line); border-radius:8px; margin-bottom:14px; overflow:hidden; box-shadow:0 4px 16px rgba(35,31,25,.05); transition:box-shadow .25s, border-color .25s;}
   .day.open{box-shadow:0 8px 26px rgba(35,31,25,.10); border-color:var(--line2);}
   .day-head{ display:flex; align-items:center; gap:14px; padding:16px 17px; cursor:pointer; transition:background .2s;}
   .day-head:active{background:#faf5e9;}
-  .d-seal{ flex:0 0 auto; width:48px; height:48px; border-radius:50%; border:1.5px solid var(--c,#21405e);
-    display:grid; place-items:center; background:#fff; position:relative; transition:transform .3s;}
+  .d-seal{ flex:0 0 auto; width:48px; height:48px; border-radius:50%; border:1.5px solid var(--c,#21405e); display:grid; place-items:center; background:#fff; position:relative; transition:transform .3s;}
   .day.open .d-seal{transform:scale(1.06);}
   .d-seal .kj{font-family:var(--serif); font-size:21px; color:var(--c,#21405e); line-height:1;}
-  .d-seal .no{ position:absolute; bottom:-5px; left:-5px; width:21px; height:21px; border-radius:50%;
-    background:var(--c,#21405e); color:#fff; font-family:var(--serif); font-size:11px; display:grid; place-items:center; border:2px solid var(--card);}
+  .d-seal .no{ position:absolute; bottom:-5px; left:-5px; width:21px; height:21px; border-radius:50%; background:var(--c,#21405e); color:#fff; font-family:var(--serif); font-size:11px; display:grid; place-items:center; border:2px solid var(--card);}
   .day-meta{flex:1 1 auto; min-width:0;}
   .day-meta .d-date{ font-size:11.5px; color:var(--muted); font-weight:600; letter-spacing:.4px;}
   .day-meta .d-title{ font-size:16px; font-weight:800; color:var(--ink); margin-top:3px;}
@@ -88,23 +77,22 @@
   .day-body-inner{padding:0 17px 17px;}
   .block{display:flex; gap:12px; padding:12px 0; border-top:1px solid var(--line);}
   .block .when{ flex:0 0 100px; font-size:12px; font-weight:700; color:var(--ai); display:flex; align-items:center; gap:6px; letter-spacing:.2px; padding-top:1px;}
-  .block .when .ic{width:14px;height:14px;color:var(--hakone);}
+  .block .when .ic{width:14px;height:14px;color:var(--hakone,#2f6a5f);}
   .block .what{flex:1; font-size:14px; color:var(--ink2);}
 
-  /* ===== Inline place links ===== */
+  /* Inline place links */
   .plinks{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px;}
-  .pl{display:inline-flex; align-items:center; gap:4px; background:var(--paper2); border:1px solid var(--line);
-    border-radius:24px; padding:3px 4px 3px 11px; transition:border-color .2s, background .2s;}
+  .pl{display:inline-flex; align-items:center; gap:4px; background:var(--paper2); border:1px solid var(--line); border-radius:24px; padding:3px 4px 3px 11px; transition:background .2s;}
   .pl:active{background:#f0e9d8;}
   .pl-nm{font-size:11.5px; color:var(--ink2); font-weight:600; letter-spacing:.2px;}
-  .pin{ display:inline-grid; place-items:center; width:29px; height:29px; border-radius:50%; background:#fff;
-    border:1px solid var(--line); transition:transform .12s ease, box-shadow .15s;}
+  .pin{ display:inline-grid; place-items:center; width:29px; height:29px; border-radius:50%; background:#fff; border:1px solid var(--line); transition:transform .12s ease, box-shadow .15s; cursor:pointer; font-family:inherit; padding:0;}
   .pin:active{transform:scale(.84);}
-  .pin.map{border-color:#dbe5f3;} .pin.map:hover{box-shadow:0 2px 8px rgba(66,133,244,.22);}
-  .pin.ta{border-color:#cfe8da;} .pin.ta:hover{box-shadow:0 2px 8px rgba(46,139,111,.22);}
+  .pin.map{border-color:#dbe5f3;}
+  .pin.ta{border-color:#cfe8da;}
+  .pin.info{border-color:var(--cc); color:var(--cc); background:color-mix(in srgb, var(--cc) 7%, #fff);}
   .gmi,.tai{flex:0 0 auto;}
 
-  /* ===== Notes ===== */
+  /* Notes */
   .note{ display:flex; gap:10px; align-items:flex-start; border-radius:6px; padding:11px 13px; margin-top:13px; font-size:13.5px;}
   .note .ic{width:17px;height:17px;margin-top:1px;}
   .eat{background:linear-gradient(180deg,#fbf5e9,#f8efdf); border:1px solid var(--line); color:var(--ink2);}
@@ -112,7 +100,7 @@
   .tip{background:#eef4f1; border:1px solid #d8e6df; color:#2f5249;}
   .tip .spark{width:16px;height:16px;fill:var(--kin);stroke:none;margin-top:1px;flex:0 0 auto;}
 
-  /* ===== Stays ===== */
+  /* Stays */
   .stay-note{font-size:13px;color:var(--muted);margin:-6px 2px 16px;}
   .hotel{ background:var(--card); border:1px solid var(--line); border-radius:8px; overflow:hidden; margin-bottom:16px; box-shadow:0 4px 16px rgba(35,31,25,.05);}
   .hotel .ph{ width:100%; height:184px; object-fit:cover; display:block; background:var(--paper);}
@@ -127,23 +115,22 @@
   .bub i.o{background:#cfe0d8;}
   .meta-row{display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-top:12px; font-size:12.5px;}
   .pill{ font-family:var(--serif); background:var(--paper2); border:1px solid var(--line); border-radius:2px; padding:4px 11px; color:var(--ink2); letter-spacing:.3px;}
-  .hotel .cta{ display:flex; align-items:center; justify-content:center; gap:9px; margin-top:15px; width:100%;
-    background:var(--ai); color:#fff; font-weight:600; font-size:13.5px; padding:13px; border-radius:4px; letter-spacing:.3px; transition:transform .12s;}
+  .hotel .cta{ display:flex; align-items:center; justify-content:center; gap:9px; margin-top:15px; width:100%; background:var(--ai); color:#fff; font-weight:600; font-size:13.5px; padding:13px; border-radius:4px; letter-spacing:.3px; transition:transform .12s;}
   .hotel .cta:active{transform:scale(.98);}
 
-  /* ===== Checklist ===== */
+  /* Checklist */
   .check{ background:var(--card); border:1px solid var(--line); border-radius:6px; margin-bottom:10px; padding:14px 16px; display:flex; align-items:flex-start; gap:13px; cursor:pointer; transition:background .15s;}
   .check:active{background:#faf5e9;}
   .check .box{ flex:0 0 auto; width:24px; height:24px; border-radius:4px; border:1.5px solid var(--ai); display:grid; place-items:center; color:#fff; transition:.15s;}
   .check .box .ic{width:15px;height:15px;stroke:#fff;opacity:0;}
-  .check.done .box{background:var(--hakone); border-color:var(--hakone);}
+  .check.done .box{background:var(--hakone,#2f6a5f); border-color:#2f6a5f;}
   .check.done .box .ic{opacity:1;}
   .check .ctext{flex:1; font-size:14px;}
   .check .ctext .ct-t{font-weight:700; color:var(--ink);}
   .check.done .ctext{opacity:.5; text-decoration:line-through;}
   .check .ctext .ct-d{font-size:12.5px; color:var(--muted); display:block; margin-top:2px;}
 
-  /* ===== Info ===== */
+  /* Info */
   .info{background:var(--card); border:1px solid var(--line); border-radius:6px; margin-bottom:11px; overflow:hidden;}
   .info-head{padding:15px 16px; font-weight:700; color:var(--ink); font-size:14.5px; display:flex; align-items:center; gap:12px; cursor:pointer; transition:background .15s;}
   .info-head:active{background:#faf5e9;}
@@ -159,11 +146,48 @@
   .foot{text-align:center; font-size:11.5px; color:var(--muted); padding:26px 18px 10px; line-height:1.9; letter-spacing:.3px;}
   .foot .kj{font-family:var(--serif); color:var(--kin); font-size:15px; display:block; margin-bottom:6px; letter-spacing:4px;}
 
-  .a2hs{ position:fixed; bottom:0; right:0; left:0; z-index:60; background:var(--ink); color:#f4eddb;
-    padding:13px 16px calc(13px + env(safe-area-inset-bottom)); font-size:12.5px; display:flex; align-items:center; gap:11px; letter-spacing:.2px;}
+  .a2hs{ position:fixed; bottom:0; right:0; left:0; z-index:60; background:var(--ink); color:#f4eddb; padding:13px 16px calc(13px + env(safe-area-inset-bottom)); font-size:12.5px; display:flex; align-items:center; gap:11px; letter-spacing:.2px;}
   .a2hs .ic{color:var(--kin-l);}
   .a2hs b{color:var(--kin-l); font-weight:600;}
   .a2hs .x{margin-inline-start:auto; background:rgba(244,237,219,.16); border:none; color:#f4eddb; width:26px; height:26px; border-radius:50%; font-size:15px; font-family:inherit;}
+
+  /* ===== Detail sheet (templates) ===== */
+  .sheet-ov{position:fixed; inset:0; background:rgba(22,18,12,.5); opacity:0; pointer-events:none; transition:opacity .3s; z-index:70;}
+  .sheet-ov.show{opacity:1; pointer-events:auto;}
+  .sheet{position:fixed; left:0; right:0; bottom:0; z-index:71; background:var(--paper2); border-radius:20px 20px 0 0; max-height:90vh; overflow-y:auto; transform:translateY(102%); transition:transform .36s cubic-bezier(.4,0,.2,1); box-shadow:0 -12px 44px rgba(0,0,0,.28); -webkit-overflow-scrolling:touch;}
+  .sheet.show{transform:translateY(0);}
+  .sheet-grip{width:42px; height:4px; border-radius:4px; background:var(--line); margin:10px auto 2px;}
+  .sh-top{display:flex; align-items:center; gap:12px; padding:6px 18px 14px; border-bottom:1px solid var(--line); position:sticky; top:0; background:var(--paper2); z-index:2;}
+  .sh-seal{flex:0 0 auto; width:46px; height:46px; display:grid; place-items:center; border-radius:8px; font-family:var(--serif); font-size:22px; color:#fff; background:var(--cc);}
+  .sh-titles{flex:1; min-width:0;}
+  .sh-name{font-size:17px; font-weight:800; color:var(--ink);}
+  .sh-cat{font-family:var(--serif); font-size:10.5px; letter-spacing:2px; color:var(--cc); text-transform:uppercase; margin-top:2px;}
+  .sh-close{flex:0 0 auto; width:34px; height:34px; border-radius:50%; border:1px solid var(--line); background:#fff; font-size:18px; color:var(--muted); font-family:inherit; cursor:pointer;}
+  .sh-body{padding:16px 18px 30px;}
+  .guide{display:flex; gap:13px; align-items:flex-start; background:linear-gradient(180deg,#fffdf6,#f6efdf); border:1px solid var(--line); border-radius:14px; padding:14px; margin-bottom:18px;}
+  .sav{width:56px; height:56px; flex:0 0 auto; border-radius:50%; background:#fbf6ec; border:1px solid var(--line);}
+  .bubble{flex:1;}
+  .bubble-name{font-family:var(--serif); font-size:11px; letter-spacing:1px; color:var(--kin); margin-bottom:4px;}
+  .bubble p{margin:0; font-size:13.5px; color:var(--ink2); line-height:1.75;}
+  .sh-sec{margin-bottom:18px;}
+  .sh-h{font-size:12px; font-weight:800; letter-spacing:.5px; color:var(--cc); margin-bottom:9px; display:flex; align-items:center; gap:7px;}
+  .sh-h .ic{width:15px; height:15px; color:var(--cc);}
+  .sh-sec ul{margin:0; padding:0; list-style:none;}
+  .sh-sec li{font-size:13.5px; color:var(--ink2); margin:8px 0; padding-inline-start:15px; position:relative; line-height:1.6;}
+  .sh-sec li::before{content:""; position:absolute; right:0; top:8px; width:5px; height:5px; border-radius:50%; background:var(--cc);}
+  .facts{display:flex; flex-wrap:wrap; gap:8px;}
+  .fact{background:#fff; border:1px solid var(--line); border-radius:20px; padding:6px 13px; font-size:12px; color:var(--ink2);}
+  .fact b{color:var(--cc); font-weight:700;}
+  .order-chips{display:flex; flex-wrap:wrap; gap:8px;}
+  .order-chips span{background:#fff; border:1px solid var(--line); border-radius:7px; padding:7px 12px; font-size:12.5px; color:var(--ink2);}
+  .getbox{background:#fff; border:1px solid var(--line); border-radius:10px; padding:12px 14px; font-size:13.5px; color:var(--ink2); line-height:1.6;}
+  .nearby{display:flex; flex-direction:column; gap:8px;}
+  .nb{display:flex; align-items:center; gap:8px; background:#fff; border:1px solid var(--line); border-radius:24px; padding:5px 6px 5px 14px;}
+  .nb-nm{flex:1; font-size:13px; font-weight:600; color:var(--ink);}
+  .sh-links{display:flex; gap:10px; margin-top:8px;}
+  .sh-links a{flex:1; display:flex; align-items:center; justify-content:center; gap:8px; padding:13px; border-radius:8px; font-size:13.5px; font-weight:700;}
+  .sh-links .l-map{background:#fff; border:1px solid #dbe5f3; color:var(--ai);}
+  .sh-links .l-ta{background:#2e8b6f; color:#fff;}
 </style>
 </head>
 <body>
@@ -193,7 +217,7 @@
 
 <div class="wrap">
   <div id="view-intro" style="display:none">
-    <div class="lead">ליהי וליאור — בנינו לכם מסלול שלוקח אתכם דרך הצדדים הכי שווים של יפן: אוכל, טבע, אורות ניאון ורגעים שקטים רק לשניכם. ומכיוון שליהי אוהבת ים ושקיעות — שילבנו פנימה אִי, חופים ושיט בנהר ובמפרץ. ליד כל מקום במסלול יש קישור למפה ול-Tripadvisor, ויש המלצות לינה אמיתיות בלשונית <b>לינה</b>.</div>
+    <div class="lead">ליהי וליאור — בנינו לכם מסלול שלוקח אתכם דרך הצדדים הכי שווים של יפן: אוכל, טבע, אורות ניאון ורגעים שקטים רק לשניכם. ומכיוון שליהי אוהבת ים ושקיעות — שילבנו פנימה אִי, חופים ושיט בנהר ובמפרץ. ליד כל מקום יש קישור למפה, ל-Tripadvisor, וכפתור מידע מורחב — לחצו עליו ו<b>מיאגי־סֶנסֵיי</b>, המדריך שלנו, יספר לכם הכול בגובה העיניים.</div>
     <div class="shead"><span class="seal">心</span><div><div class="sh-he">לפני שמתחילים</div><div class="sh-ro">Before you go</div></div></div>
     <div class="lead"><b>עונת הגשמים (tsuyu):</b> הגשם בא בהתפרצויות קצרות, לא יום שלם. מטריה מתקפלת ונעליים עמידות במים — ואתם מנצחים. בונוס: ההורטנזיות פורחות בכל מקום.</div>
     <div class="lead"><b>בלי JR Pass:</b> למסלול הזה הוא כבר לא משתלם ב-2026. קנו כרטיסי שינקנסן בודדים (אפליקציית smartEX) וכרטיס Suica נטען.</div>
@@ -228,6 +252,9 @@
   <button class="x" onclick="document.getElementById('a2hs').style.display='none'">×</button>
 </div>
 
+<div class="sheet-ov" id="sheet-ov" onclick="closeDetail()"></div>
+<div class="sheet" id="sheet"><div class="sheet-grip"></div><div id="sheet-content"></div></div>
+
 <script>
 const C={tokyo:'#21405e',hakone:'#2f6a5f',kyoto:'#a8402a',osaka:'#6a4a6b',end:'#6b6253'};
 const KJ={tokyo:'東',hakone:'箱',kyoto:'京',osaka:'阪',end:'空'};
@@ -241,11 +268,149 @@ const I={
  etiquette:'<svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="6" r="2.6"/><path d="M5 19c1.8-4.5 5-6.5 7-6.5s5.2 2 7 6.5"/></svg>',
  bag:'<svg class="ic" viewBox="0 0 24 24"><rect x="5.5" y="7.5" width="13" height="12.5" rx="2"/><path d="M9 7.5V5.5a3 3 0 0 1 6 0v2"/><path d="M10 11v5M14 11v5"/></svg>',
  wave:'<svg class="ic" viewBox="0 0 24 24"><path d="M2 9c1.6 0 1.6 1.6 3.2 1.6S6.8 9 8.4 9 10 10.6 11.6 10.6 13.2 9 14.8 9s1.6 1.6 3.2 1.6S19.6 9 21.2 9"/><path d="M2 15c1.6 0 1.6 1.6 3.2 1.6S6.8 15 8.4 15 10 16.6 11.6 16.6 13.2 15 14.8 15s1.6 1.6 3.2 1.6S19.6 15 21.2 15"/></svg>',
+ mountain:'<svg class="ic" viewBox="0 0 24 24"><path d="M3 19l6.5-12 3.4 6 2.6-4 5.5 10z"/><path d="M7.5 12.5l2 1.8 2-1.3"/></svg>',
+ torii:'<svg class="ic" viewBox="0 0 24 24"><path d="M3 6h18M4.5 9h15M7 6v13M17 6v13"/></svg>',
+ building:'<svg class="ic" viewBox="0 0 24 24"><path d="M7 21V4h10v17M7 9h10M7 13h10M7 17h10M3 21h18"/></svg>',
  check:'<svg class="ic" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg>',
  chev:'<svg class="ic chev" viewBox="0 0 24 24" width="16" height="16"><path d="M6 9l6 6 6-6"/></svg>',
  gm:'<svg class="gmi" viewBox="0 0 24 24" width="16" height="18" aria-hidden="true"><g clip-path="url(#gmpin)"><rect x="0" y="0" width="12" height="11" fill="#4285F4"/><rect x="12" y="0" width="12" height="11" fill="#EA4335"/><rect x="0" y="11" width="12" height="13" fill="#FBBC04"/><rect x="12" y="11" width="12" height="13" fill="#34A853"/></g><circle cx="12" cy="9.3" r="2.9" fill="#fff"/></svg>'
 };
 const infoIcon={transport:I.train,connect:I.wifi,food:I.food,etiquette:I.etiquette,pack:I.bag};
+
+// Sensei guide avatar (original illustration)
+const SENSEI='<svg class="sav" viewBox="0 0 72 72" aria-hidden="true"><path d="M14 72c0-12 10-18 22-18s22 6 22 18z" fill="#21405e"/><path d="M36 54l-8 18M36 54l8 18" stroke="#f4eddb" stroke-width="2.4" fill="none"/><rect x="30" y="45" width="12" height="12" rx="3" fill="#e3c09a"/><ellipse cx="36" cy="33" rx="18" ry="19" fill="#ecceaa"/><circle cx="18" cy="34" r="3.4" fill="#ecceaa"/><circle cx="54" cy="34" r="3.4" fill="#ecceaa"/><path d="M19 30c0-10 8-16 17-16s17 6 17 16c-3-6-8-8-8-8-3 3-15 3-18 0 0 0-5 2-8 8z" fill="#d9d4cb"/><path d="M25 31q4-2.4 8 0M39 31q4-2.4 8 0" stroke="#b7b1a6" stroke-width="1.8" fill="none" stroke-linecap="round"/><path d="M26 36.5q3.2 3 7 0M39 36.5q3.8 3 7 0" stroke="#5b4f3f" stroke-width="1.9" fill="none" stroke-linecap="round"/><path d="M36 38.5v4" stroke="#c79e78" stroke-width="1.6" fill="none" stroke-linecap="round"/><path d="M29 45.5q7 3.2 14 0" stroke="#cfc8bc" stroke-width="2.4" fill="none" stroke-linecap="round"/><path d="M31 47.5q5 4 10 0" stroke="#9c6b4f" stroke-width="1.6" fill="none" stroke-linecap="round"/><circle cx="24" cy="41" r="3" fill="#e0a98c" opacity=".5"/><circle cx="48" cy="41" r="3" fill="#e0a98c" opacity=".5"/></svg>';
+
+const catMeta={
+ food:{c:'#a8402a',kj:'食',label:'אוכל וטעימות',icon:I.food},
+ nature:{c:'#2f6a5f',kj:'山',label:'טבע ונוף',icon:I.mountain},
+ culture:{c:'#21405e',kj:'社',label:'תרבות ומקדש',icon:I.torii},
+ urban:{c:'#6a4a6b',kj:'街',label:'עיר וחוויה',icon:I.building},
+ transit:{c:'#a98a4e',kj:'行',label:'הגעה ומסלול',icon:I.train},
+};
+
+// ===== Expanded info, per place (templates) =====
+const details={
+ "Shibuya Scramble Crossing":{cat:'urban',
+  guide:"בוא נעצור רגע לפני שחוצים. הצומת הזה הוא הסואן בעולם — עד שלושת אלפים אנשים בכל מחזור אור, וכולם איכשהו לא מתנגשים. זה לא כאוס, זו נימוס. עִמדו בצד, נשמו, ואז זִרמו עם ההמון.",
+  know:["נקודת צפייה מצוינת: קומה 2 של בניין מגנט/סטاربקס מול הצומת.","Shibuya Sky לתצפית-על — הזמינו מראש, מרהיב בשקיעה."],
+  when:"אחרי החשכה — הניאון בשיאו.",
+  nearby:[["Shibuya Sky","Shibuya Sky"],["פסל האצ'יקו","Hachiko Statue Shibuya"]]},
+ "Hachiko Statue Shibuya":{cat:'culture',
+  guide:"הכלב הזה, האצ'יקו, חיכה לבעלו בתחנה כל יום אחר הצהריים. יום אחד הבעל לא חזר — ובכל זאת האצ'יקו המשיך לבוא, באותה שעה, כמעט עשר שנים. ליפנים הוא סמל לנאמנות. גם זה חלק מהתרבות כאן: לזכור, ולהיות נאמן.",
+  know:["נקודת מפגש מפורסמת — 'ניפגש ליד האצ'יקו'."],
+  nearby:[["צומת שיבויה","Shibuya Scramble Crossing"]]},
+ "teamLab Planets TOKYO":{cat:'urban',
+  guide:"כאן לא מסתכלים על אמנות — נכנסים לתוכה. תצעדו יחפים במים, בין אורות ופרחים שמגיבים אליכם. אל תנסו להבין, פשוט תרגישו. גַלגלו את המכנסיים מעל הברך לפני הכניסה.",
+  know:["יחפים; חלק מהמסלול במים עד הברך.","כרטיסים לפי שעה ונגמרים — הזמינו מראש."],
+  when:"לפי שעת ההזמנה.",duration:"~1.5 שעות.",
+  getting:"תחנת Shin-Toyosu (קו Yurikamome).",
+  nearby:[["teamLab Borderless","teamLab Borderless Azabudai"]]},
+ "Senso-ji Temple":{cat:'culture',
+  guide:"זה המקדש העתיק בטוקיו, משנת 645. השער האדום הענק נקרא 'שער הרעם'. לפני הכניסה, נהוג למשוך עשן קטורת אל עבר הגוף — אומרים שזה מביא בריאות. תנסו, גם אם רק בשביל החוויה.",
+  know:["רחוב נאקאמיסה שלפניו מלא דוכני מאכל ומזכרות.","'אומיקוג'י' — פתק מזל ב-100 ין. אם יצא ביש מזל, קושרים אותו ומשאירים מאחור."],
+  when:"מוקדם בבוקר או בערב המואר — פחות עומס.",
+  getting:"תחנת Asakusa (קווי Ginza/Asakusa).",
+  nearby:[["Tokyo Skytree","Tokyo Skytree"]]},
+ "Akihabara Electric Town":{cat:'urban',
+  guide:"בירת האנימה, הגיימינג והאלקטרוניקה. בניינים שלמים, קומה על קומה, של צעצועים, משחקים וגאדג'טים. תיכנסו לחנות אקראית בת שבע קומות ותעלו עד למעלה — שם מסתתרים הדברים הכי מוזרים והכי כיפיים.",
+  know:["מכונות gachapon (צעצועי הפתעה) בכל פינה.","בתי קפה תמטיים — שווה הצצה."],
+  getting:"תחנת Akihabara (קו JR Yamanote)."},
+ "Takeshita Street Harajuku":{cat:'urban',
+  guide:"הרחוב הזה הוא לב אופנת הרחוב והנעורים של טוקיו — צבעוני, רועש, מתוק. תטעמו קרפ ענק או צמר-גפן מתוק בגודל הראש, ותראו סגנונות לבוש שלא תראו בשום מקום אחר בעולם.",
+  know:["צפוף מאוד בסופי שבוע — בואו מוקדם."],
+  nearby:[["מקדש מייג'י","Meiji Shrine Tokyo"]]},
+ "Kotoku-in Great Buddha Kamakura":{cat:'culture',
+  guide:"הנה הוא — דַאיבּוּטְסוּ, הבודהה הגדול. כמעט שמונה מאות שנה הוא יושב כאן, רגוע, גם אחרי שצונאמי שטף את האולם שעטף אותו. שבו מולו רגע בלי לדבר ובלי טלפון. לפעמים הדבר הכי יפני שאפשר לעשות הוא פשוט לשבת בשקט.",
+  know:["נבנה ב-1252, גובה ~13 מ', יצוק בברונזה.","אפשר להיכנס אל תוך הפסל בתשלום סמלי."],
+  when:"בוקר מוקדם — שקט ואור רך.",duration:"~45 דק'.",
+  getting:"תחנת Hase (קו Enoden), ואז 7 דק' הליכה.",
+  nearby:[["Hasedera Temple","Hasedera Temple Kamakura"],["חוף יואיגהמה","Yuigahama Beach Kamakura"]]},
+ "Enoshima Island":{cat:'nature',
+  guide:"אי קטן ומקודש, מחובר ליבשה בגשר אחד. תטפסו בין מקדשים וגנים עד מגדל התצפית, ולמטה מחכות מערות ים שהגלים חצבו. ואז תחכו לשקיעה מעל האוקיינוס — בשביל זה, ליהי, באנו.",
+  know:["הרבה מדרגות; יש אסקלטור בתשלום ('Sea Candle')."],
+  when:"אחר הצהריים עד שקיעה.",
+  getting:"רכבת Enoden לתחנת Enoshima, ~15 דק' הליכה על הגשר.",
+  nearby:[["חוף יואיגהמה","Yuigahama Beach Kamakura"]]},
+ "Owakudani":{cat:'nature',
+  guide:"אתם עומדים על הר געש חי. האדים שעולים מהאדמה הם גופרית, והריח חזק — זה נורמלי לגמרי. המעדן כאן: ביצה שהתבשלה במעיין החם וקליפתה השחירה. אומרים שכל ביצה כזו מוסיפה שבע שנות חיים. אני אכלתי כמה.",
+  know:["נסגר לעיתים בגלל פעילות וולקנית — בדקו ביום עצמו."],
+  getting:"רכבל הקונה (Ropeway) — כלול ב-Free Pass.",
+  nearby:[["אגם אשי","Lake Ashi Hakone"]]},
+ "Lake Ashi Hakone":{cat:'nature',
+  guide:"אגם געשי שקט שנוצר בהתפרצות לפני 3,000 שנה. שייטים בספינה על פניו, ובימים בהירים הר פוג'י משתקף במים. גם אם הוא מתחבא בעננים — השקט כאן שווה את ההפלגה.",
+  when:"בוקר — מים רגועים, סיכוי טוב יותר לראות את פוג'י.",
+  getting:"ספינת תיירים מטוֹגֶנדאי למוטו-הקונה.",
+  nearby:[["שער הטורי","Hakone Shrine Torii Gate"],["Owakudani","Owakudani"]]},
+ "Hakone Shrine Torii Gate":{cat:'culture',
+  guide:"השער האדום שעומד במים נקרא 'שער השלום'. ההליכה אליו עוברת ביער עתיק עם פנסי אבן. בימים בהירים, אם המזל איתכם, הר פוג'י מציץ מעבר לאגם. אל תצפו לו — אם יבוא, תיהנו; אם לא, היער עצמו שווה את הדרך.",
+  know:["תור לצילום בשער המים יכול להיות ארוך — בוקר מוקדם עדיף."],
+  getting:"ספינת אגם אשי למוטו-הקונה, ואז ~10 דק' הליכה.",
+  nearby:[["Owakudani","Owakudani"]]},
+ "Gion Kyoto":{cat:'culture',
+  guide:"זה רובע הגיישות של קיוטו. אם תראו אישה בקימונו מרהיב חוצה במהירות — זו כנראה גֵייקו או מאיקו בדרך לעבודה. צלמו את הסמטאות, לא אותה מקרוב; הכבוד הזה הוא חלק מהיופי כאן.",
+  know:["הסמטה הכי יפה: Hanamikoji.","ערב = אווירה קסומה עם פנסים."],
+  when:"ערב.",
+  nearby:[["Kiyomizu-dera","Kiyomizu-dera"],["Pontocho","Pontocho Alley"]]},
+ "Kiyomizu-dera":{cat:'culture',
+  guide:"מקדש שלם בנוי על מדרון, ומרפסת העץ הענקית שלו עומדת בלי מסמר אחד. השם פירושו 'מים צלולים', על שם המפל שלמטה. שותים מזרם אחד בלבד — לאהבה, ללימודים או לאריכות ימים. לשתות משלושתם נחשב חמדנות.",
+  when:"שקיעה, או בוקר מוקדם.",
+  nearby:[["Gion","Gion Kyoto"]]},
+ "Arashiyama Bamboo Grove":{cat:'nature',
+  guide:"כשהרוח עוברת בין גבעולי הבמבוק הם חורקים בצליל שיפן הכריזה עליו רשמית כ'נוף קול הראוי לשימור'. עִצמו עיניים לרגע אחד והקשיבו — זה הדבר שאי אפשר לצלם.",
+  know:["קצר מאוד ומתמלא מהר.","משולב עם מקדש Tenryu-ji הסמוך."],
+  when:"לפני 8:00 — אחרת צפוף מאוד.",
+  getting:"תחנת Saga-Arashiyama (JR).",
+  nearby:[["Tenryu-ji","Tenryuji Temple"],["פארק הקופים","Iwatayama Monkey Park"]]},
+ "Hozugawa River Boat Ride":{cat:'nature',
+  guide:"שיט של מאות שנים: שייטים מנווטים סירת עץ בעמודים ובחתירה לאורך 16 ק\"מ של קניון נהר. אין מנוע, רק כוח אדם וזרם. שבו אחורה, תנו לנוף לעבור, ותרגישו את הקצב הישן של יפן.",
+  know:["נמשך ~2 שעות; תלוי במזג אוויר."],duration:"~2 שעות.",
+  getting:"רכבת JR San-in לתחנת Kameoka, ~8 דק' הליכה למזח.",
+  nearby:[["Sagano Scenic Railway","Sagano Scenic Railway"]]},
+ "Kinkaku-ji":{cat:'culture',
+  guide:"ביתן הזהב — שתי קומות עליונות מצופות זהב טהור, משתקפות באגם. במקור וילה של שוגון מהמאה ה-14 שהפכה למקדש זן. הפסל שעל הגג הוא עוף החול, הפניקס. תקיפו את האגם בנחת.",
+  know:["צופים מהשביל סביב האגם — לא נכנסים פנימה.","קומפקטי — ~45 דק'."],
+  when:"בוקר בהיר — הזהב בורק.",
+  nearby:[["Ryoan-ji","Ryoanji Temple Kyoto"]]},
+ "Fushimi Inari Taisha":{cat:'culture',
+  guide:"אלפי השערים הכתומים — כל אחד נתרם בידי עסק או אדם כתפילה לשגשוג. אינארי הוא אל האורז, והשועל הוא שליחו, ולכן השועלים נמצאים בכל פינה. תטפסו לפחות עד נקודת התצפית; שם ההמון מתפזר והקסם מתחיל.",
+  know:["עד התצפית ~30-40 דק' מעלה; לפסגה ~2-3 שעות.","חינם, פתוח תמיד."],
+  when:"לפני 8:00 או אחרי החשכה.",
+  getting:"תחנת Inari (קו JR Nara) — צמוד לכניסה.",
+  nearby:[["Tofuku-ji","Tofukuji Temple Kyoto"]]},
+ "Mimuroto-ji Uji":{cat:'nature',
+  guide:"מקדש 'ההורטנזיות' של קיוטו: ביוני המדרונות מתכסים ב-10,000 שיחי אג'יסאי בכחול, סגול וורוד. גן יפני קלאסי, שקט, רחוק מההמון. ואחרי זה — מאצ'ה אמיתי בעיר אוג'י הסמוכה, בירת התה של יפן.",
+  know:["שיא הפריחה: יוני. כניסה בתשלום.","אוג'י = המאצ'ה הכי טוב במדינה."],
+  when:"יוני — שיא ההורטנזיות.",
+  nearby:[["Byodo-in Temple","Byodoin Temple Uji"]]},
+ "Nara Park":{cat:'nature',
+  guide:"הצבאים כאן חופשיים ומקודשים — בשינטו הם נחשבים שליחי האלים. אם תקדו להם קלות, חלקם יקדו בחזרה לפני שתאכילו אותם בקרקרים. רק אל תקנו את הקרקרים מוקדם מדי, אחרת תמצאו את עצמכם מוקפים.",
+  know:["שמרו על שקיות ומפות — צבי סקרן עלול לנגוס.","בקצה הפארק: טודאי-ג'י עם בודהה ברונזה ענק."],
+  getting:"מאוסקה ~40 דק' (קו Kintetsu Nara).",
+  nearby:[["Todai-ji","Todaiji Temple Nara"]]},
+ "Nishiki Market Kyoto":{cat:'food',
+  guide:"קוראים לזה 'המטבח של קיוטו' — סמטה מקורה באורך 400 מטר, מאה דוכנים, חלקם בני דורות. כאן מותר לאכול תוך כדי הליכה, חריג נדיר ליפן. תתחילו רעבים, ותטעמו דברים שאתם בכלל לא מזהים.",
+  order:["טאקו טאמאגו — תמנון קטן ממולא בביצה","יאקיטורי","מוצ'י ודאנגו מאצ'ה","חלב סויה טרי"],
+  know:["הכי טוב 10:00-17:00; מזומן מומלץ."],
+  nearby:[["Pontocho","Pontocho Alley"]]},
+ "Dotonbori":{cat:'food',
+  guide:"הלב הפועם של אוסקה: נהר, ים של ניאון, ושלט הריצה של Glico שכולם מצטלמים מולו בזרועות מורמות. לאוסקה יש מילה — 'kuidaore', לאכול עד שמתמוטטים. הערב הזה הוא בדיוק בשביל זה.",
+  order:["טאקויאקי — כדורי תמנון","אוקונומיאקי — פנקייק מלוח","קושיקאטסו — שיפודים מטוגנים (לא טובלים פעמיים ברוטב!)"],
+  know:["שיט תעלת טומבורי ~20 דק', נוף ניאון מהמים.","הכי חי בערב."],
+  nearby:[["Shinsaibashi","Shinsaibashi-suji"],["שוק קורומון","Kuromon Ichiba Market"]]},
+ "Kuromon Ichiba Market":{cat:'food',
+  guide:"שוק בוקר ותיק של אוסקה, 'המטבח' של העיר. כאן תמצאו סושי טרי, צדפות צלויות במקום, ופירות יוקרה שעולים הון. בואו רעבים בבוקר — זו אחת מארוחות הבוקר הכי טובות שתאכלו בטיול.",
+  order:["סשימי וסושי טרי","צדפות וחסילונים על האש","טאקויאקי","פירות עונה"],
+  know:["הכי טוב בבוקר; חלק סוגרים אחה\"צ."],
+  nearby:[["Dotonbori","Dotonbori"]]},
+ "Universal Studios Japan":{cat:'urban',
+  guide:"כאן הפופ-קלצ'ר שאתם מכירים פוגש את יפן: סופר נינטנדו וורלד עם מריו אמיתי, הארי פוטר ועוד. קנו Express Pass מראש — הוא יקר, אבל יחסוך לכם שעות בתורים, וזה שווה כל ין.",
+  know:["סופר נינטנדו וורלד עשוי לדרוש כרטיס כניסה מתוזמן.","הגיעו עם הפתיחה."],
+  getting:"תחנת Universal City (קו JR Yumesaki)."},
+ "Kansai International Airport":{cat:'transit',
+  guide:"שדה התעופה בנוי על אי מלאכותי במפרץ אוסקה. מנמבה זה קרוב — אל תתלחצו, אבל אל תזלזלו בזמן.",
+  getting:"אקספרס Nankai 'Rapi:t' מנמבה ~38 דק', או JR Haruka מ-Tennoji/Shin-Osaka.",
+  know:["הגיעו ~3 שעות לפני טיסה בינלאומית.","חנויות פטור ממכס מצוינות בטרמינל 1."]},
+};
 
 const days=[
  {num:1,city:'tokyo',date:"ב' · 22.6 · נחיתה בטוקיו",title:"נחיתה והתמקמות",
@@ -256,7 +421,7 @@ const days=[
   tip:"שנת לילה טובה ביום הראשון = טיול מנצח."},
  {num:2,city:'tokyo',date:"ג' · 23.6 · טוקיו הצעיר",title:"אמנות דיגיטלית, אופנה, לילה",
   blocks:[["בוקר","teamLab Planets בטויוסו — צועדים יחפים במים ובאור. מושלם ליום גשום (הזמינו מראש).",["teamLab Planets TOKYO"]],
-   ["צהריים","הרג'וקו (רחוב טאקשיטה), אומוטסאנדו, ומקדש מייג'י ביער.",["Takeshita Street Harajuku","Meiji Shrine Tokyo"]],
+   ["צהריים","הרג'וקו (רחוב טאקשיטה), אומוטסאנדו, ומקדש מייג'י ביער.",["Takeshita Street Harajuku"]],
    ["ערב","שינג'וקו — איזקאיות ב-Omoide Yokocho, ברים זעירים ב-Golden Gai, ניאון בקבוקיצ'ו.",["Omoide Yokocho","Golden Gai Tokyo"]]],
   eat:"יאקיטורי ב-Omoide Yokocho; קרפ בהרג'וקו.",
   tip:"Golden Gai = 200+ ברים זעירים. חפשו ברים בלי דמי כניסה."},
@@ -274,7 +439,7 @@ const days=[
   tip:"אנושימה הוא אי קטן עם נוף ים פתוח ושקיעה מהממת — גן עדן לאוהבי ים."},
  {num:5,city:'hakone',date:"ו' · 26.6 · טוקיו ← הקונה",title:"אונסן, אגם, פסגת הפינוק",
   blocks:[["בוקר","נסיעה להקונה (~1.5 ש'). Hakone Free Pass. רכבל מעל עמק Owakudani הגעשי.",["Owakudani"]],
-   ["צהריים · אגם","ספינה על אגם אשי, ושער הטורי של מקדש הקונה שעומד במים.",["Lake Ashi Hakone","Hakone Shrine Torii Gate","Hakone Open Air Museum"]],
+   ["צהריים · אגם","ספינה על אגם אשי, ושער הטורי של מקדש הקונה שעומד במים.",["Lake Ashi Hakone","Hakone Shrine Torii Gate"]],
    ["ערב","ריוקאן עם אונסן פרטי וארוחת קאיסקי. הלילה שתזכרו."]],
   eat:"קאיסקי בריוקאן (כלול בלינה בד\"כ).",
   tip:"הלילה הכי רומנטי בטיול — אונסן פרטי וארוחת שף, רק שניכם. פוג'י אולי יסתתר בעננים, אבל הערב הזה שווה את הכל."},
@@ -323,22 +488,10 @@ const days=[
 ];
 
 const hotels=[
- {city:'tokyo',cityName:'טוקיו',name:'MONday Apart Premium NIHONBASHI',rating:4.9,reviews:886,
-  tags:['נוף עיר','מודרני','מיקום מרכזי'],price:'~$160 / לילה',
-  img:'https://media-cdn.tripadvisor.com/media/photo-w/2b/9a/0a/b7/caption.jpg',
-  url:'https://www.tripadvisor.com/Hotel_Review-g14129589-d20376911-Reviews-MONday_Apart_Premium_NIHONBASHI-Nihonbashi_Chuo_Tokyo_Tokyo_Prefecture_Kanto.html'},
- {city:'hakone',cityName:'הקונה',name:'Hyatt Regency Hakone Resort and Spa',rating:4.5,reviews:2091,
-  tags:['יוקרה','אונסן','שקט'],price:'~$465 / לילה',
-  img:'https://media-cdn.tripadvisor.com/media/photo-w/05/7e/83/d8/caption.jpg',
-  url:'https://www.tripadvisor.com/Hotel_Review-g298171-d635211-Reviews-Hyatt_Regency_Hakone_Resort_and_Spa-Hakone_machi_Ashigarashimo_gun_Kanagawa_Prefecture.html'},
- {city:'kyoto',cityName:'קיוטו',name:'Mimaru Suites Kyoto Central',rating:5.0,reviews:409,
-  tags:['מקסים','מרכזי','סוויטות'],price:'~$570 / לילה',
-  img:'https://media-cdn.tripadvisor.com/media/photo-w/30/fd/2c/58/caption.jpg',
-  url:'https://www.tripadvisor.com/Hotel_Review-g298564-d25400658-Reviews-Mimaru_Suites_Kyoto_Central-Kyoto_Kyoto_Prefecture_Kinki.html'},
- {city:'osaka',cityName:'אוסקה',name:'Hotel Royal Classic Osaka',rating:4.5,reviews:67,
-  tags:['רומנטי','מודרני','נמבה'],price:'~$225 / לילה',
-  img:'https://media-cdn.tripadvisor.com/media/photo-w/1a/77/4f/b1/caption.jpg',
-  url:'https://www.tripadvisor.com/Hotel_Review-g14134988-d19429108-Reviews-Hotel_Royal_Classic_Osaka-Namba_Chuo_Osaka_Osaka_Prefecture_Kinki.html'},
+ {city:'tokyo',cityName:'טוקיו',name:'MONday Apart Premium NIHONBASHI',rating:4.9,reviews:886,tags:['נוף עיר','מודרני','מיקום מרכזי'],price:'~$160 / לילה',img:'https://media-cdn.tripadvisor.com/media/photo-w/2b/9a/0a/b7/caption.jpg',url:'https://www.tripadvisor.com/Hotel_Review-g14129589-d20376911-Reviews-MONday_Apart_Premium_NIHONBASHI-Nihonbashi_Chuo_Tokyo_Tokyo_Prefecture_Kanto.html'},
+ {city:'hakone',cityName:'הקונה',name:'Hyatt Regency Hakone Resort and Spa',rating:4.5,reviews:2091,tags:['יוקרה','אונסן','שקט'],price:'~$465 / לילה',img:'https://media-cdn.tripadvisor.com/media/photo-w/05/7e/83/d8/caption.jpg',url:'https://www.tripadvisor.com/Hotel_Review-g298171-d635211-Reviews-Hyatt_Regency_Hakone_Resort_and_Spa-Hakone_machi_Ashigarashimo_gun_Kanagawa_Prefecture.html'},
+ {city:'kyoto',cityName:'קיוטו',name:'Mimaru Suites Kyoto Central',rating:5.0,reviews:409,tags:['מקסים','מרכזי','סוויטות'],price:'~$570 / לילה',img:'https://media-cdn.tripadvisor.com/media/photo-w/30/fd/2c/58/caption.jpg',url:'https://www.tripadvisor.com/Hotel_Review-g298564-d25400658-Reviews-Mimaru_Suites_Kyoto_Central-Kyoto_Kyoto_Prefecture_Kinki.html'},
+ {city:'osaka',cityName:'אוסקה',name:'Hotel Royal Classic Osaka',rating:4.5,reviews:67,tags:['רומנטי','מודרני','נמבה'],price:'~$225 / לילה',img:'https://media-cdn.tripadvisor.com/media/photo-w/1a/77/4f/b1/caption.jpg',url:'https://www.tripadvisor.com/Hotel_Review-g14134988-d19429108-Reviews-Hotel_Royal_Classic_Osaka-Namba_Chuo_Osaka_Osaka_Prefecture_Kinki.html'},
 ];
 
 const bookings=[
@@ -353,24 +506,11 @@ const bookings=[
 ];
 
 const info=[
- ["תחבורה","transport",["<b>Suica/ICOCA:</b> כרטיס נטען לכל רכבת/אוטובוס/חנות נוחות. טענו ~¥3,000.",
-  "<b>שינקנסן:</b> כרטיסים בודדים דרך אפליקציית smartEX. טוקיו←קיוטו ~₪500 לאדם.",
-  "<b>בלי JR Pass:</b> כבר לא משתלם למסלול הזה.",
-  "<b>הקונה:</b> Hakone Free Pass מכסה רכבלים, ספינה ואוטובוסים."]],
- ["חיבור וכסף","connect",["<b>אינטרנט:</b> eSIM (Airalo/Ubigi). לזוג — שתי חבילות נפרדות.",
-  "<b>מזומן:</b> כספומט ב-7-Eleven מקבל כרטיסים זרים. החזיקו ¥10–20K.",
-  "<b>אפליקציות:</b> Google Maps, Google Translate (מצלמה לתפריטים), Navitime, Tripadvisor."]],
- ["אוכל","food",["<b>הזמנות:</b> אומקסה/קובה — דרך הקונסיירז'. הרבה מקומות 'תור בלבד'.",
-  "<b>טיפים:</b> אין טיפים ביפן! זה אפילו נחשב מוזר.",
-  "<b>קונביני:</b> 7-Eleven, Lawson, FamilyMart — אוכל מעולה וזול."]],
- ["נימוסים","etiquette",["לא אוכלים תוך כדי הליכה (חוץ מאזורי אוכל רחוב).",
-  "שקט ברכבות — בלי שיחות טלפון.",
-  "באונסן: מתקלחים לפני, נכנסים ללא בגד ים. קעקועים — בדקו מראש.",
-  "מסירים נעליים על טאטאמי. עומדים בצד באסקלטור."]],
- ["לארוז","pack",["מטריה מתקפלת (או שקופה ב-konbini ב-¥500) ומעיל גשם דק.",
-  "נעליים נוחות ועמידות במים — 15,000+ צעדים ביום.",
-  "בדים מתייבשים-מהר ושכבות קלות (לח וחם).",
-  "סוללת גיבוי — הניווט מרוקן את הטלפון."]],
+ ["תחבורה","transport",["<b>Suica/ICOCA:</b> כרטיס נטען לכל רכבת/אוטובוס/חנות נוחות. טענו ~¥3,000.","<b>שינקנסן:</b> כרטיסים בודדים דרך אפליקציית smartEX. טוקיו←קיוטו ~₪500 לאדם.","<b>בלי JR Pass:</b> כבר לא משתלם למסלול הזה.","<b>הקונה:</b> Hakone Free Pass מכסה רכבלים, ספינה ואוטובוסים."]],
+ ["חיבור וכסף","connect",["<b>אינטרנט:</b> eSIM (Airalo/Ubigi). לזוג — שתי חבילות נפרדות.","<b>מזומן:</b> כספומט ב-7-Eleven מקבל כרטיסים זרים. החזיקו ¥10–20K.","<b>אפליקציות:</b> Google Maps, Google Translate (מצלמה לתפריטים), Navitime, Tripadvisor."]],
+ ["אוכל","food",["<b>הזמנות:</b> אומקסה/קובה — דרך הקונסיירז'. הרבה מקומות 'תור בלבד'.","<b>טיפים:</b> אין טיפים ביפן! זה אפילו נחשב מוזר.","<b>קונביני:</b> 7-Eleven, Lawson, FamilyMart — אוכל מעולה וזול."]],
+ ["נימוסים","etiquette",["לא אוכלים תוך כדי הליכה (חוץ מאזורי אוכל רחוב).","שקט ברכבות — בלי שיחות טלפון.","באונסן: מתקלחים לפני, נכנסים ללא בגד ים. קעקועים — בדקו מראש.","מסירים נעליים על טאטאמי. עומדים בצד באסקלטור."]],
+ ["לארוז","pack",["מטריה מתקפלת (או שקופה ב-konbini ב-¥500) ומעיל גשם דק.","נעליים נוחות ועמידות במים — 15,000+ צעדים ביום.","בדים מתייבשים-מהר ושכבות קלות (לח וחם).","סוללת גיבוי — הניווט מרוקן את הטלפון."]],
 ];
 
 function mapsLink(q){return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q+' Japan');}
@@ -378,11 +518,17 @@ function taLink(q){return 'https://www.tripadvisor.com/Search?q='+encodeURICompo
 function shortName(s){return s.replace(/ (Japan|TOKYO|Tokyo|Kyoto|Osaka|Kamakura|Uji|Shibuya|Harajuku)$/,'').trim();}
 function bubbles(r){let h='';for(let i=1;i<=5;i++){h+= r>=i?'<i></i>':(r>=i-0.5?'<i class="h"></i>':'<i class="o"></i>');}return '<span class="bub">'+h+'</span>';}
 function waterLabel(t){return /·\s*(ים|נהר|תעלה|מפרץ|אגם)/.test(t);}
+function attr(s){return s.replace(/"/g,'&quot;');}
+
 function placeLinks(arr){
   if(!arr||!arr.length) return '';
-  return '<div class="plinks">'+arr.map(s=>`<span class="pl"><span class="pl-nm">${shortName(s)}</span>`+
-    `<a class="pin map" href="${mapsLink(s)}" target="_blank" rel="noopener" aria-label="פתח במפות גוגל">${I.gm}</a>`+
-    `<a class="pin ta" href="${taLink(s)}" target="_blank" rel="noopener" aria-label="פתח ב-Tripadvisor">${I.ta}</a></span>`).join('')+'</div>';
+  return '<div class="plinks">'+arr.map(s=>{
+    const d=details[s], m=d?catMeta[d.cat]:null;
+    const info=d?`<button class="pin info" style="--cc:${m.c}" data-place="${attr(s)}" aria-label="מידע מורחב — מיאגי־סנסיי">${m.icon}</button>`:'';
+    return `<span class="pl"><span class="pl-nm">${shortName(s)}</span>${info}`+
+      `<a class="pin map" href="${mapsLink(s)}" target="_blank" rel="noopener" aria-label="פתח במפות גוגל">${I.gm}</a>`+
+      `<a class="pin ta" href="${taLink(s)}" target="_blank" rel="noopener" aria-label="פתח ב-Tripadvisor">${I.ta}</a></span>`;
+  }).join('')+'</div>';
 }
 
 const vd=document.getElementById('view-days');
@@ -401,7 +547,7 @@ days.forEach(d=>{
      <div class="note tip">${I.spark}<div>${d.tip}</div></div>
    </div></div>`;
   const head=el.querySelector('.day-head'), body=el.querySelector('.day-body');
-  head.addEventListener('click',()=>{const open=el.classList.toggle('open'); body.style.maxHeight=open?body.scrollHeight+60+'px':'0';});
+  head.addEventListener('click',()=>{const open=el.classList.toggle('open'); body.style.maxHeight=open?body.scrollHeight+80+'px':'0';});
   vd.appendChild(el);
 });
 
@@ -440,6 +586,39 @@ info.forEach(s=>{
     body.style.maxHeight=open?'0':body.scrollHeight+30+'px'; chev.style.transform=open?'rotate(0)':'rotate(180deg)';});
   il.appendChild(el);
 });
+
+// ===== Detail sheet =====
+function fact(label,val){return val?`<span class="fact"><b>${label}</b> ${val}</span>`:'';}
+function nbRow(n){return `<div class="nb"><span class="nb-nm">${n[0]}</span>`+
+  `<a class="pin map" href="${mapsLink(n[1])}" target="_blank" rel="noopener" aria-label="מפה">${I.gm}</a>`+
+  `<a class="pin ta" href="${taLink(n[1])}" target="_blank" rel="noopener" aria-label="Tripadvisor">${I.ta}</a></div>`;}
+
+function openDetail(name){
+  const d=details[name]; if(!d) return;
+  const m=catMeta[d.cat];
+  let h=`<div class="sh-top" style="--cc:${m.c}"><span class="sh-seal">${m.kj}</span>`+
+    `<div class="sh-titles"><div class="sh-name">${shortName(name)}</div><div class="sh-cat">${m.label}</div></div>`+
+    `<button class="sh-close" onclick="closeDetail()" aria-label="סגור">×</button></div>`+
+    `<div class="sh-body" style="--cc:${m.c}">`+
+    `<div class="guide">${SENSEI}<div class="bubble"><div class="bubble-name">מיאגי־סֶנסֵיי · המדריך</div><p>${d.guide}</p></div></div>`;
+  if(d.know&&d.know.length) h+=`<div class="sh-sec"><div class="sh-h">${m.icon} מה שכדאי לדעת</div><ul>${d.know.map(x=>`<li>${x}</li>`).join('')}</ul></div>`;
+  if(d.order&&d.order.length) h+=`<div class="sh-sec"><div class="sh-h">${I.food} מה להזמין</div><div class="order-chips">${d.order.map(x=>`<span>${x}</span>`).join('')}</div></div>`;
+  const f=fact('מתי',d.when)+fact('משך',d.duration);
+  if(f) h+=`<div class="sh-sec"><div class="facts">${f}</div></div>`;
+  if(d.getting) h+=`<div class="sh-sec"><div class="sh-h">${I.train} איך מגיעים</div><div class="getbox">${d.getting}</div></div>`;
+  if(d.nearby&&d.nearby.length) h+=`<div class="sh-sec"><div class="sh-h">${I.mountain} קרוב לכאן — חלופות לבדוק</div><div class="nearby">${d.nearby.map(nbRow).join('')}</div></div>`;
+  h+=`<div class="sh-links"><a class="l-map" href="${mapsLink(name)}" target="_blank" rel="noopener">${I.gm} פתח במפות</a><a class="l-ta" href="${taLink(name)}" target="_blank" rel="noopener">${I.ta} פתח ב-Tripadvisor</a></div></div>`;
+  document.getElementById('sheet-content').innerHTML=h;
+  document.getElementById('sheet').classList.add('show');
+  document.getElementById('sheet-ov').classList.add('show');
+  document.body.classList.add('noscroll');
+}
+function closeDetail(){
+  document.getElementById('sheet').classList.remove('show');
+  document.getElementById('sheet-ov').classList.remove('show');
+  document.body.classList.remove('noscroll');
+}
+document.addEventListener('click',e=>{const b=e.target.closest('.pin.info'); if(b){e.preventDefault(); openDetail(b.dataset.place);}});
 
 const tabDefs=[['intro','מבוא','Welcome'],['days','המסלול','Itinerary'],['stay','לינה','Stays'],['book','להזמין','Book'],['info','מידע','Info']];
 const views=['intro','days','stay','book','info'];
