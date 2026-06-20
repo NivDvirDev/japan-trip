@@ -767,7 +767,7 @@ function glossWrap(t){GKEYS.forEach(k=>{if(t.indexOf(k)>-1){const g=GLOSS[k];t=t
 function dpick(date){const p=date.split('·');return p[1]?p[1].trim():'';}
 
 const vd=document.getElementById('view-days');
-let curDay=0, TRIP_TODAY=-1;
+let curDay=0, TRIP_TODAY=-1, FC=null; // FC = per-day forecast map, filled async by the forecast module (declared here so the first render doesn't hit a TDZ)
 // per-page content kanji watermark (faded vertical Mincho, painted as SVG background-image)
 const DAYK=['新宿','渋谷','浅草','祇園','竹林','鳥居','銀座','ジブリ','秋葉原','東京','空港'];
 function wmBg(txt,op){
@@ -1008,7 +1008,7 @@ function wxIcon(c){const S=i=>`<svg class="wxsvg" viewBox="0 0 32 32" aria-hidde
 /* ——— per-day expected-weather forecast (Open-Meteo daily) — each day shows its city's forecast for its date; refreshes on open+resume, baked + cached fallback ——— */
 const FCITY={tokyo:{la:35.68,lo:139.69},kyoto:{la:35.01,lo:135.77},nara:{la:34.685,lo:135.805}};
 const FCNAME={tokyo:'טוקיו',kyoto:'קיוטו',nara:'נארה'};
-let FC=null; // { tokyo:{'2026-06-22':{c,mx,mn,pp}}, kyoto:{...}, nara:{...} }
+// FC (the forecast map) is declared up near curDay to avoid a temporal-dead-zone at first render
 function isoDate(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
 function dayFCkey(i){ if(i===5) return 'nara'; const c=days[i]&&days[i].city; return c==='kyoto'?'kyoto':'tokyo'; } // day 6 = Nara day-trip; end → Tokyo
 function dayForecast(i){ if(!FC) return null; const d=parseDayDate(days[i].date); if(!d) return null; const fc=FC[dayFCkey(i)]; return fc?(fc[isoDate(d)]||null):null; }
