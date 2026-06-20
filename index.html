@@ -953,7 +953,7 @@ function paintDays(){
 // open today's day automatically when the trip is underway
 TRIP_TODAY=tripIdx();
 if(TRIP_TODAY>=0) curDay=TRIP_TODAY;
-paintDays();
+// initial paintDays() is deferred until after ASSOC is defined (woven terms need it)
 // content-keyed kanji watermark on the four static views
 [['view-intro','日本'],['view-stay','宿'],['view-book','予約'],['view-info','案内']].forEach(([id,k])=>{
   const el=document.getElementById(id); if(el){el.style.cssText+=';'+wmStyle(k,0.09);}
@@ -1223,6 +1223,7 @@ const ASSOC={
  uniqlo:{he:'יוניקלו',en:'Uniqlo',cat:'culture',ic:'shirt',fact:"קמעונאית יפנית שנפתחה בהירושימה ב-1984; השם הוא קיצור של 'Unique Clothing Warehouse'.",img:'UNIQLO_Ginza_store.JPG',url:"https://he.wikipedia.org/wiki/יוניקלו",rel:['asics','mariekondo','pilot','japandi']},
  geta:{he:'גֵטָה / כפכפים',en:'Geta Sandals',cat:'culture',ic:'geta',fact:"סנדלי העץ המוגבהים המסורתיים של יפן, נלבשים עם קימונו — והאב הקדמון של רצועת הכפכף.",img:'Geta.JPG',url:"https://en.wikipedia.org/wiki/Geta_(footwear)",rel:['sakura','uniqlo','bonsai','origami']},
 };
+paintDays(); // initial day render — runs here, after ASSOC/AIC are defined, so woven {{ }} terms resolve
 function aceChip(id){const a=ASSOC[id];if(!a)return '';const cc=ACAT[a.cat]||['',''];return `<div class="ace-wrap"><button class="ace" data-ace="${id}" style="--ac:${cc[1]}"><span class="ace-ic">${AIC[a.ic]||AIC.spark}</span><span class="ace-nm">${a.he}</span><span class="ace-chev">▸</span></button><div class="ace-body"><div class="ace-en">${a.en} · ${cc[0]}</div><p>${a.fact}</p></div></div>`;}
 function assocSection(d){if(!d.assoc||!d.assoc.length)return '';return `<div class="sh-sec assoc-sec"><button class="assoc-head" data-assoctoggle><span class="ah-l">${AIC.spark} ידעת? · קשרים מהבית</span><span class="ah-c">${d.assoc.length}</span><span class="ah-chev">▾</span></button><div class="aces" hidden>${d.assoc.map(aceChip).join('')}</div></div>`;}
 function openDetail(name){
