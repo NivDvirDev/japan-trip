@@ -351,6 +351,18 @@
   .ap-fact{font-size:14.5px; line-height:1.65; color:var(--ink2); margin:16px auto 0; max-width:34ch; text-align:start;}
   .ap-search{display:inline-flex; align-items:center; gap:6px; margin-top:18px; font-size:12.5px; font-weight:700; color:var(--ai); text-decoration:none; border:1px solid var(--line); border-radius:9px; padding:9px 15px; background:var(--paper2);}
   .ap-search svg{width:15px; height:15px;}
+  .ap-photo{position:relative; width:calc(100% + 40px); margin:-24px -20px 14px; aspect-ratio:16/10; overflow:hidden; background:color-mix(in srgb, var(--ac) 8%, var(--card));}
+  .ap-photo img{width:100%; height:100%; object-fit:cover; display:block; animation:fadeUp .5s ease;}
+  .ap-photo::after{content:''; position:absolute; inset:0; box-shadow:inset 0 -40px 40px -28px var(--card), inset 0 0 0 1px color-mix(in srgb, var(--ink) 8%, transparent); pointer-events:none;}
+  .ap-photo.has .ap-ic-overlay{display:none;}
+  .ap-credit{position:absolute; inset-inline-end:6px; bottom:5px; font-size:8.5px; letter-spacing:.3px; color:#fff; opacity:.7; text-shadow:0 1px 2px rgba(0,0,0,.6); pointer-events:none;}
+  .ap-links{display:flex; flex-wrap:wrap; gap:6px 16px; justify-content:center; margin-top:16px;}
+  .ap-link{font-size:12.5px; font-weight:600; color:var(--ai); text-decoration:none; border-bottom:1px solid color-mix(in srgb, var(--ai) 35%, transparent); padding-bottom:1px;}
+  .ap-link.sub{color:var(--muted); border-bottom-color:color-mix(in srgb, var(--muted) 35%, transparent);}
+  .ap-rel{margin-top:16px; padding-top:14px; border-top:1px dashed var(--line); font-size:12.5px; line-height:1.9; color:var(--ink2); text-align:center;}
+  .ap-rel-h{font-weight:800; color:var(--ac); margin-inline-end:4px;}
+  .ap-rl{background:none; border:none; cursor:pointer; font:inherit; color:var(--ai); padding:0 2px; border-bottom:1px dotted color-mix(in srgb, var(--ai) 55%, transparent);}
+  .ap-rel-sep{color:var(--muted); opacity:.5; margin:0 2px;}
   @keyframes fadeUp{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
   .wx{display:flex;gap:10px;margin:0 0 8px;}
   .wx-card{flex:1;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px 13px;}
@@ -962,19 +974,28 @@ function openGloss(k){
 document.addEventListener('click',e=>{const g=e.target.closest('.gl'); if(g){e.preventDefault(); openGloss(g.dataset.g);}});
 function openSheet(){document.getElementById('sheet').classList.add('show');document.getElementById('sheet-ov').classList.add('show');document.body.classList.add('noscroll');}
 // rich knowledge panel for a woven association term (composed card — not a flat chip)
+function assocImg(u){return 'https://commons.wikimedia.org/wiki/Special:FilePath/'+encodeURIComponent(u)+'?width=420';}
 function openAssoc(id){const a=ASSOC[id];if(!a)return;const cc=ACAT[a.cat]||['',''];
+  const photo=a.img?`<div class="ap-photo"><img src="${assocImg(a.img)}" alt="${a.en}" loading="lazy" onerror="this.closest('.ap-photo').remove()"><span class="ap-credit">Wikimedia Commons</span></div>`:'';
+  const primary=a.url?`<a class="ap-link" href="${a.url}" target="_blank" rel="noopener">למידע נוסף ↗</a>`:'';
+  const search=`<a class="ap-link sub" href="https://www.google.com/search?q=${encodeURIComponent(a.en+' Japan')}&tbm=isch" target="_blank" rel="noopener">תמונות ↗</a>`;
+  const rel=(a.rel&&a.rel.length&&a.rel.filter(r=>ASSOC[r]).length)
+    ? `<div class="ap-rel"><span class="ap-rel-h">קשור מהבית:</span> ${a.rel.filter(r=>ASSOC[r]).map(r=>`<button class="ap-rl" data-al="${r}">${ASSOC[r].he}</button>`).join('<span class="ap-rel-sep">·</span>')}</div>`
+    : '';
   document.getElementById('sheet-content').innerHTML=`<div class="ap" style="--ac:${cc[1]}">
     <button class="sh-close" onclick="closeDetail()" aria-label="סגור">×</button>
+    ${photo}
     <div class="ap-ic">${AIC[a.ic]||AIC.spark}</div>
     <div class="ap-kicker">מהבית ליפן · ${cc[0]}</div>
     <div class="ap-name">${a.he}</div>
     <div class="ap-en">${a.en}</div>
     <p class="ap-fact">${a.fact}</p>
-    <a class="ap-search" href="https://www.google.com/search?q=${encodeURIComponent(a.en+' Japan')}" target="_blank" rel="noopener">${I.gm} עוד על ${a.he}</a>
+    <div class="ap-links">${primary}${search}</div>
+    ${rel}
   </div>`;
   openSheet();
 }
-document.addEventListener('click',e=>{const a=e.target.closest('.al'); if(a){e.preventDefault(); openAssoc(a.dataset.al);}});
+document.addEventListener('click',e=>{const r=e.target.closest('.ap-rl'); if(r){e.preventDefault(); openAssoc(r.dataset.al); return;} const a=e.target.closest('.al'); if(a){e.preventDefault(); openAssoc(a.dataset.al);}});
 
 const hl=document.getElementById('hotellist');
 const TIER={budget:['תקציבי','#5f86a0'],value:['משתלם','#3f8a86'],mid:['ביניים','#5f8a4e'],upper:['ביניים-גבוה','#a98a4e'],high:['יוקרה','#a8402a']};
@@ -1120,12 +1141,12 @@ const AIC={
  makiroll:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="5.3" stroke-width="1.1"/><circle cx="12" cy="12" r="2.7" fill="currentColor" stroke="none"/></svg>'
 };
 const ASSOC={
- nintendo:{he:'נינטנדו',en:'Nintendo',cat:'game',ic:'gameboy',fact:"נוסדה בקיוטו ב-1889 — לא כחברת משחקים אלא כיצרנית קלפי 'האנאפודה'. רק כעבור עשורים עברה למשחקי וידאו."},
- playstation:{he:'פלייסטיישן',en:'PlayStation',cat:'game',ic:'psshapes',fact:"סוני השיקה את ה-PlayStation ביפן ב-1994, אחרי שיתוף פעולה שנכשל עם נינטנדו שדחף אותה לדרך עצמאית."},
- pokemon:{he:'פוקימון',en:'Pokémon',cat:'game',ic:'pokeball',fact:"נוצר על ידי סאטושי טאג'ירי ויצא ביפן ב-1996, בהשראת תחביב הילדות שלו — איסוף חרקים."},
- pacman:{he:'פאק-מן',en:'Pac-Man',cat:'game',ic:'pacman',fact:"עוצב ב-Namco ביפן ב-1980; השם בא מ'פאקו-פאקו', צליל פתיחת וסגירת הפה ביפנית."},
- mario:{he:'סופר מריו',en:'Super Mario',cat:'game',ic:'mushroom',fact:"נוצר על ידי שיגרו מיאמוטו מנינטנדו; מריו הופיע לראשונה במשחק Donkey Kong מ-1981."},
- sonic:{he:'סוניק',en:'Sonic',cat:'game',ic:'ring',fact:"הקיפוד של סגה נוצר ביפן ב-1991, והחליף עיצוב ארנב מוקדם כדי להתאים למשחק מהיר יותר."},
+ nintendo:{he:'נינטנדו',en:'Nintendo',cat:'game',ic:'gameboy',fact:"נוסדה בקיוטו ב-1889 — לא כחברת משחקים אלא כיצרנית קלפי 'הָנָפוּדָה' (花札). רק כעבור עשורים עברה למשחקי וידאו, וה-Game Boy שבתמונה (1989) הפך אותה לאימפריה.",img:'Game-Boy-FL.png',url:'https://he.wikipedia.org/wiki/נינטנדו',rel:['pokemon','mario','playstation']},
+ playstation:{he:'פלייסטיישן',en:'PlayStation',cat:'game',ic:'psshapes',fact:"סוני השיקה את ה-PlayStation ביפן ב-1994, אחרי שיתוף פעולה שנכשל עם נינטנדו שדחף אותה לדרך עצמאית. הקונסולה המקורית שבתמונה כבשה את הסלונים בעולם.",img:'PSX-Console-wController.png',url:'https://he.wikipedia.org/wiki/PlayStation',rel:['nintendo','sonic']},
+ pokemon:{he:'פוקימון',en:'Pokémon',cat:'game',ic:'pokeball',fact:"נוצר על ידי סָאטוֹשי טָאגִ'ירי ויצא ביפן ב-1996 על ה-Game Boy של נינטנדו, בהשראת תחביב הילדות שלו — איסוף חרקים. 'פוקימון' = קיצור של 'פוקֵטו מוֹנסוּטָא' (Pocket Monsters).",url:'https://he.wikipedia.org/wiki/פוקימון',rel:['nintendo','mario']},
+ pacman:{he:'פאק-מן',en:'Pac-Man',cat:'game',ic:'pacman',fact:"עוצב ב-Namco ביפן ב-1980; השם בא מ'פָּקוּ-פָּקוּ', צליל פתיחת וסגירת הפה ביפנית.",url:'https://he.wikipedia.org/wiki/פק-מן',rel:['nintendo','sonic']},
+ mario:{he:'סופר מריו',en:'Super Mario',cat:'game',ic:'mushroom',fact:"נוצר על ידי שִיגֵרוּ מִיָאמוֹטוֹ מנינטנדו; מריו הופיע לראשונה במשחק Donkey Kong מ-1981, ופרח על קונסולת ה-Famicom/NES שבתמונה.",img:'NES-Console-Set.png',url:'https://he.wikipedia.org/wiki/סופר_מריו',rel:['nintendo','pokemon']},
+ sonic:{he:'סוניק',en:'Sonic',cat:'game',ic:'ring',fact:"הקיפוד של סֵגָה נוצר ביפן ב-1991 ככוכב-הדגל של קונסולת ה-Mega Drive/Genesis שבתמונה, והחליף עיצוב ארנב מוקדם כדי להתאים למשחק מהיר יותר.",img:'Sega-Genesis-Mod1-Set.jpg',url:'https://he.wikipedia.org/wiki/סוניק_הקיפוד',rel:['playstation','mario']},
  tamagotchi:{he:"טמגוצ'י",en:'Tamagotchi',cat:'game',ic:'egg',fact:"חיית המחמד הווירטואלית של Bandai 'בקעה' ביפן ב-1996."},
  beyblade:{he:'בייבלייד',en:'Beyblade',cat:'game',ic:'toptop',fact:"סביבון הקרב הושק על ידי Takara היפנית ב-1999, בהשראת משחק הסביבונים המסורתי 'בייגומה'."},
  yugioh:{he:'יו-גי-הו!',en:'Yu-Gi-Oh!',cat:'game',ic:'ygcard',fact:"התחיל כמנגה יפנית ב-1996; משחק הקלפים צמח מתוך קשת עלילה אחת בסיפור."},
@@ -1136,10 +1157,10 @@ const ASSOC={
  onepiece:{he:'וואן פיס',en:'One Piece',cat:'game',ic:'strawhat',fact:"מנגת הפיראטים של אייצ'ירו אודה יצאה ביפן ב-1997 — סדרת המנגה הנמכרת בכל הזמנים."},
  hellokitty:{he:'הלו קיטי',en:'Hello Kitty',cat:'game',ic:'kittybow',fact:"עוצבה ב-Sanrio היפנית ב-1974. רשמית היא ילדה לונדונית בשם קיטי וייט — לא חתולה."},
  ghibli:{he:"אולפן ג'יבלי",en:'Studio Ghibli',cat:'game',ic:'film',fact:"'המסע המופלא' של ג'יבלי זכה באוסקר לאנימציה ב-2003 — הסרט המצויר-ביד והלא-אנגלי היחיד שזכה."},
- sushi:{he:'סושי',en:'Sushi',cat:'food',ic:'sushi',fact:"הניגירי (דג לחוץ ביד על אורז) הופיע כאוכל-רחוב מהיר בְּאֵדו, טוקיו של פעם, בתחילת המאה ה-19."},
+ sushi:{he:'סושי',en:'Sushi',cat:'food',ic:'sushi',fact:"הנִיגִ'ירי (דג לחוץ ביד על אורז) הופיע כאוכל-רחוב מהיר בְּאֵדו, טוקיו של פעם, בתחילת המאה ה-19.",img:'Sushi_platter.jpg',url:'https://he.wikipedia.org/wiki/סושי',rel:['wasabi','gari','caliroll','wagyu']},
  wagyu:{he:'וואגיו',en:'Wagyu Beef',cat:'food',ic:'steak',fact:"'וואגיו' פירושו פשוט 'בקר יפני'. הזנים המפורסמים, כמו בקר קובה, ידועים בשיוש העדין שנמס בפה — מהבשר היקר בעולם."},
  caliroll:{he:'רול הפוך / קליפורניה',en:'Inside-Out Roll',cat:'food',ic:'makiroll',fact:"הרול ההפוך נוצר בידי השף היפני הידקזו טוג'ו בוונקובר בשנות ה-70, כדי להסתיר את האצה מסועדים מערביים."},
- ramen:{he:'ראמן',en:'Ramen',cat:'food',ic:'ramen',fact:"שורשי האטריות סיניים, אך הראמן עוצב מחדש ביפן; הראמן המיידי הומצא שם בידי מומופוקו אנדו ב-1958."},
+ ramen:{he:'ראמן',en:'Ramen',cat:'food',ic:'ramen',fact:"שורשי האטריות סיניים, אך הראמן עוצב מחדש ביפן; הראמן המיידי הומצא שם בידי מוֹמוֹפוּקוּ אָנדוֹ ב-1958.",img:'Shoyu_ramen,_at_Kasukabe_Station_(2014.05.05)_1.jpg',url:'https://he.wikipedia.org/wiki/ראמן',rel:['miso','udon']},
  kikkoman:{he:'קיקומן (רוטב סויה)',en:'Soy Sauce',cat:'food',ic:'soy',fact:"קיקומן נוסדה ב-1917 כשמונה משפחות רוטב-סויה בעיירה נודה התאחדו — עם מתכונים מהמאה ה-17."},
  teriyaki:{he:'טריאקי',en:'Teriyaki',cat:'food',ic:'teri',fact:"טכניקת בישול יפנית מתקופת אֵדו; 'טֵרי' פירושו ברק/זיגוג ו'יאקי' פירושו צלוי."},
  wasabi:{he:'וואסאבי',en:'Wasabi',cat:'food',ic:'wasabi',fact:"הוואסאבי האמיתי הוא צמח יפני הגדל בנחלי הרים קרים; רוב ה'וואסאבי' בעולם הוא בעצם חזרת צבועה."},
@@ -1185,7 +1206,7 @@ const ASSOC={
  fuji:{he:'הר פוג\'י',en:'Mt. Fuji',cat:'culture',ic:'fuji',fact:"הר הגעש המקודש של יפן (3,776 מ'), אתר מורשת עולמית ונושא לאמנות ולעלייה-לרגל מזה מאות שנים."},
  godzilla:{he:'גודזילה',en:'Godzilla',cat:'culture',ic:'film',fact:"מפלצת הקולנוע הנודעת ביותר של יפן הופיעה ב-1954 כמשל לאימה הגרעינית. בסרטים היא מטילה הרס על טוקיו — ומגדל טוקיו הוא קורבן קבוע."},
  manekineko:{he:'חתול המזל',en:'Maneki-neko',cat:'culture',ic:'luckycat',fact:"החתול המנופף שמזמין מזל ולקוחות נולד באֵדו של המאה ה-19 — ומקדש גוטוקו-ג'י נחשב לאחד ממקומות הולדתו. היום הוא אייקון עולמי וגם אמוג'י."},
- sakura:{he:'פריחת הדובדבן',en:'Cherry Blossom',cat:'culture',ic:'sakura',fact:"הסאקורה האהובה על יפן מסמלת את יופיים החולף של החיים, ונחגגת במסורת ה'האנאמי' (צפייה בפריחה)."},
+ sakura:{he:'פריחת הדובדבן',en:'Cherry Blossom',cat:'culture',ic:'sakura',fact:"הסָאקוּרָה האהובה על יפן מסמלת את יופיים החולף של החיים, ונחגגת במסורת ה'הָאנָאמי' (花見, צפייה בפריחה).",img:'Cherry_blossoms_in_the_Tsutsujigaoka_Park.jpg',url:'https://he.wikipedia.org/wiki/פריחת_הדובדבן_ביפן',rel:['fuji','bonsai']},
  emoji:{he:'אמוג\'י',en:'Emoji',cat:'culture',ic:'emoji',fact:"הומצא בידי שיגטקה קוריטה ב-NTT DoCoMo היפנית ב-1999; 'אמוג'י' פירושו 'תו-תמונה' — ואין לו קשר ל'אֶמושן'."},
  karaoke:{he:'קריוקי',en:'Karaoke',cat:'culture',ic:'mic',fact:"פותח בידי דאיסוקה אינואה בקובה ב-1971; 'קַרַאוֹקֶה' פירושו 'תזמורת ריקה'."},
  origami:{he:'אוריגמי / עגורי נייר',en:'Origami',cat:'culture',ic:'origami',fact:"קיפול אלף עגורי נייר (סֵנבָּזורו) הוא מסורת יפנית שאמורה להגשים משאלה, קשורה לסאדאקו ססאקי מהירושימה."},
