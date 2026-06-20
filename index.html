@@ -264,6 +264,12 @@
   .tl-now{display:inline-block;margin-inline-start:7px;font-size:9px;background:var(--shu);color:#fff;padding:1px 7px;border-radius:8px;letter-spacing:.3px;font-weight:800;vertical-align:middle;}
   .df-route{display:inline-flex;align-items:center;gap:7px;margin:14px 0 2px;padding:9px 15px;border:1px solid var(--line);border-radius:9px;background:var(--card);color:var(--ai);font-size:12.5px;font-weight:700;text-decoration:none;}
   .df-route svg{width:16px;height:16px;}
+  .df-wx{margin-inline-start:auto;display:flex;align-items:center;gap:6px;padding:5px 9px;border:1px solid var(--line);border-radius:999px;background:var(--paper2);align-self:flex-start;}
+  .df-wx .wxsvg{width:26px;height:26px;flex:0 0 auto;}
+  .df-wx .dfw-t{font-size:12.5px;font-weight:800;color:var(--ink);line-height:1;}
+  .df-wx .dfw-t small{font-weight:600;color:var(--muted);}
+  .df-wx .dfw-p{display:flex;align-items:center;gap:2px;font-size:10.5px;font-weight:700;color:var(--ai);}
+  .df-wx .dfw-p svg{width:11px;height:11px;}
   .wx{display:flex;gap:10px;margin:0 0 8px;}
   .wx-card{flex:1;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px 13px;}
   .wx-card .wx-city{font-size:12px;color:var(--muted);font-weight:700;display:flex;align-items:center;gap:6px;}
@@ -795,6 +801,7 @@ function renderFocus(){
      <div class="df-head">
        <div class="df-seal"><span class="kj">${KJ[d.city]}</span><span class="no">${d.num}</span></div>
        <div class="df-titles"><div class="df-date">${d.date}</div><div class="df-title">${d.title}</div><div class="df-city">${CITYN[d.city]}</div></div>
+       ${dayWxBadge(curDay)}
      </div>
      <div class="timeline">${rows}</div>
      ${mapsRoute(d)}
@@ -947,28 +954,29 @@ function speakJa(t){try{if(!('speechSynthesis'in window))return;const u=new Spee
 const PHRASES=[['שלום / יום טוב','こんにちは','konnichiwa'],['תודה רבה','ありがとうございます','arigatō gozaimasu'],['סליחה / סליחה רגע','すみません','sumimasen'],['כן / לא','はい / いいえ','hai / iie'],['כמה זה עולה?','いくらですか','ikura desu ka'],['איפה התחנה?','駅はどこですか','eki wa doko desu ka'],['טעים מאוד!','おいしい','oishii'],['החשבון בבקשה','お会計お願いします','o-kaikei onegai shimasu'],['מים בבקשה','お水ください','o-mizu kudasai'],['מדברים אנגלית?','英語は話せますか','eigo wa hanasemasu ka'],['נעים מאוד','はじめまして','hajimemashite'],['בבקשה / קח','どうぞ','dōzo'],['להתראות','さようなら','sayōnara'],['עזרה!','助けて','tasukete']];
 (function(){const box=document.getElementById('phrBox');if(!box)return;const ic='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 8.5a4 4 0 0 1 0 7" stroke-linecap="round"/></svg>';box.innerHTML='<div class="phr">'+PHRASES.map(p=>`<div class="phr-row"><div class="phr-he">${p[0]}</div><div class="phr-mid"><div class="phr-jp">${p[1]}</div><div class="phr-ro">${p[2]}</div></div><button class="phr-say" data-jp="${attr(p[1])}" aria-label="השמע">${ic}</button></div>`).join('')+'</div>';box.querySelectorAll('.phr-say').forEach(b=>b.addEventListener('click',()=>speakJa(b.dataset.jp)));})();
 
+// shared: WMO weather-code → Hebrew label + low-weight inline Japanese SVG icons (日の丸 sun, kumo cloud, Hokusai-slant rain) — reused by current weather AND per-day forecast badges
+function wmoHe(c){if(c===0)return'בהיר';if(c<=2)return'בהיר חלקית';if(c===3)return'מעונן';if(c>=45&&c<=48)return'ערפילי';if(c>=51&&c<=67)return'גשום';if(c>=71&&c<=77)return'שלג';if(c>=80&&c<=82)return'ממטרים';if(c>=95)return'סופת רעמים';return'מעונן חלקית';}
+function wxIcon(c){const S=i=>`<svg class="wxsvg" viewBox="0 0 32 32" aria-hidden="true">${i}</svg>`;
+  const sun='<circle cx="16" cy="15" r="6.3" fill="#a8402a"/><g stroke="#a8402a" stroke-width="2" stroke-linecap="round"><path d="M16 3.2v3M16 24v3M3.2 15h3M25.8 15h3M7 6l2.1 2.1M22.9 21.9 25 24M25 6l-2.1 2.1M9.1 21.9 7 24"/></g>';
+  const cloud='<path d="M24 24H10.2A4.6 4.6 0 0 1 9.6 14.9 6.1 6.1 0 0 1 21.4 13.4 4.3 4.3 0 0 1 24 24Z" fill="#e7edf3" stroke="#21405e" stroke-width="1.5" stroke-linejoin="round"/>';
+  const sunSmall='<circle cx="11" cy="11" r="4.6" fill="#a8402a"/><g stroke="#a8402a" stroke-width="1.5" stroke-linecap="round"><path d="M11 3.4v1.8M4 11h1.8M5.2 5.2l1.3 1.3M16.8 5.2l-1.3 1.3"/></g>';
+  const rain='<g stroke="#21405e" stroke-width="1.7" stroke-linecap="round"><path d="M12 25.5l-1.6 3.4M17 25.5l-1.6 3.4M22 25.5l-1.6 3.4"/></g>';
+  const heavy='<g stroke="#21405e" stroke-width="1.8" stroke-linecap="round"><path d="M10.5 25.5l-1.6 3.4M15 25.5l-1.6 3.4M19.5 25.5l-1.6 3.4M24 25.5l-1.6 3.4"/></g>';
+  if(c===0)return S(sun);
+  if(c<=2)return S(sunSmall+cloud);
+  if(c===3)return S(cloud);
+  if(c>=45&&c<=48)return S(cloud+'<g stroke="#857a67" stroke-width="1.6" stroke-linecap="round"><path d="M8 26.5h12M10 29.3h11"/></g>');
+  if(c>=95)return S(cloud+'<path d="M16.5 24.5l-3.2 4.6h2.1l-1.1 3 4.2-5.1h-2.3z" fill="#a98a4e"/>');
+  if(c>=71&&c<=77)return S(cloud+'<g fill="#21405e"><circle cx="12" cy="27.5" r="1.4"/><circle cx="17" cy="29.2" r="1.4"/><circle cx="22" cy="27.5" r="1.4"/></g>');
+  if(c>=80&&c<=82)return S(cloud+heavy);
+  if(c>=51&&c<=67)return S(cloud+rain);
+  return S(sunSmall+cloud);}
+
 // live weather (Open-Meteo, no key) — refreshes on every open AND on resume (visibilitychange/pageshow); server-baked weather.json + local cache as offline fallbacks
 (function(){
   const wrap=document.getElementById('wxWrap'),strip=document.getElementById('wxStrip'),note=document.getElementById('wxNote');if(!strip)return;
   const KEY='jp_wx', MIN=10*60*1000, IVL=3*3600*1000; // MIN throttles rapid resumes; IVL keeps long-open sessions fresh
   const cities=[{n:'טוקיו',kj:'東',la:35.68,lo:139.69},{n:'קיוטו',kj:'京',la:35.01,lo:135.77}];
-  function wmoHe(c){if(c===0)return'בהיר';if(c<=2)return'בהיר חלקית';if(c===3)return'מעונן';if(c>=45&&c<=48)return'ערפילי';if(c>=51&&c<=67)return'גשום';if(c>=71&&c<=77)return'שלג';if(c>=80&&c<=82)return'ממטרים';if(c>=95)return'סופת רעמים';return'מעונן חלקית';}
-  // low-weight inline SVG weather icons — Japanese motifs (日の丸 sun, kumo cloud, Hokusai-slant rain)
-  function wxIcon(c){const S=i=>`<svg class="wxsvg" viewBox="0 0 32 32" aria-hidden="true">${i}</svg>`;
-    const sun='<circle cx="16" cy="15" r="6.3" fill="#a8402a"/><g stroke="#a8402a" stroke-width="2" stroke-linecap="round"><path d="M16 3.2v3M16 24v3M3.2 15h3M25.8 15h3M7 6l2.1 2.1M22.9 21.9 25 24M25 6l-2.1 2.1M9.1 21.9 7 24"/></g>';
-    const cloud='<path d="M24 24H10.2A4.6 4.6 0 0 1 9.6 14.9 6.1 6.1 0 0 1 21.4 13.4 4.3 4.3 0 0 1 24 24Z" fill="#e7edf3" stroke="#21405e" stroke-width="1.5" stroke-linejoin="round"/>';
-    const sunSmall='<circle cx="11" cy="11" r="4.6" fill="#a8402a"/><g stroke="#a8402a" stroke-width="1.5" stroke-linecap="round"><path d="M11 3.4v1.8M4 11h1.8M5.2 5.2l1.3 1.3M16.8 5.2l-1.3 1.3"/></g>';
-    const rain='<g stroke="#21405e" stroke-width="1.7" stroke-linecap="round"><path d="M12 25.5l-1.6 3.4M17 25.5l-1.6 3.4M22 25.5l-1.6 3.4"/></g>';
-    const heavy='<g stroke="#21405e" stroke-width="1.8" stroke-linecap="round"><path d="M10.5 25.5l-1.6 3.4M15 25.5l-1.6 3.4M19.5 25.5l-1.6 3.4M24 25.5l-1.6 3.4"/></g>';
-    if(c===0)return S(sun);
-    if(c<=2)return S(sunSmall+cloud);
-    if(c===3)return S(cloud);
-    if(c>=45&&c<=48)return S(cloud+'<g stroke="#857a67" stroke-width="1.6" stroke-linecap="round"><path d="M8 26.5h12M10 29.3h11"/></g>');
-    if(c>=95)return S(cloud+'<path d="M16.5 24.5l-3.2 4.6h2.1l-1.1 3 4.2-5.1h-2.3z" fill="#a98a4e"/>');
-    if(c>=71&&c<=77)return S(cloud+'<g fill="#21405e"><circle cx="12" cy="27.5" r="1.4"/><circle cx="17" cy="29.2" r="1.4"/><circle cx="22" cy="27.5" r="1.4"/></g>');
-    if(c>=80&&c<=82)return S(cloud+heavy);
-    if(c>=51&&c<=67)return S(cloud+rain);
-    return S(sunSmall+cloud);}
   const SUNSET='<svg class="wxset" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 18h17" stroke="#a98a4e" stroke-width="1.4" stroke-linecap="round"/><path d="M8 18a4 4 0 0 1 8 0Z" fill="#a8402a"/><g stroke="#a98a4e" stroke-width="1.2" stroke-linecap="round"><path d="M12 5.5v1.8M5.6 9l1.3 1.3M18.4 9l-1.3 1.3M3.8 14.5h1.5M18.7 14.5h1.5"/></g></svg>';
   function render(data){strip.innerHTML=data.map(d=>`<div class="wx-card"><div class="wx-city"><span class="wx-kj">${d.kj}</span> ${d.n}</div><div class="wx-main"><span class="wx-ico">${wxIcon(d.c)}</span><span class="wx-temp">${Math.round(d.t)}°</span></div><div class="wx-cond">${wmoHe(d.c)} · ${Math.round(d.mn)}°–${Math.round(d.mx)}°</div><div class="wx-sun">${SUNSET} שקיעה ${d.ss}</div></div>`).join('');wrap.style.display='block';}
   function fmt(ts){try{return new Date(ts).toLocaleTimeString('he-IL',{hour:'2-digit',minute:'2-digit'});}catch(_){return '';}}
@@ -995,6 +1003,43 @@ const PHRASES=[['שלום / יום טוב','こんにちは','konnichiwa'],['ת�
   document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')refresh(false);}); // resume / return-to-foreground
   window.addEventListener('pageshow',()=>refresh(false)); // incl. bfcache restore
   setInterval(()=>refresh(true), IVL); // long-open session
+})();
+
+/* ——— per-day expected-weather forecast (Open-Meteo daily) — each day shows its city's forecast for its date; refreshes on open+resume, baked + cached fallback ——— */
+const FCITY={tokyo:{la:35.68,lo:139.69},kyoto:{la:35.01,lo:135.77},nara:{la:34.685,lo:135.805}};
+const FCNAME={tokyo:'טוקיו',kyoto:'קיוטו',nara:'נארה'};
+let FC=null; // { tokyo:{'2026-06-22':{c,mx,mn,pp}}, kyoto:{...}, nara:{...} }
+function isoDate(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function dayFCkey(i){ if(i===5) return 'nara'; const c=days[i]&&days[i].city; return c==='kyoto'?'kyoto':'tokyo'; } // day 6 = Nara day-trip; end → Tokyo
+function dayForecast(i){ if(!FC) return null; const d=parseDayDate(days[i].date); if(!d) return null; const fc=FC[dayFCkey(i)]; return fc?(fc[isoDate(d)]||null):null; }
+function dayWxBadge(i){ const f=dayForecast(i); if(!f) return ''; const drop=(f.pp!=null&&f.pp>=20)?`<span class="dfw-p"><svg viewBox="0 0 24 24" fill="#21405e" aria-hidden="true"><path d="M12 3s6 7 6 11a6 6 0 0 1-12 0c0-4 6-11 6-11z"/></svg>${f.pp}%</span>`:''; return `<div class="df-wx" title="תחזית צפויה · ${FCNAME[dayFCkey(i)]}">${wxIcon(f.c)}<span class="dfw-t">${Math.round(f.mx)}°<small>/${Math.round(f.mn)}°</small></span>${drop}</div>`; }
+(function(){
+  const KEY='jp_fc', MIN=10*60*1000, IVL=3*3600*1000;
+  function range(){return [isoDate(parseDayDate(days[0].date)), isoDate(parseDayDate(days[days.length-1].date))];}
+  function readCache(){try{const o=JSON.parse(localStorage.getItem(KEY));return (o&&o.fc&&o.ts)?o:null;}catch(_){return null;}}
+  function apply(fc){FC=fc; if(typeof paintDays==='function') paintDays();}
+  async function fetchFresh(){
+    const [sd,ed]=range(); const keys=Object.keys(FCITY);
+    const res=await Promise.all(keys.map(k=>fetch(`https://api.open-meteo.com/v1/forecast?latitude=${FCITY[k].la}&longitude=${FCITY[k].lo}&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Asia%2FTokyo&start_date=${sd}&end_date=${ed}`).then(r=>r.json())));
+    const fc={}; keys.forEach((k,i)=>{const d=res[i].daily||{}; const m={}; (d.time||[]).forEach((t,j)=>{m[t]={c:d.weather_code?d.weather_code[j]:0,mx:d.temperature_2m_max[j],mn:d.temperature_2m_min[j],pp:d.precipitation_probability_max?d.precipitation_probability_max[j]:null};}); fc[k]=m;});
+    localStorage.setItem(KEY,JSON.stringify({ts:Date.now(),fc})); return fc;
+  }
+  async function fromBake(){const b=await fetch('weather.json?_='+Date.now(),{cache:'no-store'}).then(r=>r.json()); if(b&&b.forecast){localStorage.setItem(KEY,JSON.stringify({ts:b.ts,fc:b.forecast})); return b.forecast;} throw 0;}
+  let busy=false;
+  async function refresh(force){
+    if(busy)return; const c=readCache();
+    if(!force && c && (Date.now()-c.ts)<MIN){ if(!FC) apply(c.fc); return; } // throttle rapid resumes
+    busy=true;
+    try{
+      if(navigator.onLine!==false){try{apply(await fetchFresh());return;}catch(e){}} // every open/resume: fetch live when online
+      try{apply(await fromBake());return;}catch(_){} // live failed → server-baked weather.json forecast
+      if(c) apply(c.fc); // offline → last cached forecast
+    }finally{busy=false;}
+  }
+  refresh(true);
+  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')refresh(false);});
+  window.addEventListener('pageshow',()=>refresh(false));
+  setInterval(()=>refresh(true), IVL);
 })();
 </script>
 </body>
