@@ -28,7 +28,7 @@ jobs:
           function get(u){return new Promise((res,rej)=>{https.get(u,r=>{let d="";r.on("data",c=>d+=c);r.on("end",()=>{try{res(JSON.parse(d))}catch(e){rej(e)}});}).on("error",rej);});}
           const cur=[{n:"טוקיו",kj:"東",la:35.68,lo:139.69},{n:"קיוטו",kj:"京",la:35.01,lo:135.77}];
           const fcity={tokyo:{la:35.68,lo:139.69},kyoto:{la:35.01,lo:135.77},nara:{la:34.685,lo:135.805}};
-          const SD="2026-06-22", ED="2026-07-02";
+          const SD="2026-06-23", ED="2026-07-03";
           (async()=>{
             const data=[];
             for(const c of cur){
