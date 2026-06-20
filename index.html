@@ -337,6 +337,20 @@
   .ace-body.open{display:block;animation:fadeUp .25s ease both;}
   .ace-body .ace-en{font-size:10px;letter-spacing:.5px;color:var(--ac);font-weight:800;margin-bottom:3px;}
   .ace-body p{margin:0;font-size:12.5px;color:var(--ink2);line-height:1.5;}
+  /* inline woven association term (subtle, in the flow of the prose) */
+  .al{border:none; background:none; font:inherit; color:var(--ai); font-weight:700; cursor:pointer; padding:0 1px; border-bottom:1.5px dotted var(--kin); border-radius:0; line-height:inherit;}
+  .al:active{color:var(--shu);}
+  /* rich knowledge panel opened by a woven term */
+  .ap{position:relative; padding:24px 20px 20px; text-align:center;}
+  .ap .sh-close{position:absolute; top:12px; inset-inline-start:12px;}
+  .ap-ic{width:54px; height:54px; margin:0 auto 12px; color:var(--ac); display:grid; place-items:center; border-radius:16px; background:color-mix(in srgb, var(--ac) 10%, var(--card)); border:1px solid color-mix(in srgb, var(--ac) 30%, transparent);}
+  .ap-ic svg{width:32px; height:32px;}
+  .ap-kicker{font-size:10.5px; font-weight:800; letter-spacing:.6px; color:var(--ac); text-transform:uppercase;}
+  .ap-name{font-family:var(--serif); font-size:24px; font-weight:800; color:var(--ink); margin-top:4px; line-height:1.15;}
+  .ap-en{font-size:12px; letter-spacing:1px; color:var(--muted); margin-top:2px;}
+  .ap-fact{font-size:14.5px; line-height:1.65; color:var(--ink2); margin:16px auto 0; max-width:34ch; text-align:start;}
+  .ap-search{display:inline-flex; align-items:center; gap:6px; margin-top:18px; font-size:12.5px; font-weight:700; color:var(--ai); text-decoration:none; border:1px solid var(--line); border-radius:9px; padding:9px 15px; background:var(--paper2);}
+  .ap-search svg{width:15px; height:15px;}
   @keyframes fadeUp{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
   .wx{display:flex;gap:10px;margin:0 0 8px;}
   .wx-card{flex:1;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px 13px;}
@@ -586,10 +600,9 @@ const details={
   assoc:['samurai','ninja','karate','judo','jujitsu','aikido','sumo'],
   nearby:[["Tokyo Skytree","Tokyo Skytree"]]},
  "Akihabara Electric Town":{cat:'urban',
-  guide:"בירת האנימה, הגיימינג והאלקטרוניקה. בניינים שלמים, קומה על קומה, של צעצועים, משחקים וגאדג'טים. תיכנסו לחנות אקראית בת שבע קומות ותעלו עד למעלה — שם מסתתרים הדברים הכי מוזרים והכי כיפיים.",
-  know:["מכונות gachapon (צעצועי הפתעה) בכל פינה.","בתי קפה תמטיים — שווה הצצה."],
-  getting:"תחנת Akihabara (קו JR Yamanote).",
-  assoc:['nintendo','playstation','pokemon','pacman','mario','sonic','tamagotchi','beyblade','yugioh','transformers','powerrangers','dbz','naruto','onepiece','hellokitty']},
+  guide:"זוכרים את אחר הצהריים מול הקונסולה? כאן הוא נולד. אקיהברה היא בירת האנימה והגיימינג — בניינים שלמים, קומה על קומה, של משחקים, צעצועים וגאדג'טים — אבל היא גם הבית של הילדות שלכם. {{nintendo|נינטנדו}} התחילה דרכה ממש מכאן (אם כי דווקא ככרטיסי משחק), ה{{playstation|פלייסטיישן}} של סוני יצאה מיפן, ו{{pokemon|פוקימון}} נולד מתחביב ילדות של איסוף חרקים. תיכנסו לחנות אקראית בת שבע קומות, עלו עד הסוף — ובדרך, שימו לב, גם {{pacman|פאק-מן}} התחיל את חייו פה.",
+  know:["מכונות gachapon (צעצועי הפתעה) בכל פינה.","בתי קפה תמטיים — שווה הצצה.","הקישו על שם מודגש בטקסט כדי לגלות את הסיפור היפני שמאחוריו."],
+  getting:"תחנת Akihabara (קו JR Yamanote)."},
  "Takeshita Street Harajuku":{cat:'urban',
   guide:"הרחוב הזה הוא לב אופנת הרחוב והנעורים של טוקיו — צבעוני, רועש, מתוק. תטעמו קרפ ענק או צמר-גפן מתוק בגודל הראש, ותראו סגנונות לבוש שלא תראו בשום מקום אחר בעולם.",
   know:["צפוף מאוד בסופי שבוע — בואו מוקדם."],
@@ -645,9 +658,8 @@ const details={
   getting:"צמוד לתחנת Shinjuku, יציאה מערבית.",
   nearby:[["Golden Gai","Golden Gai Tokyo"]]},
  "Golden Gai Tokyo":{cat:'urban',
-  guide:"שישה סמטאות עם 200+ ברים זעירים, כל אחד בעיצוב משלו ולעיתים 5 מקומות בלבד — לב הבוהמה הלילי של טוקיו. אל תתביישו להיכנס; חלק מסבירי-פנים לזרים, אחרים 'לקבועים בלבד'.",
-  know:["חפשו שלט 'tourists welcome' / 'no cover charge'.","פתוח בעיקר אחרי 21:00."],
-  assoc:['beer','whisky','sake','karaoke','yakuza'],
+  guide:"שישה סמטאות, מאתיים ברים זעירים, כל אחד בגודל סלון ובאופי משלו — זה לב הבוהמה הלילי של טוקיו. שבו על שרפרף, הזמינו כוס {{whisky|ויסקי}} יפני (יפן מזקקת אותו מאז 1923, וזכתה עליו בפרסים עולמיים) או סאקה, ותנו לברמן לספר. ואם בא לכם להמשיך — מכאן זה צעד אחד ל{{karaoke|קריוקי}}, שגם הוא, אגב, המצאה יפנית. אל תתביישו להיכנס; חלק מהברים מסבירי-פנים לזרים, אחרים 'לקבועים בלבד'.",
+  know:["חפשו שלט 'tourists welcome' / 'no cover charge'.","פתוח בעיקר אחרי 21:00.","הקישו על שם מודגש בטקסט כדי לגלות את הסיפור היפני שמאחוריו."],
   nearby:[["Omoide Yokocho","Omoide Yokocho"]]},
  "Ginza Tokyo":{cat:'urban',
   guide:"רובע היוקרה של טוקיו — חנויות דגל, גלריות וסושי משובח. בסופי שבוע אחה\"צ הרחוב הראשי נסגר לרכב והופך למדרחוב.",
@@ -866,7 +878,9 @@ const GLOSS={
 };
 const GKEYS=Object.keys(GLOSS).sort((a,b)=>b.length-a.length);
 // render the niqqud (vocalized) form inline so Hebrew readers can pronounce the Japanese term; click opens the glossary
-function glossWrap(t){GKEYS.forEach(k=>{if(t.indexOf(k)>-1){const g=GLOSS[k];t=t.replace(k,`<button class="gl" data-g="${k}">${g.p||k}</button>`);}});return t;}
+// {{assocId|text}} in prose → a subtly-marked inline term that opens the rich association panel on tap (selective, woven by hand — never a dumped list)
+function weaveAssoc(t){return t.replace(/\{\{(\w+)\|([^}]+)\}\}/g,(m,id,txt)=>{const a=ASSOC[id];return a?`<button class="al" data-al="${id}">${txt}</button>`:txt;});}
+function glossWrap(t){GKEYS.forEach(k=>{if(t.indexOf(k)>-1){const g=GLOSS[k];t=t.replace(k,`<button class="gl" data-g="${k}">${g.p||k}</button>`);}});return weaveAssoc(t);}
 function dpick(date){const p=date.split('·');return p[1]?p[1].trim():'';}
 
 const vd=document.getElementById('view-days');
@@ -956,6 +970,21 @@ function openGloss(k){
   document.body.classList.add('noscroll');
 }
 document.addEventListener('click',e=>{const g=e.target.closest('.gl'); if(g){e.preventDefault(); openGloss(g.dataset.g);}});
+function openSheet(){document.getElementById('sheet').classList.add('show');document.getElementById('sheet-ov').classList.add('show');document.body.classList.add('noscroll');}
+// rich knowledge panel for a woven association term (composed card — not a flat chip)
+function openAssoc(id){const a=ASSOC[id];if(!a)return;const cc=ACAT[a.cat]||['',''];
+  document.getElementById('sheet-content').innerHTML=`<div class="ap" style="--ac:${cc[1]}">
+    <button class="sh-close" onclick="closeDetail()" aria-label="סגור">×</button>
+    <div class="ap-ic">${AIC[a.ic]||AIC.spark}</div>
+    <div class="ap-kicker">מהבית ליפן · ${cc[0]}</div>
+    <div class="ap-name">${a.he}</div>
+    <div class="ap-en">${a.en}</div>
+    <p class="ap-fact">${a.fact}</p>
+    <a class="ap-search" href="https://www.google.com/search?q=${encodeURIComponent(a.en+' Japan')}" target="_blank" rel="noopener">${I.gm} עוד על ${a.he}</a>
+  </div>`;
+  openSheet();
+}
+document.addEventListener('click',e=>{const a=e.target.closest('.al'); if(a){e.preventDefault(); openAssoc(a.dataset.al);}});
 
 const hl=document.getElementById('hotellist');
 const TIER={budget:['תקציבי','#5f86a0'],value:['משתלם','#3f8a86'],mid:['ביניים','#5f8a4e'],upper:['ביניים-גבוה','#a98a4e'],high:['יוקרה','#a8402a']};
@@ -1183,7 +1212,6 @@ function openDetail(name){
   if(f) h+=`<div class="sh-sec"><div class="facts">${f}</div></div>`;
   if(d.getting) h+=`<div class="sh-sec"><div class="sh-h">${I.train} איך מגיעים</div><div class="getbox">${glossWrap(d.getting)}</div></div>`;
   if(d.nearby&&d.nearby.length) h+=`<div class="sh-sec"><div class="sh-h">${I.mountain} קרוב לכאן — חלופות לבדוק</div><div class="nearby">${d.nearby.map(nbRow).join('')}</div></div>`;
-  h+=assocSection(d);
   h+=`<div class="sh-links"><a class="l-map" href="${mapsLink(name)}" target="_blank" rel="noopener">${I.gm} פתח במפות</a><a class="l-ta" href="${taLink(name)}" target="_blank" rel="noopener">${I.ta} פתח ב-Tripadvisor</a></div></div>`;
   document.getElementById('sheet-content').innerHTML=h;
   document.getElementById('sheet').classList.add('show');
@@ -1196,12 +1224,8 @@ function closeDetail(){
   document.body.classList.remove('noscroll');
 }
 document.addEventListener('click',e=>{const b=e.target.closest('.pin.cat'); if(b){e.preventDefault(); openDetail(b.dataset.place);}});
-// progressive disclosure for the "ידעת?" easter-eggs: toggle the section, then each association chip → its fact
+// optional "special event nearby" marker toggle
 document.addEventListener('click',e=>{
-  const head=e.target.closest('[data-assoctoggle]');
-  if(head){const aces=head.parentElement.querySelector('.aces'); aces.hidden=!aces.hidden; head.classList.toggle('open',!aces.hidden); return;}
-  const chip=e.target.closest('.ace');
-  if(chip){const body=chip.parentElement.querySelector('.ace-body'); const open=body.classList.toggle('open'); chip.classList.toggle('open',open); return;}
   const ev=e.target.closest('.ev-mark');
   if(ev){const p=ev.nextElementSibling; if(p&&p.classList.contains('ev-panel')){p.hidden=!p.hidden; ev.classList.toggle('open',!p.hidden);}}
 });
