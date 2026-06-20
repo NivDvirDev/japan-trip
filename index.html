@@ -126,8 +126,10 @@
   .df-city{font-family:var(--serif); font-size:12px; color:var(--c); letter-spacing:2px; margin-top:4px;}
   .timeline{position:relative;}
   .tl-row{display:flex; align-items:flex-start;}
-  .tl-when{flex:0 0 84px; font-size:12px; font-weight:700; color:var(--c); padding-top:7px; display:flex; align-items:center; gap:5px;}
-  .tl-when .ic{width:13px;height:13px; color:var(--c);}
+  .tl-when{flex:0 0 86px; padding-top:6px; display:flex; flex-direction:column; gap:1px; color:var(--c);}
+  .tl-when .ic{width:13px;height:13px; color:var(--c); vertical-align:-2px; margin-inline-end:3px;}
+  .tl-when .tl-time{font-size:14px; font-weight:800; letter-spacing:.3px; line-height:1.15; color:var(--c);}
+  .tl-when .tl-lab{font-size:11px; font-weight:700; color:var(--ink2); line-height:1.3;}
   .tl-when.eatw{color:#a8402a;} .tl-when.eatw .ic{color:#a8402a;}
   .tl-rail{flex:0 0 30px; align-self:stretch; position:relative;}
   .tl-rail::before{content:""; position:absolute; top:0; bottom:0; right:14px; width:2px; background:var(--line);}
@@ -641,11 +643,12 @@ const details={
 
 const days=[
  {num:1,city:'tokyo',date:"ג' · 23.6 · נחיתה ← שינג'וקו",title:"נחיתה והתמקמות · יום חלקי",
-  blocks:[["צהריים · נחיתה 14:00","נוחתים ב-14:00. רכבת לשינג'וקו (Narita Express ~75 דק' / מונורייל מהאנדה ~30 דק'), וצ'ק-אין במלון."],
-   ["בדרך","קנו Suica/Welcome Suica, והפעילו eSIM."],
-   ["ערב · קליל וקרוב למלון","בלי אטרקציות מתוזמנות היום. שינג'וקו ממש ליד המלון — Omoide Yokocho, ברים זעירים ב-Golden Gai, ניאון בקבוקיצ'ו, וראמן ראשון. אל תעמיסו, ג'ט לג.",["Ichiran Nishi-Shinjuku","Golden Gai Tokyo","Kabukicho"]]],
-  eat:"ראמן ב-Ichiran (חובה ברשימה שלכם!) או יאקיטורי ב-Omoide Yokocho.",
-  tip:"נחיתה ב-14:00 — היום הראשון חלקי וקליל, צמוד למלון. שנת לילה טובה = טיול מנצח."},
+  blocks:[["14:00 · נחיתה","הגלגלים נוגעים בקרקע. אחרי הדרכונים, עצרו רגע לפני שצוללים פנימה: במכונה הכתומה קונים Suica (כרטיס נטען שיפתח לכם כל שער בטוקיו), מפעילים את ה-eSIM, ומושכים אוויר יפני ראשון. שימו לב כמה שקט פה — גם בשדה תעופה, הקצב מנומס."],
+   ["15:30 · אל שינג'וקו","Narita Express חותך ישר ללב טוקיו (~75 דק'), נוף של פרברים ירוקים שהופכים לג'ונגל בטון. (נחתתם בהאנדה? המונורייל מהיר עוד יותר.) מניחים מזוודות במלון, מתקלחים — ולא ממהרים לשום מקום. יש ג'ט לג, וזה בסדר.",["Kimpton Shinjuku Tokyo"]],
+   ["18:30 · ראמן ראשון","הארוחה הראשונה ביפן צריכה להיות טקס. ב-Ichiran יושבים בתא אישי, מקבלים קערת ראמן טונקוצו דרך וילון קטן, וזהו — רק אתם והמרק. ממלאים פתק העדפות (חריפות, שומן, מרקם האטריות), והקערה חוזרת מותאמת בדיוק לכם. בול אחרי טיסה ארוכה.",["Ichiran Nishi-Shinjuku"]],
+   ["20:30 · לילה ראשון, בעדינות","סיבוב ערב קצר וצמוד למלון, רק כדי לטעום את העיר: סמטאות הניאון של קבוקיצ'ו, ואז Golden Gai — שש סמטאות עם מאתיים חורי-שתייה זעירים, כל בר בגודל סלון ובאופי משלו. כוסית אחת, חיוך, ולישון. מחר טוקיו מתחילה באמת.",["Golden Gai Tokyo","Kabukicho"]]],
+  eat:"הראמן של Ichiran (חובה ברשימה שלכם!) — או, אם בא לכם משהו על האש, יאקיטורי בסמטת Omoide Yokocho שמעבר לפינה.",
+  tip:"נחתם ב-14:00, אז בנינו לכם יום ראשון חלקי בכוונה. אל תילחמו בג'ט לג: ארוחה טובה, הליכה קצרה, ושינה מוקדמת — וקמים רעננים לקרב."},
  {num:2,city:'tokyo',date:"ד' · 24.6 · שיבויה והרג'וקו",title:"אורות, אופנה ושקיעה",
   blocks:[["בוקר","שיבויה — צומת ה-Scramble, הכלב האצ'יקו, וקניות (Hands, Loft, Pokémon Center).",["Shibuya Scramble Crossing","Hachiko Statue Shibuya"]],
    ["צהריים · אופנה","הרג'וקו — רחוב טאקשיטה הצבעוני, אומוטסאנדו, ומקדש מייג'י ביער. וינטג' יוקרה ב-AMORE.",["Takeshita Street Harajuku","Age.3 Q Harajuku","Meiji Shrine Tokyo"]],
@@ -864,13 +867,15 @@ function renderRail(){
      ${i===TRIP_TODAY?'<span class="drm-today">היום</span>':''}<span class="drm-seal"><span class="kj">${KJ[d.city]}</span><span class="no">${d.num}</span></span>
      <span class="drm-date">${dpick(d.date)}</span></button>`).join('')+'</div>';
 }
+// render a timeline "when" cell: if it leads with a clock time (14:00 · נחיתה) show the time as a schedule marker + sub-label
+function whenHTML(w){const m=w.match(/^(\d{1,2}:\d{2})\s*·?\s*(.*)$/);if(m){return `<span class="tl-time">${m[1]}</span>${m[2]?`<span class="tl-lab">${waterLabel(w)?I.wave:''}${m[2]}</span>`:''}`;}return `${waterLabel(w)?I.wave:''}<span class="tl-lab">${w}</span>`;}
 function renderFocus(){
   const d=days[curDay], c=C[d.city];
   const isToday=curDay===TRIP_TODAY, ph=isToday?nowPhase():null; let marked=false;
   let rows=d.blocks.map(b=>{
     const isNow=isToday&&!marked&&ph&&blockPhase(b[0])===ph; if(isNow)marked=true;
     return `<div class="tl-row${isNow?' now':''}">
-     <div class="tl-when">${waterLabel(b[0])?I.wave:''}${b[0]}${isNow?'<span class="tl-now">עכשיו</span>':''}</div>
+     <div class="tl-when">${whenHTML(b[0])}${isNow?'<span class="tl-now">עכשיו</span>':''}</div>
      <div class="tl-rail"><span class="tl-dot" style="--c:${c}"></span></div>
      <div class="tl-what">${glossWrap(b[1])}${placeLinks(b[2])}</div></div>`;
   }).join('');
