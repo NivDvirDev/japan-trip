@@ -292,6 +292,28 @@
   .scard-price small{font-weight:600;color:var(--muted);font-size:10.5px;}
   .scard-link{font-size:11px;font-weight:700;color:var(--shu);display:flex;align-items:center;gap:4px;white-space:nowrap;}
   .scard-link svg{width:14px;height:14px;}
+  /* "ידעת?" easter-eggs (progressive disclosure) */
+  .assoc-sec{margin-top:4px;}
+  .assoc-head{display:flex;align-items:center;gap:8px;width:100%;background:var(--paper2);border:1px solid var(--line);border-radius:9px;padding:10px 12px;cursor:pointer;font:inherit;color:var(--ink);}
+  .assoc-head .ah-l{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:800;}
+  .assoc-head .ah-l svg{width:15px;height:15px;color:var(--kin);flex:0 0 auto;}
+  .assoc-head .ah-c{margin-inline-start:auto;background:var(--shu);color:#fff;font-size:11px;font-weight:800;border-radius:999px;padding:1px 8px;}
+  .assoc-head .ah-chev{transition:transform .25s;color:var(--muted);font-size:11px;}
+  .assoc-head.open .ah-chev{transform:rotate(180deg);}
+  .aces{display:flex;flex-wrap:wrap;gap:8px;margin-top:9px;}
+  .ace-wrap{display:contents;}
+  .ace{display:inline-flex;align-items:center;gap:7px;padding:7px 11px;border:1px solid var(--line);border-radius:999px;background:var(--card);cursor:pointer;font:inherit;color:var(--ink);}
+  .ace-ic{width:20px;height:20px;color:var(--ac);display:inline-flex;flex:0 0 auto;}
+  .ace-ic svg{width:20px;height:20px;display:block;}
+  .ace-nm{font-size:12.5px;font-weight:700;}
+  .ace-chev{font-size:9px;color:var(--muted);transition:transform .2s;}
+  .ace.open{border-color:var(--ac);background:var(--paper2);}
+  .ace.open .ace-chev{transform:rotate(90deg);}
+  .ace-body{display:none;width:100%;margin:-2px 0 2px;background:var(--card);border:1px solid var(--line);border-inline-start:3px solid var(--ac);border-radius:9px;padding:10px 12px;}
+  .ace-body.open{display:block;animation:fadeUp .25s ease both;}
+  .ace-body .ace-en{font-size:10px;letter-spacing:.5px;color:var(--ac);font-weight:800;margin-bottom:3px;}
+  .ace-body p{margin:0;font-size:12.5px;color:var(--ink2);line-height:1.5;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
   .wx{display:flex;gap:10px;margin:0 0 8px;}
   .wx-card{flex:1;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px 13px;}
   .wx-card .wx-city{font-size:12px;color:var(--muted);font-weight:700;display:flex;align-items:center;gap:6px;}
@@ -531,7 +553,8 @@ const details={
  "Akihabara Electric Town":{cat:'urban',
   guide:"בירת האנימה, הגיימינג והאלקטרוניקה. בניינים שלמים, קומה על קומה, של צעצועים, משחקים וגאדג'טים. תיכנסו לחנות אקראית בת שבע קומות ותעלו עד למעלה — שם מסתתרים הדברים הכי מוזרים והכי כיפיים.",
   know:["מכונות gachapon (צעצועי הפתעה) בכל פינה.","בתי קפה תמטיים — שווה הצצה."],
-  getting:"תחנת Akihabara (קו JR Yamanote)."},
+  getting:"תחנת Akihabara (קו JR Yamanote).",
+  assoc:['nintendo','playstation','pokemon','pacman','mario','sonic','tamagotchi','beyblade','yugioh','transformers','powerrangers','dbz','naruto','onepiece','hellokitty']},
  "Takeshita Street Harajuku":{cat:'urban',
   guide:"הרחוב הזה הוא לב אופנת הרחוב והנעורים של טוקיו — צבעוני, רועש, מתוק. תטעמו קרפ ענק או צמר-גפן מתוק בגודל הראש, ותראו סגנונות לבוש שלא תראו בשום מקום אחר בעולם.",
   know:["צפוף מאוד בסופי שבוע — בואו מוקדם."],
@@ -945,6 +968,45 @@ function nbRow(n){return `<div class="nb"><span class="nb-nm">${n[0]}</span>`+
   `<a class="pin map" href="${mapsLink(n[1])}" target="_blank" rel="noopener" aria-label="מפה">${I.gm}</a>`+
   `<a class="pin ta" href="${taLink(n[1])}" target="_blank" rel="noopener" aria-label="Tripadvisor">${I.ta}</a></div>`;}
 
+/* ——— "ידעת? קשרים מהבית" — progressive-disclosure pop-culture easter-eggs (web-verified). Original stylized SVG cues, no copyrighted logos. ——— */
+const ACAT={game:['גיימינג ואנימה','#7a4ea8'],brand:['מותגים וטכנולוגיה','#21405e'],food:['אוכל ומשקאות','#a8402a'],martial:['לחימה וסמוראים','#4a4338'],culture:['תרבות ונופים','#2f6a5f']};
+const AIC={
+ spark:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.7 6.8L20 11l-6.3 1.5L12 20l-1.7-7.5L4 11l6.3-2.2z"/></svg>',
+ controller:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M8 8.5h8a4.2 4.2 0 0 1 4.1 3.3l.7 3.7a2.2 2.2 0 0 1-3.9 1.8L15 15H9l-1.9 2.3a2.2 2.2 0 0 1-3.9-1.8l.7-3.7A4.2 4.2 0 0 1 8 8.5Z"/><path d="M6.4 11.3v2.3M5.3 12.5h2.3" stroke-linecap="round"/><circle cx="16.3" cy="11.8" r="1" fill="currentColor" stroke="none"/><circle cx="18" cy="13.5" r="1" fill="currentColor" stroke="none"/></svg>',
+ pokeball:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="8.3"/><path d="M3.7 12h5.1M15.2 12h5.1" stroke-linecap="round"/><circle cx="12" cy="12" r="2.5"/></svg>',
+ pacman:'<svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 12 19 8.2A8 8 0 1 0 19 15.8Z"/><circle cx="20.4" cy="12" r="1.1"/></svg>',
+ mushroom:'<svg viewBox="0 0 24 24"><path d="M4.5 12a7.5 7.5 0 0 1 15 0Z" fill="currentColor"/><path d="M9 12v4.5a3 3 0 0 0 6 0V12" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="9.5" cy="9.2" r="1.15" fill="#efe8d8"/><circle cx="14.5" cy="9.2" r="1.15" fill="#efe8d8"/></svg>',
+ speed:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 9h9M3 12.5h7M5 16h8"/><path d="M14 6.5l4 5.5-4 5.5"/></svg>',
+ egg:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3.5c3.6 0 6 4.2 6 8.2a6 6 0 0 1-12 0c0-4 2.4-8.2 6-8.2Z"/><rect x="9.3" y="9.6" width="5.4" height="4" rx="1"/><circle cx="8.2" cy="17" r=".8" fill="currentColor" stroke="none"/><circle cx="12" cy="18" r=".8" fill="currentColor" stroke="none"/><circle cx="15.8" cy="17" r=".8" fill="currentColor" stroke="none"/></svg>',
+ spin:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M7 8.5h10l-2.2 4-2.8 4.5-2.8-4.5z" fill="currentColor" stroke="none"/><path d="M5.5 7c1.6 1.1 11.4 1.1 13 0" stroke-linecap="round"/></svg>',
+ card:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="5" width="8" height="12" rx="1.6" transform="rotate(-9 9 11)"/><rect x="10" y="6.5" width="8" height="12" rx="1.6" transform="rotate(8 14 12.5)"/></svg>',
+ robot:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="6" y="7.5" width="12" height="9.5" rx="2"/><path d="M9 4.5v3M15 4.5v3" stroke-linecap="round"/><rect x="8.8" y="10.3" width="2.6" height="2.6" rx=".5" fill="currentColor" stroke="none"/><rect x="12.6" y="10.3" width="2.6" height="2.6" rx=".5" fill="currentColor" stroke="none"/><path d="M9.5 14.6h5" stroke-linecap="round"/></svg>',
+ star7:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="8"/><path d="M12 8l.9 1.9 2.1.2-1.6 1.4.5 2-1.9-1-1.9 1 .5-2-1.6-1.4 2.1-.2z" fill="currentColor" stroke="none"/></svg>',
+ ninja:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="8.3"/><path d="M4.2 10.6h15.6" stroke-width="3.1"/><circle cx="9.4" cy="13.6" r="1" fill="currentColor" stroke="none"/><circle cx="14.6" cy="13.6" r="1" fill="currentColor" stroke="none"/></svg>',
+ pirate:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3a7 7 0 0 0-7 7c0 2.5 1.4 4.1 3 5v2.3A1.6 1.6 0 0 0 12.6 18h-1.2A1.6 1.6 0 0 0 13 18v-2.3"/><path d="M12 3a7 7 0 0 1 7 7c0 2.5-1.4 4.1-3 5v2.3A1.6 1.6 0 0 1 12.4 19h.2A1.6 1.6 0 0 0 11 17.4"/><circle cx="9.4" cy="10.4" r="1.7" fill="#efe8d8"/><circle cx="14.6" cy="10.4" r="1.7" fill="#efe8d8"/><path d="M11.1 13.6h1.8v2.2h-1.8z" fill="#efe8d8"/></svg>',
+ catface:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M6.2 9 4.6 5.4 8.4 7.6M17.8 9l1.6-3.6-3.8 2.2"/><path d="M5.6 12.2a6.4 5.6 0 0 1 12.8 0 6 5.6 0 0 1-12.8 0Z"/><circle cx="9.6" cy="12.2" r=".9" fill="currentColor" stroke="none"/><circle cx="14.4" cy="12.2" r=".9" fill="currentColor" stroke="none"/><path d="M11.1 14.4h1.8" stroke-linecap="round"/></svg>',
+ film:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="6" width="16" height="12" rx="2"/><path d="M8 6v12M16 6v12M4 10h4M4 14h4M16 10h4M16 14h4"/></svg>'
+};
+const ASSOC={
+ nintendo:{he:'נינטנדו',en:'Nintendo',cat:'game',ic:'controller',fact:"נוסדה בקיוטו ב-1889 — לא כחברת משחקים אלא כיצרנית קלפי 'האנאפודה'. רק כעבור עשורים עברה למשחקי וידאו."},
+ playstation:{he:'פלייסטיישן',en:'PlayStation',cat:'game',ic:'controller',fact:"סוני השיקה את ה-PlayStation ביפן ב-1994, אחרי שיתוף פעולה שנכשל עם נינטנדו שדחף אותה לדרך עצמאית."},
+ pokemon:{he:'פוקימון',en:'Pokémon',cat:'game',ic:'pokeball',fact:"נוצר על ידי סאטושי טאג'ירי ויצא ביפן ב-1996, בהשראת תחביב הילדות שלו — איסוף חרקים."},
+ pacman:{he:'פאק-מן',en:'Pac-Man',cat:'game',ic:'pacman',fact:"עוצב ב-Namco ביפן ב-1980; השם בא מ'פאקו-פאקו', צליל פתיחת וסגירת הפה ביפנית."},
+ mario:{he:'סופר מריו',en:'Super Mario',cat:'game',ic:'mushroom',fact:"נוצר על ידי שיגרו מיאמוטו מנינטנדו; מריו הופיע לראשונה במשחק Donkey Kong מ-1981."},
+ sonic:{he:'סוניק',en:'Sonic',cat:'game',ic:'speed',fact:"הקיפוד של סגה נוצר ביפן ב-1991, והחליף עיצוב ארנב מוקדם כדי להתאים למשחק מהיר יותר."},
+ tamagotchi:{he:"טמגוצ'י",en:'Tamagotchi',cat:'game',ic:'egg',fact:"חיית המחמד הווירטואלית של Bandai 'בקעה' ביפן ב-1996."},
+ beyblade:{he:'בייבלייד',en:'Beyblade',cat:'game',ic:'spin',fact:"סביבון הקרב הושק על ידי Takara היפנית ב-1999, בהשראת משחק הסביבונים המסורתי 'בייגומה'."},
+ yugioh:{he:'יו-גי-הו!',en:'Yu-Gi-Oh!',cat:'game',ic:'card',fact:"התחיל כמנגה יפנית ב-1996; משחק הקלפים צמח מתוך קשת עלילה אחת בסיפור."},
+ transformers:{he:'טרנספורמרס',en:'Transformers',cat:'game',ic:'robot',fact:"נבנו מצעצועי Takara יפניים; Hasbro מיתגה אותם מחדש כ-Transformers ב-1984."},
+ powerrangers:{he:"פאוור ריינג'רס",en:'Power Rangers',cat:'game',ic:'robot',fact:"עיבוד אמריקאי מ-1993 לסדרת 'סופר סנטאי' היפנית, עם קטעי קרב מתוך Zyuranger של Toei."},
+ dbz:{he:'דרגון בול Z',en:'Dragon Ball Z',cat:'game',ic:'star7',fact:"מבוסס על המנגה של אקירה טוריאמה משנת 1984, בהשראה רופפת מהסיפור הסיני 'המסע למערב'."},
+ naruto:{he:'נארוטו',en:'Naruto',cat:'game',ic:'ninja',fact:"מנגת הנינג'ה של מסאשי קישימוטו החלה ב-Shonen Jump היפני ב-1999."},
+ onepiece:{he:'וואן פיס',en:'One Piece',cat:'game',ic:'pirate',fact:"מנגת הפיראטים של אייצ'ירו אודה יצאה ביפן ב-1997 — סדרת המנגה הנמכרת בכל הזמנים."},
+ hellokitty:{he:'הלו קיטי',en:'Hello Kitty',cat:'game',ic:'catface',fact:"עוצבה ב-Sanrio היפנית ב-1974. רשמית היא ילדה לונדונית בשם קיטי וייט — לא חתולה."},
+ ghibli:{he:"אולפן ג'יבלי",en:'Studio Ghibli',cat:'game',ic:'film',fact:"'המסע המופלא' של ג'יבלי זכה באוסקר לאנימציה ב-2003 — הסרט המצויר-ביד והלא-אנגלי היחיד שזכה."}
+};
+function aceChip(id){const a=ASSOC[id];if(!a)return '';const cc=ACAT[a.cat]||['',''];return `<div class="ace-wrap"><button class="ace" data-ace="${id}" style="--ac:${cc[1]}"><span class="ace-ic">${AIC[a.ic]||AIC.spark}</span><span class="ace-nm">${a.he}</span><span class="ace-chev">▸</span></button><div class="ace-body"><div class="ace-en">${a.en} · ${cc[0]}</div><p>${a.fact}</p></div></div>`;}
+function assocSection(d){if(!d.assoc||!d.assoc.length)return '';return `<div class="sh-sec assoc-sec"><button class="assoc-head" data-assoctoggle><span class="ah-l">${AIC.spark} ידעת? · קשרים מהבית</span><span class="ah-c">${d.assoc.length}</span><span class="ah-chev">▾</span></button><div class="aces" hidden>${d.assoc.map(aceChip).join('')}</div></div>`;}
 function openDetail(name){
   const d=details[name]; if(!d) return;
   const m=catMeta[d.cat];
@@ -959,6 +1021,7 @@ function openDetail(name){
   if(f) h+=`<div class="sh-sec"><div class="facts">${f}</div></div>`;
   if(d.getting) h+=`<div class="sh-sec"><div class="sh-h">${I.train} איך מגיעים</div><div class="getbox">${glossWrap(d.getting)}</div></div>`;
   if(d.nearby&&d.nearby.length) h+=`<div class="sh-sec"><div class="sh-h">${I.mountain} קרוב לכאן — חלופות לבדוק</div><div class="nearby">${d.nearby.map(nbRow).join('')}</div></div>`;
+  h+=assocSection(d);
   h+=`<div class="sh-links"><a class="l-map" href="${mapsLink(name)}" target="_blank" rel="noopener">${I.gm} פתח במפות</a><a class="l-ta" href="${taLink(name)}" target="_blank" rel="noopener">${I.ta} פתח ב-Tripadvisor</a></div></div>`;
   document.getElementById('sheet-content').innerHTML=h;
   document.getElementById('sheet').classList.add('show');
@@ -971,6 +1034,13 @@ function closeDetail(){
   document.body.classList.remove('noscroll');
 }
 document.addEventListener('click',e=>{const b=e.target.closest('.pin.cat'); if(b){e.preventDefault(); openDetail(b.dataset.place);}});
+// progressive disclosure for the "ידעת?" easter-eggs: toggle the section, then each association chip → its fact
+document.addEventListener('click',e=>{
+  const head=e.target.closest('[data-assoctoggle]');
+  if(head){const aces=head.parentElement.querySelector('.aces'); aces.hidden=!aces.hidden; head.classList.toggle('open',!aces.hidden); return;}
+  const chip=e.target.closest('.ace');
+  if(chip){const body=chip.parentElement.querySelector('.ace-body'); const open=body.classList.toggle('open'); chip.classList.toggle('open',open);}
+});
 
 const tabDefs=[['intro','מבוא','Welcome'],['days','המסלול','Itinerary'],['stay','לינה','Stays'],['book','להזמין','Book'],['info','מידע','Info']];
 const views=['intro','days','stay','book','info'];
