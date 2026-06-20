@@ -268,9 +268,13 @@
   .wx-card{flex:1;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px 13px;}
   .wx-card .wx-city{font-size:12px;color:var(--muted);font-weight:700;display:flex;align-items:center;gap:6px;}
   .wx-card .wx-kj{font-family:var(--serif);color:var(--shu);font-size:14px;}
-  .wx-card .wx-temp{font-size:23px;font-weight:800;color:var(--ink);margin-top:5px;}
-  .wx-card .wx-cond{font-size:12px;color:var(--ink2);margin-top:1px;}
-  .wx-card .wx-sun{font-size:11px;color:var(--kin);margin-top:6px;}
+  .wx-card .wx-main{display:flex;align-items:center;gap:7px;margin-top:5px;}
+  .wx-card .wx-ico{flex:0 0 auto;line-height:0;}
+  .wx-card .wx-ico .wxsvg{width:32px;height:32px;display:block;}
+  .wx-card .wx-temp{font-size:23px;font-weight:800;color:var(--ink);}
+  .wx-card .wx-cond{font-size:12px;color:var(--ink2);margin-top:2px;}
+  .wx-card .wx-sun{font-size:11px;color:var(--kin);margin-top:6px;display:flex;align-items:center;gap:5px;}
+  .wx-card .wx-sun .wxset{width:15px;height:15px;flex:0 0 auto;}
   .wx-note{font-size:10.5px;color:var(--muted);margin:0 2px 16px;}
   .cur-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:2px;}
   .cur-chip{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:9px 13px;font-size:13px;color:var(--ink2);}
@@ -943,13 +947,30 @@ function speakJa(t){try{if(!('speechSynthesis'in window))return;const u=new Spee
 const PHRASES=[['שלום / יום טוב','こんにちは','konnichiwa'],['תודה רבה','ありがとうございます','arigatō gozaimasu'],['סליחה / סליחה רגע','すみません','sumimasen'],['כן / לא','はい / いいえ','hai / iie'],['כמה זה עולה?','いくらですか','ikura desu ka'],['איפה התחנה?','駅はどこですか','eki wa doko desu ka'],['טעים מאוד!','おいしい','oishii'],['החשבון בבקשה','お会計お願いします','o-kaikei onegai shimasu'],['מים בבקשה','お水ください','o-mizu kudasai'],['מדברים אנגלית?','英語は話せますか','eigo wa hanasemasu ka'],['נעים מאוד','はじめまして','hajimemashite'],['בבקשה / קח','どうぞ','dōzo'],['להתראות','さようなら','sayōnara'],['עזרה!','助けて','tasukete']];
 (function(){const box=document.getElementById('phrBox');if(!box)return;const ic='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 8.5a4 4 0 0 1 0 7" stroke-linecap="round"/></svg>';box.innerHTML='<div class="phr">'+PHRASES.map(p=>`<div class="phr-row"><div class="phr-he">${p[0]}</div><div class="phr-mid"><div class="phr-jp">${p[1]}</div><div class="phr-ro">${p[2]}</div></div><button class="phr-say" data-jp="${attr(p[1])}" aria-label="השמע">${ic}</button></div>`).join('')+'</div>';box.querySelectorAll('.phr-say').forEach(b=>b.addEventListener('click',()=>speakJa(b.dataset.jp)));})();
 
-// live weather + sunset (Open-Meteo, no key) — time-based refresh up to ~2×/day on open + every 12h while open; cached & offline-safe
+// live weather (Open-Meteo, no key) — refreshes on every open AND on resume (visibilitychange/pageshow); server-baked weather.json + local cache as offline fallbacks
 (function(){
   const wrap=document.getElementById('wxWrap'),strip=document.getElementById('wxStrip'),note=document.getElementById('wxNote');if(!strip)return;
-  const KEY='jp_wx', MAXAGE=12*3600*1000;
+  const KEY='jp_wx', MIN=10*60*1000, IVL=3*3600*1000; // MIN throttles rapid resumes; IVL keeps long-open sessions fresh
   const cities=[{n:'טוקיו',kj:'東',la:35.68,lo:139.69},{n:'קיוטו',kj:'京',la:35.01,lo:135.77}];
   function wmoHe(c){if(c===0)return'בהיר';if(c<=2)return'בהיר חלקית';if(c===3)return'מעונן';if(c>=45&&c<=48)return'ערפילי';if(c>=51&&c<=67)return'גשום';if(c>=71&&c<=77)return'שלג';if(c>=80&&c<=82)return'ממטרים';if(c>=95)return'סופת רעמים';return'מעונן חלקית';}
-  function render(data){strip.innerHTML=data.map(d=>`<div class="wx-card"><div class="wx-city"><span class="wx-kj">${d.kj}</span> ${d.n}</div><div class="wx-temp">${Math.round(d.t)}°</div><div class="wx-cond">${wmoHe(d.c)} · ${Math.round(d.mn)}°–${Math.round(d.mx)}°</div><div class="wx-sun">${I.spark} שקיעה ${d.ss}</div></div>`).join('');wrap.style.display='block';}
+  // low-weight inline SVG weather icons — Japanese motifs (日の丸 sun, kumo cloud, Hokusai-slant rain)
+  function wxIcon(c){const S=i=>`<svg class="wxsvg" viewBox="0 0 32 32" aria-hidden="true">${i}</svg>`;
+    const sun='<circle cx="16" cy="15" r="6.3" fill="#a8402a"/><g stroke="#a8402a" stroke-width="2" stroke-linecap="round"><path d="M16 3.2v3M16 24v3M3.2 15h3M25.8 15h3M7 6l2.1 2.1M22.9 21.9 25 24M25 6l-2.1 2.1M9.1 21.9 7 24"/></g>';
+    const cloud='<path d="M24 24H10.2A4.6 4.6 0 0 1 9.6 14.9 6.1 6.1 0 0 1 21.4 13.4 4.3 4.3 0 0 1 24 24Z" fill="#e7edf3" stroke="#21405e" stroke-width="1.5" stroke-linejoin="round"/>';
+    const sunSmall='<circle cx="11" cy="11" r="4.6" fill="#a8402a"/><g stroke="#a8402a" stroke-width="1.5" stroke-linecap="round"><path d="M11 3.4v1.8M4 11h1.8M5.2 5.2l1.3 1.3M16.8 5.2l-1.3 1.3"/></g>';
+    const rain='<g stroke="#21405e" stroke-width="1.7" stroke-linecap="round"><path d="M12 25.5l-1.6 3.4M17 25.5l-1.6 3.4M22 25.5l-1.6 3.4"/></g>';
+    const heavy='<g stroke="#21405e" stroke-width="1.8" stroke-linecap="round"><path d="M10.5 25.5l-1.6 3.4M15 25.5l-1.6 3.4M19.5 25.5l-1.6 3.4M24 25.5l-1.6 3.4"/></g>';
+    if(c===0)return S(sun);
+    if(c<=2)return S(sunSmall+cloud);
+    if(c===3)return S(cloud);
+    if(c>=45&&c<=48)return S(cloud+'<g stroke="#857a67" stroke-width="1.6" stroke-linecap="round"><path d="M8 26.5h12M10 29.3h11"/></g>');
+    if(c>=95)return S(cloud+'<path d="M16.5 24.5l-3.2 4.6h2.1l-1.1 3 4.2-5.1h-2.3z" fill="#a98a4e"/>');
+    if(c>=71&&c<=77)return S(cloud+'<g fill="#21405e"><circle cx="12" cy="27.5" r="1.4"/><circle cx="17" cy="29.2" r="1.4"/><circle cx="22" cy="27.5" r="1.4"/></g>');
+    if(c>=80&&c<=82)return S(cloud+heavy);
+    if(c>=51&&c<=67)return S(cloud+rain);
+    return S(sunSmall+cloud);}
+  const SUNSET='<svg class="wxset" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 18h17" stroke="#a98a4e" stroke-width="1.4" stroke-linecap="round"/><path d="M8 18a4 4 0 0 1 8 0Z" fill="#a8402a"/><g stroke="#a98a4e" stroke-width="1.2" stroke-linecap="round"><path d="M12 5.5v1.8M5.6 9l1.3 1.3M18.4 9l-1.3 1.3M3.8 14.5h1.5M18.7 14.5h1.5"/></g></svg>';
+  function render(data){strip.innerHTML=data.map(d=>`<div class="wx-card"><div class="wx-city"><span class="wx-kj">${d.kj}</span> ${d.n}</div><div class="wx-main"><span class="wx-ico">${wxIcon(d.c)}</span><span class="wx-temp">${Math.round(d.t)}°</span></div><div class="wx-cond">${wmoHe(d.c)} · ${Math.round(d.mn)}°–${Math.round(d.mx)}°</div><div class="wx-sun">${SUNSET} שקיעה ${d.ss}</div></div>`).join('');wrap.style.display='block';}
   function fmt(ts){try{return new Date(ts).toLocaleTimeString('he-IL',{hour:'2-digit',minute:'2-digit'});}catch(_){return '';}}
   function show(o,stale){render(o.data);note.textContent=(stale?'מצב לא מקוון · ':'')+'עודכן '+fmt(o.ts);note.style.display='block';}
   function readCache(){try{const o=JSON.parse(localStorage.getItem(KEY));return (o&&o.data&&o.ts)?o:null;}catch(_){return null;}}
@@ -958,13 +979,22 @@ const PHRASES=[['שלום / יום טוב','こんにちは','konnichiwa'],['ת�
     const data=cities.map((c,i)=>{const j=res[i];return{n:c.n,kj:c.kj,t:j.current.temperature_2m,c:j.current.weather_code,mx:j.daily.temperature_2m_max[0],mn:j.daily.temperature_2m_min[0],ss:(j.daily.sunset[0]||'').slice(11,16)};});
     const o={ts:Date.now(),data};localStorage.setItem(KEY,JSON.stringify(o));return o;
   }
+  async function fromBake(){const b=await fetch('weather.json?_='+Date.now(),{cache:'no-store'}).then(r=>r.json());if(b&&b.data&&b.ts){localStorage.setItem(KEY,JSON.stringify(b));return b;}throw 0;}
+  let busy=false;
   async function refresh(force){
-    const cached=readCache();
-    if(cached && !force && (Date.now()-cached.ts)<MAXAGE){show(cached,false);return;} // cache fresh (<12h) — refresh up to ~twice a day when opened
-    try{show(await fetchFresh(),false);}catch(e){if(cached)show(cached,true);} // stale/none → fetch; on failure fall back to last cached (offline)
+    if(busy)return; const c=readCache();
+    if(!force && c && (Date.now()-c.ts)<MIN){show(c,false);return;} // recently refreshed → reuse (throttle rapid resumes)
+    busy=true;
+    try{
+      if(navigator.onLine!==false){try{show(await fetchFresh(),false);return;}catch(e){}} // every open/resume: fetch live when online
+      try{show(await fromBake(),false);return;}catch(_){} // live failed → server-baked weather.json
+      if(c)show(c,true); // offline → last cached values
+    }finally{busy=false;}
   }
-  refresh(false);
-  setInterval(()=>refresh(true), MAXAGE); // long-open session keeps updating every ~12h
+  refresh(true); // initial open
+  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')refresh(false);}); // resume / return-to-foreground
+  window.addEventListener('pageshow',()=>refresh(false)); // incl. bfcache restore
+  setInterval(()=>refresh(true), IVL); // long-open session
 })();
 </script>
 </body>
