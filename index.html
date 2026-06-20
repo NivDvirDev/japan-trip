@@ -943,8 +943,29 @@ function speakJa(t){try{if(!('speechSynthesis'in window))return;const u=new Spee
 const PHRASES=[['שלום / יום טוב','こんにちは','konnichiwa'],['תודה רבה','ありがとうございます','arigatō gozaimasu'],['סליחה / סליחה רגע','すみません','sumimasen'],['כן / לא','はい / いいえ','hai / iie'],['כמה זה עולה?','いくらですか','ikura desu ka'],['איפה התחנה?','駅はどこですか','eki wa doko desu ka'],['טעים מאוד!','おいしい','oishii'],['החשבון בבקשה','お会計お願いします','o-kaikei onegai shimasu'],['מים בבקשה','お水ください','o-mizu kudasai'],['מדברים אנגלית?','英語は話せますか','eigo wa hanasemasu ka'],['נעים מאוד','はじめまして','hajimemashite'],['בבקשה / קח','どうぞ','dōzo'],['להתראות','さようなら','sayōnara'],['עזרה!','助けて','tasukete']];
 (function(){const box=document.getElementById('phrBox');if(!box)return;const ic='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 8.5a4 4 0 0 1 0 7" stroke-linecap="round"/></svg>';box.innerHTML='<div class="phr">'+PHRASES.map(p=>`<div class="phr-row"><div class="phr-he">${p[0]}</div><div class="phr-mid"><div class="phr-jp">${p[1]}</div><div class="phr-ro">${p[2]}</div></div><button class="phr-say" data-jp="${attr(p[1])}" aria-label="השמע">${ic}</button></div>`).join('')+'</div>';box.querySelectorAll('.phr-say').forEach(b=>b.addEventListener('click',()=>speakJa(b.dataset.jp)));})();
 
-// live weather + sunset (Open-Meteo, no key) — cached, degrades gracefully offline
-(function(){const wrap=document.getElementById('wxWrap'),strip=document.getElementById('wxStrip'),note=document.getElementById('wxNote');if(!strip)return;const cities=[{n:'טוקיו',kj:'東',la:35.68,lo:139.69},{n:'קיוטו',kj:'京',la:35.01,lo:135.77}];function wmoHe(c){if(c===0)return'בהיר';if(c<=2)return'בהיר חלקית';if(c===3)return'מעונן';if(c>=45&&c<=48)return'ערפילי';if(c>=51&&c<=67)return'גשום';if(c>=71&&c<=77)return'שלג';if(c>=80&&c<=82)return'ממטרים';if(c>=95)return'סופת רעמים';return'מעונן חלקית';}function render(data){strip.innerHTML=data.map(d=>`<div class="wx-card"><div class="wx-city"><span class="wx-kj">${d.kj}</span> ${d.n}</div><div class="wx-temp">${Math.round(d.t)}°</div><div class="wx-cond">${wmoHe(d.c)} · ${Math.round(d.mn)}°–${Math.round(d.mx)}°</div><div class="wx-sun">${I.spark} שקיעה ${d.ss}</div></div>`).join('');wrap.style.display='block';}async function load(){try{const res=await Promise.all(cities.map(c=>fetch(`https://api.open-meteo.com/v1/forecast?latitude=${c.la}&longitude=${c.lo}&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min,sunset&timezone=Asia%2FTokyo&forecast_days=1`).then(r=>r.json())));const data=cities.map((c,i)=>{const j=res[i];return{n:c.n,kj:c.kj,t:j.current.temperature_2m,c:j.current.weather_code,mx:j.daily.temperature_2m_max[0],mn:j.daily.temperature_2m_min[0],ss:(j.daily.sunset[0]||'').slice(11,16)};});localStorage.setItem('jp_wx',JSON.stringify(data));render(data);note.textContent='לפי שעון יפן · מתעדכן עם חיבור לאינטרנט.';note.style.display='block';}catch(e){const cc=localStorage.getItem('jp_wx');if(cc){try{render(JSON.parse(cc));note.textContent='מצב לא מקוון — הנתונים האחרונים שנשמרו.';note.style.display='block';}catch(_){}}}}load();})();
+// live weather + sunset (Open-Meteo, no key) — time-based refresh up to ~2×/day on open + every 12h while open; cached & offline-safe
+(function(){
+  const wrap=document.getElementById('wxWrap'),strip=document.getElementById('wxStrip'),note=document.getElementById('wxNote');if(!strip)return;
+  const KEY='jp_wx', MAXAGE=12*3600*1000;
+  const cities=[{n:'טוקיו',kj:'東',la:35.68,lo:139.69},{n:'קיוטו',kj:'京',la:35.01,lo:135.77}];
+  function wmoHe(c){if(c===0)return'בהיר';if(c<=2)return'בהיר חלקית';if(c===3)return'מעונן';if(c>=45&&c<=48)return'ערפילי';if(c>=51&&c<=67)return'גשום';if(c>=71&&c<=77)return'שלג';if(c>=80&&c<=82)return'ממטרים';if(c>=95)return'סופת רעמים';return'מעונן חלקית';}
+  function render(data){strip.innerHTML=data.map(d=>`<div class="wx-card"><div class="wx-city"><span class="wx-kj">${d.kj}</span> ${d.n}</div><div class="wx-temp">${Math.round(d.t)}°</div><div class="wx-cond">${wmoHe(d.c)} · ${Math.round(d.mn)}°–${Math.round(d.mx)}°</div><div class="wx-sun">${I.spark} שקיעה ${d.ss}</div></div>`).join('');wrap.style.display='block';}
+  function fmt(ts){try{return new Date(ts).toLocaleTimeString('he-IL',{hour:'2-digit',minute:'2-digit'});}catch(_){return '';}}
+  function show(o,stale){render(o.data);note.textContent=(stale?'מצב לא מקוון · ':'')+'עודכן '+fmt(o.ts);note.style.display='block';}
+  function readCache(){try{const o=JSON.parse(localStorage.getItem(KEY));return (o&&o.data&&o.ts)?o:null;}catch(_){return null;}}
+  async function fetchFresh(){
+    const res=await Promise.all(cities.map(c=>fetch(`https://api.open-meteo.com/v1/forecast?latitude=${c.la}&longitude=${c.lo}&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min,sunset&timezone=Asia%2FTokyo&forecast_days=1`).then(r=>r.json())));
+    const data=cities.map((c,i)=>{const j=res[i];return{n:c.n,kj:c.kj,t:j.current.temperature_2m,c:j.current.weather_code,mx:j.daily.temperature_2m_max[0],mn:j.daily.temperature_2m_min[0],ss:(j.daily.sunset[0]||'').slice(11,16)};});
+    const o={ts:Date.now(),data};localStorage.setItem(KEY,JSON.stringify(o));return o;
+  }
+  async function refresh(force){
+    const cached=readCache();
+    if(cached && !force && (Date.now()-cached.ts)<MAXAGE){show(cached,false);return;} // cache fresh (<12h) — refresh up to ~twice a day when opened
+    try{show(await fetchFresh(),false);}catch(e){if(cached)show(cached,true);} // stale/none → fetch; on failure fall back to last cached (offline)
+  }
+  refresh(false);
+  setInterval(()=>refresh(true), MAXAGE); // long-open session keeps updating every ~12h
+})();
 </script>
 </body>
 </html>
