@@ -40,6 +40,9 @@
   .hero .count{ margin-top:15px; display:flex; justify-content:center; gap:9px; font-size:11px; flex-wrap:wrap; letter-spacing:.5px; color:#cdbf9f;}
   .hero .count span{ position:relative; padding:0 11px;}
   .hero .count span+span::before{content:""; position:absolute; right:-1px; top:3px; bottom:3px; width:1px; background:rgba(196,167,108,.4);}
+  .hero .flights{margin-top:14px; display:inline-flex; align-items:center; gap:12px; padding:8px 16px; border-radius:30px; background:rgba(33,64,94,.28); border:1px solid rgba(196,167,108,.4); font-size:12px; letter-spacing:.4px; color:#ecdfc0;}
+  .hero .flights b{color:#fff; font-weight:800;}
+  .hero .flights .fl-sep{color:var(--kin-l); font-size:13px;}
 
   /* Tabs */
   .tabs{ position:sticky; top:0; z-index:50; display:flex; gap:0; overflow-x:auto; background:rgba(239,232,216,.94); backdrop-filter:saturate(160%) blur(12px); border-bottom:1px solid var(--line); -webkit-overflow-scrolling:touch; padding:0 8px;}
@@ -362,9 +365,10 @@
   <div class="kicker">日本 · 2026</div>
   <h1>ליהי &amp; ליאור ביפן</h1>
   <div class="jp">リヒ &amp; リオル</div>
-  <div class="sub">22 ביוני – 2 ביולי 2026 · טיול החלומות שלכם</div>
+  <div class="sub">23 ביוני – 3 ביולי 2026 · טיול החלומות שלכם</div>
   <div class="route">טוקיו · 3 ← קיוטו · 3 ← טוקיו · 4</div>
   <div class="count"><span>10 לילות</span><span>שינג'וקו · גיון</span><span>נארה כטיול יום</span></div>
+  <div class="flights"><span><b>נחיתה</b> · 23.6 · 14:00</span><span class="fl-sep">✈</span><span><b>חזרה</b> · 3.7 · 18:00</span></div>
 </div>
 
 <div class="tabs" id="tabs"></div>
@@ -636,72 +640,73 @@ const details={
 };
 
 const days=[
- {num:1,city:'tokyo',date:"א' · 22.6 · נחיתה ← שינג'וקו",title:"נחיתה והתמקמות בשינג'וקו",
-  blocks:[["בוקר/צהריים","נחיתה. רכבת לשינג'וקו (Narita Express ~75 דק' / מונורייל מהאנדה ~30 דק'). צ'ק-אין במלון."],
-   ["בדרך","קנו Suica/Welcome Suica, הפעילו eSIM."],
-   ["ערב","שינג'וקו — Omoide Yokocho, ברים זעירים ב-Golden Gai, ניאון בקבוקיצ'ו, וראמן ראשון. אל תעמיסו — ג'ט לג.",["Ichiran Nishi-Shinjuku","Golden Gai Tokyo","Kabukicho"]]],
+ {num:1,city:'tokyo',date:"ג' · 23.6 · נחיתה ← שינג'וקו",title:"נחיתה והתמקמות · יום חלקי",
+  blocks:[["צהריים · נחיתה 14:00","נוחתים ב-14:00. רכבת לשינג'וקו (Narita Express ~75 דק' / מונורייל מהאנדה ~30 דק'), וצ'ק-אין במלון."],
+   ["בדרך","קנו Suica/Welcome Suica, והפעילו eSIM."],
+   ["ערב · קליל וקרוב למלון","בלי אטרקציות מתוזמנות היום. שינג'וקו ממש ליד המלון — Omoide Yokocho, ברים זעירים ב-Golden Gai, ניאון בקבוקיצ'ו, וראמן ראשון. אל תעמיסו, ג'ט לג.",["Ichiran Nishi-Shinjuku","Golden Gai Tokyo","Kabukicho"]]],
   eat:"ראמן ב-Ichiran (חובה ברשימה שלכם!) או יאקיטורי ב-Omoide Yokocho.",
-  tip:"Ichiran פתוח לרוב 24/7 — מקבלים את הקערה דרך חלון, חוויה. שנת לילה טובה ביום הראשון = טיול מנצח."},
- {num:2,city:'tokyo',date:"ב' · 23.6 · שיבויה והרג'וקו",title:"אורות, אופנה ושקיעה",
+  tip:"נחיתה ב-14:00 — היום הראשון חלקי וקליל, צמוד למלון. שנת לילה טובה = טיול מנצח."},
+ {num:2,city:'tokyo',date:"ד' · 24.6 · שיבויה והרג'וקו",title:"אורות, אופנה ושקיעה",
   blocks:[["בוקר","שיבויה — צומת ה-Scramble, הכלב האצ'יקו, וקניות (Hands, Loft, Pokémon Center).",["Shibuya Scramble Crossing","Hachiko Statue Shibuya"]],
    ["צהריים · אופנה","הרג'וקו — רחוב טאקשיטה הצבעוני, אומוטסאנדו, ומקדש מייג'י ביער. וינטג' יוקרה ב-AMORE.",["Takeshita Street Harajuku","Age.3 Q Harajuku","Meiji Shrine Tokyo"]],
    ["ערב · שקיעה","Shibuya Sky — תצפית 360° מעל הצומת. הזמינו סלוט שקיעה מראש!",["Shibuya Sky"]]],
   eat:"מהרשימה: Age.3×Q (סנדוויצ'ים חובה!) או GYUKATSU Katsugyu (שניצל וואגיו).",
   tip:"Shibuya Sky נמכר 4 שבועות מראש בדיוק (00:00 שעון יפן) — שריינו סלוט שקיעה ברגע שנפתח."},
- {num:3,city:'tokyo',date:"ג' · 24.6 · אסאקוסה וטויוסו",title:"מקדשים, שוק, ו-teamLab",
+ {num:3,city:'tokyo',date:"ה' · 25.6 · אסאקוסה וטויוסו",title:"מקדשים, שוק, ו-teamLab",
   blocks:[["בוקר","אסקוסה — מקדש סנסו-ג'י, רחוב נאקאמיסה, וטקס קימונו (להזמין). Skytree ברקע.",["Senso-ji Temple","Tokyo Skytree","Kimono Tea Ceremony Maikoya Asakusa"]],
    ["צהריים","שוק צוקיג'י החיצוני — סושי, צדפות וטמאגו טריים היישר מהשוק.",["Tsukiji Outer Market"]],
    ["ערב · חובה","teamLab Planets בטויוסו — צועדים יחפים במים ובאור. מוזיאון חובה (הזמינו מראש!).",["teamLab Planets TOKYO"]]],
   eat:"מהרשימה: סושי בשוק צוקיג'י, או Kura Sushi (חובה — סושי מסוע מהטוב ביפן).",
   tip:"teamLab — לבשו מכנס שמתגלגל מעל הברך, חלק מהמסלול במים. בחרו סלוט בוקר/ערב מוקדם."},
- {num:4,city:'kyoto',date:"ד' · 25.6 · טוקיו ← קיוטו",title:"אל בירת המקדשים",
+ {num:4,city:'kyoto',date:"ו' · 26.6 · טוקיו ← קיוטו",title:"אל בירת המקדשים",
   blocks:[["בוקר","שינקנסן Nozomi לקיוטו (~2:15). הזמינו ב-smartEX, מושב D/E לנוף פוג'י. הניחו תיקים.",["Kyoto Station"]],
    ["אחה\"צ","גיון והיגאשיאמה — סמטאות מרוצפות, בתי תה, ועליה לקיומיזו-דרה לשקיעה.",["Gion Kyoto","Kiyomizu-dera"]],
    ["ערב","סמטת פונטוצ'ו לאורך הנהר לארוחת ערב.",["Pontocho Alley"]]],
   eat:"מטבח קיוטו עדין (kaiseki) או יאקיטורי בפונטוצ'ו.",
   tip:"קיוטו = ההפך מטוקיו: לאט, עדין, מסורתי. תנו לקצב להשתנות."},
- {num:5,city:'kyoto',date:"ה' · 26.6 · קיוטו: ערב-מערב",title:"במבוק וזהב",
+ {num:5,city:'kyoto',date:"ש' · 27.6 · קיוטו: ערב-מערב",title:"במבוק וזהב",
   blocks:[["בוקר מוקדם","אראשיאמה — חורש הבמבוק (לכו ב-8:00!), טנריו-ג'י וגשר טוגטסוקיו.",["Arashiyama Bamboo Grove"]],
    ["צהריים","קינקאקו-ג'י — ביתן הזהב המשתקף באגם.",["Kinkaku-ji"]],
    ["ערב","שוק נישיקי לטעימות, ואז קוואראמאצ'י לחיי לילה.",["Nishiki Market Kyoto"]]],
   eat:"סיבוב טעימות בשוק נישיקי; קינוח מאצ'ה אמיתי.",
   tip:"חורש הבמבוק מתמלא עד 9:00. ב-8:00 הוא כמעט שלכם."},
- {num:6,city:'kyoto',date:"ו' · 27.6 · פושימי-אינארי ונארה",title:"שערי טורי וצבאים",
+ {num:6,city:'kyoto',date:"א' · 28.6 · פושימי-אינארי ונארה",title:"שערי טורי וצבאים",
   blocks:[["בוקר מוקדם","פושימי-אינארי — אלפי שערי טורי אדומים במעלה ההר. לכו לפני 8:00.",["Fushimi Inari Taisha"]],
    ["צהריים · טיול יום","נארה (~45 דק') — פארק הצבאים החופשיים, טודאי-ג'י עם הבודהה הענק, ועיירה עתיקה.",["Nara Park","Todai-ji"]],
    ["אופציה","בדרך חזרה — אוג'י לקינוח מאצ'ה אמיתי, בירת התה של יפן.",["Mimuroto-ji Uji"]]],
   eat:"מוצ'י טרי בנארה, או קינוח מאצ'ה באוג'י.",
   tip:"נארה הוא טיול-היום הכי מאוזן מקיוטו (תרבות+טבע+אוכל). אל תקנו קרקרים לצבאים מוקדם מדי."},
- {num:7,city:'tokyo',date:"ש' · 28.6 · קיוטו ← טוקיו",title:"חזרה לטוקיו + גינזה",
+ {num:7,city:'tokyo',date:"ב' · 29.6 · קיוטו ← טוקיו",title:"חזרה לטוקיו + גינזה",
   blocks:[["בוקר","שינקנסן חזרה לטוקיו (~2:15). צ'ק-אין מחדש בשינג'וקו.",["Kyoto Station"]],
-   ["אחה\"צ · קניות","גינזה — GINZA SIX, Uniqlo דגל, Muji, ו-Don Quijote. הרחוב הראשי נסגר לרכב בסופ\"ש.",["Ginza Tokyo","GINZA SIX"]],
+   ["אחה\"צ · קניות","גינזה — GINZA SIX, Uniqlo דגל, Muji, ו-Don Quijote. (המדרחוב נטול-הרכב פעיל בסופי שבוע; היום יום שני, אז רק תנועה רגילה.)",["Ginza Tokyo","GINZA SIX"]],
    ["ערב","סושי מסוע ב-Kura Sushi (חובה ברשימה!) או אומקסה בגינזה.",["Kura Sushi"]]],
   eat:"Kura Sushi (חובה) או אומקסה בגינזה (הזמינו מראש).",
   tip:"בגינזה כמה ממסעדות האומקסה הטובות בעולם — שווה הזמנה דרך הקונסיירז'."},
- {num:8,city:'tokyo',date:"א' · 29.6 · ג'יבלי ווינטג'",title:"קסם, וינטג' וגנים",
-  blocks:[["בוקר","מוזיאון ג'יבלי במיטקה — עולם הקסם של מיאזאקי. כרטיסים נמכרים ב-10 לחודש הקודם ונגמרים בדקות!",["Ghibli Museum"]],
-   ["צהריים","שימוקיטזאווה — שכונת וינטג', קפה והיפ. הון של סחורת יד-שנייה.",["Shimokitazawa"]],
-   ["ערב","גן שינג'וקו גיוֹאֶן — הפארק היפני המושלם להירגע בו לפני הערב.",["Shinjuku Gyoen"]]],
-  eat:"מהרשימה: Shogun Burger (המבורגר וואגיו) או Shichibei (קטסודון אגדי).",
-  tip:"ג'יבלי — השם על הכרטיס חייב להתאים לדרכון בדיוק, אחרת לא מכניסים."},
- {num:9,city:'tokyo',date:"ב' · 30.6 · פופ-קלצ'ר וחתולי מזל",title:"אקיהברה / הארי פוטר",
-  blocks:[["אופציה א'","סטודיו הארי פוטר (Warner Bros, טושימהאן) — סיור מאחורי הקלעים, 3-4 שעות. הזמינו מראש.",["Warner Bros Studio Tour Tokyo"]],
+ {num:8,city:'tokyo',date:"ג' · 30.6 · פופ-קלצ'ר וחתולי מזל",title:"אקיהברה / הארי פוטר",
+  blocks:[["אופציה א'","סטודיו הארי פוטר (Warner Bros, טושימהאן) — סיור מאחורי הקלעים, 3-4 שעות. הזמינו מראש (~חודשיים).",["Warner Bros Studio Tour Tokyo"]],
    ["אופציה ב'","אקיהברה — אנימה, גיימינג, אלקטרוניקה, gachapon, ו-Pokémon Center.",["Akihabara Electric Town","Pokemon Center Shibuya"]],
    ["אחה\"צ","Gōtoku-ji — מקדש 'חתולי המזל' (manekineko) עם אלפי פסלוני חתול. מקסים, צילומי ופחות תיירותי.",["Gotokuji Temple"]],
    ["ערב","חזרה לשינג'וקו — ברים זעירים ב-Golden Gai או קוקטיילים ב-Bar Benfiddich (טופ אסיה).",["Bar Benfiddich"]]],
   eat:"מהרשימה: ראמן ב-AFURI או Ichiran; קארי-שניצל ב-CoCo Ichibanya.",
-  tip:"אוהבי פופ-קלצ'ר? אקיהברה. אוהבי הארי פוטר? הסטודיו שווה את הנסיעה (~40 דק')."},
- {num:10,city:'tokyo',date:"ג' · 1.7 · יום אחרון מלא",title:"אמנות, אוכל יוקרה ופרידה",
+  tip:"אוהבי פופ-קלצ'ר? אקיהברה. אוהבי הארי פוטר? הסטודיו שווה את הנסיעה (~40 דק') — הזמינו מראש."},
+ {num:9,city:'tokyo',date:"ד' · 1.7 · ג'יבלי ווינטג'",title:"קסם, וינטג' וגנים",
+  blocks:[["בוקר","מוזיאון ג'יבלי במיטקה — עולם הקסם של מיאזאקי. כרטיסים נמכרים ב-10 לחודש הקודם ונגמרים בדקות (לביקור ב-1.7 — שוחררו ב-10.6).",["Ghibli Museum"]],
+   ["צהריים","שימוקיטזאווה — שכונת וינטג', קפה והיפ. הון של סחורת יד-שנייה.",["Shimokitazawa"]],
+   ["ערב","גן שינג'וקו גיוֹאֶן — הפארק היפני המושלם להירגע בו (פתוח; סגור רק בימי שני).",["Shinjuku Gyoen"]]],
+  eat:"מהרשימה: Shogun Burger (המבורגר וואגיו) או Shichibei (קטסודון אגדי).",
+  tip:"ג'יבלי סגור בימי שלישי — לכן קבענו אותו ליום רביעי. השם על הכרטיס חייב להתאים לדרכון בדיוק."},
+ {num:10,city:'tokyo',date:"ה' · 2.7 · יום אחרון מלא",title:"אמנות, אוכל יוקרה ופרידה",
   blocks:[["בוקר","אזאבודאי הילס — teamLab Borderless (אמנות דיגיטלית שונה מ-Planets), מגדל טוקיו ו-%Arabica לקפה.",["teamLab Borderless Azabudai","Tokyo Tower"]],
    ["אחה\"צ · קניות","קניות אחרונות — שוק אמייוקו באואנו, או Don Quijote (פתוח 24/7) למתנות.",["Ameyoko market","Don Quijote Shinjuku"]],
    ["ערב · פרידה","ארוחת השיא מהרשימה: וואגיו-יאקיניקו ב-YORONIKU או USHIGORO S. לילה אחרון בשינג'וקו.",["YORONIKU TOKYO AZABUDAI HILLS"]]],
   eat:"ארוחת פרידה מפנקת — וואגיו/סושי/טפניאקי, הזמינו מראש.",
   tip:"רוצים ים ושקיעה, ליהי? אפשר להחליף את הבוקר בטיול לקמקורה/אנושימה (~1 שעה)."},
- {num:11,city:'end',date:"ד' · 2.7 · טיסה הביתה",title:"להתראות, יפן",
-  blocks:[["בוקר","רכבת לשדה (Narita Express / מונורייל להאנדה). הגיעו ~3 שעות לפני טיסה בינלאומית.",["Tokyo Station"]],
-   ["טיפ","שופינג אחרון בטרמינל, ובנטו אחרון לדרך."]],
+ {num:11,city:'end',date:"ו' · 3.7 · טיסה הביתה · חזרה 18:00",title:"בוקר אחרון, ואז הביתה",
+  blocks:[["בוקר · קליל","בוקר רגוע ואריזה. קפה אחרון ומזכרות אחרונות ליד שינג'וקו — בלי אטרקציות גדולות, הטיסה היום."],
+   ["צ'ק-אאוט · יציאה ~15:00","צ'ק-אאוט ויציאה לשדה סביב 15:00. Narita Express / מונורייל להאנדה — הגיעו ~3 שעות לפני הטיסה.",["Tokyo Station"]],
+   ["טיסה · 18:00","שופינג אחרון בטרמינל, ובנטו אחרון לדרך."]],
   eat:"בנטו אחרון לדרך מחנות בתחנה.",
-  tip:"זהו, ליהי וליאור — חזרתם עם זיכרונות לכל החיים. סיינרה, יפן."},
+  tip:"היום חלקי — בוקר נינוח בלבד, ויציאה לשדה ~15:00 לטיסה ב-18:00. זהו, ליהי וליאור — חזרתם עם זיכרונות לכל החיים. סיינרה, יפן."},
 ];
 
 // each city = our recommended pick + web-verified alternatives spanning mid → upper-mid → high luxury
@@ -845,7 +850,7 @@ function dpick(date){const p=date.split('·');return p[1]?p[1].trim():'';}
 const vd=document.getElementById('view-days');
 let curDay=0, TRIP_TODAY=-1, FC=null; // FC = per-day forecast map, filled async by the forecast module (declared here so the first render doesn't hit a TDZ)
 // per-page content kanji watermark (faded vertical Mincho, painted as SVG background-image)
-const DAYK=['新宿','渋谷','浅草','祇園','竹林','鳥居','銀座','ジブリ','秋葉原','東京','空港'];
+const DAYK=['新宿','渋谷','浅草','祇園','竹林','鳥居','銀座','秋葉原','ジブリ','東京','空港'];
 function wmBg(txt,op){
   op=op||0.11; const fs=84, gap=100, pad=66, W=190; const chars=[...txt];
   const h=pad*2+(chars.length-1)*gap;
