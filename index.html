@@ -351,11 +351,10 @@
   .ap-fact{font-size:14.5px; line-height:1.65; color:var(--ink2); margin:16px auto 0; max-width:34ch; text-align:start;}
   .ap-search{display:inline-flex; align-items:center; gap:6px; margin-top:18px; font-size:12.5px; font-weight:700; color:var(--ai); text-decoration:none; border:1px solid var(--line); border-radius:9px; padding:9px 15px; background:var(--paper2);}
   .ap-search svg{width:15px; height:15px;}
-  .ap-photo{position:relative; width:calc(100% + 40px); margin:-24px -20px 14px; aspect-ratio:16/10; overflow:hidden; background:color-mix(in srgb, var(--ac) 8%, var(--card));}
+  .ap-photo{position:relative; width:172px; height:116px; margin:2px auto 14px; border-radius:14px; overflow:hidden; background:color-mix(in srgb, var(--ac) 8%, var(--card)); border:1px solid color-mix(in srgb, var(--ink) 12%, transparent); box-shadow:0 6px 16px -10px rgba(0,0,0,.4);}
   .ap-photo img{width:100%; height:100%; object-fit:cover; display:block; animation:fadeUp .5s ease;}
-  .ap-photo::after{content:''; position:absolute; inset:0; box-shadow:inset 0 -40px 40px -28px var(--card), inset 0 0 0 1px color-mix(in srgb, var(--ink) 8%, transparent); pointer-events:none;}
-  .ap-photo.has .ap-ic-overlay{display:none;}
-  .ap-credit{position:absolute; inset-inline-end:6px; bottom:5px; font-size:8.5px; letter-spacing:.3px; color:#fff; opacity:.7; text-shadow:0 1px 2px rgba(0,0,0,.6); pointer-events:none;}
+  .ap-photo + .ap-ic{display:none;}
+  .ap-credit{position:absolute; inset-inline-end:5px; bottom:4px; font-size:8px; letter-spacing:.2px; color:#fff; opacity:.65; text-shadow:0 1px 2px rgba(0,0,0,.7); pointer-events:none;}
   .ap-links{display:flex; flex-wrap:wrap; gap:6px 16px; justify-content:center; margin-top:16px;}
   .ap-link{font-size:12.5px; font-weight:600; color:var(--ai); text-decoration:none; border-bottom:1px solid color-mix(in srgb, var(--ai) 35%, transparent); padding-bottom:1px;}
   .ap-link.sub{color:var(--muted); border-bottom-color:color-mix(in srgb, var(--muted) 35%, transparent);}
@@ -984,8 +983,7 @@ function openAssoc(id){const a=ASSOC[id];if(!a)return;const cc=ACAT[a.cat]||['',
     : '';
   document.getElementById('sheet-content').innerHTML=`<div class="ap" style="--ac:${cc[1]}">
     <button class="sh-close" onclick="closeDetail()" aria-label="סגור">×</button>
-    ${photo}
-    <div class="ap-ic">${AIC[a.ic]||AIC.spark}</div>
+    ${photo}<div class="ap-ic">${AIC[a.ic]||AIC.spark}</div>
     <div class="ap-kicker">מהבית ליפן · ${cc[0]}</div>
     <div class="ap-name">${a.he}</div>
     <div class="ap-en">${a.en}</div>
