@@ -249,6 +249,45 @@
   .sh-links a{flex:1; display:flex; align-items:center; justify-content:center; gap:8px; padding:13px; border-radius:8px; font-size:13.5px; font-weight:700;}
   .sh-links .l-map{background:#fff; border:1px solid #dbe5f3; color:var(--ai);}
   .sh-links .l-ta{background:#2e8b6f; color:#fff;}
+  /* —— delightful features —— */
+  .trip-status{margin-top:16px;display:inline-flex;align-items:center;gap:9px;padding:8px 16px;border-radius:30px;background:rgba(196,167,108,.14);border:1px solid rgba(196,167,108,.42);font-size:12.5px;letter-spacing:.4px;color:#f0e7d0;}
+  .trip-status b{color:#fff;font-weight:800;font-size:14px;}
+  .trip-status .ts-dot{width:7px;height:7px;border-radius:50%;background:var(--shu-soft);animation:tsPulse 2.2s infinite;}
+  @keyframes tsPulse{0%{box-shadow:0 0 0 0 rgba(187,82,55,.55)}70%{box-shadow:0 0 0 7px rgba(187,82,55,0)}100%{box-shadow:0 0 0 0 rgba(187,82,55,0)}}
+  .trip-prog{display:flex;align-items:center;gap:9px;margin:0 2px 13px;font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.2px;}
+  .trip-prog .bar{flex:1;height:5px;border-radius:5px;background:var(--line);overflow:hidden;}
+  .trip-prog .bar i{display:block;height:100%;border-radius:5px;background:linear-gradient(90deg,var(--kin),var(--shu));transition:width .5s ease;}
+  .drm{position:relative;}
+  .drm.today .drm-seal{box-shadow:0 0 0 2px var(--shu);}
+  .drm .drm-today{position:absolute;top:-8px;left:50%;transform:translateX(-50%);font-size:8px;background:var(--shu);color:#fff;padding:1px 6px;border-radius:8px;letter-spacing:.3px;font-weight:800;white-space:nowrap;}
+  .tl-row.now .tl-dot{box-shadow:0 0 0 4px rgba(168,64,42,.18);}
+  .tl-now{display:inline-block;margin-inline-start:7px;font-size:9px;background:var(--shu);color:#fff;padding:1px 7px;border-radius:8px;letter-spacing:.3px;font-weight:800;vertical-align:middle;}
+  .df-route{display:inline-flex;align-items:center;gap:7px;margin:14px 0 2px;padding:9px 15px;border:1px solid var(--line);border-radius:9px;background:var(--card);color:var(--ai);font-size:12.5px;font-weight:700;text-decoration:none;}
+  .df-route svg{width:16px;height:16px;}
+  .wx{display:flex;gap:10px;margin:0 0 8px;}
+  .wx-card{flex:1;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px 13px;}
+  .wx-card .wx-city{font-size:12px;color:var(--muted);font-weight:700;display:flex;align-items:center;gap:6px;}
+  .wx-card .wx-kj{font-family:var(--serif);color:var(--shu);font-size:14px;}
+  .wx-card .wx-temp{font-size:23px;font-weight:800;color:var(--ink);margin-top:5px;}
+  .wx-card .wx-cond{font-size:12px;color:var(--ink2);margin-top:1px;}
+  .wx-card .wx-sun{font-size:11px;color:var(--kin);margin-top:6px;}
+  .wx-note{font-size:10.5px;color:var(--muted);margin:0 2px 16px;}
+  .cur-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:2px;}
+  .cur-chip{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:9px 13px;font-size:13px;color:var(--ink2);}
+  .cur-chip b{color:var(--ai);font-weight:800;}
+  .cur-note{font-size:10.5px;color:var(--muted);margin-top:9px;}
+  .phr{display:flex;flex-direction:column;gap:8px;margin-top:2px;}
+  .phr-row{display:flex;align-items:center;gap:11px;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 12px;}
+  .phr-he{flex:0 0 31%;font-size:13px;color:var(--ink);font-weight:700;}
+  .phr-mid{flex:1;min-width:0;}
+  .phr-jp{font-family:var(--serif);font-size:15px;color:var(--ink);}
+  .phr-ro{font-size:11px;color:var(--kin);margin-top:1px;}
+  .phr-say{flex:0 0 auto;width:34px;height:34px;border:1px solid var(--line);border-radius:8px;background:var(--paper2);color:var(--ai);display:grid;place-items:center;cursor:pointer;}
+  .phr-say svg{width:17px;height:17px;}
+  @media (prefers-reduced-motion:no-preference){
+   .day-focus{animation:dfIn .34s cubic-bezier(.2,.7,.3,1);}
+   @keyframes dfIn{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+  }
 </style>
 </head>
 <body>
@@ -272,6 +311,7 @@
   <div class="sub">22 ביוני – 2 ביולי 2026 · טיול החלומות שלכם</div>
   <div class="route">טוקיו · 3 ← קיוטו · 3 ← טוקיו · 4</div>
   <div class="count"><span>10 לילות</span><span>שינג'וקו · גיון</span><span>נארה כטיול יום</span></div>
+  <div class="trip-status" id="tripStatus" style="display:none"></div>
 </div>
 
 <div class="tabs" id="tabs"></div>
@@ -300,8 +340,17 @@
   </div>
 
   <div id="view-info" style="display:none">
+    <div id="wxWrap" style="display:none">
+      <div class="shead"><span class="seal">天</span><div><div class="sh-he">מזג אוויר עכשיו</div><div class="sh-ro">Weather now</div></div></div>
+      <div class="wx" id="wxStrip"></div>
+      <div class="wx-note" id="wxNote"></div>
+    </div>
     <div class="shead"><span class="seal">案</span><div><div class="sh-he">המדריך המעשי</div><div class="sh-ro">Good to know</div></div></div>
     <div id="infolist"></div>
+    <div class="shead" style="margin-top:24px"><span class="seal">円</span><div><div class="sh-he">המרת מטבע</div><div class="sh-ro">Currency</div></div></div>
+    <div id="curBox"></div>
+    <div class="shead" style="margin-top:24px"><span class="seal">話</span><div><div class="sh-he">משפטים שימושיים</div><div class="sh-ro">Useful phrases</div></div></div>
+    <div id="phrBox"></div>
   </div>
 </div>
 
@@ -709,7 +758,7 @@ function glossWrap(t){GKEYS.forEach(k=>{if(t.indexOf(k)>-1){const g=GLOSS[k];t=t
 function dpick(date){const p=date.split('·');return p[1]?p[1].trim():'';}
 
 const vd=document.getElementById('view-days');
-let curDay=0;
+let curDay=0, TRIP_TODAY=-1;
 // per-page content kanji watermark (faded vertical Mincho, painted as SVG background-image)
 const DAYK=['新宿','渋谷','浅草','祇園','竹林','鳥居','銀座','ジブリ','秋葉原','東京','空港'];
 function wmBg(txt,op){
@@ -721,16 +770,20 @@ function wmBg(txt,op){
 }
 function wmStyle(txt,op){return `background-image:${wmBg(txt,op)};background-repeat:no-repeat;background-position:left 4px top 10px;`;}
 function renderRail(){
-  return '<div class="dayrail">'+days.map((d,i)=>`<button class="drm${i===curDay?' on':''}" style="--c:${C[d.city]}" data-day="${i}">
-     <span class="drm-seal"><span class="kj">${KJ[d.city]}</span><span class="no">${d.num}</span></span>
+  return '<div class="dayrail">'+days.map((d,i)=>`<button class="drm${i===curDay?' on':''}${i===TRIP_TODAY?' today':''}" style="--c:${C[d.city]}" data-day="${i}">
+     ${i===TRIP_TODAY?'<span class="drm-today">היום</span>':''}<span class="drm-seal"><span class="kj">${KJ[d.city]}</span><span class="no">${d.num}</span></span>
      <span class="drm-date">${dpick(d.date)}</span></button>`).join('')+'</div>';
 }
 function renderFocus(){
   const d=days[curDay], c=C[d.city];
-  let rows=d.blocks.map(b=>`<div class="tl-row">
-     <div class="tl-when">${waterLabel(b[0])?I.wave:''}${b[0]}</div>
+  const isToday=curDay===TRIP_TODAY, ph=isToday?nowPhase():null; let marked=false;
+  let rows=d.blocks.map(b=>{
+    const isNow=isToday&&!marked&&ph&&blockPhase(b[0])===ph; if(isNow)marked=true;
+    return `<div class="tl-row${isNow?' now':''}">
+     <div class="tl-when">${waterLabel(b[0])?I.wave:''}${b[0]}${isNow?'<span class="tl-now">עכשיו</span>':''}</div>
      <div class="tl-rail"><span class="tl-dot" style="--c:${c}"></span></div>
-     <div class="tl-what">${glossWrap(b[1])}${placeLinks(b[2])}</div></div>`).join('');
+     <div class="tl-what">${glossWrap(b[1])}${placeLinks(b[2])}</div></div>`;
+  }).join('');
   rows+=`<div class="tl-row">
      <div class="tl-when eatw">${I.food}לאכול</div>
      <div class="tl-rail"><span class="tl-dot" style="--c:#a8402a"></span></div>
@@ -741,13 +794,18 @@ function renderFocus(){
        <div class="df-titles"><div class="df-date">${d.date}</div><div class="df-title">${d.title}</div><div class="df-city">${CITYN[d.city]}</div></div>
      </div>
      <div class="timeline">${rows}</div>
+     ${mapsRoute(d)}
      <div class="df-tip">${I.spark}<div>${glossWrap(d.tip)}</div></div>
    </div>`;
 }
 function paintDays(){
-  vd.innerHTML=renderRail()+'<div class="dayfocus-wrap">'+renderFocus()+'</div>';
+  const prog=`<div class="trip-prog"><span>יום ${curDay+1} · ${days.length}</span><div class="bar"><i style="width:${Math.round((curDay+1)/days.length*100)}%"></i></div></div>`;
+  vd.innerHTML=renderRail()+prog+'<div class="dayfocus-wrap">'+renderFocus()+'</div>';
   vd.querySelectorAll('.drm').forEach(b=>b.addEventListener('click',()=>{curDay=+b.dataset.day; paintDays();}));
 }
+// open today's day automatically when the trip is underway
+TRIP_TODAY=tripIdx();
+if(TRIP_TODAY>=0) curDay=TRIP_TODAY;
 paintDays();
 // content-keyed kanji watermark on the four static views
 [['view-intro','日本'],['view-stay','宿'],['view-book','予約'],['view-info','案内']].forEach(([id,k])=>{
@@ -869,6 +927,28 @@ tabDefs.forEach(([k,label,ro])=>{
 });
 show('days');
 if(window.navigator.standalone){document.getElementById('a2hs').style.display='none';}
+
+/* ——— delightful features: trip clock, route, currency, phrases, weather ——— */
+function parseDayDate(s){const m=s.match(/(\d+)\.(\d+)/);return m?new Date(2026,(+m[2])-1,+m[1]):null;}
+function midnight(d){const x=new Date(d);x.setHours(0,0,0,0);return x;}
+function tripIdx(){const t=midnight(new Date()).getTime();for(let i=0;i<days.length;i++){const d=parseDayDate(days[i].date);if(d&&midnight(d).getTime()===t)return i;}return -1;}
+function nowPhase(){const h=new Date().getHours();return h<11?'בוקר':(h<16?'צהריים':'ערב');}
+function blockPhase(l){if(/בוקר/.test(l))return 'בוקר';if(/צהר|אחה/.test(l))return 'צהריים';if(/ערב/.test(l))return 'ערב';return null;}
+function mapsRoute(d){const pts=[];d.blocks.forEach(b=>{if(b[2])b[2].forEach(p=>{if(!pts.includes(p))pts.push(p);});});if(pts.length<2)return '';const enc=p=>encodeURIComponent(shortName(p)+' Japan');const dest=enc(pts[pts.length-1]);const wp=pts.slice(0,-1).map(enc).join('|');return `<a class="df-route" href="https://www.google.com/maps/dir/?api=1&destination=${dest}&waypoints=${wp}&travelmode=transit" target="_blank" rel="noopener">${I.gm} נווט למסלול היום ב-Google Maps</a>`;}
+function speakJa(t){try{if(!('speechSynthesis'in window))return;const u=new SpeechSynthesisUtterance(t);u.lang='ja-JP';u.rate=.9;const v=speechSynthesis.getVoices().find(v=>/ja/i.test(v.lang));if(v)u.voice=v;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}}
+
+// hero trip clock — countdown before, day-of-trip during, farewell after
+(function(){const el=document.getElementById('tripStatus');if(!el)return;const t=midnight(new Date()).getTime();const start=midnight(parseDayDate(days[0].date)).getTime();const end=midnight(parseDayDate(days[days.length-1].date)).getTime();const dot='<span class="ts-dot"></span>';let html;if(t<start){const n=Math.round((start-t)/86400000);html=dot+(n===1?'<b>מחר</b> טסים ליפן ✦':`עוד <b>${n}</b> ימים ל-יפן ✦`);}else if(t<=end){const i=TRIP_TODAY>=0?TRIP_TODAY:0;html=dot+`<b>יום ${i+1}</b> מתוך ${days.length} · ${CITYN[days[i].city]}`;}else{html=dot+'הטיול הסתיים — סָיוֹנָרָה ✦';}el.innerHTML=html;el.style.display='inline-flex';})();
+
+// currency quick reference (hardcoded, labelled — robust offline)
+(function(){const box=document.getElementById('curBox');if(!box)return;const r=0.0185;const yens=[500,1000,3000,5000,10000];const chips=yens.map(y=>`<span class="cur-chip">¥${y.toLocaleString()} ≈ <b>₪${Math.round(y*r)}</b></span>`).join('');box.innerHTML=`<div class="cur-grid">${chips}</div><div class="cur-note">שער משוער ליוני 2026: 100¥ ≈ ₪1.85 · ₪1 ≈ ¥54. לאומדן מהיר בלבד.</div>`;})();
+
+// Japanese key phrases (with tap-to-speak)
+const PHRASES=[['שלום / יום טוב','こんにちは','konnichiwa'],['תודה רבה','ありがとうございます','arigatō gozaimasu'],['סליחה / סליחה רגע','すみません','sumimasen'],['כן / לא','はい / いいえ','hai / iie'],['כמה זה עולה?','いくらですか','ikura desu ka'],['איפה התחנה?','駅はどこですか','eki wa doko desu ka'],['טעים מאוד!','おいしい','oishii'],['החשבון בבקשה','お会計お願いします','o-kaikei onegai shimasu'],['מים בבקשה','お水ください','o-mizu kudasai'],['מדברים אנגלית?','英語は話せますか','eigo wa hanasemasu ka'],['נעים מאוד','はじめまして','hajimemashite'],['בבקשה / קח','どうぞ','dōzo'],['להתראות','さようなら','sayōnara'],['עזרה!','助けて','tasukete']];
+(function(){const box=document.getElementById('phrBox');if(!box)return;const ic='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 8.5a4 4 0 0 1 0 7" stroke-linecap="round"/></svg>';box.innerHTML='<div class="phr">'+PHRASES.map(p=>`<div class="phr-row"><div class="phr-he">${p[0]}</div><div class="phr-mid"><div class="phr-jp">${p[1]}</div><div class="phr-ro">${p[2]}</div></div><button class="phr-say" data-jp="${attr(p[1])}" aria-label="השמע">${ic}</button></div>`).join('')+'</div>';box.querySelectorAll('.phr-say').forEach(b=>b.addEventListener('click',()=>speakJa(b.dataset.jp)));})();
+
+// live weather + sunset (Open-Meteo, no key) — cached, degrades gracefully offline
+(function(){const wrap=document.getElementById('wxWrap'),strip=document.getElementById('wxStrip'),note=document.getElementById('wxNote');if(!strip)return;const cities=[{n:'טוקיו',kj:'東',la:35.68,lo:139.69},{n:'קיוטו',kj:'京',la:35.01,lo:135.77}];function wmoHe(c){if(c===0)return'בהיר';if(c<=2)return'בהיר חלקית';if(c===3)return'מעונן';if(c>=45&&c<=48)return'ערפילי';if(c>=51&&c<=67)return'גשום';if(c>=71&&c<=77)return'שלג';if(c>=80&&c<=82)return'ממטרים';if(c>=95)return'סופת רעמים';return'מעונן חלקית';}function render(data){strip.innerHTML=data.map(d=>`<div class="wx-card"><div class="wx-city"><span class="wx-kj">${d.kj}</span> ${d.n}</div><div class="wx-temp">${Math.round(d.t)}°</div><div class="wx-cond">${wmoHe(d.c)} · ${Math.round(d.mn)}°–${Math.round(d.mx)}°</div><div class="wx-sun">${I.spark} שקיעה ${d.ss}</div></div>`).join('');wrap.style.display='block';}async function load(){try{const res=await Promise.all(cities.map(c=>fetch(`https://api.open-meteo.com/v1/forecast?latitude=${c.la}&longitude=${c.lo}&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min,sunset&timezone=Asia%2FTokyo&forecast_days=1`).then(r=>r.json())));const data=cities.map((c,i)=>{const j=res[i];return{n:c.n,kj:c.kj,t:j.current.temperature_2m,c:j.current.weather_code,mx:j.daily.temperature_2m_max[0],mn:j.daily.temperature_2m_min[0],ss:(j.daily.sunset[0]||'').slice(11,16)};});localStorage.setItem('jp_wx',JSON.stringify(data));render(data);note.textContent='לפי שעון יפן · מתעדכן עם חיבור לאינטרנט.';note.style.display='block';}catch(e){const cc=localStorage.getItem('jp_wx');if(cc){try{render(JSON.parse(cc));note.textContent='מצב לא מקוון — הנתונים האחרונים שנשמרו.';note.style.display='block';}catch(_){}}}}load();})();
 </script>
 </body>
 </html>
