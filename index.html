@@ -275,6 +275,25 @@
   .df-wx .dfw-t small{font-weight:600;color:var(--muted);}
   .df-wx .dfw-p{display:flex;align-items:center;gap:2px;font-size:10.5px;font-weight:700;color:var(--ai);}
   .df-wx .dfw-p svg{width:11px;height:11px;}
+  /* optional "special event nearby" marker — deliberately set apart from the plan (dashed gold) */
+  .ev-wrap{margin:14px 0 2px;}
+  .ev-mark{display:flex; align-items:center; gap:10px; width:100%; text-align:start; background:linear-gradient(180deg,rgba(169,138,78,.11),rgba(169,138,78,.04)); border:1px dashed var(--kin); border-radius:11px; padding:11px 13px; cursor:pointer; font:inherit; color:var(--ink);}
+  .ev-ic{flex:0 0 auto; width:24px; height:24px; color:var(--kin);}
+  .ev-ic svg{width:24px; height:24px; display:block;}
+  .ev-mark-t{flex:1; min-width:0; display:flex; flex-direction:column; gap:2px;}
+  .ev-tag{font-size:9.5px; font-weight:800; letter-spacing:.3px; color:var(--kin);}
+  .ev-name{font-size:13px; font-weight:800; color:var(--ink); line-height:1.25;}
+  .ev-chev{flex:0 0 auto; color:var(--kin); font-size:12px; transition:transform .25s;}
+  .ev-mark.open .ev-chev{transform:rotate(180deg);}
+  .ev-panel{margin-top:3px; background:var(--card); border:1px dashed var(--line2); border-inline-start:3px solid var(--kin); border-radius:10px; padding:12px 14px; animation:fadeUp .25s ease both;}
+  .ev-panel[hidden]{display:none;}
+  .ev-row{display:flex; gap:10px; font-size:12.5px; padding:3px 0; color:var(--ink2);}
+  .ev-row .ev-k{flex:0 0 50px; color:var(--muted); font-weight:700;}
+  .ev-note{font-size:12.5px; color:var(--ink2); line-height:1.55; margin:9px 0 0;}
+  .ev-sib{font-size:11.5px; color:var(--ink2); margin-top:9px; padding-top:9px; border-top:1px solid var(--line2);}
+  .ev-sib a{color:var(--shu); font-weight:700; text-decoration:none;}
+  .ev-cta{display:inline-block; margin-top:11px; background:var(--shu); color:#fff; font-size:12.5px; font-weight:800; padding:8px 16px; border-radius:8px; text-decoration:none;}
+  .ev-foot{font-size:10px; color:var(--muted); margin-top:9px;}
   /* hotel strips */
   .stay-group{margin-bottom:20px;}
   .stay-city{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 2px 10px;}
@@ -867,6 +886,19 @@ function renderRail(){
      ${i===TRIP_TODAY?'<span class="drm-today">היום</span>':''}<span class="drm-seal"><span class="kj">${KJ[d.city]}</span><span class="no">${d.num}</span></span>
      <span class="drm-date">${dpick(d.date)}</span></button>`).join('')+'</div>';
 }
+/* ——— optional "special event nearby" markers (Fever) — kept SEPARATE from the curated itinerary. Reusable: key by date token (DD.M). ——— */
+const EVIC='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.2l1.7 5.6L19.4 9l-5.7 1.7L12 16.4l-1.7-5.7L4.6 9l5.7-1.2z"/><circle cx="18.7" cy="5.3" r="1.3"/><circle cx="5.4" cy="17.6" r="1.1"/></svg>';
+const EVENTS={
+ "27.6":[
+  {name:"Candlelight: עולמו של ג'ו היסאישי",time:"18:15",date:"27.6",venue:"אוסקה",dist:"~15–30 דק' ברכבת מקיוטו",price:"מ-¥3,850",rating:4.64,reviews:1950,link:"https://feverup.com/m/133191",
+   note:"קונצרט לאור נרות עם הרכב כלי-קשת חי, כולו מוזיקה של ג'ו היסאישי — המלחין של אולפן ג'יבלי. ערב קסום ואופציונלי שמתחבר יפה לחוט הג'יבלי של הטיול: ערב באוסקה, ובחזרה לקיוטו לישון.",
+   sibling:{name:"Candlelight: פסקולי קולנוע קסומים",time:"16:00",venue:"Ohtsuki Noh Theatre, אוסקה",link:"https://feverup.com/m/148964"}}
+ ]
+};
+function dayEvents(i){const d=days[i];if(!d)return null;const m=d.date.match(/(\d+\.\d+)/);return m?(EVENTS[m[1]]||null):null;}
+function dayEventMarker(i){const evs=dayEvents(i);if(!evs||!evs.length)return '';
+  return '<div class="ev-wrap">'+evs.map(e=>`<button class="ev-mark"><span class="ev-ic">${EVIC}</span><span class="ev-mark-t"><span class="ev-tag">✦ אירוע מיוחד בקרבת מקום · אופציונלי</span><span class="ev-name">${e.name}</span></span><span class="ev-chev">▾</span></button><div class="ev-panel" hidden><div class="ev-row"><span class="ev-k">מתי</span><span>${e.date} · ${e.time}</span></div><div class="ev-row"><span class="ev-k">איפה</span><span>${e.venue} · ${e.dist}</span></div><div class="ev-row"><span class="ev-k">מחיר</span><span>${e.price}</span></div><div class="ev-row"><span class="ev-k">דירוג</span><span>${bubbles(e.rating)} ${e.rating} · ${e.reviews.toLocaleString()} ביקורות</span></div><p class="ev-note">${e.note}</p>${e.sibling?`<div class="ev-sib">גם באותו ערב: <b>${e.sibling.name}</b> · ${e.sibling.time} · ${e.sibling.venue} — <a href="${e.sibling.link}" target="_blank" rel="noopener">Fever ↗</a></div>`:''}<a class="ev-cta" href="${e.link}" target="_blank" rel="noopener">להזמנה ב-Fever ↗</a><div class="ev-foot">לא חלק מהמסלול המתוכנן — הצעה לערב חופשי.</div></div>`).join('')+'</div>';
+}
 // render a timeline "when" cell: if it leads with a clock time (14:00 · נחיתה) show the time as a schedule marker + sub-label
 function whenHTML(w){const m=w.match(/^(\d{1,2}:\d{2})\s*·?\s*(.*)$/);if(m){return `<span class="tl-time">${m[1]}</span>${m[2]?`<span class="tl-lab">${waterLabel(w)?I.wave:''}${m[2]}</span>`:''}`;}return `${waterLabel(w)?I.wave:''}<span class="tl-lab">${w}</span>`;}
 function renderFocus(){
@@ -891,6 +923,7 @@ function renderFocus(){
      </div>
      <div class="timeline">${rows}</div>
      ${mapsRoute(d)}
+     ${dayEventMarker(curDay)}
      <div class="df-tip">${I.spark}<div>${glossWrap(d.tip)}</div></div>
    </div>`;
 }
@@ -1168,7 +1201,9 @@ document.addEventListener('click',e=>{
   const head=e.target.closest('[data-assoctoggle]');
   if(head){const aces=head.parentElement.querySelector('.aces'); aces.hidden=!aces.hidden; head.classList.toggle('open',!aces.hidden); return;}
   const chip=e.target.closest('.ace');
-  if(chip){const body=chip.parentElement.querySelector('.ace-body'); const open=body.classList.toggle('open'); chip.classList.toggle('open',open);}
+  if(chip){const body=chip.parentElement.querySelector('.ace-body'); const open=body.classList.toggle('open'); chip.classList.toggle('open',open); return;}
+  const ev=e.target.closest('.ev-mark');
+  if(ev){const p=ev.nextElementSibling; if(p&&p.classList.contains('ev-panel')){p.hidden=!p.hidden; ev.classList.toggle('open',!p.hidden);}}
 });
 
 const tabDefs=[['intro','מבוא','Welcome'],['days','המסלול','Itinerary'],['stay','לינה','Stays'],['book','להזמין','Book'],['info','מידע','Info']];
