@@ -270,6 +270,28 @@
   .df-wx .dfw-t small{font-weight:600;color:var(--muted);}
   .df-wx .dfw-p{display:flex;align-items:center;gap:2px;font-size:10.5px;font-weight:700;color:var(--ai);}
   .df-wx .dfw-p svg{width:11px;height:11px;}
+  /* hotel strips */
+  .stay-group{margin-bottom:20px;}
+  .stay-city{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 2px 10px;}
+  .stay-hint{font-size:10.5px;color:var(--muted);white-space:nowrap;}
+  .stay-strip{display:flex;gap:11px;overflow-x:auto;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;padding:7px 2px 12px;scrollbar-width:thin;scrollbar-color:var(--line) transparent;}
+  .stay-strip::-webkit-scrollbar{height:5px;}
+  .stay-strip::-webkit-scrollbar-thumb{background:var(--line);border-radius:5px;}
+  .stay-strip.dragging{cursor:grabbing;user-select:none;scroll-snap-type:none;}
+  .stay-strip.dragging .scard{cursor:grabbing;}
+  .scard{flex:0 0 80%;max-width:300px;scroll-snap-align:start;background:var(--card);border:1px solid var(--line);border-radius:11px;padding:14px 15px 13px;text-decoration:none;color:inherit;position:relative;display:flex;flex-direction:column;gap:5px;cursor:grab;}
+  .scard.rec{border:1.5px solid var(--shu);box-shadow:0 3px 16px rgba(168,64,42,.10);}
+  .rec-badge{position:absolute;top:-9px;inset-inline-start:14px;background:var(--shu);color:#fff;font-size:10px;font-weight:800;padding:2px 9px;border-radius:8px;letter-spacing:.3px;}
+  .scard .tier{align-self:flex-start;font-size:10.5px;font-weight:800;color:var(--tc);border:1px solid var(--tc);border-radius:7px;padding:2px 9px;background:var(--paper2);}
+  .scard h3{margin:3px 0 0;font-size:15px;font-weight:800;color:var(--ink);line-height:1.25;}
+  .scard-area{font-size:12px;color:var(--muted);}
+  .scard .rate{font-size:12px;}
+  .scard-why{font-size:12.5px;color:var(--ink2);line-height:1.45;flex:1;}
+  .scard-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:5px;padding-top:9px;border-top:1px solid var(--line2);}
+  .scard-price{font-size:14px;font-weight:800;color:var(--ai);}
+  .scard-price small{font-weight:600;color:var(--muted);font-size:10.5px;}
+  .scard-link{font-size:11px;font-weight:700;color:var(--shu);display:flex;align-items:center;gap:4px;white-space:nowrap;}
+  .scard-link svg{width:14px;height:14px;}
   .wx{display:flex;gap:10px;margin:0 0 8px;}
   .wx-card{flex:1;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px 13px;}
   .wx-card .wx-city{font-size:12px;color:var(--muted);font-weight:700;display:flex;align-items:center;gap:6px;}
@@ -338,7 +360,7 @@
 
   <div id="view-stay" style="display:none">
     <div class="shead"><span class="seal">宿</span><div><div class="sh-he">איפה לישון</div><div class="sh-ro">Stays</div></div></div>
-    <div class="stay-note">המלצות מדורגות גבוה ב-Tripadvisor לתאריכים שלכם. הכפתור פותח את המלון באפליקציה.</div>
+    <div class="stay-note">לכל עיר: <b>ההמלצה שלנו</b> ועוד אפשרויות — מרמת ביניים ועד יוקרה. החליקו לצדדים בין הכרטיסים, והקישו לפתיחה ב-Tripadvisor.</div>
     <div id="hotellist"></div>
   </div>
 
@@ -644,10 +666,22 @@ const days=[
   tip:"זהו, ליהי וליאור — חזרתם עם זיכרונות לכל החיים. סיינרה, יפן."},
 ];
 
-const hotels=[
- {city:'tokyo',cityName:"טוקיו · שינג'וקו",name:"Kimpton Shinjuku Tokyo",rating:4.5,reviews:525,tags:["מעוצב","רומנטי","#1 בנישי-שינג'וקו"],price:'~$500 / לילה',img:'',url:'https://www.tripadvisor.com/Hotel_Review-g14133673-d19601940-Reviews-Kimpton_Shinjuku_Tokyo_By_IHG-Nishishinjuku_Shinjuku_Tokyo_Tokyo_Prefecture_Kanto.html'},
- {city:'tokyo',cityName:"טוקיו · יוקרה",name:"Park Hyatt Tokyo",rating:4.5,reviews:2500,tags:["איקוני","נוף עיר","משופץ 2025"],price:'~$800 / לילה',img:'',url:'https://www.tripadvisor.com/Hotel_Review-g14133673-d307368-Reviews-Park_Hyatt_Tokyo-Nishishinjuku_Shinjuku_Tokyo_Tokyo_Prefecture_Kanto.html'},
- {city:'kyoto',cityName:"קיוטו · גיון",name:"Four Seasons Hotel Kyoto",rating:4.5,reviews:1050,tags:["גן עתיק","ספא","ליד גיון"],price:'~$800 / לילה',img:'',url:'https://www.tripadvisor.com/Hotel_Review-g298564-d10532611-Reviews-Four_Seasons_Hotel_Kyoto-Kyoto_Kyoto_Prefecture_Kinki.html'},
+// each city = our recommended pick + web-verified alternatives spanning mid → upper-mid → high luxury
+const stays=[
+ {city:'tokyo', cityName:"טוקיו · שינג'וקו", list:[
+   {rec:1,name:"Kimpton Shinjuku Tokyo",area:"נישי-שינג'וקו",tier:'high',price:'~$500',rating:4.5,why:"מעוצב ורומנטי — מדורג #1 באזור.",url:"https://www.tripadvisor.com/Hotel_Review-g14133673-d19601940-Reviews-Kimpton_Shinjuku_Tokyo_By_IHG-Nishishinjuku_Shinjuku_Tokyo_Tokyo_Prefecture_Kanto.html"},
+   {name:"JR Kyushu Hotel Blossom Shinjuku",area:"יויוגי · דרום שינג'וקו",tier:'mid',price:'$150–230',rating:4.0,why:"תמורה מצוינת וקרבה מצוינת לתחנה.",url:"https://www.tripadvisor.com/Hotel_Review-g14133713-d6650764-Reviews-JR_Kyushu_Hotel_Blossom_Shinjuku-Yoyogi_Shibuya_Tokyo_Tokyo_Prefecture_Kanto.html"},
+   {name:"Hyatt Regency Tokyo",area:"נישי-שינג'וקו",tier:'upper',price:'$200–320',rating:4.0,why:"מותג מלא-שירות, חדרים מרווחים.",url:"https://www.tripadvisor.com/Hotel_Review-g14133673-d307324-Reviews-Hyatt_Regency_Tokyo-Nishishinjuku_Shinjuku_Tokyo_Tokyo_Prefecture_Kanto.html"},
+   {name:"Keio Plaza Hotel Tokyo",area:"נישי-שינג'וקו",tier:'upper',price:'$280–450',rating:4.0,why:"גורד שחקים איקוני, מאוד מרכזי.",url:"https://www.tripadvisor.com/Hotel_Review-g14133673-d304305-Reviews-Keio_Plaza_Hotel_Tokyo-Nishishinjuku_Shinjuku_Tokyo_Tokyo_Prefecture_Kanto.html"},
+   {name:"Park Hyatt Tokyo",area:"נישי-שינג'וקו",tier:'high',price:'$700+',rating:4.5,why:"נוף איקוני ורומנטי, שופץ מחדש.",url:"https://www.tripadvisor.com/Hotel_Review-g14133673-d307368-Reviews-Park_Hyatt_Tokyo-Nishishinjuku_Shinjuku_Tokyo_Tokyo_Prefecture_Kanto.html"},
+ ]},
+ {city:'kyoto', cityName:"קיוטו · גיון", list:[
+   {rec:1,name:"Four Seasons Hotel Kyoto",area:"היגאשיאמה · ליד גיון",tier:'high',price:'~$800',rating:4.5,why:"גן עתיק וספא, צמוד לגיון.",url:"https://www.tripadvisor.com/Hotel_Review-g298564-d10532611-Reviews-Four_Seasons_Hotel_Kyoto-Kyoto_Kyoto_Prefecture_Kinki.html"},
+   {name:"Cross Hotel Kyoto",area:"קוואראמאצ'י · סאנג'ו",tier:'mid',price:'$150–230',rating:4.0,why:"מעוצב, בלב אזור ההליכה והאוכל.",url:"https://www.tripadvisor.com/Hotel_Review-g298564-d15194272-Reviews-Cross_Hotel_Kyoto-Kyoto_Kyoto_Prefecture_Kinki.html"},
+   {name:"Hotel The Celestine Kyoto Gion",area:"גיון · היגאשיאמה",tier:'upper',price:'$250–420',rating:4.0,why:"אדריכלות קיוטו מסורתית בלב גיון.",url:"https://www.tripadvisor.com/Hotel_Review-g298564-d12257620-Reviews-Hotel_The_Celestine_Kyoto_Gion-Kyoto_Kyoto_Prefecture_Kinki.html"},
+   {name:"Park Hyatt Kyoto",area:"היגאשיאמה",tier:'high',price:'$900+',rating:4.5,why:"70 חדרים ונוף לפגודה — הכי רומנטי.",url:"https://www.tripadvisor.com/Hotel_Review-g298564-d17637198-Reviews-Park_Hyatt_Kyoto-Kyoto_Kyoto_Prefecture_Kinki.html"},
+   {name:"The Ritz-Carlton, Kyoto",area:"גדת נהר קאמו · מרכז",tier:'high',price:'$1,000+',rating:4.5,why:"יוקרה על הנהר עם גנים.",url:"https://www.tripadvisor.com/Search?q=The%20Ritz-Carlton%20Kyoto"},
+ ]},
 ];
 
 const bookings=[
@@ -839,19 +873,30 @@ function openGloss(k){
 document.addEventListener('click',e=>{const g=e.target.closest('.gl'); if(g){e.preventDefault(); openGloss(g.dataset.g);}});
 
 const hl=document.getElementById('hotellist');
-hotels.forEach(h=>{
-  const c=C[h.city];
-  const el=document.createElement('div'); el.className='hotel';
-  el.innerHTML=`
-   ${h.img?`<img class="ph" src="${h.img}" alt="${h.name}" loading="lazy" onerror="this.style.display='none'">`:''}
-   <div class="body">
-     <span class="city-tag" style="background:${c}"><span class="kj">${KJ[h.city]}</span> ${h.cityName}</span>
-     <h3>${h.name}</h3>
-     <span class="rate">${bubbles(h.rating)} ${h.rating.toFixed(1)} · ${h.reviews.toLocaleString()} ביקורות</span>
-     <div class="meta-row">${h.tags.map(t=>`<span class="pill">${t}</span>`).join('')}<span class="pill">${h.price}</span></div>
-     <a class="cta" href="${h.url}" target="_blank" rel="noopener">${I.ta} צפו ב-Tripadvisor</a>
-   </div>`;
+const TIER={mid:['ביניים','#2f6a5f'],upper:['ביניים-גבוה','#a98a4e'],high:['יוקרה','#a8402a']};
+stays.forEach(s=>{
+  const c=C[s.city];
+  const cards=s.list.map(h=>{const t=TIER[h.tier];return `<a class="scard${h.rec?' rec':''}" href="${h.url}" target="_blank" rel="noopener">
+      ${h.rec?'<span class="rec-badge">ההמלצה שלנו</span>':''}
+      <span class="tier" style="--tc:${t[1]}">${t[0]}</span>
+      <h3>${h.name}</h3>
+      <div class="scard-area">${h.area}</div>
+      <span class="rate">${bubbles(h.rating)} ${h.rating.toFixed(1)}</span>
+      <div class="scard-why">${h.why}</div>
+      <div class="scard-foot"><span class="scard-price">${h.price}<small> / לילה</small></span><span class="scard-link">${I.ta} Tripadvisor</span></div>
+    </a>`;}).join('');
+  const el=document.createElement('div'); el.className='stay-group';
+  el.innerHTML=`<div class="stay-city"><span class="city-tag" style="background:${c}"><span class="kj">${KJ[s.city]}</span> ${s.cityName}</span><span class="stay-hint">${s.list.length} אפשרויות · החליקו ←</span></div><div class="stay-strip">${cards}</div>`;
   hl.appendChild(el);
+});
+// click-drag to scroll on desktop (mouse); touch uses native momentum scroll
+hl.querySelectorAll('.stay-strip').forEach(strip=>{
+  let down=false,moved=false,sx=0,sl=0;
+  strip.addEventListener('pointerdown',e=>{if(e.pointerType==='touch')return;down=true;moved=false;sx=e.clientX;sl=strip.scrollLeft;strip.classList.add('dragging');});
+  strip.addEventListener('pointermove',e=>{if(!down)return;const dx=e.clientX-sx;if(Math.abs(dx)>4)moved=true;strip.scrollLeft=sl-dx;});
+  const up=()=>{down=false;setTimeout(()=>strip.classList.remove('dragging'),0);};
+  strip.addEventListener('pointerup',up);strip.addEventListener('pointerleave',up);
+  strip.addEventListener('click',e=>{if(moved){e.preventDefault();e.stopPropagation();moved=false;}},true);
 });
 
 const cl=document.getElementById('checklist');
