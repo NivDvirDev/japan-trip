@@ -311,7 +311,6 @@
   <div class="sub">22 ביוני – 2 ביולי 2026 · טיול החלומות שלכם</div>
   <div class="route">טוקיו · 3 ← קיוטו · 3 ← טוקיו · 4</div>
   <div class="count"><span>10 לילות</span><span>שינג'וקו · גיון</span><span>נארה כטיול יום</span></div>
-  <div class="trip-status" id="tripStatus" style="display:none"></div>
 </div>
 
 <div class="tabs" id="tabs"></div>
@@ -936,9 +935,6 @@ function nowPhase(){const h=new Date().getHours();return h<11?'בוקר':(h<16?'
 function blockPhase(l){if(/בוקר/.test(l))return 'בוקר';if(/צהר|אחה/.test(l))return 'צהריים';if(/ערב/.test(l))return 'ערב';return null;}
 function mapsRoute(d){const pts=[];d.blocks.forEach(b=>{if(b[2])b[2].forEach(p=>{if(!pts.includes(p))pts.push(p);});});if(pts.length<2)return '';const enc=p=>encodeURIComponent(shortName(p)+' Japan');const dest=enc(pts[pts.length-1]);const wp=pts.slice(0,-1).map(enc).join('|');return `<a class="df-route" href="https://www.google.com/maps/dir/?api=1&destination=${dest}&waypoints=${wp}&travelmode=transit" target="_blank" rel="noopener">${I.gm} נווט למסלול היום ב-Google Maps</a>`;}
 function speakJa(t){try{if(!('speechSynthesis'in window))return;const u=new SpeechSynthesisUtterance(t);u.lang='ja-JP';u.rate=.9;const v=speechSynthesis.getVoices().find(v=>/ja/i.test(v.lang));if(v)u.voice=v;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}}
-
-// hero trip clock — countdown before, day-of-trip during, farewell after
-(function(){const el=document.getElementById('tripStatus');if(!el)return;const t=midnight(new Date()).getTime();const start=midnight(parseDayDate(days[0].date)).getTime();const end=midnight(parseDayDate(days[days.length-1].date)).getTime();const dot='<span class="ts-dot"></span>';let html;if(t<start){const n=Math.round((start-t)/86400000);html=dot+(n===1?'<b>מחר</b> טסים ליפן ✦':`עוד <b>${n}</b> ימים ל-יפן ✦`);}else if(t<=end){const i=TRIP_TODAY>=0?TRIP_TODAY:0;html=dot+`<b>יום ${i+1}</b> מתוך ${days.length} · ${CITYN[days[i].city]}`;}else{html=dot+'הטיול הסתיים — סָיוֹנָרָה ✦';}el.innerHTML=html;el.style.display='inline-flex';})();
 
 // currency quick reference (hardcoded, labelled — robust offline)
 (function(){const box=document.getElementById('curBox');if(!box)return;const r=0.0185;const yens=[500,1000,3000,5000,10000];const chips=yens.map(y=>`<span class="cur-chip">¥${y.toLocaleString()} ≈ <b>₪${Math.round(y*r)}</b></span>`).join('');box.innerHTML=`<div class="cur-grid">${chips}</div><div class="cur-note">שער משוער ליוני 2026: 100¥ ≈ ₪1.85 · ₪1 ≈ ¥54. לאומדן מהיר בלבד.</div>`;})();
