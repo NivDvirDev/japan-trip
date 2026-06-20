@@ -499,7 +499,8 @@ const details={
  "Ghibli Museum":{cat:'culture',
   guide:"אם גדלתם על 'השכן שלי טוטורו' או 'המסע המופלא' — זו עלייה לרגל. מוזיאון קסום של אולפן ג'יבלי: אין מסלול קבוע, פשוט מסתובבים, מגלים סרטון קצר שמוקרן רק כאן, ומטפסים על חתול-אוטובוס. אסור לצלם בפנים — וזה דווקא יפה, פשוט תהיו שם.",
   know:["כרטיסים רק מראש דרך Lawson, נמכרים ב-10 לחודש הקודם ונגמרים בדקות.","השם על הכרטיס חייב להתאים לדרכון בדיוק.","כרטיס ~¥1,000. סגור בימי שלישי, שעות 10:00–18:00.","הסרטון הקצר ב'תיאטרון סאטורן' מוקרן רק כאן ומתחלף."],
-  duration:"~2-3 שעות.",getting:"מיטקה (Mitaka) או Kichijoji, ואז אוטובוס/הליכה דרך פארק אינוקאשירה."},
+  duration:"~2-3 שעות.",getting:"מיטקה (Mitaka) או Kichijoji, ואז אוטובוס/הליכה דרך פארק אינוקאשירה.",
+  assoc:['ghibli']},
  "Shimokitazawa":{cat:'urban',
   guide:"שכונת הבוהמה של טוקיו — סמטאות קטנות מלאות חנויות יד-שנייה (vintage), בתי קפה, תקליטים ובארים זעירים. קצב איטי, אווירה צעירה. מושלם לבוקר נינוח של חיטוט וקפה.",
   when:"אחה\"צ נעים לשיטוט.",getting:"תחנת שימוקיטזאווה (קו Odakyu/Keio)."},
@@ -536,6 +537,7 @@ const details={
   guide:"בוא נעצור רגע לפני שחוצים. הצומת הזה הוא הסואן בעולם — עד שלושת אלפים אנשים בכל מחזור אור, וכולם איכשהו לא מתנגשים. זה לא כאוס, זו נימוס. עִמדו בצד, נשמו, ואז זִרמו עם ההמון.",
   know:["נקודת צפייה מצוינת: קומה 2 של בניין מגנט/סטاربקס מול הצומת.","Shibuya Sky לתצפית-על — הזמינו מראש, מרהיב בשקיעה."],
   when:"אחרי החשכה — הניאון בשיאו.",
+  assoc:['toyota','mazda','honda','nissan','subaru','suzuki','lexus','mitsubishi','yamaha'],
   nearby:[["Shibuya Sky","Shibuya Sky"],["פסל האצ'יקו","Hachiko Statue Shibuya"]]},
  "Hachiko Statue Shibuya":{cat:'culture',
   guide:"הכלב הזה, האצ'יקו, חיכה לבעלו בתחנה כל יום אחר הצהריים. יום אחד הבעל לא חזר — ובכל זאת האצ'יקו המשיך לבוא, באותה שעה, כמעט עשר שנים. ליפנים הוא סמל לנאמנות. גם זה חלק מהתרבות כאן: לזכור, ולהיות נאמן.",
@@ -546,6 +548,7 @@ const details={
   know:["יחפים; חלק מהמסלול במים עד הברך — לבשו מכנס שמתגלגל.","כרטיס ~¥3,800 (חול) / ¥4,200 (סופ\"ש), לפי שעה — הזמינו 1-2 שבועות מראש.","שעות ~9:00–22:00, כניסה אחרונה 21:00; סלוט 9:00 הכי שקט.","שמלות לא מומלצות (יש משטחי מראה ברצפה)."],
   when:"סלוט בוקר מוקדם או ערב.",duration:"~1.5 שעות.",
   getting:"תחנת Shin-Toyosu (קו Yurikamome) או Toyosu (קו Yurakucho).",
+  assoc:['canon','nikon','panasonic','sharp','casio','seiko','toshiba'],
   nearby:[["teamLab Borderless","teamLab Borderless Azabudai"]]},
  "Senso-ji Temple":{cat:'culture',
   guide:"זה המקדש העתיק בטוקיו, משנת 645. השער האדום הענק נקרא 'שער הרעם'. לפני הכניסה, נהוג למשוך עשן קטורת אל עבר הגוף — אומרים שזה מביא בריאות. תנסו, גם אם רק בשביל החוויה.",
@@ -1006,7 +1009,14 @@ const AIC={
  mochi:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="12" cy="13" rx="7" ry="5.5"/><path d="M7 11.2c2.6-1.6 7.4-1.6 10 0" stroke-width="1.1"/></svg>',
  pocky:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M5 19 13 11"/><path d="M14.5 4.5 19 9l-3.2 5-4.3-4.3z" fill="currentColor" stroke="none"/></svg>',
  bento:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="7" width="16" height="10" rx="2"/><path d="M12 7v10M4 12.5h8" stroke-width="1.1"/><circle cx="16" cy="10.6" r="1.3" fill="currentColor" stroke="none"/></svg>',
- teri:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 18 21 6"/><ellipse cx="9" cy="14" rx="2.3" ry="1.8" transform="rotate(-33 9 14)" fill="currentColor" stroke="none"/><ellipse cx="13.5" cy="11" rx="2.3" ry="1.8" transform="rotate(-33 13.5 11)" fill="currentColor" stroke="none"/></svg>'
+ teri:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 18 21 6"/><ellipse cx="9" cy="14" rx="2.3" ry="1.8" transform="rotate(-33 9 14)" fill="currentColor" stroke="none"/><ellipse cx="13.5" cy="11" rx="2.3" ry="1.8" transform="rotate(-33 13.5 11)" fill="currentColor" stroke="none"/></svg>',
+ camera:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="3" y="7" width="18" height="12" rx="2"/><circle cx="12" cy="13" r="3.3"/><path d="M8 7l1.2-2h5.6L16 7"/></svg>',
+ screen:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M9 20h6M12 17v3" stroke-linecap="round"/></svg>',
+ watch:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="7" y="7" width="10" height="10" rx="3"/><path d="M9 7l.5-3h5l.5 3M9 17l.5 3h5l.5-3"/><path d="M12 10v3l2 1" stroke-linecap="round"/></svg>',
+ car:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M4 13l1.8-4A2 2 0 0 1 7.6 8h8.8a2 2 0 0 1 1.8 1.1l1.8 3.9"/><path d="M3 13h18v3.2a.8.8 0 0 1-.8.8h-1.4M5.2 17H3.8a.8.8 0 0 1-.8-.8V13"/><circle cx="7.5" cy="17" r="1.6"/><circle cx="16.5" cy="17" r="1.6"/></svg>',
+ star6:'<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5.5" r="1.5"/><circle cx="6.8" cy="9.5" r="1.5"/><circle cx="17.2" cy="9.5" r="1.5"/><circle cx="9" cy="15" r="1.5"/><circle cx="15" cy="15" r="1.5"/><circle cx="12" cy="11" r="1.5"/></svg>',
+ fork:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 5v6.5a4 4 0 0 0 8 0V5M12 5v6.5"/><path d="M8 16v3M16 16v3M12 16.5v2.5"/></svg>',
+ diamond3:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l3.2 5.2H8.8z"/><path d="M6.4 11.5l3.2 5.2H3.2z"/><path d="M17.6 11.5l3.2 5.2h-6.4z"/></svg>'
 };
 const ASSOC={
  nintendo:{he:'נינטנדו',en:'Nintendo',cat:'game',ic:'controller',fact:"נוסדה בקיוטו ב-1889 — לא כחברת משחקים אלא כיצרנית קלפי 'האנאפודה'. רק כעבור עשורים עברה למשחקי וידאו."},
@@ -1040,7 +1050,23 @@ const ASSOC={
  whisky:{he:'ויסקי יפני',en:'Japanese Whisky',cat:'food',ic:'whisky',fact:"מזקקת הוויסקי הראשונה ביפן, יאמאזאקי, נפתחה בידי שינג'ירו טורי מ-Suntory ב-1923."},
  mochi:{he:"מוצ'י",en:'Mochi',cat:'food',ic:'mochi',fact:"עוגת אורז כתושה ודביקה, מוכנה בטקס ה'מוצ'יצוקי' המסורתי, ונאכלת במיוחד בראש השנה."},
  pocky:{he:'פוקי',en:'Pocky',cat:'food',ic:'pocky',fact:"Glico השיקה את Pocky ביפן ב-1966; השם מחקה את 'פוקין', צליל שבירת המקלון."},
- bento:{he:'בנטו',en:'Bento',cat:'food',ic:'bento',fact:"קופסת הארוחה האישית היפנית בת מאות שנים — והשראה לתרבות קופסת-האוכל בעולם."}
+ bento:{he:'בנטו',en:'Bento',cat:'food',ic:'bento',fact:"קופסת הארוחה האישית היפנית בת מאות שנים — והשראה לתרבות קופסת-האוכל בעולם."},
+ toyota:{he:'טויוטה',en:'Toyota',cat:'brand',ic:'car',fact:"התחילה כיצרנית נולי אריגה יפנית; משפחת טויודה שינתה את השם ל'טויוטה' (8 משיכות מכחול, נחשב מספר מזל) ב-1937."},
+ mazda:{he:'מאזדה',en:'Mazda',cat:'brand',ic:'car',fact:"נוסדה בהירושימה ב-1920; השם רומז גם לאל הזורואסטרי אהורה-מזדה וגם למייסד ג'וג'ירו מאטסודה."},
+ honda:{he:'הונדה',en:'Honda',cat:'brand',ic:'car',fact:"הוקמה בידי סואיצ'ירו הונדה ב-1948, תחילה כיצרנית אופניים ממונעים ביפן שאחרי המלחמה."},
+ subaru:{he:'סובארו',en:'Subaru',cat:'brand',ic:'star6',fact:"פירושו ביפנית צביר הכוכבים 'פלאיאדס'; ששת הכוכבים בלוגו מסמלים שש חברות שהתמזגו."},
+ mitsubishi:{he:'מיצובישי',en:'Mitsubishi',cat:'brand',ic:'diamond3',fact:"פירושו 'שלושה יהלומים' ביפנית; החברה צמחה מחברת ספנות משנת 1870."},
+ suzuki:{he:'סוזוקי',en:'Suzuki',cat:'brand',ic:'car',fact:"התחילה ב-1909 כמפעל נולי אריגה יפני, לפני המעבר לרכב ואופנועים."},
+ nissan:{he:'ניסאן',en:'Nissan',cat:'brand',ic:'car',fact:"יצרנית הרכב היפנית, ששמות Datsun ו-Nissan מתחקים לשנות ה-30 ביפן."},
+ lexus:{he:'לקסוס',en:'Lexus',cat:'brand',ic:'car',fact:"מותג היוקרה של טויוטה, הושק ב-1989; הסיפור ש-LEXUS הוא ראשי תיבות הוא מיתוס — השם הולחן מ'luxury' ו'lexicon'."},
+ yamaha:{he:'ימאהה',en:'Yamaha',cat:'brand',ic:'fork',fact:"התחילה ב-1887 בייצור אורגנים ביפן; שלושת מזלגות-הקול בלוגו רומזים לשורשיה המוזיקליים."},
+ canon:{he:'קאנון',en:'Canon',cat:'brand',ic:'camera',fact:"נוסדה בטוקיו ב-1937; המצלמה הראשונה שלה, ה-Kwanon, נקראה על שם אלת הרחמים הבודהיסטית."},
+ nikon:{he:'ניקון',en:'Nikon',cat:'brand',ic:'camera',fact:"יצרנית האופטיקה היפנית הוקמה ב-1917; השם הוא קיצור של Nippon Kogaku — 'אופטיקה יפנית'."},
+ panasonic:{he:'פנסוניק',en:'Panasonic',cat:'brand',ic:'screen',fact:"נוסדה בידי קונוסוקה מאטסושיטה באוסקה ב-1918, שהחל מייצור שקעי תאורה."},
+ sharp:{he:'שארפ',en:'Sharp',cat:'brand',ic:'screen',fact:"נקראה על שם העיפרון המכני 'Ever-Sharp' שהמציא מייסדה היפני ב-1915."},
+ casio:{he:"קסיו (G-Shock)",en:'Casio',cat:'brand',ic:'watch',fact:"Casio היפנית השיקה את שעון ה-G-Shock עמיד-ההלם ב-1983, אחרי שמהנדס הפיל וניפץ את שעון אביו."},
+ seiko:{he:'סייקו',en:'Seiko',cat:'brand',ic:'watch',fact:"חברת טוקיו ששחררה את שעון הקוורץ הראשון בעולם, ה-Astron, ב-1969."},
+ toshiba:{he:'תושיבה',en:'Toshiba',cat:'brand',ic:'screen',fact:"ענקית אלקטרוניקה יפנית שנוצרה במיזוג ב-1939, עם שורשים עד 1875."}
 };
 function aceChip(id){const a=ASSOC[id];if(!a)return '';const cc=ACAT[a.cat]||['',''];return `<div class="ace-wrap"><button class="ace" data-ace="${id}" style="--ac:${cc[1]}"><span class="ace-ic">${AIC[a.ic]||AIC.spark}</span><span class="ace-nm">${a.he}</span><span class="ace-chev">▸</span></button><div class="ace-body"><div class="ace-en">${a.en} · ${cc[0]}</div><p>${a.fact}</p></div></div>`;}
 function assocSection(d){if(!d.assoc||!d.assoc.length)return '';return `<div class="sh-sec assoc-sec"><button class="assoc-head" data-assoctoggle><span class="ah-l">${AIC.spark} ידעת? · קשרים מהבית</span><span class="ah-c">${d.assoc.length}</span><span class="ah-chev">▾</span></button><div class="aces" hidden>${d.assoc.map(aceChip).join('')}</div></div>`;}
