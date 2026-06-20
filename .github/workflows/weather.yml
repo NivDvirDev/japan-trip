@@ -2,8 +2,10 @@ name: Bake weather
 
 # Refreshes weather.json server-side on a schedule so a cold/offline open of the
 # app still shows recent weather. The page (index.html) reads weather.json as a
-# fallback after a live Open-Meteo fetch. GitHub cron is best-effort (can run
-# 15-60 min late) and is auto-disabled after ~60 days of repo inactivity.
+# fallback: .data = current weather (Tokyo, Kyoto) for the Info tab; .forecast =
+# per-day daily forecast (Tokyo, Kyoto, Nara) for the itinerary day badges.
+# GitHub cron is best-effort (can run 15-60 min late) and is auto-disabled after
+# ~60 days of repo inactivity.
 
 on:
   schedule:
@@ -19,20 +21,30 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Fetch Open-Meteo and write weather.json
+      - name: Fetch Open-Meteo (current + per-day forecast) and write weather.json
         run: |
           node -e '
           const https=require("https");
-          const cities=[{n:"טוקיו",kj:"東",la:35.68,lo:139.69},{n:"קיוטו",kj:"京",la:35.01,lo:135.77}];
           function get(u){return new Promise((res,rej)=>{https.get(u,r=>{let d="";r.on("data",c=>d+=c);r.on("end",()=>{try{res(JSON.parse(d))}catch(e){rej(e)}});}).on("error",rej);});}
+          const cur=[{n:"טוקיו",kj:"東",la:35.68,lo:139.69},{n:"קיוטו",kj:"京",la:35.01,lo:135.77}];
+          const fcity={tokyo:{la:35.68,lo:139.69},kyoto:{la:35.01,lo:135.77},nara:{la:34.685,lo:135.805}};
+          const SD="2026-06-22", ED="2026-07-02";
           (async()=>{
             const data=[];
-            for(const c of cities){
+            for(const c of cur){
               const j=await get(`https://api.open-meteo.com/v1/forecast?latitude=${c.la}&longitude=${c.lo}&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min,sunset&timezone=Asia%2FTokyo&forecast_days=1`);
               data.push({n:c.n,kj:c.kj,t:j.current.temperature_2m,c:j.current.weather_code,mx:j.daily.temperature_2m_max[0],mn:j.daily.temperature_2m_min[0],ss:(j.daily.sunset[0]||"").slice(11,16)});
             }
-            require("fs").writeFileSync("weather.json",JSON.stringify({ts:Date.now(),data}));
-            console.log("baked",JSON.stringify(data));
+            const forecast={};
+            for(const k of Object.keys(fcity)){
+              const f=fcity[k];
+              const j=await get(`https://api.open-meteo.com/v1/forecast?latitude=${f.la}&longitude=${f.lo}&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Asia%2FTokyo&start_date=${SD}&end_date=${ED}`);
+              const d=j.daily; const m={};
+              (d.time||[]).forEach((t,i)=>{m[t]={c:d.weather_code[i],mx:d.temperature_2m_max[i],mn:d.temperature_2m_min[i],pp:d.precipitation_probability_max?d.precipitation_probability_max[i]:null};});
+              forecast[k]=m;
+            }
+            require("fs").writeFileSync("weather.json",JSON.stringify({ts:Date.now(),data,forecast}));
+            console.log("baked current+forecast");
           })().catch(e=>{console.error(e);process.exit(1);});
           '
 
@@ -41,5 +53,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add weather.json
-          git diff --staged --quiet || git commit -m "chore: bake weather [skip ci]"
+          git diff --staged --quiet || git commit -m "chore: bake weather"
           git push
