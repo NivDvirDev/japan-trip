@@ -670,6 +670,8 @@ const days=[
 const stays=[
  {city:'tokyo', cityName:"טוקיו · שינג'וקו", list:[
    {rec:1,name:"Kimpton Shinjuku Tokyo",area:"נישי-שינג'וקו",tier:'high',price:'~$500',rating:4.5,why:"מעוצב ורומנטי — מדורג #1 באזור.",url:"https://www.tripadvisor.com/Hotel_Review-g14133673-d19601940-Reviews-Kimpton_Shinjuku_Tokyo_By_IHG-Nishishinjuku_Shinjuku_Tokyo_Tokyo_Prefecture_Kanto.html"},
+   {name:"Sotetsu Fresa Inn Higashi-Shinjuku",area:"היגאשי-שינג'וקו",tier:'budget',price:'$70–110',rating:4.0,why:"רשת נקייה, תמורה מצוינת, מאוד מרכזי.",url:"https://www.tripadvisor.com/Hotel_Review-g1066457-d658576-Reviews-Sotetsu_Fresa_Inn_Higashi_Shinjuku-Shinjuku_Tokyo_Tokyo_Prefecture_Kanto.html"},
+   {name:"Tokyu Stay Shinjuku",area:"שינג'וקו 3-צ'ומה",tier:'value',price:'$120–165',rating:4.0,why:"חדרים חכמים עם מכונת כביסה, מיקום מעולה.",url:"https://www.booking.com/hotel/jp/tokyu-stay-shinjuku.html"},
    {name:"JR Kyushu Hotel Blossom Shinjuku",area:"יויוגי · דרום שינג'וקו",tier:'mid',price:'$150–230',rating:4.0,why:"תמורה מצוינת וקרבה מצוינת לתחנה.",url:"https://www.tripadvisor.com/Hotel_Review-g14133713-d6650764-Reviews-JR_Kyushu_Hotel_Blossom_Shinjuku-Yoyogi_Shibuya_Tokyo_Tokyo_Prefecture_Kanto.html"},
    {name:"Hyatt Regency Tokyo",area:"נישי-שינג'וקו",tier:'upper',price:'$200–320',rating:4.0,why:"מותג מלא-שירות, חדרים מרווחים.",url:"https://www.tripadvisor.com/Hotel_Review-g14133673-d307324-Reviews-Hyatt_Regency_Tokyo-Nishishinjuku_Shinjuku_Tokyo_Tokyo_Prefecture_Kanto.html"},
    {name:"Keio Plaza Hotel Tokyo",area:"נישי-שינג'וקו",tier:'upper',price:'$280–450',rating:4.0,why:"גורד שחקים איקוני, מאוד מרכזי.",url:"https://www.tripadvisor.com/Hotel_Review-g14133673-d304305-Reviews-Keio_Plaza_Hotel_Tokyo-Nishishinjuku_Shinjuku_Tokyo_Tokyo_Prefecture_Kanto.html"},
@@ -677,6 +679,8 @@ const stays=[
  ]},
  {city:'kyoto', cityName:"קיוטו · גיון", list:[
    {rec:1,name:"Four Seasons Hotel Kyoto",area:"היגאשיאמה · ליד גיון",tier:'high',price:'~$800',rating:4.5,why:"גן עתיק וספא, צמוד לגיון.",url:"https://www.tripadvisor.com/Hotel_Review-g298564-d10532611-Reviews-Four_Seasons_Hotel_Kyoto-Kyoto_Kyoto_Prefecture_Kinki.html"},
+   {name:"Sotetsu Fresa Inn Kyoto-Hachijoguchi",area:"ליד תחנת קיוטו",tier:'budget',price:'$70–120',rating:4.0,why:"חדרים מודרניים, צמוד לתחנה ולשינקנסן.",url:"https://www.tripadvisor.com/Hotel_Review-g298564-d12139499-Reviews-Sotetsu_Fresa_Inn_Kyoto_Hachijoguchi-Kyoto_Kyoto_Prefecture_Kinki.html"},
+   {name:"Hotel Resol Kyoto Kawaramachi Sanjo",area:"קוואראמאצ'י · סאנג'ו",tier:'value',price:'$120–170',rating:4.0,why:"מיקום מרכזי ליד גיון ופונטוצ'ו, צוות נחמד.",url:"https://www.tripadvisor.com/Hotel_Review-g298564-d13819748-Reviews-Hotel_Resol_Kyoto_Kawaramachi_Sanjo-Kyoto_Kyoto_Prefecture_Kinki.html"},
    {name:"Cross Hotel Kyoto",area:"קוואראמאצ'י · סאנג'ו",tier:'mid',price:'$150–230',rating:4.0,why:"מעוצב, בלב אזור ההליכה והאוכל.",url:"https://www.tripadvisor.com/Hotel_Review-g298564-d15194272-Reviews-Cross_Hotel_Kyoto-Kyoto_Kyoto_Prefecture_Kinki.html"},
    {name:"Hotel The Celestine Kyoto Gion",area:"גיון · היגאשיאמה",tier:'upper',price:'$250–420',rating:4.0,why:"אדריכלות קיוטו מסורתית בלב גיון.",url:"https://www.tripadvisor.com/Hotel_Review-g298564-d12257620-Reviews-Hotel_The_Celestine_Kyoto_Gion-Kyoto_Kyoto_Prefecture_Kinki.html"},
    {name:"Park Hyatt Kyoto",area:"היגאשיאמה",tier:'high',price:'$900+',rating:4.5,why:"70 חדרים ונוף לפגודה — הכי רומנטי.",url:"https://www.tripadvisor.com/Hotel_Review-g298564-d17637198-Reviews-Park_Hyatt_Kyoto-Kyoto_Kyoto_Prefecture_Kinki.html"},
@@ -873,7 +877,7 @@ function openGloss(k){
 document.addEventListener('click',e=>{const g=e.target.closest('.gl'); if(g){e.preventDefault(); openGloss(g.dataset.g);}});
 
 const hl=document.getElementById('hotellist');
-const TIER={mid:['ביניים','#2f6a5f'],upper:['ביניים-גבוה','#a98a4e'],high:['יוקרה','#a8402a']};
+const TIER={budget:['תקציבי','#5f86a0'],value:['משתלם','#3f8a86'],mid:['ביניים','#5f8a4e'],upper:['ביניים-גבוה','#a98a4e'],high:['יוקרה','#a8402a']};
 stays.forEach(s=>{
   const c=C[s.city];
   const cards=s.list.map(h=>{const t=TIER[h.tier];return `<a class="scard${h.rec?' rec':''}" href="${h.url}" target="_blank" rel="noopener">
