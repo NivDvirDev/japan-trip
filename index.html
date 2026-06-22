@@ -991,7 +991,7 @@ function openAssoc(id){const a=ASSOC[id];if(!a)return;const cc=ACAT[a.cat]||['',
   const primary=a.url?`<a class="ap-link" href="${a.url}" target="_blank" rel="noopener">למידע נוסף ↗</a>`:'';
   const search=`<a class="ap-link sub" href="https://www.google.com/search?q=${encodeURIComponent(a.en+' Japan')}&tbm=isch" target="_blank" rel="noopener">תמונות ↗</a>`;
   const rel=(a.rel&&a.rel.length&&a.rel.filter(r=>ASSOC[r]).length)
-    ? `<div class="ap-rel"><span class="ap-rel-h">קשור מהבית:</span> ${a.rel.filter(r=>ASSOC[r]).map(r=>`<button class="ap-rl" data-al="${r}">${ASSOC[r].he}</button>`).join('<span class="ap-rel-sep">·</span>')}</div>`
+    ? `<div class="ap-rel"><span class="ap-rel-h">ראה גם:</span> ${a.rel.filter(r=>ASSOC[r]).map(r=>`<button class="ap-rl" data-al="${r}">${ASSOC[r].he}</button>`).join('<span class="ap-rel-sep">·</span>')}</div>`
     : '';
   document.getElementById('sheet-content').innerHTML=`<div class="ap" style="--ac:${cc[1]}">
     <button class="sh-close" onclick="closeDetail()" aria-label="סגור">×</button>
@@ -1076,7 +1076,7 @@ function nbRow(n){return `<div class="nb"><span class="nb-nm">${n[0]}</span>`+
   `<a class="pin map" href="${mapsLink(n[1])}" target="_blank" rel="noopener" aria-label="מפה">${I.gm}</a>`+
   `<a class="pin ta" href="${taLink(n[1])}" target="_blank" rel="noopener" aria-label="Tripadvisor">${I.ta}</a></div>`;}
 
-/* ——— "ידעת? קשרים מהבית" — progressive-disclosure pop-culture easter-eggs (web-verified). Original stylized SVG cues, no copyrighted logos. ——— */
+/* ——— "ידעת? (אז איפה זה פוגש אותך)" — progressive-disclosure pop-culture easter-eggs (web-verified). Original stylized SVG cues, no copyrighted logos. ——— */
 const ACAT={game:['גיימינג ואנימה','#7a4ea8'],brand:['מותגים וטכנולוגיה','#21405e'],food:['אוכל ומשקאות','#a8402a'],martial:['לחימה וסמוראים','#4a4338'],culture:['תרבות ונופים','#2f6a5f']};
 const AIC={
  spark:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.7 6.8L20 11l-6.3 1.5L12 20l-1.7-7.5L4 11l6.3-2.2z"/></svg>',
@@ -1236,7 +1236,7 @@ const ASSOC={
 };
 paintDays(); // initial day render — runs here, after ASSOC/AIC are defined, so woven {{ }} terms resolve
 function aceChip(id){const a=ASSOC[id];if(!a)return '';const cc=ACAT[a.cat]||['',''];return `<div class="ace-wrap"><button class="ace" data-ace="${id}" style="--ac:${cc[1]}"><span class="ace-ic">${AIC[a.ic]||AIC.spark}</span><span class="ace-nm">${a.he}</span><span class="ace-chev">▸</span></button><div class="ace-body"><div class="ace-en">${a.en} · ${cc[0]}</div><p>${a.fact}</p></div></div>`;}
-function assocSection(d){if(!d.assoc||!d.assoc.length)return '';return `<div class="sh-sec assoc-sec"><button class="assoc-head" data-assoctoggle><span class="ah-l">${AIC.spark} ידעת? · קשרים מהבית</span><span class="ah-c">${d.assoc.length}</span><span class="ah-chev">▾</span></button><div class="aces" hidden>${d.assoc.map(aceChip).join('')}</div></div>`;}
+function assocSection(d){if(!d.assoc||!d.assoc.length)return '';return `<div class="sh-sec assoc-sec"><button class="assoc-head" data-assoctoggle><span class="ah-l">${AIC.spark} ידעת? · (אז איפה זה פוגש אותך..)</span><span class="ah-c">${d.assoc.length}</span><span class="ah-chev">▾</span></button><div class="aces" hidden>${d.assoc.map(aceChip).join('')}</div></div>`;}
 function openDetail(name){
   const d=details[name]; if(!d) return;
   const m=catMeta[d.cat];
